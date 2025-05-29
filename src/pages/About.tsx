@@ -17,9 +17,9 @@ const About = () => {
           <div className="lg:col-span-1">
             <div className="bg-gradient-to-br from-blue-800 to-blue-900 rounded-lg p-8 text-center shadow-xl">
               <div className="w-32 h-32 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <span className="text-4xl font-bold text-white">YN</span>
+                <span className="text-4xl font-bold text-white">JW</span>
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Your Name</h3>
+              <h3 className="text-xl font-bold text-white mb-2">Jerry Wang</h3>
               <p className="text-blue-300">Developer & Writer</p>
             </div>
           </div>
@@ -80,7 +80,7 @@ const About = () => {
               </p>
               <div className="flex flex-wrap gap-4">
                 <a 
-                  href="mailto:your.email@example.com" 
+                  href="mailto:jerry.wang@example.com" 
                   className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
                 >
                   Email Me
