@@ -12,7 +12,7 @@ const Home = () => {
         <div className="max-w-6xl mx-auto text-center">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
             Welcome to My
-            <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"> Digital Space</span>
+            <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"> Personal Page</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
             A place where I share my thoughts, experiences, and insights on technology, life, and everything in between.
