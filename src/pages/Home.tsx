@@ -15,7 +15,7 @@ const Home = () => {
             <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"> Personal Page</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-            A place where I share my thoughts, experiences, and insights on technology, life, and everything in between.
+            A place where you can get to know me and learn about venture capital.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
