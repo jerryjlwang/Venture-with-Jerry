@@ -11,7 +11,7 @@ const Posts = () => {
             All Posts
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Thoughts, tutorials, and insights from my journey in technology and life.
+            Check out my insights after interviewing notable venture capital professionals.
           </p>
         </div>
 
