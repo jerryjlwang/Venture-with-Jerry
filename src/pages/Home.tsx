@@ -11,7 +11,7 @@ const Home = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('https://m.media-amazon.com/images/I/81ESrPkXw9L.jpg')`
+          backgroundImage: `url('https://te-cdn-marketing-site.storage.googleapis.com/littleamerica/America/parnter/stay/places/usa-washington-state-seattle-skyline.jpg')`
         }}
       />
       
