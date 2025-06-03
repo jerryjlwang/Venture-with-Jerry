@@ -52,6 +52,14 @@ const About = () => {
                 >
                   GitHub
                 </a>
+                <a 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="#" 
+                  className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center"
+                >
+                  Instagram
+                </a>
               </div>
             </div>
           </div>
