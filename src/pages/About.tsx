@@ -89,12 +89,16 @@ const About = () => {
                   Email Me
                 </a>
                 <a 
-                  href="www.linkedin.com/in/jerry-wang-21a282368" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://www.linkedin.com/in/jerry-wang-21a282368/" 
                   className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all"
                 >
                   LinkedIn
                 </a>
                 <a 
+                  target="_blank"
+                  rel="noopener noreferrer"
                   href="https://github.com/jerryjlwang" 
                   className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all"
                 >
