@@ -1,4 +1,3 @@
-
 const About = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-950 via-gray-900 to-black">
@@ -13,11 +12,15 @@ const About = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Profile Image Placeholder */}
+          {/* Profile Image */}
           <div className="lg:col-span-1">
             <div className="bg-gradient-to-br from-blue-800 to-blue-900 rounded-lg p-8 text-center shadow-xl">
-              <div className="w-32 h-32 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <span className="text-4xl font-bold text-white">JW</span>
+              <div className="mb-4">
+                <img 
+                  src="/lovable-uploads/cb638f5f-12a6-4fbb-9ebc-fc7d89d54fe9.png" 
+                  alt="Jerry Wang"
+                  className="w-full max-w-xs mx-auto rounded-lg shadow-lg object-cover"
+                />
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Jerry Wang</h3>
               <p className="text-blue-300">Developer & Writer</p>
