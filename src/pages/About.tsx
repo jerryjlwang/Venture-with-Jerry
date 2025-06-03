@@ -83,19 +83,19 @@ const About = () => {
               </p>
               <div className="flex flex-wrap gap-4">
                 <a 
-                  href="mailto:jerry.wang@example.com" 
+                  href="mailto:wang.jerryjl@gmail.com" 
                   className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
                 >
                   Email Me
                 </a>
                 <a 
-                  href="#" 
+                  href="www.linkedin.com/in/jerry-wang-21a282368" 
                   className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all"
                 >
                   LinkedIn
                 </a>
                 <a 
-                  href="#" 
+                  href="https://github.com/jerryjlwang" 
                   className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all"
                 >
                   GitHub
