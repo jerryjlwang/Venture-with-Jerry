@@ -1,3 +1,4 @@
+
 const About = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-950 via-gray-900 to-black">
@@ -12,8 +13,8 @@ const About = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          {/* Profile Image */}
-          <div className="lg:col-span-1">
+          {/* Profile Image and Let's Connect */}
+          <div className="lg:col-span-1 space-y-8">
             <div className="bg-gradient-to-br from-blue-800 to-blue-900 rounded-lg p-8 text-center shadow-xl">
               <div className="mb-4">
                 <img 
@@ -24,6 +25,38 @@ const About = () => {
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Jerry Wang</h3>
               <p className="text-blue-300">Developer & Writer</p>
+            </div>
+
+            <div className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-8 shadow-xl">
+              <h2 className="text-2xl font-bold text-white mb-4">Let's Connect</h2>
+              <p className="text-gray-300 mb-6">
+                I'm always excited to connect with fellow developers, writers, and anyone interested 
+                in technology. Feel free to reach out!
+              </p>
+              <div className="flex flex-col gap-4">
+                <a 
+                  href="mailto:wang.jerryjl@gmail.com" 
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors text-center"
+                >
+                  Email Me
+                </a>
+                <a 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://www.linkedin.com/in/jerry-wang-21a282368/" 
+                  className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center"
+                >
+                  LinkedIn
+                </a>
+                <a 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://github.com/jerryjlwang" 
+                  className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center"
+                >
+                  GitHub
+                </a>
+              </div>
             </div>
           </div>
 
@@ -72,38 +105,6 @@ const About = () => {
                     <li>• Community Building</li>
                   </ul>
                 </div>
-              </div>
-            </section>
-
-            <section className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-8 shadow-xl">
-              <h2 className="text-2xl font-bold text-white mb-4">Let's Connect</h2>
-              <p className="text-gray-300 mb-6">
-                I'm always excited to connect with fellow developers, writers, and anyone interested 
-                in technology. Feel free to reach out!
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <a 
-                  href="mailto:wang.jerryjl@gmail.com" 
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
-                >
-                  Email Me
-                </a>
-                <a 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://www.linkedin.com/in/jerry-wang-21a282368/" 
-                  className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all"
-                >
-                  LinkedIn
-                </a>
-                <a 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://github.com/jerryjlwang" 
-                  className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all"
-                >
-                  GitHub
-                </a>
               </div>
             </section>
           </div>
