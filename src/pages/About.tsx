@@ -29,10 +29,6 @@ const About = () => {
 
             <div className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-8 shadow-xl">
               <h2 className="text-2xl font-bold text-white mb-4">Let's Connect</h2>
-              <p className="text-gray-300 mb-6">
-                I'm always excited to connect with fellow developers, writers, and anyone interested 
-                in technology. Feel free to reach out!
-              </p>
               <div className="flex flex-col gap-4">
                 <a 
                   href="mailto:wang.jerryjl@gmail.com" 
