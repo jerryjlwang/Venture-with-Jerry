@@ -59,39 +59,49 @@ const LogoCarousel = () => {
     };
   }, [isUserInteracting, logos.length]);
 
-  const handleWheel = (e: React.WheelEvent) => {
-    // Prevent the wheel event from affecting the page, but allow manual scrolling
-    e.stopPropagation();
-    e.preventDefault();
-
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
     
-    setIsUserInteracting(true);
-    lastInteractionTime.current = Date.now();
-    
-    // Manual scroll with wheel
-    setTranslateY(prev => {
-      const logoHeight = 100;
-      const singleSetHeight = logos.length * logoHeight;
-      const delta = e.deltaY * 0.5;
-      let newY = prev + delta;
+    const handleNativeWheel = (e: WheelEvent) => {
+      // Prevent the wheel event from affecting the page, but allow manual scrolling
+      e.stopPropagation();
+      e.preventDefault();
+  
       
-      // Handle wrapping for manual scroll
-      if (newY >= singleSetHeight * 2) {
-        newY = singleSetHeight;
-      } else if (newY < singleSetHeight) {
-        newY = singleSetHeight * 2 - 1;
-      }
+      setIsUserInteracting(true);
+      lastInteractionTime.current = Date.now();
       
-      return newY;
-    });
+      // Manual scroll with wheel
+      setTranslateY(prev => {
+        const logoHeight = 100;
+        const singleSetHeight = logos.length * logoHeight;
+        const delta = e.deltaY * 0.5;
+        let newY = prev + delta;
+        
+        // Handle wrapping for manual scroll
+        if (newY >= singleSetHeight * 2) {
+          newY = singleSetHeight;
+        } else if (newY < singleSetHeight) {
+          newY = singleSetHeight * 2 - 1;
+        }
+        
+        return newY;
+      });
+  
+      // Resume auto-scroll after user stops
+      setTimeout(() => {
+        if (Date.now() - lastInteractionTime.current >= 800) {
+          setIsUserInteracting(false);
+        }
+      }, 800);
+    };
+    container.addEventListener('wheel', handleNativeWheel, { passive: false });
 
-    // Resume auto-scroll after user stops
-    setTimeout(() => {
-      if (Date.now() - lastInteractionTime.current >= 800) {
-        setIsUserInteracting(false);
-      }
-    }, 800);
-  };
+    return () => {
+      container.removeEventListener('wheel', handleNativeWheel);
+    };
+  }, []);
 
   const handleMouseEnter = () => {
     setIsUserInteracting(true);
@@ -124,7 +134,6 @@ const LogoCarousel = () => {
       <div 
         ref={containerRef}
         className="no-scrollbar h-96 overflow-hidden cursor-grab active:cursor-grabbing relative select-none"
-        onWheel={handleWheel}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{ 
