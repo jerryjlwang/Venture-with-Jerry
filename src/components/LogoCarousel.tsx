@@ -9,10 +9,11 @@ interface Logo {
 
 const LogoCarousel = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollSpeed, setScrollSpeed] = useState(1.5); // Increased from 1 to 1.5
-  const [isUserScrolling, setIsUserScrolling] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [isUserInteracting, setIsUserInteracting] = useState(false);
+  const [translateY, setTranslateY] = useState(0);
   const animationRef = useRef<number>();
-  const lastScrollTime = useRef<number>(Date.now());
+  const lastInteractionTime = useRef<number>(Date.now());
   
   // Sample logos - you can replace these with actual company logos
   const logos: Logo[] = [
@@ -30,21 +31,16 @@ const LogoCarousel = () => {
   const doubledLogos = [...logos, ...logos];
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
     const animate = () => {
-      if (!isUserScrolling) {
-        // Smoother scrolling with fractional pixels
-        container.scrollTop += scrollSpeed;
-        
-        // Reset scroll position when we've scrolled through one complete set
-        const logoHeight = 100; // 80px logo + 20px gap
-        const totalHeight = logos.length * logoHeight;
-        
-        if (container.scrollTop >= totalHeight) {
-          container.scrollTop = 0;
-        }
+      if (!isUserInteracting) {
+        setTranslateY(prev => {
+          const logoHeight = 100; // 80px logo + 20px gap
+          const totalHeight = logos.length * logoHeight;
+          const newY = prev + 0.8; // Smooth consistent speed
+          
+          // Reset when we've moved through one complete set
+          return newY >= totalHeight ? 0 : newY;
+        });
       }
       
       animationRef.current = requestAnimationFrame(animate);
@@ -57,62 +53,56 @@ const LogoCarousel = () => {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [scrollSpeed, isUserScrolling, logos.length]);
-
-  const handleScroll = (e: React.UIEvent) => {
-    // Prevent the scroll event from bubbling up to the page
-    e.stopPropagation();
-    
-    setIsUserScrolling(true);
-    lastScrollTime.current = Date.now();
-    
-    // Resume auto-scroll after user stops scrolling
-    setTimeout(() => {
-      if (Date.now() - lastScrollTime.current >= 500) {
-        setIsUserScrolling(false);
-      }
-    }, 500);
-  };
+  }, [isUserInteracting, logos.length]);
 
   const handleWheel = (e: React.WheelEvent) => {
-    // Prevent the wheel event from bubbling up to the page
+    // Completely prevent the wheel event from affecting the page
     e.preventDefault();
     e.stopPropagation();
     
-    const container = containerRef.current;
-    if (!container) return;
-
-    setIsUserScrolling(true);
-    lastScrollTime.current = Date.now();
+    setIsUserInteracting(true);
+    lastInteractionTime.current = Date.now();
     
-    container.scrollTop += e.deltaY * 0.5;
-    
-    // Reset position if needed
-    const logoHeight = 100;
-    const totalHeight = logos.length * logoHeight;
-    
-    if (container.scrollTop >= totalHeight) {
-      container.scrollTop = 0;
-    } else if (container.scrollTop < 0) {
-      container.scrollTop = totalHeight - 1;
-    }
+    // Manual scroll with wheel
+    setTranslateY(prev => {
+      const logoHeight = 100;
+      const totalHeight = logos.length * logoHeight;
+      const delta = e.deltaY * 0.5;
+      let newY = prev + delta;
+      
+      // Handle wrapping
+      if (newY >= totalHeight) {
+        newY = 0;
+      } else if (newY < 0) {
+        newY = totalHeight - 1;
+      }
+      
+      return newY;
+    });
 
     // Resume auto-scroll after user stops
     setTimeout(() => {
-      if (Date.now() - lastScrollTime.current >= 500) {
-        setIsUserScrolling(false);
+      if (Date.now() - lastInteractionTime.current >= 800) {
+        setIsUserInteracting(false);
       }
-    }, 500);
+    }, 800);
   };
 
   const handleMouseEnter = () => {
-    // Pause auto-scroll when user hovers over the carousel
-    setIsUserScrolling(true);
+    setIsUserInteracting(true);
   };
 
   const handleMouseLeave = () => {
-    // Resume auto-scroll when user stops hovering
-    setIsUserScrolling(false);
+    setIsUserInteracting(false);
+  };
+
+  // Prevent any touch/pointer events from bubbling to parent
+  const handlePointerDown = (e: React.PointerEvent) => {
+    e.stopPropagation();
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    e.stopPropagation();
   };
 
   return (
@@ -120,14 +110,26 @@ const LogoCarousel = () => {
       <h2 className="text-xl font-bold text-white mb-4 text-center">Companies Interviewed</h2>
       <div 
         ref={containerRef}
-        className="h-96 overflow-hidden cursor-grab active:cursor-grabbing"
-        onScroll={handleScroll}
+        className="h-96 overflow-hidden cursor-grab active:cursor-grabbing relative"
         onWheel={handleWheel}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        onPointerDown={handlePointerDown}
+        onTouchStart={handleTouchStart}
+        style={{ 
+          scrollbarWidth: 'none', 
+          msOverflowStyle: 'none',
+          touchAction: 'none' // Prevent touch scrolling
+        }}
       >
-        <div className="flex flex-col gap-5">
+        <div 
+          ref={contentRef}
+          className="flex flex-col gap-5 transition-transform duration-75 ease-linear"
+          style={{ 
+            transform: `translateY(-${translateY}px)`,
+            willChange: 'transform'
+          }}
+        >
           {doubledLogos.map((logo, index) => (
             <div 
               key={`${logo.id}-${index}`}
