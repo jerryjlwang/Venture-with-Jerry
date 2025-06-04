@@ -60,8 +60,7 @@ const LogoCarousel = () => {
   }, [isUserInteracting, logos.length]);
 
   const handleWheel = (e: React.WheelEvent) => {
-    // Completely prevent the wheel event from affecting the page
-    e.preventDefault();
+    // Prevent the wheel event from affecting the page, but allow manual scrolling
     e.stopPropagation();
     
     setIsUserInteracting(true);
@@ -97,31 +96,25 @@ const LogoCarousel = () => {
   };
 
   const handleMouseLeave = () => {
-    setIsUserInteracting(false);
+    // Smooth transition back to auto-scroll by normalizing position first
+    setTranslateY(prev => {
+      const logoHeight = 100;
+      const singleSetHeight = logos.length * logoHeight;
+      
+      // Ensure we're in the middle set for smooth continuation
+      if (prev < singleSetHeight) {
+        return prev + singleSetHeight;
+      } else if (prev >= singleSetHeight * 2) {
+        return prev - singleSetHeight;
+      }
+      return prev;
+    });
+    
+    // Small delay to allow position normalization, then resume auto-scroll
+    setTimeout(() => {
+      setIsUserInteracting(false);
+    }, 50);
   };
-
-  // More comprehensive event prevention
-  const preventScrollPropagation = (e: Event) => {
-    e.preventDefault();
-    e.stopPropagation();
-    e.stopImmediatePropagation();
-  };
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    // Add passive: false to ensure preventDefault works
-    container.addEventListener('wheel', preventScrollPropagation, { passive: false });
-    container.addEventListener('touchmove', preventScrollPropagation, { passive: false });
-    container.addEventListener('scroll', preventScrollPropagation, { passive: false });
-
-    return () => {
-      container.removeEventListener('wheel', preventScrollPropagation);
-      container.removeEventListener('touchmove', preventScrollPropagation);
-      container.removeEventListener('scroll', preventScrollPropagation);
-    };
-  }, []);
 
   return (
     <div className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-6 shadow-xl">
@@ -134,9 +127,7 @@ const LogoCarousel = () => {
         onMouseLeave={handleMouseLeave}
         style={{ 
           scrollbarWidth: 'none', 
-          msOverflowStyle: 'none',
-          touchAction: 'none',
-          overscrollBehavior: 'none'
+          msOverflowStyle: 'none'
         }}
       >
         <div 
