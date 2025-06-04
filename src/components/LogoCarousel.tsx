@@ -62,6 +62,8 @@ const LogoCarousel = () => {
   const handleWheel = (e: React.WheelEvent) => {
     // Prevent the wheel event from affecting the page, but allow manual scrolling
     e.stopPropagation();
+    e.preventDefault();
+
     
     setIsUserInteracting(true);
     lastInteractionTime.current = Date.now();
