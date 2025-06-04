@@ -128,8 +128,10 @@ const LogoCarousel = () => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{ 
+          overflow: 'hidden',
           scrollbarWidth: 'none', 
-          msOverflowStyle: 'none'
+          msOverflowStyle: 'none',
+          touchAction: 'none':
         }}
       >
         <div 
