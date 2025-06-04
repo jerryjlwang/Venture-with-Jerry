@@ -108,11 +108,6 @@ const LogoCarousel = () => {
         onWheel={handleWheel}
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
-        <style jsx>{`
-          div::-webkit-scrollbar {
-            display: none;
-          }
-        `}</style>
         <div className="flex flex-col gap-5">
           {doubledLogos.map((logo, index) => (
             <div 
