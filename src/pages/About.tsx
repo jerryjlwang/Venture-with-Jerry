@@ -67,21 +67,24 @@ const About = () => {
           {/* About Content */}
           <div className="lg:col-span-2 space-y-8">
             <section className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-8 shadow-xl">
-              <h2 className="text-2xl font-bold text-white mb-4">My Story</h2>
+              <h2 className="text-2xl font-bold text-white mb-4">My Background</h2>
               <div className="text-gray-300 leading-relaxed space-y-4">
                 <p>
-                  Hello! I'm a passionate developer and writer who loves to share knowledge and experiences 
-                  with the community. My journey in technology started several years ago, and I've been 
-                  fascinated by the endless possibilities of creating digital solutions.
+                  My name is Jerry Wang and I’m a junior at Interlake High School in Bellevue. My areas of
+                  interest lie in the intersection of AI and finance, and venture capital is one field that
+                  encapsulates it all. I want to learn more about the evolution of AI and how it will break
+                  the finance industry, so over the past few months I’ve been learning as much as I can and
+                  conducting interviews with venture capital professionals to start building my network.
                 </p>
                 <p>
-                  When I'm not coding, you can find me exploring new technologies, reading about industry 
-                  trends, or working on personal projects that challenge me to grow as a developer and as 
-                  a person.
+                  Some of my hobbies include golfing, where I’m working towards being a single-digit 
+                  handicapper, and pursuing business ideas. I like to think I’m a curious individual, 
+                  so I always chase what I want.
                 </p>
                 <p>
-                  This blog serves as my digital notebook where I document my learning journey, share 
-                  insights, and hopefully help others along the way.
+                  This blog serves as a medium for documenting my learnings throughout my venture capital
+                  journey and also sharing personal insights which I find interesting. Be sure to connect
+                  with me on any platform below and feel free to ask for advice or help!
                 </p>
               </div>
             </section>
