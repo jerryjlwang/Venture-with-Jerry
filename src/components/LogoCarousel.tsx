@@ -27,19 +27,23 @@ const LogoCarousel = () => {
     { id: '8', name: 'Company H', src: '/api/placeholder/80/80' },
   ];
 
-  // Double the logos to create seamless loop
-  const doubledLogos = [...logos, ...logos];
+  // Triple the logos for smoother infinite scroll
+  const tripleLogos = [...logos, ...logos, ...logos];
 
   useEffect(() => {
     const animate = () => {
       if (!isUserInteracting) {
         setTranslateY(prev => {
           const logoHeight = 100; // 80px logo + 20px gap
-          const totalHeight = logos.length * logoHeight;
-          const newY = prev + 0.8; // Smooth consistent speed
+          const singleSetHeight = logos.length * logoHeight;
+          let newY = prev + 0.8; // Smooth consistent speed
           
-          // Reset when we've moved through one complete set
-          return newY >= totalHeight ? 0 : newY;
+          // When we reach the end of the second set, smoothly reset to start of second set
+          if (newY >= singleSetHeight * 2) {
+            newY = singleSetHeight;
+          }
+          
+          return newY;
         });
       }
       
@@ -66,15 +70,15 @@ const LogoCarousel = () => {
     // Manual scroll with wheel
     setTranslateY(prev => {
       const logoHeight = 100;
-      const totalHeight = logos.length * logoHeight;
+      const singleSetHeight = logos.length * logoHeight;
       const delta = e.deltaY * 0.5;
       let newY = prev + delta;
       
-      // Handle wrapping
-      if (newY >= totalHeight) {
-        newY = 0;
-      } else if (newY < 0) {
-        newY = totalHeight - 1;
+      // Handle wrapping for manual scroll
+      if (newY >= singleSetHeight * 2) {
+        newY = singleSetHeight;
+      } else if (newY < singleSetHeight) {
+        newY = singleSetHeight * 2 - 1;
       }
       
       return newY;
@@ -96,14 +100,28 @@ const LogoCarousel = () => {
     setIsUserInteracting(false);
   };
 
-  // Prevent any touch/pointer events from bubbling to parent
-  const handlePointerDown = (e: React.PointerEvent) => {
+  // More comprehensive event prevention
+  const preventScrollPropagation = (e: Event) => {
+    e.preventDefault();
     e.stopPropagation();
+    e.stopImmediatePropagation();
   };
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    e.stopPropagation();
-  };
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    // Add passive: false to ensure preventDefault works
+    container.addEventListener('wheel', preventScrollPropagation, { passive: false });
+    container.addEventListener('touchmove', preventScrollPropagation, { passive: false });
+    container.addEventListener('scroll', preventScrollPropagation, { passive: false });
+
+    return () => {
+      container.removeEventListener('wheel', preventScrollPropagation);
+      container.removeEventListener('touchmove', preventScrollPropagation);
+      container.removeEventListener('scroll', preventScrollPropagation);
+    };
+  }, []);
 
   return (
     <div className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-6 shadow-xl">
@@ -114,12 +132,11 @@ const LogoCarousel = () => {
         onWheel={handleWheel}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        onPointerDown={handlePointerDown}
-        onTouchStart={handleTouchStart}
         style={{ 
           scrollbarWidth: 'none', 
           msOverflowStyle: 'none',
-          touchAction: 'none' // Prevent touch scrolling
+          touchAction: 'none',
+          overscrollBehavior: 'none'
         }}
       >
         <div 
@@ -130,9 +147,9 @@ const LogoCarousel = () => {
             willChange: 'transform'
           }}
         >
-          {doubledLogos.map((logo, index) => (
+          {tripleLogos.map((logo, index) => (
             <div 
-              key={`${logo.id}-${index}`}
+              key={`${logo.id}-${Math.floor(index / logos.length)}-${index % logos.length}`}
               className="flex items-center justify-center p-4 bg-white/10 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
             >
               <div className="w-20 h-20 bg-gray-300 rounded-lg flex items-center justify-center text-gray-600 text-xs font-semibold">
