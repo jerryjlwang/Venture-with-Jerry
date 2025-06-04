@@ -9,7 +9,7 @@ interface Logo {
 
 const LogoCarousel = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollSpeed, setScrollSpeed] = useState(1);
+  const [scrollSpeed, setScrollSpeed] = useState(1.5); // Increased from 1 to 1.5
   const [isUserScrolling, setIsUserScrolling] = useState(false);
   const animationRef = useRef<number>();
   const lastScrollTime = useRef<number>(Date.now());
@@ -35,6 +35,7 @@ const LogoCarousel = () => {
 
     const animate = () => {
       if (!isUserScrolling) {
+        // Smoother scrolling with fractional pixels
         container.scrollTop += scrollSpeed;
         
         // Reset scroll position when we've scrolled through one complete set
@@ -58,7 +59,10 @@ const LogoCarousel = () => {
     };
   }, [scrollSpeed, isUserScrolling, logos.length]);
 
-  const handleScroll = () => {
+  const handleScroll = (e: React.UIEvent) => {
+    // Prevent the scroll event from bubbling up to the page
+    e.stopPropagation();
+    
     setIsUserScrolling(true);
     lastScrollTime.current = Date.now();
     
@@ -71,7 +75,10 @@ const LogoCarousel = () => {
   };
 
   const handleWheel = (e: React.WheelEvent) => {
+    // Prevent the wheel event from bubbling up to the page
     e.preventDefault();
+    e.stopPropagation();
+    
     const container = containerRef.current;
     if (!container) return;
 
@@ -98,6 +105,16 @@ const LogoCarousel = () => {
     }, 500);
   };
 
+  const handleMouseEnter = () => {
+    // Pause auto-scroll when user hovers over the carousel
+    setIsUserScrolling(true);
+  };
+
+  const handleMouseLeave = () => {
+    // Resume auto-scroll when user stops hovering
+    setIsUserScrolling(false);
+  };
+
   return (
     <div className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-6 shadow-xl">
       <h2 className="text-xl font-bold text-white mb-4 text-center">Companies Interviewed</h2>
@@ -106,6 +123,8 @@ const LogoCarousel = () => {
         className="h-96 overflow-hidden cursor-grab active:cursor-grabbing"
         onScroll={handleScroll}
         onWheel={handleWheel}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         <div className="flex flex-col gap-5">
