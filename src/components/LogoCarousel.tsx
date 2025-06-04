@@ -123,7 +123,7 @@ const LogoCarousel = () => {
       <h2 className="text-xl font-bold text-white mb-4 text-center">Companies Interviewed</h2>
       <div 
         ref={containerRef}
-        className="h-96 overflow-hidden cursor-grab active:cursor-grabbing relative"
+        className="no-scrollbar h-96 overflow-hidden cursor-grab active:cursor-grabbing relative select-none"
         onWheel={handleWheel}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
