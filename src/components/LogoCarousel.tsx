@@ -97,10 +97,10 @@ const LogoCarousel = () => {
         let newY = prev + delta;
         
         // Keep position within bounds using modulo for seamless wrapping
-        if (newY < 0) {
-          newY = singleSetHeight + (newY % singleSetHeight);
-        } else if (newY >= singleSetHeight) {
-          newY = newY % singleSetHeight;
+        if (newY < singleSetHeight) {
+          newY = singleSetHeight + newY;
+        } else if (newY >= singleSetHeight * 2) {
+          newY = newY - singleSetHeight;
         }
         
         return newY;
