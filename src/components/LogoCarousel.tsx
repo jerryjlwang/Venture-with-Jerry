@@ -166,34 +166,32 @@ const LogoCarousel = () => {
     return (
       <div 
         key={`${logo.id}-${Math.floor(index / logos.length)}-${index % logos.length}`}
-        className="flex items-center justify-center p-4 bg-white/10 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+        className="h-20 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-3 flex items-center justify-center"
       >
-        <div className="w-20 h-20 flex items-center justify-center rounded-lg overflow-hidden bg-white/90 relative">
-          {!imageError ? (
-            <>
-              <img 
-                src={logo.src}
-                alt={`${logo.name} logo`}
-                className={`max-w-full max-h-full object-contain transition-opacity duration-300 ${
-                  imageLoaded ? 'opacity-100' : 'opacity-0'
-                }`}
-                onLoad={() => setImageLoaded(true)}
-                onError={() => {
-                  setImageError(true);
-                  setImageLoaded(true);
-                }}
-                loading="lazy"
-              />
-              {!imageLoaded && (
-                <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg" />
-              )}
-            </>
-          ) : (
-            <div className="w-full h-full bg-gray-300 rounded-lg flex items-center justify-center text-gray-600 text-xs font-semibold text-center p-1">
-              {logo.name}
-            </div>
-          )}
-        </div>
+        {!imageError ? (
+          <>
+            <img 
+              src={logo.src}
+              alt={`${logo.name} logo`}
+              className={`max-w-full max-h-full object-contain transition-opacity duration-300 ${
+                imageLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
+              onLoad={() => setImageLoaded(true)}
+              onError={() => {
+                setImageError(true);
+                setImageLoaded(true);
+              }}
+              loading="lazy"
+            />
+            {!imageLoaded && (
+              <div className="w-full h-full bg-gray-200 animate-pulse rounded" />
+            )}
+          </>
+        ) : (
+          <div className="w-full h-full bg-gray-100 rounded flex items-center justify-center text-gray-600 text-xs font-semibold text-center p-1">
+            {logo.name}
+          </div>
+        )}
       </div>
     );
   };
