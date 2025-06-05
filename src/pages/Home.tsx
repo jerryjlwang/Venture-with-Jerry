@@ -70,6 +70,9 @@ const Home = () => {
             </div>
           </div>
         </section>
+        <div className="lg:col-span-1">
+            <LogoCarousel />
+          </div>
       </div>
     </div>
   );
