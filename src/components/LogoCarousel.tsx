@@ -58,7 +58,7 @@ const LogoCarousel = () => {
           // Use modulo for seamless infinite scroll
           // When we've scrolled through one complete set, seamlessly continue
           if (newY >= singleSetHeight * 2) {
-            newY = newY - singleSetHeight;
+            newY -= singleSetHeight;
           }
           
           return newY;
@@ -98,9 +98,9 @@ const LogoCarousel = () => {
         
         // Keep position within bounds using modulo for seamless wrapping
         if (newY < singleSetHeight) {
-          newY = singleSetHeight + newY;
+          newY += singleSetHeight;
         } else if (newY >= singleSetHeight * 2) {
-          newY = newY - singleSetHeight;
+          newY -= singleSetHeight;
         }
         
         return newY;
@@ -186,7 +186,7 @@ const LogoCarousel = () => {
       >
         <div 
           ref={contentRef}
-          className="flex flex-col gap-5 transition-transform duration-75 ease-linear"
+          className="flex flex-col gap-5"
           style={{ 
             transform: `translateY(-${translateY}px)`,
             willChange: 'transform'
