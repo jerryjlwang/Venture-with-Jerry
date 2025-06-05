@@ -17,11 +17,11 @@ const LogoCarousel = () => {
   
   // Sample logos - you can replace these with actual company logos
   const logos: Logo[] = [
-    { id: '1', name: 'Company A', src: '/api/placeholder/80/80' },
-    { id: '2', name: 'Company B', src: '/api/placeholder/80/80' },
-    { id: '3', name: 'Company C', src: '/api/placeholder/80/80' },
-    { id: '4', name: 'Company D', src: '/api/placeholder/80/80' },
-    { id: '5', name: 'Company E', src: '/api/placeholder/80/80' },
+    { id: '1', name: 'Onesixone Ventures', src: 'https://images.squarespace-cdn.com/content/v1/62c76bc98f086645bc40162f/40be5b57-b1cd-4ba7-93d1-2b67adb946fc/logo-transparent-bg.png?format=1500w' },
+    { id: '2', name: 'West River Group', src: 'https://images.squarespace-cdn.com/content/v1/6337b0e52a797969996c3b4c/0b2af09b-a5eb-4172-a918-bbfe03ae9282/WRG-White.png?format=1500w' },
+    { id: '3', name: 'Tola Capital', src: 'https://tolacapital.com/wp-content/uploads/2022/11/TC-portrait-logo-1600x800-1.png' },
+    { id: '4', name: 'Ascend VC', src: 'https://images.squarespace-cdn.com/content/v1/5d6ed158d1024700012397dc/1574804203738-JYY4WYCNRJVQM2YK8SLO/ascend_logo_color_novc.png?format=1000w' },
+    { id: '5', name: 'Madrona', src: 'https://mcusercontent.com/5a8bd6aa34ddacb810fa9d339/images/857dad64-5e53-ffd3-aca4-9f2ae170f961.png' },
     { id: '6', name: 'Company F', src: '/api/placeholder/80/80' },
     { id: '7', name: 'Company G', src: '/api/placeholder/80/80' },
     { id: '8', name: 'Company H', src: '/api/placeholder/80/80' },
