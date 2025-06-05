@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 
 interface Logo {
@@ -15,16 +14,48 @@ const LogoCarousel = () => {
   const animationRef = useRef<number>();
   const lastInteractionTime = useRef<number>(Date.now());
   
-  // Sample logos - you can replace these with actual company logos
+  // Company logos with actual image sources
   const logos: Logo[] = [
-    { id: '1', name: 'Onesixone Ventures', src: 'https://images.squarespace-cdn.com/content/v1/62c76bc98f086645bc40162f/40be5b57-b1cd-4ba7-93d1-2b67adb946fc/logo-transparent-bg.png?format=1500w' },
-    { id: '2', name: 'West River Group', src: 'https://images.squarespace-cdn.com/content/v1/6337b0e52a797969996c3b4c/0b2af09b-a5eb-4172-a918-bbfe03ae9282/WRG-White.png?format=1500w' },
-    { id: '3', name: 'Tola Capital', src: 'https://tolacapital.com/wp-content/uploads/2022/11/TC-portrait-logo-1600x800-1.png' },
-    { id: '4', name: 'Ascend VC', src: 'https://images.squarespace-cdn.com/content/v1/5d6ed158d1024700012397dc/1574804203738-JYY4WYCNRJVQM2YK8SLO/ascend_logo_color_novc.png?format=1000w' },
-    { id: '5', name: 'Madrona', src: 'https://mcusercontent.com/5a8bd6aa34ddacb810fa9d339/images/857dad64-5e53-ffd3-aca4-9f2ae170f961.png' },
-    { id: '6', name: 'Company F', src: '/api/placeholder/80/80' },
-    { id: '7', name: 'Company G', src: '/api/placeholder/80/80' },
-    { id: '8', name: 'Company H', src: '/api/placeholder/80/80' },
+    { 
+      id: '1', 
+      name: 'Onesixone Ventures', 
+      src: 'https://images.squarespace-cdn.com/content/v1/62c76bc98f086645bc40162f/40be5b57-b1cd-4ba7-93d1-2b67adb946fc/logo-transparent-bg.png?format=1500w' 
+    },
+    { 
+      id: '2', 
+      name: 'West River Group', 
+      src: 'https://images.squarespace-cdn.com/content/v1/6337b0e52a797969996c3b4c/0b2af09b-a5eb-4172-a918-bbfe03ae9282/WRG-White.png?format=1500w' 
+    },
+    { 
+      id: '3', 
+      name: 'Tola Capital', 
+      src: 'https://tolacapital.com/wp-content/uploads/2022/11/TC-portrait-logo-1600x800-1.png' 
+    },
+    { 
+      id: '4', 
+      name: 'Ascend VC', 
+      src: 'https://images.squarespace-cdn.com/content/v1/5d6ed158d1024700012397dc/1574804203738-JYY4WYCNRJVQM2YK8SLO/ascend_logo_color_novc.png?format=1000w' 
+    },
+    { 
+      id: '5', 
+      name: 'Madrona', 
+      src: 'https://mcusercontent.com/5a8bd6aa34ddacb810fa9d339/images/857dad64-5e53-ffd3-aca4-9f2ae170f961.png' 
+    },
+    { 
+      id: '6', 
+      name: 'Bessemer Venture Partners', 
+      src: 'https://www.bvp.com/sites/default/files/inline-images/BVP_Logo_Horizontal_Navy_RGB.png' 
+    },
+    { 
+      id: '7', 
+      name: 'Andreessen Horowitz', 
+      src: 'https://a16z.com/wp-content/uploads/2021/07/a16z-logo.png' 
+    },
+    { 
+      id: '8', 
+      name: 'Sequoia Capital', 
+      src: 'https://www.sequoiacap.com/wp-content/uploads/sites/6/2022/11/sequoia_logo_horizontal_black.svg' 
+    },
   ];
 
   // Triple the logos for smoother infinite scroll
@@ -128,6 +159,45 @@ const LogoCarousel = () => {
     }, 50);
   };
 
+  const LogoItem = ({ logo, index }: { logo: Logo; index: number }) => {
+    const [imageLoaded, setImageLoaded] = useState(false);
+    const [imageError, setImageError] = useState(false);
+
+    return (
+      <div 
+        key={`${logo.id}-${Math.floor(index / logos.length)}-${index % logos.length}`}
+        className="flex items-center justify-center p-4 bg-white/10 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+      >
+        <div className="w-20 h-20 flex items-center justify-center rounded-lg overflow-hidden bg-white/90 relative">
+          {!imageError ? (
+            <>
+              <img 
+                src={logo.src}
+                alt={`${logo.name} logo`}
+                className={`max-w-full max-h-full object-contain transition-opacity duration-300 ${
+                  imageLoaded ? 'opacity-100' : 'opacity-0'
+                }`}
+                onLoad={() => setImageLoaded(true)}
+                onError={() => {
+                  setImageError(true);
+                  setImageLoaded(true);
+                }}
+                loading="lazy"
+              />
+              {!imageLoaded && (
+                <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg" />
+              )}
+            </>
+          ) : (
+            <div className="w-full h-full bg-gray-300 rounded-lg flex items-center justify-center text-gray-600 text-xs font-semibold text-center p-1">
+              {logo.name}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-6 shadow-xl">
       <h2 className="text-xl font-bold text-white mb-4 text-center">Companies Interviewed</h2>
@@ -152,14 +222,7 @@ const LogoCarousel = () => {
           }}
         >
           {tripleLogos.map((logo, index) => (
-            <div 
-              key={`${logo.id}-${Math.floor(index / logos.length)}-${index % logos.length}`}
-              className="flex items-center justify-center p-4 bg-white/10 rounded-lg backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
-            >
-              <div className="w-20 h-20 bg-gray-300 rounded-lg flex items-center justify-center text-gray-600 text-xs font-semibold">
-                {logo.name}
-              </div>
-            </div>
+            <LogoItem key={`${logo.id}-${Math.floor(index / logos.length)}-${index % logos.length}`} logo={logo} index={index} />
           ))}
         </div>
       </div>
