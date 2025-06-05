@@ -19,12 +19,12 @@ const LogoCarousel = () => {
     { 
       id: '1', 
       name: 'Onesixone Ventures', 
-      src: 'https://images.squarespace-cdn.com/content/v1/62c76bc98f086645bc40162f/40be5b57-b1cd-4ba7-93d1-2b67adb946fc/logo-transparent-bg.png?format=1500w' 
+      src: 'https://images.squarespace-cdn.com/content/v1/62c76bc98f086645bc40162f/33627f65-3967-4877-b6bd-b8c5706e5389/Untitled+design.png' 
     },
     { 
       id: '2', 
       name: 'West River Group', 
-      src: 'https://images.squarespace-cdn.com/content/v1/6337b0e52a797969996c3b4c/0b2af09b-a5eb-4172-a918-bbfe03ae9282/WRG-White.png?format=1500w' 
+      src: 'https://images.squarespace-cdn.com/content/v1/6337b0e52a797969996c3b4c/a6d9c2c8-4211-4db9-baf5-d668f9b066da/WRG+Transparent.png' 
     },
     { 
       id: '3', 
@@ -39,7 +39,7 @@ const LogoCarousel = () => {
     { 
       id: '5', 
       name: 'Madrona', 
-      src: 'https://mcusercontent.com/5a8bd6aa34ddacb810fa9d339/images/857dad64-5e53-ffd3-aca4-9f2ae170f961.png' 
+      src: 'https://www.madrona.com/wp-content/uploads/2022/10/Madrona_LockupV_MADGRN_RGB_1000W-300x200.png' 
     },
     { 
       id: '6', 
