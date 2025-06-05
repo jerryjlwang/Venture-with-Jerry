@@ -41,21 +41,6 @@ const LogoCarousel = () => {
       name: 'Madrona', 
       src: 'https://www.madrona.com/wp-content/uploads/2022/10/Madrona_LockupV_MADGRN_RGB_1000W-300x200.png' 
     },
-    { 
-      id: '6', 
-      name: 'Bessemer Venture Partners', 
-      src: 'https://www.bvp.com/sites/default/files/inline-images/BVP_Logo_Horizontal_Navy_RGB.png' 
-    },
-    { 
-      id: '7', 
-      name: 'Andreessen Horowitz', 
-      src: 'https://a16z.com/wp-content/uploads/2021/07/a16z-logo.png' 
-    },
-    { 
-      id: '8', 
-      name: 'Sequoia Capital', 
-      src: 'https://www.sequoiacap.com/wp-content/uploads/sites/6/2022/11/sequoia_logo_horizontal_black.svg' 
-    },
   ];
 
   // Triple the logos for smoother infinite scroll
