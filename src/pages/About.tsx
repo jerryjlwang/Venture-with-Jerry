@@ -56,7 +56,7 @@ const About = () => {
                 <a 
                   target="_blank"
                   rel="noopener noreferrer"
-                  href="#" 
+                  href="https://www.instagram.com/jerr_yw08/" 
                   className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center"
                 >
                   Instagram
@@ -96,19 +96,19 @@ const About = () => {
                 <div>
                   <h3 className="text-lg font-semibold text-blue-400 mb-3">Technical Skills</h3>
                   <ul className="text-gray-300 space-y-2">
-                    <li>• Web Development</li>
-                    <li>• JavaScript/TypeScript</li>
-                    <li>• React & Modern Frameworks</li>
-                    <li>• Database Design</li>
-                    <li>• Cloud Technologies</li>
+                    <li>• Math</li>
+                    <li>• Python</li>
+                    <li>• Financial Analysis</li>
+                    <li>• Excel Modelling</li>
+                    <li>• Experimental Design</li>
                   </ul>
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-blue-400 mb-3">Interests</h3>
                   <ul className="text-gray-300 space-y-2">
                     <li>• Open Source Projects</li>
-                    <li>• Tech Writing</li>
-                    <li>• Continuous Learning</li>
+                    <li>• VC Writing</li>
+                    <li>• Golf Course Design</li>
                     <li>• Problem Solving</li>
                     <li>• Community Building</li>
                   </ul>
