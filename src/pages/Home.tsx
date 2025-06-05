@@ -1,6 +1,7 @@
 
 import PostCard from '../components/PostCard';
 import { posts } from '../data/posts';
+import LogoCarousel from '../components/LogoCarousel';
 
 const Home = () => {
   const recentPosts = posts.slice(0, 3);
