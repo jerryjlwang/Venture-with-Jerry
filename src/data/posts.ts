@@ -38,58 +38,30 @@ I believe in the power of sharing knowledge and experiences. This blog serves as
 I'll be posting regularly, so make sure to check back often for new content. Feel free to reach out if you have any questions or suggestions for topics you'd like me to cover.
 
 Thank you for being here, and I hope you find value in what I share!`,
-    date: "2024-01-15",
+    date: "2025-01-15",
     readTime: "3 min read"
   },
   {
-    id: "web-development-tips",
-    title: "Essential Web Development Tips for Beginners",
-    excerpt: "A collection of practical tips and best practices for those starting their journey in web development.",
-    content: `# Essential Web Development Tips for Beginners
-
-Starting your journey in web development can be overwhelming. Here are some essential tips to help you navigate the learning process effectively.
-
-## 1. Master the Fundamentals
-
-Before diving into frameworks and libraries, ensure you have a solid understanding of:
-- HTML5 semantic elements
-- CSS3 properties and layouts
-- JavaScript ES6+ features
-- Responsive design principles
-
-## 2. Practice Consistently
-
-- Build projects regularly
-- Code every day, even if it's just for 30 minutes
-- Contribute to open-source projects
-- Join coding challenges and hackathons
-
-## 3. Learn Version Control
-
-Git is essential for any developer:
-- Learn basic Git commands
-- Understand branching and merging
-- Use GitHub or GitLab for your projects
-- Practice collaborative workflows
-
-## 4. Focus on Problem-Solving
-
-- Break down complex problems into smaller parts
-- Use debugging tools effectively
-- Learn to read documentation
-- Don't be afraid to ask for help
-
-## 5. Stay Updated
-
-The web development landscape evolves rapidly:
-- Follow industry blogs and newsletters
-- Attend webinars and conferences
-- Join developer communities
-- Experiment with new technologies
-
-Remember, becoming a proficient developer is a marathon, not a sprint. Be patient with yourself and enjoy the learning process!`,
-    date: "2024-01-20",
-    readTime: "5 min read"
+    id: "Kirby Winfield-Ascend",
+    title: "Start Ups Galore",
+    excerpt: "Learn about Kirby's journey and his tips on breaking into venture capital.",
+    content: `I met with Ascend VC's Founding General Partner Kirby Winfield to talk about his outlook on venture capital and how to break into it in the future.
+    
+    The first thing to understand is that there is no better experience than working at a start-up. In fact, work at as many start-ups as you can while you're young and energetic so that you can understand the business environment and learn as much as possble. Kirby himself has been apart of numerous start-ups since his college years, involving himself in numerous exits that introduced him to the VC world.
+    
+    But how do you break into start-ups?
+    
+    Kirby says to make yourself useful to everyone. His first start-up opportunity arose from just being a helpful person, and that is a continuity throughout most start-ups. Don't think about just equipping yourself with certifications or courses. Everyone can do that. Learn applicable skills that have utility and you'll be noticed much quicker than you think.
+    
+    Another question that arose is the evolution of VC with AI.
+    
+    I asked him whether he envisioned a declining role with venture capitals firms in funding stages and he was firm on its solidarity. He used quantum AI as an example, stating that VC won't be disappearing anytime soon because technoloy is constantly developing. Even with strong revenue models and distribution strategies, funding from venture capitals is always needed to get ahead in the market, and the value that VC firms are bringing to early-stage start-ups is indispensable.
+    
+    That wraps up my learnings from this interview with Kirby. Make sure to check him out on linkedin or on Ascend VC's website. If you want to learn more my contacts are in the about section.
+    
+    Until the next one!`,
+    date: "2025-05-06",
+    readTime: "2 min read"
   },
   {
     id: "productivity-hacks",
