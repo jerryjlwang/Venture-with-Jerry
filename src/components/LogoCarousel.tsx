@@ -10,7 +10,7 @@ const LogoCarousel = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [isUserInteracting, setIsUserInteracting] = useState(false);
-  const [translateY, setTranslateY] = useState(0);
+  const [translateY, setTranslateY] = useState(() => logos.length * 100);
   const animationRef = useRef<number>();
   const lastInteractionTime = useRef<number>(Date.now());
   
