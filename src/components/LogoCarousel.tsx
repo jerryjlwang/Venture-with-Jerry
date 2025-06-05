@@ -57,8 +57,8 @@ const LogoCarousel = () => {
           
           // Use modulo for seamless infinite scroll
           // When we've scrolled through one complete set, seamlessly continue
-          if (newY >= singleSetHeight) {
-            newY = newY % singleSetHeight;
+          if (newY >= singleSetHeight * 2) {
+            newY = newY - singleSetHeight;
           }
           
           return newY;
