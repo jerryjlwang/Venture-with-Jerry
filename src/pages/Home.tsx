@@ -67,7 +67,6 @@ const Home = () => {
               >
                 View all posts →
               </a>
-              See what companies I've interviewed ↓
             </div>
           </div>
         </section>
