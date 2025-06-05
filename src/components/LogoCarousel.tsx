@@ -62,16 +62,18 @@ const LogoCarousel = () => {
   const tripleLogos = [...logos, ...logos, ...logos];
 
   useEffect(() => {
+    const logoHeight = 100; // 80px logo + 20px gap
+    const singleSetHeight = logos.length * logoHeight;
+    
     const animate = () => {
       if (!isUserInteracting) {
         setTranslateY(prev => {
-          const logoHeight = 100; // 80px logo + 20px gap
-          const singleSetHeight = logos.length * logoHeight;
           let newY = prev + 0.8; // Smooth consistent speed
           
-          // When we reach the end of the second set, smoothly reset to start of second set
-          if (newY >= singleSetHeight * 2) {
-            newY = singleSetHeight;
+          // Use modulo for seamless infinite scroll
+          // When we've scrolled through one complete set, seamlessly continue
+          if (newY >= singleSetHeight) {
+            newY = newY % singleSetHeight;
           }
           
           return newY;
@@ -99,7 +101,6 @@ const LogoCarousel = () => {
       e.stopPropagation();
       e.preventDefault();
   
-      
       setIsUserInteracting(true);
       lastInteractionTime.current = Date.now();
       
@@ -110,11 +111,11 @@ const LogoCarousel = () => {
         const delta = e.deltaY * 0.5;
         let newY = prev + delta;
         
-        // Handle wrapping for manual scroll
-        if (newY >= singleSetHeight * 2) {
-          newY = singleSetHeight;
-        } else if (newY < singleSetHeight) {
-          newY = singleSetHeight * 2 - 1;
+        // Keep position within bounds using modulo for seamless wrapping
+        if (newY < 0) {
+          newY = singleSetHeight + (newY % singleSetHeight);
+        } else if (newY >= singleSetHeight) {
+          newY = newY % singleSetHeight;
         }
         
         return newY;
@@ -127,33 +128,20 @@ const LogoCarousel = () => {
         }
       }, 800);
     };
+    
     container.addEventListener('wheel', handleNativeWheel, { passive: false });
 
     return () => {
       container.removeEventListener('wheel', handleNativeWheel);
     };
-  }, []);
+  }, [logos.length]);
 
   const handleMouseEnter = () => {
     setIsUserInteracting(true);
   };
 
   const handleMouseLeave = () => {
-    // Smooth transition back to auto-scroll by normalizing position first
-    setTranslateY(prev => {
-      const logoHeight = 100;
-      const singleSetHeight = logos.length * logoHeight;
-      
-      // Ensure we're in the middle set for smooth continuation
-      if (prev < singleSetHeight) {
-        return prev + singleSetHeight;
-      } else if (prev >= singleSetHeight * 2) {
-        return prev - singleSetHeight;
-      }
-      return prev;
-    });
-    
-    // Small delay to allow position normalization, then resume auto-scroll
+    // No need to normalize position anymore since we're using modulo
     setTimeout(() => {
       setIsUserInteracting(false);
     }, 50);
