@@ -140,7 +140,7 @@ const LogoCarousel = () => {
           overflow: 'hidden',
           scrollbarWidth: 'none', 
           msOverflowStyle: 'none',
-          touchAction: 'none':
+          touchAction: 'none'
         }}
       >
         <div 
