@@ -10,7 +10,6 @@ const LogoCarousel = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [isUserInteracting, setIsUserInteracting] = useState(false);
-  const [translateY, setTranslateY] = useState(() => logos.length * 100);
   const animationRef = useRef<number>();
   const lastInteractionTime = useRef<number>(Date.now());
   
@@ -42,6 +41,7 @@ const LogoCarousel = () => {
       src: 'https://www.madrona.com/wp-content/uploads/2022/10/Madrona_LockupV_MADGRN_RGB_1000W-300x200.png' 
     },
   ];
+  const [translateY, setTranslateY] = useState(() => logos.length * 100);
 
   // Triple the logos for smoother infinite scroll
   const tripleLogos = [...logos, ...logos, ...logos];
