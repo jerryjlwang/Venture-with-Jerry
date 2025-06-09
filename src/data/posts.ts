@@ -15,31 +15,29 @@ export const posts: Post[] = [
     excerpt: "Welcome to my personal blog! Here's what you can expect and how I plan to share my thoughts and experiences.",
     content: `# Getting Started with My Personal Blog
 
-Welcome to my personal blog! I'm excited to share this space with you where I'll be documenting my thoughts, experiences, and insights.
+Welcome to my personal blog! I'm excited to share this space with you where I'll be documenting my VC interviews.
 
 ## What You Can Expect
 
-This blog will be a mix of:
-- Technical tutorials and insights
-- Personal reflections and experiences
-- Industry trends and analysis
-- Creative projects and experiments
+This blog will: 
+- summarize my interviews with VC professionals
+- show my own insights
+- give recommendations on pursuing VC as a path
 
 ## Why I Started This Blog
 
 I believe in the power of sharing knowledge and experiences. This blog serves as:
-- A platform to document my learning journey
+- A platform to document my journey to VC (in high school)
 - A way to connect with like-minded individuals
-- A space for creative expression
-- A repository of useful information and tutorials
+- A space for others to learn finance and venture capitalism
 
 ## Stay Connected
 
-I'll be posting regularly, so make sure to check back often for new content. Feel free to reach out if you have any questions or suggestions for topics you'd like me to cover.
+I'll be posting regularly, so make sure to check back often for new content. Feel free to reach out if you have any questions or suggestions for firms that I should interview.
 
 Thank you for being here, and I hope you find value in what I share!`,
-    date: "2025-01-15",
-    readTime: "3 min read"
+    date: "2025-05-05",
+    readTime: "2 min read"
   },
   {
     id: "Kirby Winfield-Ascend",
@@ -64,55 +62,26 @@ Thank you for being here, and I hope you find value in what I share!`,
     readTime: "2 min read"
   },
   {
-    id: "productivity-hacks",
-    title: "Productivity Hacks That Changed My Life",
-    excerpt: "Discover the simple yet effective productivity techniques that have helped me achieve more while maintaining work-life balance.",
-    content: `# Productivity Hacks That Changed My Life
+    id: "Paul Goodrich-Madrona",
+    title: "Why are all venture capitals trees?",
+    excerpt: "Learn about Paul's unorthodox journey to venture capital and how he helped build the biggest VC in Washington.",
+    content: `Why are all venture capitals named after trees?
 
-Over the years, I've experimented with various productivity techniques. Here are the ones that have made the biggest impact on my daily life and work.
+Just kidding, that wasn’t really the topic when I interviewed Paul Goodrich, co-founder of and managing director at Madrona (a tree). Though, I do still wonder why that is. 
 
-## The Pomodoro Technique
+Madrona is the biggest venture capital in Washington, and they’ve invested in some of the biggest tech companies to come out of here.
 
-This time management method has been a game-changer:
-- Work for 25 minutes
-- Take a 5-minute break
-- Repeat 4 times, then take a longer break
-- Helps maintain focus and prevents burnout
+Their biggest deal came from Snowflake, with a record $3.4 billion raised from their IPO under Madrona’s management. Paul told me this was an example of the general rule in venture capital in which really only one successful company is needed to make the whole fund. It’s easy for fund managers to get discouraged when almost all of their investments go bankrupt, but that’s the thing with venture capital. Investing with limited liability creates a fixed downside for the companies that do fail, and a huge potential upside with star companies like Snowflake.
 
-## Time Blocking
+How does Madrona find these companies?
 
-Instead of keeping a traditional to-do list:
-- Block specific times for different activities
-- Include buffer time between tasks
-- Protect your most productive hours
-- Batch similar activities together
+Paul travels day and night networking and consulting with founders to find potential deals. Stimulating deal flow is the most important aspect of venture capital, and knowing who to talk to greatly expedites that process. He values long term relationships with the founders he meets and a lot of time, he builds connections with people that aren’t even founders yet. Leaving a positive impression on likely entrepreneurs is crucial in venture capital because establishing these connections before the founder spikes gives a competitive advantage for early funding.
 
-## The Two-Minute Rule
+He also reiterates that venture capital is a long haul. Coming from a law background, he didn’t have much experience with venture capital, but he was taught to be analytical and view things from different perspectives. These are both valuable skills in being a successful partner, but Paul doesn’t advise going that route.
 
-If a task takes less than two minutes, do it immediately:
-- Prevents small tasks from accumulating
-- Reduces mental overhead
-- Creates momentum for larger tasks
-- Keeps your workspace organized
-
-## Digital Minimalism
-
-Reducing digital distractions has been crucial:
-- Turn off non-essential notifications
-- Use website blockers during focused work
-- Keep your phone in another room when working
-- Practice regular digital detoxes
-
-## Weekly Reviews
-
-Every Sunday, I spend 30 minutes:
-- Reviewing the previous week's accomplishments
-- Planning the upcoming week's priorities
-- Adjusting goals and strategies
-- Celebrating wins and learning from setbacks
-
-These techniques aren't magic bullets, but when combined and practiced consistently, they can significantly improve your productivity and overall well-being.`,
-    date: "2024-02-01",
+He suggested either follow the traditional route of grinding through college, working through wall street, and getting an MBA; or, jumping into startups early, attaining soft and technical skills, and then entering VC. Both routes are very viable, yet he still prefers the startup method because of how it prepares you for diligence and business evaluation. Founders see clear as day how an early stage company startup works and whether it’s on the path to success. Understanding these “success factors” makes VC a lot easier, and empathizing and relating to founders is a great way to ensure workability.
+`,
+    date: "2025-06-08",
     readTime: "4 min read"
   }
 ];
