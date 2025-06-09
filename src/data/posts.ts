@@ -80,7 +80,10 @@ Paul travels day and night networking and consulting with founders to find poten
 He also reiterates that venture capital is a long haul. Coming from a law background, he didn’t have much experience with venture capital, but he was taught to be analytical and view things from different perspectives. These are both valuable skills in being a successful partner, but Paul doesn’t advise going that route.
 
 He suggested either follow the traditional route of grinding through college, working through wall street, and getting an MBA; or, jumping into startups early, attaining soft and technical skills, and then entering VC. Both routes are very viable, yet he still prefers the startup method because of how it prepares you for diligence and business evaluation. Founders see clear as day how an early stage company startup works and whether it’s on the path to success. Understanding these “success factors” makes VC a lot easier, and empathizing and relating to founders is a great way to ensure workability.
-`,
+
+That wraps up my learnings from this interview with Kirby. Make sure to check him out on linkedin or on Ascend VC's website. If you want to learn more my contacts are in the about section.
+    
+Until the next one!`,
     date: "2025-06-08",
     readTime: "4 min read"
   }
