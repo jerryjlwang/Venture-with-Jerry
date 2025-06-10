@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, BarChart3 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Header = () => {
@@ -36,6 +36,13 @@ const Header = () => {
               className={`text-white hover:text-blue-300 transition-colors ${isActive('/about') ? 'text-blue-300' : ''}`}
             >
               About
+            </Link>
+            <Link 
+              to="/analytics" 
+              className={`text-white hover:text-blue-300 transition-colors flex items-center gap-1 ${isActive('/analytics') ? 'text-blue-300' : ''}`}
+            >
+              <BarChart3 size={18} />
+              Analytics
             </Link>
           </nav>
 
@@ -74,6 +81,14 @@ const Header = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
+              </Link>
+              <Link 
+                to="/analytics" 
+                className={`text-white hover:text-blue-300 transition-colors py-2 flex items-center gap-1 ${isActive('/analytics') ? 'text-blue-300' : ''}`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <BarChart3 size={18} />
+                Analytics
               </Link>
             </div>
           </nav>

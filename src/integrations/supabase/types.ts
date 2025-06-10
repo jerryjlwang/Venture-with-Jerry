@@ -9,13 +9,105 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      analytics: {
+        Row: {
+          browser: string | null
+          city: string | null
+          consent_given: boolean | null
+          country: string | null
+          device_type: string | null
+          duration_seconds: number | null
+          id: string
+          ip_address: unknown | null
+          page_path: string
+          page_title: string | null
+          referrer: string | null
+          session_id: string
+          user_agent: string | null
+          visited_at: string
+          visitor_id: string | null
+        }
+        Insert: {
+          browser?: string | null
+          city?: string | null
+          consent_given?: boolean | null
+          country?: string | null
+          device_type?: string | null
+          duration_seconds?: number | null
+          id?: string
+          ip_address?: unknown | null
+          page_path: string
+          page_title?: string | null
+          referrer?: string | null
+          session_id: string
+          user_agent?: string | null
+          visited_at?: string
+          visitor_id?: string | null
+        }
+        Update: {
+          browser?: string | null
+          city?: string | null
+          consent_given?: boolean | null
+          country?: string | null
+          device_type?: string | null
+          duration_seconds?: number | null
+          id?: string
+          ip_address?: unknown | null
+          page_path?: string
+          page_title?: string | null
+          referrer?: string | null
+          session_id?: string
+          user_agent?: string | null
+          visited_at?: string
+          visitor_id?: string | null
+        }
+        Relationships: []
+      }
+      analytics_summary: {
+        Row: {
+          date: string
+          device_breakdown: Json | null
+          id: string
+          page_views: number | null
+          top_pages: Json | null
+          top_referrers: Json | null
+          total_visits: number | null
+          unique_visitors: number | null
+          updated_at: string
+        }
+        Insert: {
+          date?: string
+          device_breakdown?: Json | null
+          id?: string
+          page_views?: number | null
+          top_pages?: Json | null
+          top_referrers?: Json | null
+          total_visits?: number | null
+          unique_visitors?: number | null
+          updated_at?: string
+        }
+        Update: {
+          date?: string
+          device_breakdown?: Json | null
+          id?: string
+          page_views?: number | null
+          top_pages?: Json | null
+          top_referrers?: Json | null
+          total_visits?: number | null
+          unique_visitors?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      update_analytics_summary: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
