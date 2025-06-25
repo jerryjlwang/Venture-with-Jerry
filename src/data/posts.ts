@@ -86,5 +86,35 @@ That wraps up my learnings from this interview with Paul. Make sure to check him
 Until the next one!`,
     date: "2025-06-08",
     readTime: "4 min read"
+  },
+  {
+    id: "Hope Cochran-Madrona",
+    title: "Where's the Parking in Seattle?",
+    excerpt: "Discover Hope's insights on VC and how her CFO backgrounds has put her in the position she has today.",
+    content: `What's the best way to find parking in Seattle? 
+
+I don't have an answer, and neither does Hope Cochran from Madrona.
+
+However, we can both agree that that's not the hardest part of VC (it might be a close second). Besides complaining about Seattle traffic, we also had a great conversation about VC and how her path brought her to the Managing Director position.
+
+Hope has always been an entrepreneurial person, and at a very young age already knew she wanted to pursue finance, just like me. After finding success as a founder, she jumped into two CFO positions (one at the developer of Candy Crush!), in which she helped lead both IPO's. This path again reiterates that VC is not a normal first job, or even a second. It requires tons of industry expertise, something that Hope has learned on the job operating at the C-suite level.
+
+What also sets her apart is her initiative. She leads Madrona's OnBoarding Women Program, a free yet rigorous bootcamp that prepares women for board positions at top companies (and it's already placed 100+ women on boards!). Unique programs like these are so beneficial to the entrepreneurial space, creating accessibility for those who may be overwhelmed by the current market. Having instruction and mentorship at this level is so crucial to succeeding in this space, and there are so many other programs out there that can immensely boost people's careers.
+
+She also spoke about how VC can be broken down into three lanes. 
+
+The first is the investing side. They concern themselves with doing the diligence, writing the investment memo, putting together the construct of a deal, and really just working in the field to make investments happen.
+
+The second lane is comprised of building the company. Directors will sit on boards, but Hope says it's really just a silly title for working side by side with the CEO to actually build the company.
+
+The third lane is the most technical. This is where a firm will craft its investment thesis with hours and hours of research. Directors will hone in on their own knowledge by learning about the newest industry developments, implementing that into their methodology to keep track of innovative ideas and ask complicated questions. Hope tells me about how Madrona works in this lane, having literal meetings on what's new in the world and how the portfolio companies may benefit from the big headlines.
+
+It's an important lesson for founders too. Keeping up with the latest news is incredibly important for maintaining relevant businesses, especially when trying to get help from VC's. I know what I'm adding to my morning routine.
+
+That wraps up today's interview with Hope. Let me know if there's anything VC related that you'd like me to cover in these interviews, and I'll be happy to ask.
+    
+Until the next one!`,
+    date: "2025-06-24",
+    readTime: "3 min read"
   }
 ];
