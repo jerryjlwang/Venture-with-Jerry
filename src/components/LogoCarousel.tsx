@@ -40,6 +40,11 @@ const LogoCarousel = () => {
       name: 'Madrona', 
       src: 'https://www.madrona.com/wp-content/uploads/2022/10/Madrona_LockupV_MADGRN_RGB_1000W-300x200.png' 
     },
+    { 
+      id: '6', 
+      name: 'Founders' Co-op', 
+      src: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fx.com%2Ffounderscoop&psig=AOvVaw0sQVPuW05SGlMUoRmpP1L9&ust=1751001796517000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOCKqpOsjo4DFQAAAAAdAAAAABAE' 
+    },
   ];
   const [translateY, setTranslateY] = useState(() => logos.length * 100);
 
