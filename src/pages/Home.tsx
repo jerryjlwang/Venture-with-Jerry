@@ -22,7 +22,7 @@ const Home = () => {
       {/* Content */}
       <div className="relative z-10">
         {/* Hero Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <section className="py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto text-center">
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
               Welcome to My
@@ -50,9 +50,9 @@ const Home = () => {
         </section>
 
         {/* Recent Posts Section */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <section className="py-8 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
               Recent Posts
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -60,7 +60,7 @@ const Home = () => {
                 <PostCard key={post.id} {...post} />
               ))}
             </div>
-            <div className="text-center mt-12">
+            <div className="text-center mt-8">
               <a 
                 href="/posts" 
                 className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors font-medium text-lg"
@@ -70,7 +70,7 @@ const Home = () => {
             </div>
           </div>
         </section>
-        <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <section className="py-8 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <LogoCarousel direction="horizontal" />
           </div>
