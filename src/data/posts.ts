@@ -40,6 +40,28 @@ Thank you for being here, and I hope you find value in what I share!`,
     readTime: "2 min read"
   },
   {
+    id: "Aviel Ginzburg-Founders\' Co-op",
+    title: "Build, Build, Build",
+    excerpt: "Learn about Aviel's opinion on making it to the VC space and operating several funds.",
+    content: `Just build.
+
+That's the biggest piece of advice that I received from Aviel Ginzburg, General Partner at Founders Co-op. The world as it is right now could not be any better for building from scratch. Data is so accessible that tools can quickly become useful and scale just presents itself. If you really want to go into VC the finance route is becoming less and less appealing. It's arduous and doesn't promise the same industry experience that startups can offer.
+
+It also allows you to spread yourself out. Aviel is an incredibly fast-paced individual, starting new projects and researching into new fields constantly. It's something that VC can offer that staying at a company doesn't—flexibility in pursuing whatever seems interesting. And, there's no requirement to become experts in every technical domain. You can remain at the high level, and still be incredibly effective.
+
+I also learned that VC plays a bigger role in startups than what I originally thought. Aviel described to me what it was like being funded by Founders' Co-op in his startup. It was enough to get him to not go to YC, but the capital wasn't the only motivator. Having VC's invest in your startup is an incredible confidence boost that your product is worth it to pursue. I can imagine it too. Getting backed by previous industry leaders, it's a sign that you have the ability to do whatever it takes to make your product work. VC's aren't just there to make returns for their LP's, they can actively advance technological innovation by pushing founders to success.
+
+One key VC topic that I learned through this interview is how funds actually run. Traditionally, they've always been 2-year, 3-year, or 4-year cycles; this is when capital is invested into new companies to build the fund's portfolio. This also means that funds are deployed concurrently, but new companies are only added through the latest fund. The other funds sustain another ~3-7 years of fund life, where capital is further invested into companies already part of that fund. This means reserving capital for follow-on in later funding stages and bridge rounds. Aviel actively invests out of 4 funds currently, which is just insane to think about.
+
+That's all I have to share for today. Thanks for reading until now and make sure to check out my other interviews too!
+
+If you're a generous VC professional with advice for me I'd love to set up an interview please reach out. 
+
+Thanks to Aviel Ginzburg and Founders Co-op for supporting my VC journey!`,
+    date: "2025-07-03",
+    readTime: "3 min read"
+  },
+  {
     id: "Hope Cochran-Madrona",
     title: "Where's the Parking in Seattle?",
     excerpt: "Discover Hope's insights on VC and how her CFO backgrounds has put her in the position she has today.",
