@@ -70,9 +70,11 @@ const Home = () => {
             </div>
           </div>
         </section>
-        <div className="lg:col-span-1">
-            <LogoCarousel />
+        <section className="py-16 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto">
+            <LogoCarousel direction="horizontal" />
           </div>
+        </section>
       </div>
     </div>
   );

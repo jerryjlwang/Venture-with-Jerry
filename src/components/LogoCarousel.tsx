@@ -7,7 +7,11 @@ interface Logo {
   url: string;
 }
 
-const LogoCarousel = () => {
+interface LogoCarouselProps {
+  direction?: 'vertical' | 'horizontal';
+}
+
+const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [isUserInteracting, setIsUserInteracting] = useState(false);
@@ -53,27 +57,27 @@ const LogoCarousel = () => {
       url: 'https://www.founderscoop.com'
     },
   ];
-  const [translateY, setTranslateY] = useState(() => logos.length * 100);
+  const [translateValue, setTranslateValue] = useState(() => direction === 'horizontal' ? logos.length * 180 : logos.length * 100);
 
   // Triple the logos for smoother infinite scroll
   const tripleLogos = [...logos, ...logos, ...logos];
 
   useEffect(() => {
-    const logoHeight = 100; // 80px logo + 20px gap
-    const singleSetHeight = logos.length * logoHeight;
+    const logoSize = direction === 'horizontal' ? 180 : 100; // 160px logo + 20px gap for horizontal, 80px + 20px for vertical
+    const singleSetSize = logos.length * logoSize;
     
     const animate = () => {
       if (!isUserInteracting) {
-        setTranslateY(prev => {
-          let newY = prev + 0.8; // Smooth consistent speed
+        setTranslateValue(prev => {
+          let newValue = prev + 0.8; // Smooth consistent speed
           
           // Use modulo for seamless infinite scroll
           // When we've scrolled through one complete set, seamlessly continue
-          if (newY >= singleSetHeight * 2) {
-            newY -= singleSetHeight;
+          if (newValue >= singleSetSize * 2) {
+            newValue -= singleSetSize;
           }
           
-          return newY;
+          return newValue;
         });
       }
       
@@ -87,7 +91,7 @@ const LogoCarousel = () => {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [isUserInteracting, logos.length]);
+  }, [isUserInteracting, logos.length, direction]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -102,20 +106,20 @@ const LogoCarousel = () => {
       lastInteractionTime.current = Date.now();
       
       // Manual scroll with wheel
-      setTranslateY(prev => {
-        const logoHeight = 100;
-        const singleSetHeight = logos.length * logoHeight;
-        const delta = e.deltaY * 0.5;
-        let newY = prev + delta;
+      setTranslateValue(prev => {
+        const logoSize = direction === 'horizontal' ? 180 : 100;
+        const singleSetSize = logos.length * logoSize;
+        const delta = (direction === 'horizontal' ? e.deltaX : e.deltaY) * 0.5;
+        let newValue = prev + delta;
         
         // Keep position within bounds using modulo for seamless wrapping
-        if (newY < singleSetHeight) {
-          newY += singleSetHeight;
-        } else if (newY >= singleSetHeight * 2) {
-          newY -= singleSetHeight;
+        if (newValue < singleSetSize) {
+          newValue += singleSetSize;
+        } else if (newValue >= singleSetSize * 2) {
+          newValue -= singleSetSize;
         }
         
-        return newY;
+        return newValue;
       });
   
       // Resume auto-scroll after user stops
@@ -131,7 +135,7 @@ const LogoCarousel = () => {
     return () => {
       container.removeEventListener('wheel', handleNativeWheel);
     };
-  }, [logos.length]);
+  }, [logos.length, direction]);
 
   const handleMouseEnter = () => {
     setIsUserInteracting(true);
@@ -154,7 +158,7 @@ const LogoCarousel = () => {
         target="_blank"
         rel="noopener noreferrer"
         key={`${logo.id}-${Math.floor(index / logos.length)}-${index % logos.length}`}
-        className="h-20 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-3 flex items-center justify-center cursor-pointer"
+        className={`${direction === 'horizontal' ? 'w-40 h-20' : 'h-20'} bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-3 flex items-center justify-center cursor-pointer flex-shrink-0`}
       >
         {!imageError ? (
           <>
@@ -189,7 +193,9 @@ const LogoCarousel = () => {
       <h2 className="text-xl font-bold text-white mb-4 text-center">Companies Interviewed</h2>
       <div 
         ref={containerRef}
-        className="no-scrollbar h-96 overflow-hidden cursor-grab active:cursor-grabbing relative select-none"
+        className={`no-scrollbar overflow-hidden cursor-grab active:cursor-grabbing relative select-none ${
+          direction === 'horizontal' ? 'w-full h-28' : 'h-96'
+        }`}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{ 
@@ -201,9 +207,11 @@ const LogoCarousel = () => {
       >
         <div 
           ref={contentRef}
-          className="flex flex-col gap-5"
+          className={`flex gap-5 ${direction === 'horizontal' ? 'flex-row' : 'flex-col'}`}
           style={{ 
-            transform: `translateY(-${translateY}px)`,
+            transform: direction === 'horizontal' 
+              ? `translateX(-${translateValue}px)` 
+              : `translateY(-${translateValue}px)`,
             willChange: 'transform'
           }}
         >
