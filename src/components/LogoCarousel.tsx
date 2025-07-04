@@ -20,13 +20,13 @@ const LogoCarousel = () => {
       id: '1', 
       name: 'Onesixone Ventures', 
       src: 'https://images.squarespace-cdn.com/content/v1/62c76bc98f086645bc40162f/33627f65-3967-4877-b6bd-b8c5706e5389/Untitled+design.png',
-      url: 'https://onesixone-ventures.example.com'
+      url: 'https://www.onesixone.ventures'
     },
     { 
       id: '2', 
       name: 'West River Group', 
       src: 'https://images.squarespace-cdn.com/content/v1/6337b0e52a797969996c3b4c/a6d9c2c8-4211-4db9-baf5-d668f9b066da/WRG+Transparent.png',
-      url: 'https://west-river-group.example.com'
+      url: 'https://www.wrg.vc'
     },
     { 
       id: '3', 
@@ -38,19 +38,19 @@ const LogoCarousel = () => {
       id: '4', 
       name: 'Ascend VC', 
       src: 'https://images.squarespace-cdn.com/content/v1/5d6ed158d1024700012397dc/1574804203738-JYY4WYCNRJVQM2YK8SLO/ascend_logo_color_novc.png?format=1000w',
-      url: 'https://ascend-vc.example.com'
+      url: 'https://www.ascend.vc'
     },
     { 
       id: '5', 
       name: 'Madrona', 
       src: 'https://www.madrona.com/wp-content/uploads/2022/10/Madrona_LockupV_MADGRN_RGB_1000W-300x200.png',
-      url: 'https://madrona.example.com'
+      url: 'https://www.madrona.com'
     },
     { 
       id: '6', 
       name: 'Founders\' Co-op', 
       src: 'https://www.washingtontechnology.org/wp-content/uploads/2018/08/founders-coop.png',
-      url: 'https://founders-coop.example.com'
+      url: 'https://www.founderscoop.com'
     },
   ];
   const [translateY, setTranslateY] = useState(() => logos.length * 100);
