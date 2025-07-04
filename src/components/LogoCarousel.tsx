@@ -32,7 +32,7 @@ const LogoCarousel = () => {
       id: '3', 
       name: 'Tola Capital', 
       src: 'https://tolacapital.com/wp-content/uploads/2022/11/TC-portrait-logo-1600x800-1.png',
-      url: 'https://tola-capital.example.com'
+      url: 'https://tolacapital.com'
     },
     { 
       id: '4', 
