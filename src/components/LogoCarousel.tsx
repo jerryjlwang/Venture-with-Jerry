@@ -4,6 +4,7 @@ interface Logo {
   id: string;
   name: string;
   src: string;
+  url: string;
 }
 
 const LogoCarousel = () => {
@@ -18,32 +19,38 @@ const LogoCarousel = () => {
     { 
       id: '1', 
       name: 'Onesixone Ventures', 
-      src: 'https://images.squarespace-cdn.com/content/v1/62c76bc98f086645bc40162f/33627f65-3967-4877-b6bd-b8c5706e5389/Untitled+design.png' 
+      src: 'https://images.squarespace-cdn.com/content/v1/62c76bc98f086645bc40162f/33627f65-3967-4877-b6bd-b8c5706e5389/Untitled+design.png',
+      url: 'https://onesixone-ventures.example.com'
     },
     { 
       id: '2', 
       name: 'West River Group', 
-      src: 'https://images.squarespace-cdn.com/content/v1/6337b0e52a797969996c3b4c/a6d9c2c8-4211-4db9-baf5-d668f9b066da/WRG+Transparent.png' 
+      src: 'https://images.squarespace-cdn.com/content/v1/6337b0e52a797969996c3b4c/a6d9c2c8-4211-4db9-baf5-d668f9b066da/WRG+Transparent.png',
+      url: 'https://west-river-group.example.com'
     },
     { 
       id: '3', 
       name: 'Tola Capital', 
-      src: 'https://tolacapital.com/wp-content/uploads/2022/11/TC-portrait-logo-1600x800-1.png' 
+      src: 'https://tolacapital.com/wp-content/uploads/2022/11/TC-portrait-logo-1600x800-1.png',
+      url: 'https://tola-capital.example.com'
     },
     { 
       id: '4', 
       name: 'Ascend VC', 
-      src: 'https://images.squarespace-cdn.com/content/v1/5d6ed158d1024700012397dc/1574804203738-JYY4WYCNRJVQM2YK8SLO/ascend_logo_color_novc.png?format=1000w' 
+      src: 'https://images.squarespace-cdn.com/content/v1/5d6ed158d1024700012397dc/1574804203738-JYY4WYCNRJVQM2YK8SLO/ascend_logo_color_novc.png?format=1000w',
+      url: 'https://ascend-vc.example.com'
     },
     { 
       id: '5', 
       name: 'Madrona', 
-      src: 'https://www.madrona.com/wp-content/uploads/2022/10/Madrona_LockupV_MADGRN_RGB_1000W-300x200.png' 
+      src: 'https://www.madrona.com/wp-content/uploads/2022/10/Madrona_LockupV_MADGRN_RGB_1000W-300x200.png',
+      url: 'https://madrona.example.com'
     },
     { 
       id: '6', 
       name: 'Founders\' Co-op', 
-      src: 'https://www.washingtontechnology.org/wp-content/uploads/2018/08/founders-coop.png' 
+      src: 'https://www.washingtontechnology.org/wp-content/uploads/2018/08/founders-coop.png',
+      url: 'https://founders-coop.example.com'
     },
   ];
   const [translateY, setTranslateY] = useState(() => logos.length * 100);
@@ -142,9 +149,12 @@ const LogoCarousel = () => {
     const [imageError, setImageError] = useState(false);
 
     return (
-      <div 
+      <a 
+        href={logo.url}
+        target="_blank"
+        rel="noopener noreferrer"
         key={`${logo.id}-${Math.floor(index / logos.length)}-${index % logos.length}`}
-        className="h-20 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-3 flex items-center justify-center"
+        className="h-20 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-3 flex items-center justify-center cursor-pointer"
       >
         {!imageError ? (
           <>
@@ -170,7 +180,7 @@ const LogoCarousel = () => {
             {logo.name}
           </div>
         )}
-      </div>
+      </a>
     );
   };
 

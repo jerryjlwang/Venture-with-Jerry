@@ -104,6 +104,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      backfill_analytics_summary: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
       update_analytics_summary: {
         Args: Record<PropertyKey, never>
         Returns: undefined
