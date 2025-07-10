@@ -56,6 +56,12 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
       src: 'https://www.washingtontechnology.org/wp-content/uploads/2018/08/founders-coop.png',
       url: 'https://www.founderscoop.com'
     },
+    { 
+      id: '7', 
+      name: 'Voyager Capital', 
+      src: 'https://s3-us-west-2.amazonaws.com/cbi-image-service-prd/modified/0901d791-bed4-4b60-b29d-e7fa33ea8b9c.png',
+      url: 'https://www.voyagercapital.com/'
+    },
   ];
   const [translateValue, setTranslateValue] = useState(() => direction === 'horizontal' ? logos.length * 180 : logos.length * 100);
 
