@@ -40,6 +40,32 @@ Thank you for being here, and I hope you find value in what I share!`,
     readTime: "2 min read"
   },
   {
+    id: "Erik Benson-Voyager Capital",
+    title: "Is agriculture the future?",
+    excerpt: "Learn about Erik Benson and his insights on agtech and how a trillion dollar industry is changing.",
+    content: `Write on your Linkedin that you're building something. 
+
+Maybe a VC will reach out. Maybe you'll see Erik Benson (Managing Director at Voyager Capital) in your inbox if you get really lucky.
+
+But how much does luck really factor into creating a major startup?
+
+Probably a lot, and that's why VC's will take chances on founders with aspirations to scale their companies 1000x within just a few years.
+
+If you're a founder with 5% revenue growth every year, forget about being VC-backed. Try your luck out. Have goals to scale as much as humanly possible and maybe you'll catch the interest of some partners.
+
+This desire for massive growth is one reason 80% of Erik's attention is on agtech (besides growing up on a crop farm in Skagit Valley). Around 8 years ago, the industry started to see major exits with companies like The Climate Corporation which led Voyager Capital to consider it seriously. Erik identifies that one reason it took off is because older farm owners were beginning to pass their land off to their middle-aged tech educated kids. As a result, more and more farms were becoming receptive to implementing modern technologies.
+
+Adoption of agtech skyrocketed. Farmers were now using tech to kill weeds, test land fertility, and much more to boost supply and quality. The way the world is set up right now, building hardware and software for use cases in agriculture can be so effective. There are so many new technologies being developed daily that can solve tangible problems on the farm with precision and scale.
+
+Take Carbon Robotics—one of the earliest agtech companies in the fund's portfolio. They created a revolutionary tool that removes weeds with precision lasers. With a neural network and some NVIDIA GPU's, they were able to turn a laborious task that either required hours of manual work or potentially hazardous chemicals into an automated, cost-effective system. And now, they're valued at $375 million, with institutional investors wanting to take them public, calling them the Tesla of agtech.
+
+Agriculture is the staple of any functioning country. It's a vertical that can constantly see demand for new technologies, and there's no doubt that AI will revolutionize it. It represents an astounding market of over $20 billion, and is expected to more than DOUBLE within 5 years.
+
+That wraps up my learnings from my interview with Erik. A huge thank you to him for chatting with me. Also make sure to attend his AMA webinar on the 17th to learn more about the amazing industry of agtech!`,
+    date: "2025-07-08",
+    readTime: "3 min read"
+  },
+  {
     id: "Aviel Ginzburg-Founders\' Co-op",
     title: "Build, Build, Build",
     excerpt: "Learn about Aviel's opinion on making it to the VC space and operating several funds.",
