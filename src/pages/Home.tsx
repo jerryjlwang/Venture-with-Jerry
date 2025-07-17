@@ -45,6 +45,12 @@ const Home = () => {
               >
                 Learn About Me
               </a>
+              <a 
+                href="/vcfunds" 
+                className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl"
+              >
+                Weekly Fund
+              </a>
             </div>
           </div>
         </section>
