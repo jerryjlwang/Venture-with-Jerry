@@ -16,7 +16,7 @@ const VCFunds = () => {
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-900 via-blue-950 to-black">
       {/* Hero Section */}
-      <div className="bg-cover bg-center bg-no-repeat relative" style={{backgroundImage: 'url(https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05)'}}>
+      <div className="bg-cover bg-center bg-no-repeat relative" style={{backgroundImage: 'url(https://images.squarespace-cdn.com/content/v1/56e8fcc03c44d89db7df9b3e/1554359150041-FS043JZG6F79BEDSZIY2/11+Picture-Perfect+Views+of+the+Golden+Gate+Bridge+in+San+Francisco)'}}>
         <div className="absolute inset-0 bg-black/50"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
