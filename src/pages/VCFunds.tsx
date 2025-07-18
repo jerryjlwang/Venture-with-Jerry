@@ -86,7 +86,7 @@ const VCFunds = () => {
                         </CardDescription>
                       </div>
                       <div className="flex flex-wrap gap-2">
-                        <Badge variant="outline" className="text-sm">
+                        <Badge variant="secondary" className="text-sm">
                           <TrendingUp className="w-3 h-3 mr-1" />
                           {fund.returns}
                         </Badge>
