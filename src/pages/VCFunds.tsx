@@ -14,7 +14,7 @@ const VCFunds = () => {
   const selectedIndustryData = vcFundsData.find(industry => industry.id === selectedIndustry);
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-600 via-blue-800 to-black">
+    <div className="min-h-screen bg-gradient-to-r from-blue-900 via-blue-950 to-black">
       {/* Hero Section */}
       <div className="bg-cover bg-center bg-no-repeat relative" style={{backgroundImage: 'url(https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05)'}}>
         <div className="absolute inset-0 bg-black/50"></div>
