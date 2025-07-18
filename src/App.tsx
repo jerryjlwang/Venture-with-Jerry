@@ -14,6 +14,7 @@ import PostDetail from "./pages/PostDetail";
 import About from "./pages/About";
 import Privacy from "./pages/Privacy";
 import VCFunds from "./pages/VCFunds";
+import FundDetail from "./pages/FundDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const AppContent = () => {
           <Route path="/about" element={<About />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/vc-funds" element={<VCFunds />} />
+          <Route path="/fund/:fundId" element={<FundDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

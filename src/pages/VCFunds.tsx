@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { vcFundsData } from "@/data/vcFunds";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -7,6 +8,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { TrendingUp, Building, DollarSign } from "lucide-react";
 
 const VCFunds = () => {
+  const navigate = useNavigate();
   const [selectedIndustry, setSelectedIndustry] = useState(vcFundsData[0]?.id || "");
 
   const selectedIndustryData = vcFundsData.find(industry => industry.id === selectedIndustry);
@@ -69,7 +71,11 @@ const VCFunds = () => {
 
             <div className="grid gap-8">
               {selectedIndustryData.funds.map((fund) => (
-                <Card key={fund.id} className="border-muted/50 shadow-lg hover-scale">
+                <Card 
+                  key={fund.id} 
+                  className="border-muted/50 shadow-lg hover-scale cursor-pointer transition-all hover:shadow-xl"
+                  onClick={() => navigate(`/fund/${fund.id}`)}
+                >
                   <CardHeader>
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                       <div>
