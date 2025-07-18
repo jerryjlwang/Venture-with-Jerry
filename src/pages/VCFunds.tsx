@@ -14,7 +14,7 @@ const VCFunds = () => {
   const selectedIndustryData = vcFundsData.find(industry => industry.id === selectedIndustry);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background to-blue-600">
+    <div className="min-h-screen bg-gradient-to-r from-blue-600 via-blue-800 to-black">
       {/* Hero Section */}
       <div className="bg-cover bg-center bg-no-repeat relative" style={{backgroundImage: 'url(https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05)'}}>
         <div className="absolute inset-0 bg-black/50"></div>
@@ -74,7 +74,7 @@ const VCFunds = () => {
               {selectedIndustryData.funds.map((fund) => (
                 <Card 
                   key={fund.id} 
-                  className="bg-black border-gray-800 shadow-lg hover-scale cursor-pointer transition-all hover:shadow-xl text-white"
+                  className="bg-black border-white border-2 shadow-lg hover-scale cursor-pointer transition-all hover:shadow-xl text-white"
                   onClick={() => navigate(`/fund/${fund.id}`)}
                 >
                   <CardHeader>
