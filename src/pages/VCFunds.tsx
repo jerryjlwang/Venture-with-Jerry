@@ -86,11 +86,11 @@ const VCFunds = () => {
                         </CardDescription>
                       </div>
                       <div className="flex flex-wrap gap-2">
-                        <Badge variant="secondary" className="text-sm">
+                        <Badge className="bg-white text-black border text-sm">
                           <TrendingUp className="w-3 h-3 mr-1" />
                           {fund.returns}
                         </Badge>
-                        <Badge variant="secondary" className="text-sm">
+                        <Badge className="bg-white text-black border text-sm">
                           {fund.keyMetrics.irr} IRR
                         </Badge>
                       </div>
