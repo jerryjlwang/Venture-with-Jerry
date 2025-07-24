@@ -33,8 +33,8 @@ const Home = () => {
             <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
               A place where you can get to know me and learn about my venture capital conversations.
             </p>
-            <div className="flex flex-col lg:flex-row gap-8 justify-center items-start">
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="relative flex justify-center">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <a 
                   href="/posts" 
                   className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-colors shadow-lg hover:shadow-xl"
@@ -48,7 +48,7 @@ const Home = () => {
                   Learn About Me
                 </a>
               </div>
-              <div className="w-full max-w-sm lg:max-w-xs">
+              <div className="absolute top-0 right-[calc(50%-180px)] w-72 hidden lg:block">
                 <NextGuests />
               </div>
             </div>
