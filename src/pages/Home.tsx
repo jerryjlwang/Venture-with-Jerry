@@ -48,7 +48,7 @@ const Home = () => {
                   Learn About Me
                 </a>
               </div>
-              <div className="absolute top-0 right-[calc(50%-180px)] w-72 hidden lg:block">
+              <div className="absolute top-0 right-0 w-72 hidden lg:block">
                 <NextGuests />
               </div>
             </div>
