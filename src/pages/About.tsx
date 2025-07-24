@@ -27,7 +27,7 @@ const About = () => {
             <div className="bg-gradient-to-br from-blue-800 to-blue-900 rounded-lg p-8 text-center shadow-xl">
               <div className="mb-4">
                 <img 
-                  src="https://scontent-sea1-1.xx.fbcdn.net/v/t1.15752-9/494824554_597077179526536_3831233855537341962_n.png?_nc_cat=100&ccb=1-7&_nc_sid=0024fc&_nc_ohc=qHA_s0fwL1sQ7kNvwHRd9QD&_nc_oc=AdkooboxwjWIv2NzOiJldZezyFHLUy1m8axROnuaqXM94zD2Ql7DG64UkO5Awe104A_modn5mNkXbrTJ9KdcowVi&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-sea1-1.xx&oh=03_Q7cD2gGe2UDPtYys88CJe6ZbWjyGKvn_0S0fEMoakjjQv3Q_sA&oe=6868B1CC" 
+                  src="/lovable-uploads/b7f4222c-402c-4621-9437-54726053d142.png" 
                   alt="Jerry Wang"
                   className="w-full max-w-xs mx-auto rounded-lg shadow-lg object-cover"
                 />
