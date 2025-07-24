@@ -33,7 +33,7 @@ const Home = () => {
             <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
               A place where you can get to know me and learn about my venture capital conversations.
             </p>
-            <div className="relative flex justify-center">
+            <div className="relative flex justify-center w-full">
               <div className="flex flex-col sm:flex-row gap-4">
                 <a 
                   href="/posts" 
@@ -48,7 +48,7 @@ const Home = () => {
                   Learn About Me
                 </a>
               </div>
-              <div className="absolute top-0 right-[calc(50%-180px)] w-72 hidden lg:block">
+              <div className="absolute top-0 right-0 w-72 hidden lg:block">
                 <NextGuests />
               </div>
             </div>
