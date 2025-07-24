@@ -2,6 +2,7 @@
 import PostCard from '../components/PostCard';
 import { posts } from '../data/posts';
 import LogoCarousel from '../components/LogoCarousel';
+import NextGuests from '../components/NextGuests';
 
 const Home = () => {
   const recentPosts = posts.slice(0, 3);
@@ -32,19 +33,24 @@ const Home = () => {
             <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
               A place where you can get to know me and learn about my venture capital conversations.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
-                href="/posts" 
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-colors shadow-lg hover:shadow-xl"
-              >
-                Read My Posts
-              </a>
-              <a 
-                href="/about" 
-                className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl"
-              >
-                Learn About Me
-              </a>
+            <div className="flex flex-col lg:flex-row gap-8 justify-center items-start">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a 
+                  href="/posts" 
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-colors shadow-lg hover:shadow-xl"
+                >
+                  Read My Posts
+                </a>
+                <a 
+                  href="/about" 
+                  className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl"
+                >
+                  Learn About Me
+                </a>
+              </div>
+              <div className="w-full max-w-sm lg:max-w-xs">
+                <NextGuests />
+              </div>
             </div>
           </div>
         </section>
