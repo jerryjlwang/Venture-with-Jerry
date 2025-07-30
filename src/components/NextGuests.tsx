@@ -4,12 +4,6 @@ const NextGuests = () => {
   // Placeholder data - you can replace with real data later
   const upcomingGuests = [
     {
-      name: "Geoff Entress",
-      title: "Co-founder & Managing Director at Pioneer Square Labs",
-      date: "Jul 28, 2025",
-      topic: "Early Stage Validation"
-    },
-    {
       name: "Kyle Lui", 
       title: "General Partner at Bling Capital",
       date: "Aug 1, 2025",
