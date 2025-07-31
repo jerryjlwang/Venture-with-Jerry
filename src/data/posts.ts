@@ -40,6 +40,24 @@ Thank you for being here, and I hope you find value in what I share!`,
     readTime: "2 min read"
   },
   {
+    id: "Geoff Entress-Pioneer Square Labs",
+    title: "What's a venture studio?",
+    excerpt: "Learn about Geoff Entress's take on operating a startup studio and how to successfully validate venture concepts",
+    content: `Venture studios are an amazing way for early startup ideas to be validated.
+
+Today, I had a great conversation with Geoff Entress, co-founder of Pioneer Square Labs, about their venture studio and their investment methodology.
+
+The venture studio acts as a space where internal and external venture ideas are pursued and evaluated with customer validation and traction building. Historically, it's been a 50/50 split for PSL where half the ideas come from solopreneurs or small founding teams and the other half coming from their own ideation. Really, the most important step in committing to a studio concept is the customer interest. It's really common for consumers to display interest but be unwilling to pay the cost, and it's even more common for there to be no interest at all. That's why PSL frequently finds success in bridging ideas such that concepts which have been validated well previously can be applied to new verticals. In current times, this means applying AI to new use cases, with repeatable frameworks that appeal greatly to consumers.
+
+The building scheme is an intense, iterative process in which designs are drawn up for the MVP, an engineering team is brought on, and a potential CEO is scouted out. The product, if validated, will then be built and the company gets spun out with its own CEO. Where it differs from the traditional investing process is that instead of taking a smaller operator role on the board of the portfolio company, PSL will fully engage in building the company from the ground up. The studio serves its own LP base and so funds are raised to incubate these ventures. When the company is finally built, PSL retains some equity while the company is left to scale itself. 
+
+To date, PSL has successfully spun out 41 ventures (out of over 400 ideas), one of which being Boundless Immigration. The idea was incubated internally, when they realized that immigration was faulty and unnecessarily complicated. It was a real problem, and the alternative of getting an immigration lawyer was costly and time consuming. There were many regulatory pressures that they faced especially due to the legality of it all, but the market was great and they found a CEO who had lived experience.
+
+This building process greatly parallels unbacked startup construction, and I think it's a great model to follow for aspiring startups. Early-stage validation is everything, and while you may not have to work with a venture studio to achieve this, it sure is a nice path to consider.`,
+    date: "2025-07-29",
+    readTime: "3 min read"
+  },
+  {
     id: "Erik Benson-Voyager Capital",
     title: "Is agriculture the future?",
     excerpt: "Learn about Erik Benson and his insights on agtech and how a trillion dollar industry is changing.",
