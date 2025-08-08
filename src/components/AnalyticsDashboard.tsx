@@ -1,12 +1,17 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
-import { Card } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { Skeleton } from '@/components/ui/skeleton';
+import { useAuth } from '@/hooks/useAuth';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 const AnalyticsDashboard = () => {
-  // Fetch analytics summary
-  const { data: summary, isLoading } = useQuery({
+  const { user, isAdmin, loading: authLoading } = useAuth();
+  
+  // Fetch analytics summary - only if user is admin
+  const { data: summary, isLoading: summaryLoading } = useQuery({
     queryKey: ['analytics-summary'],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -17,47 +22,107 @@ const AnalyticsDashboard = () => {
       
       if (error) throw error;
       return data;
-    }
+    },
+    enabled: isAdmin && !!user,
   });
 
-  // Fetch recent page views
-  const { data: pageViews } = useQuery({
+  // Fetch recent page views - only if user is admin
+  const { data: pageViews, isLoading: pageViewsLoading } = useQuery({
     queryKey: ['recent-page-views'],
     queryFn: async () => {
       const { data, error } = await supabase
         .from('analytics')
-        .select('page_path, visited_at')
+        .select('page_path')
         .eq('consent_given', true)
         .order('visited_at', { ascending: false })
         .limit(100);
       
       if (error) throw error;
       
-      // Group by page and count
-      const pageCounts = data.reduce((acc: any, item) => {
+      // Process data to get top pages
+      const pageCounts = data.reduce((acc: Record<string, number>, item) => {
         acc[item.page_path] = (acc[item.page_path] || 0) + 1;
         return acc;
       }, {});
       
       return Object.entries(pageCounts)
-        .map(([page, count]) => ({ page, views: count }))
-        .sort((a: any, b: any) => b.views - a.views)
+        .map(([page, views]) => ({ page, views }))
+        .sort((a, b) => b.views - a.views)
         .slice(0, 5);
-    }
+    },
+    enabled: isAdmin && !!user,
   });
 
-  const deviceColors = ['#3B82F6', '#10B981', '#F59E0B'];
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
+
+  // Show loading while checking auth
+  if (authLoading) {
+    return (
+      <div className="space-y-6">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {[1, 2, 3, 4].map((i) => (
+            <Card key={i}>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <Skeleton className="h-4 w-[100px]" />
+              </CardHeader>
+              <CardContent>
+                <Skeleton className="h-8 w-[80px]" />
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  // Show access denied if not admin
+  if (!user || !isAdmin) {
+    return (
+      <div className="space-y-6">
+        <Alert>
+          <AlertDescription>
+            Access denied. Analytics dashboard is restricted to administrators only.
+            {!user && " Please sign in to continue."}
+          </AlertDescription>
+        </Alert>
+      </div>
+    );
+  }
+
+  const isLoading = summaryLoading || pageViewsLoading;
 
   if (isLoading) {
     return (
-      <div className="p-6 space-y-6">
-        <h2 className="text-2xl font-bold text-white">Analytics Dashboard</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[1, 2, 3].map((i) => (
-            <Card key={i} className="p-6 bg-gray-800 border-gray-700 animate-pulse">
-              <div className="h-20 bg-gray-700 rounded"></div>
+      <div className="space-y-6">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {[1, 2, 3, 4].map((i) => (
+            <Card key={i}>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <Skeleton className="h-4 w-[100px]" />
+              </CardHeader>
+              <CardContent>
+                <Skeleton className="h-8 w-[80px]" />
+              </CardContent>
             </Card>
           ))}
+        </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          <Card>
+            <CardHeader>
+              <Skeleton className="h-6 w-[150px]" />
+            </CardHeader>
+            <CardContent>
+              <Skeleton className="h-[300px]" />
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <Skeleton className="h-6 w-[150px]" />
+            </CardHeader>
+            <CardContent>
+              <Skeleton className="h-[300px]" />
+            </CardContent>
+          </Card>
         </div>
       </div>
     );
@@ -134,9 +199,9 @@ const AnalyticsDashboard = () => {
                   dataKey="value"
                   label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                 >
-                  {Object.keys(latestSummary.device_breakdown).map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={deviceColors[index % deviceColors.length]} />
-                  ))}
+                   {Object.keys(latestSummary.device_breakdown).map((entry, index) => (
+                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                   ))}
                 </Pie>
                 <Tooltip />
               </PieChart>

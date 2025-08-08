@@ -88,14 +88,15 @@ class Analytics {
     };
 
     try {
-      const { error } = await supabase
-        .from('analytics')
-        .insert({
+      // Use secure edge function for analytics tracking
+      const { error } = await supabase.functions.invoke('analytics-track', {
+        body: {
           session_id: this.sessionId,
           visitor_id: this.visitorId,
           consent_given: this.consentGiven,
           ...data
-        });
+        }
+      });
 
       if (error) {
         console.error('Analytics tracking error:', error);
@@ -114,22 +115,20 @@ class Analytics {
     const duration = Math.round((Date.now() - this.startTime) / 1000);
     
     try {
-      // Get the most recent analytics entry for this session and page
-      const { data: recentEntry } = await supabase
-        .from('analytics')
-        .select('id')
-        .eq('session_id', this.sessionId)
-        .eq('page_path', window.location.pathname)
-        .order('visited_at', { ascending: false })
-        .limit(1)
-        .single();
-
-      if (recentEntry) {
-        await supabase
-          .from('analytics')
-          .update({ duration_seconds: duration })
-          .eq('id', recentEntry.id);
-      }
+      // Track duration via secure edge function
+      await supabase.functions.invoke('analytics-track', {
+        body: {
+          session_id: this.sessionId,
+          visitor_id: this.visitorId,
+          consent_given: this.consentGiven,
+          page_path: window.location.pathname,
+          page_title: document.title,
+          user_agent: navigator.userAgent,
+          device_type: this.getDeviceType(),
+          browser: this.getBrowser(),
+          duration_seconds: duration
+        }
+      });
     } catch (error) {
       console.error('Duration tracking failed:', error);
     }

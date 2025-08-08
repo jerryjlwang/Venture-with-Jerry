@@ -1,0 +1,144 @@
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+};
+
+interface AnalyticsData {
+  page_path: string;
+  page_title?: string;
+  referrer?: string;
+  user_agent?: string;
+  device_type?: string;
+  browser?: string;
+  duration_seconds?: number;
+  session_id: string;
+  visitor_id?: string;
+  consent_given: boolean;
+}
+
+Deno.serve(async (req) => {
+  // Handle CORS preflight requests
+  if (req.method === 'OPTIONS') {
+    return new Response(null, { headers: corsHeaders });
+  }
+
+  try {
+    // Create Supabase client with service role key
+    const supabase = createClient(
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
+    );
+
+    const analyticsData: AnalyticsData = await req.json();
+    
+    // Get client IP address
+    const clientIP = req.headers.get('x-forwarded-for') || 
+                    req.headers.get('x-real-ip') || 
+                    'unknown';
+
+    // Rate limiting check
+    const { data: isRateLimited, error: rateLimitError } = await supabase
+      .rpc('check_rate_limit', {
+        ip: clientIP,
+        session: analyticsData.session_id,
+        max_requests: 60 // 60 requests per minute
+      });
+
+    if (rateLimitError) {
+      console.error('Rate limit check error:', rateLimitError);
+    }
+
+    if (isRateLimited) {
+      return new Response(
+        JSON.stringify({ error: 'Rate limit exceeded' }),
+        { 
+          status: 429, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      );
+    }
+
+    // Increment rate limit counter
+    const { error: incrementError } = await supabase
+      .rpc('increment_rate_limit', {
+        ip: clientIP,
+        session: analyticsData.session_id
+      });
+
+    if (incrementError) {
+      console.error('Rate limit increment error:', incrementError);
+    }
+
+    // Only track if consent is given
+    if (!analyticsData.consent_given) {
+      return new Response(
+        JSON.stringify({ success: true, message: 'Consent not given, tracking skipped' }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Basic data validation
+    if (!analyticsData.page_path || !analyticsData.session_id) {
+      return new Response(
+        JSON.stringify({ error: 'Missing required fields' }),
+        { 
+          status: 400, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      );
+    }
+
+    // Sanitize and prepare data for insertion
+    const sanitizedData = {
+      session_id: analyticsData.session_id,
+      visitor_id: analyticsData.visitor_id || null,
+      consent_given: analyticsData.consent_given,
+      page_path: analyticsData.page_path.substring(0, 500), // Limit length
+      page_title: analyticsData.page_title?.substring(0, 500) || null,
+      referrer: analyticsData.referrer?.substring(0, 500) || null,
+      user_agent: analyticsData.user_agent?.substring(0, 1000) || null,
+      device_type: analyticsData.device_type || null,
+      browser: analyticsData.browser || null,
+      duration_seconds: analyticsData.duration_seconds || null,
+      ip_address: clientIP,
+    };
+
+    // Insert analytics data
+    const { error: insertError } = await supabase
+      .from('analytics')
+      .insert(sanitizedData);
+
+    if (insertError) {
+      console.error('Analytics insert error:', insertError);
+      return new Response(
+        JSON.stringify({ error: 'Failed to track analytics' }),
+        { 
+          status: 500, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      );
+    }
+
+    // Clean up old rate limit data occasionally (1% chance)
+    if (Math.random() < 0.01) {
+      await supabase.rpc('cleanup_old_rate_limits');
+    }
+
+    return new Response(
+      JSON.stringify({ success: true }),
+      { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+    );
+
+  } catch (error) {
+    console.error('Analytics tracking error:', error);
+    return new Response(
+      JSON.stringify({ error: 'Internal server error' }),
+      { 
+        status: 500, 
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+      }
+    );
+  }
+});

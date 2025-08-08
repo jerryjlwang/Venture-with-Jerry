@@ -68,6 +68,33 @@ export type Database = {
         }
         Relationships: []
       }
+      analytics_rate_limit: {
+        Row: {
+          created_at: string | null
+          id: string
+          ip_address: unknown
+          request_count: number | null
+          session_id: string
+          window_start: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          ip_address: unknown
+          request_count?: number | null
+          session_id: string
+          window_start?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          ip_address?: unknown
+          request_count?: number | null
+          session_id?: string
+          window_start?: string | null
+        }
+        Relationships: []
+      }
       analytics_summary: {
         Row: {
           date: string
@@ -104,6 +131,27 @@ export type Database = {
         }
         Relationships: []
       }
+      user_roles: {
+        Row: {
+          created_at: string | null
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -113,13 +161,29 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: undefined
       }
+      check_rate_limit: {
+        Args: { ip: unknown; session: string; max_requests?: number }
+        Returns: boolean
+      }
+      cleanup_old_rate_limits: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      increment_rate_limit: {
+        Args: { ip: unknown; session: string }
+        Returns: undefined
+      }
+      is_admin: {
+        Args: { user_id?: string }
+        Returns: boolean
+      }
       update_analytics_summary: {
         Args: Record<PropertyKey, never>
         Returns: undefined
       }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -246,6 +310,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
