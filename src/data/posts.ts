@@ -40,6 +40,32 @@ Thank you for being here, and I hope you find value in what I share!`,
     readTime: "2 min read"
   },
   {
+    id: "Kyle Lui-Bling Capital",
+    title: "Fintech's a pretty big industry",
+    excerpt: "See Kyle Lui's thoughts on fintech and how it's broken down into consumer, prosumer, and enterprise.",
+    content: `Fintech's a field that has no right or wrong solution.
+
+Sometimes you break out by doing something wildly different, like how Robinhood democratized trading for the common investor. No huge fees. No friction.
+
+Other times you build deep technical moats that prevent competitors from catching up quickly.
+
+I had a conversation with Kyle Lui, General Partner at Bling Capital, about how fintech and other verticals are evaluated at Bling and how fintech can be seen as different industries.
+
+First, I want to point out that Bling has a very consistent framework for evaluating all startups. In fact, they publicly post this startup guide on their company blog. Even for a vertical like fintech which differs greatly from the others, the "hair on fire" method and Bling's other tools can conduct deep diligence and excel in early stage validation.
+
+Now, onto fintech.
+
+Consumer fintech is public facing and usually gains traction from ease of use. It's more so a consumer product than a financial service. For an early stage investor to find conviction, the startup must have a strong marketing scheme and deliver a product that scales with the average joe and not just experienced users. There's a little less focus on regulatory, as these startups are able to borrow things—such as banking licenses—and work around some of those regulatory considerations with partner integrations. They just need to meet the bare minimum of regulation, and focus most of their efforts of engagement and acquisition.
+
+Enterprise fintech, on the other hand, should be rooted in security and compliance. It needs to be a product that disrupts a current mode of utility. And to do that, they must be careful in either creating proprietary products that need to be compliant or finding new integrations that are so high friction for later startups that it is well protected. This large emphasis on security and compliance can actually be a USP for enterprise fintech, whereas for consumer tech it's just a hurdle.
+
+Then, there's the middle ground, Fintech that serves the prosumer and SMB's. There are a lot of tools that are typically used for enterprise use and fall in the hands of skilled individuals. For example, angel investors who utilize PitchBook services. This is an interesting domain because a lot of the time a financial service isn't created to target prosumers, but many individuals find so much utility in a tool that it makes sense to buy it for themselves. For small businesses, no matter how many employees work there, financial services like Quickbooks can work extremely well. So, anything outside of consumer and enterprise falls into this sort of range, where a large market still exists, but the usage is much more dependent on other factors.
+
+Those are my biggest learnings from my interview with Kyle, thanks for reading until the end and make sure to check out my blog for more interviews like this.`,
+    date: "2025-08-05",
+    readTime: "3 min read"
+  },
+  {
     id: "Geoff Entress-Pioneer Square Labs",
     title: "What's a venture studio?",
     excerpt: "Learn about Geoff Entress's take on operating a startup studio and how to successfully validate venture concepts",
