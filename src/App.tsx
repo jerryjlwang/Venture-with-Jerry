@@ -14,6 +14,7 @@ import PostDetail from "./pages/PostDetail";
 import About from "./pages/About";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&display=swap');
 
 const queryClient = new QueryClient();
 
