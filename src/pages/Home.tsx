@@ -25,10 +25,10 @@ const Home = () => {
         {/* Hero Section */}
         <section className="py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto text-center">
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              Welcome to My
+            <h1 className="text-5xl md:text-7xl font-merriweather font-bold text-white mb-6 leading-tight">
+  Welcome to My
               <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"> Personal Page </span>
-              on Venture Capital
+  on Venture Capital
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
               A place where you can get to know me and learn about my venture capital conversations.
