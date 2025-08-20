@@ -62,6 +62,18 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
       src: 'https://s3-us-west-2.amazonaws.com/cbi-image-service-prd/modified/0901d791-bed4-4b60-b29d-e7fa33ea8b9c.png',
       url: 'https://www.voyagercapital.com/'
     },
+    { 
+      id: '8', 
+      name: 'Pioneer Square Labs', 
+      src: 'https://hcseattle.clubs.harvard.edu/images/vault/886.png',
+      url: 'https://www.psl.com/'
+    },
+    { 
+      id: '9', 
+      name: 'Bling Capital', 
+      src: 'https://www.blingcap.com/static/images/logo-social.png',
+      url: 'https://www.blingcap.com/'
+    },
   ];
   const [translateValue, setTranslateValue] = useState(() => direction === 'horizontal' ? logos.length * 180 : logos.length * 100);
 
