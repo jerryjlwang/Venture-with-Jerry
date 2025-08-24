@@ -6,6 +6,7 @@ export interface Post {
   content: string;
   date: string;
   readTime: string;
+  imageUrl?: string;
 }
 
 export const posts: Post[] = [
@@ -37,7 +38,8 @@ I'll be posting regularly, so make sure to check back often for new content. Fee
 
 Thank you for being here, and I hope you find value in what I share!`,
     date: "2025-05-05",
-    readTime: "2 min read"
+    readTime: "2 min read",
+    imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
   },
   {
     id: "Kyle Lui-Bling Capital",
@@ -63,7 +65,8 @@ Then, there's the middle ground, Fintech that serves the prosumer and SMB's. The
 
 Those are my biggest learnings from my interview with Kyle, thanks for reading until the end and make sure to check out my blog for more interviews like this.`,
     date: "2025-08-05",
-    readTime: "3 min read"
+    readTime: "3 min read",
+    imageUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
   },
   {
     id: "Geoff Entress-Pioneer Square Labs",
@@ -81,7 +84,8 @@ To date, PSL has successfully spun out 41 ventures (out of over 400 ideas), one 
 
 This building process greatly parallels unbacked startup construction, and I think it's a great model to follow for aspiring startups. Early-stage validation is everything, and while you may not have to work with a venture studio to achieve this, it sure is a nice path to consider.`,
     date: "2025-07-29",
-    readTime: "3 min read"
+    readTime: "3 min read",
+    imageUrl: "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=150&h=150&fit=crop&crop=face"
   },
   {
     id: "Erik Benson-Voyager Capital",
@@ -107,7 +111,8 @@ Agriculture is the staple of any functioning country. It's a vertical that can c
 
 That wraps up my learnings from my interview with Erik. A huge thank you to him for chatting with me. Also make sure to attend his AMA webinar on the 17th to learn more about the amazing industry of agtech!`,
     date: "2025-07-08",
-    readTime: "3 min read"
+    readTime: "3 min read",
+    imageUrl: "https://images.unsplash.com/photo-1566492031773-4f4e44671d66?w=150&h=150&fit=crop&crop=face"
   },
   {
     id: "Aviel Ginzburg-Founders\' Co-op",
@@ -129,7 +134,8 @@ If you're a generous VC professional with advice for me I'd love to set up an in
 
 Thanks to Aviel Ginzburg and Founders Co-op for supporting my VC journey!`,
     date: "2025-07-03",
-    readTime: "3 min read"
+    readTime: "3 min read",
+    imageUrl: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face"
   },
   {
     id: "Hope Cochran-Madrona",
@@ -159,7 +165,8 @@ That wraps up today's interview with Hope. Let me know if there's anything VC re
     
 Until the next one!`,
     date: "2025-06-24",
-    readTime: "3 min read"
+    readTime: "3 min read",
+    imageUrl: "https://images.unsplash.com/photo-1494790108755-2616b612b412?w=150&h=150&fit=crop&crop=face"
   },
   {
     id: "Paul Goodrich-Madrona",
@@ -185,7 +192,8 @@ That wraps up my learnings from this interview with Paul. Make sure to check him
     
 Until the next one!`,
     date: "2025-06-08",
-    readTime: "4 min read"
+    readTime: "4 min read",
+    imageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face"
   },
   {
     id: "Kirby Winfield-Ascend",
@@ -207,6 +215,7 @@ Until the next one!`,
     
     Until the next one!`,
     date: "2025-05-06",
-    readTime: "2 min read"
+    readTime: "2 min read",
+    imageUrl: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=150&h=150&fit=crop&crop=face"
   },
 ];
