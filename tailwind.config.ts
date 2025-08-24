@@ -19,6 +19,7 @@ export default {
 		},
 		extend: {
 			fontFamily: {
+				'public-sans': ['Public Sans', 'sans-serif'],
         		merriweather: ["Merriweather", "serif"],
       			},
 			colors: {
