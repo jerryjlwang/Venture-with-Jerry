@@ -21,8 +21,8 @@ const Header = () => {
   }, []);
 
   return (
-    <header className={`bg-gradient-to-r from-blue-900 to-black shadow-lg sticky top-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-opacity-80 backdrop-blur-md' : 'bg-opacity-100'
+    <header className={`bg-gradient-to-r shadow-lg sticky top-0 z-50 transition-all duration-300 ${
+      isScrolled ? 'from-blue-900/70 to-black/70 backdrop-blur-md' : 'from-blue-900 to-black'
     }`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
