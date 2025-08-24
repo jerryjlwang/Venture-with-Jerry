@@ -112,7 +112,7 @@ Agriculture is the staple of any functioning country. It's a vertical that can c
 That wraps up my learnings from my interview with Erik. A huge thank you to him for chatting with me. Also make sure to attend his AMA webinar on the 17th to learn more about the amazing industry of agtech!`,
     date: "2025-07-08",
     readTime: "3 min read",
-    imageUrl: "https://images.unsplash.com/photo-1566492031773-4f4e44671d66?w=150&h=150&fit=crop&crop=face"
+    imageUrl: "https://s3.amazonaws.com/hoth.bizango/images/985412/008.jpg"
   },
   {
     id: "Aviel Ginzburg-Founders\' Co-op",
@@ -135,7 +135,7 @@ If you're a generous VC professional with advice for me I'd love to set up an in
 Thanks to Aviel Ginzburg and Founders Co-op for supporting my VC journey!`,
     date: "2025-07-03",
     readTime: "3 min read",
-    imageUrl: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face"
+    imageUrl: "https://www.founderscoop.com/wp-content/themes/founderscoop/images/team/aviel-ginzburg.jpg"
   },
   {
     id: "Hope Cochran-Madrona",
@@ -166,7 +166,7 @@ That wraps up today's interview with Hope. Let me know if there's anything VC re
 Until the next one!`,
     date: "2025-06-24",
     readTime: "3 min read",
-    imageUrl: "https://images.unsplash.com/photo-1494790108755-2616b612b412?w=150&h=150&fit=crop&crop=face"
+    imageUrl: "https://www.madrona.com/wp-content/uploads/2014/11/HopeCochran-Full.jpg"
   },
   {
     id: "Paul Goodrich-Madrona",
@@ -193,7 +193,7 @@ That wraps up my learnings from this interview with Paul. Make sure to check him
 Until the next one!`,
     date: "2025-06-08",
     readTime: "4 min read",
-    imageUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face"
+    imageUrl: "https://www.madrona.com/wp-content/uploads/2014/11/Goodrich_20A0303full.jpg"
   },
   {
     id: "Kirby Winfield-Ascend",
@@ -216,6 +216,6 @@ Until the next one!`,
     Until the next one!`,
     date: "2025-05-06",
     readTime: "2 min read",
-    imageUrl: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=150&h=150&fit=crop&crop=face"
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSihBj705kxu4eM5TbGBxxE8_nHkU-Ka3yB7Q&s"
   },
 ];
