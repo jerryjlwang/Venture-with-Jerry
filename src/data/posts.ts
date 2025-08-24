@@ -39,7 +39,7 @@ I'll be posting regularly, so make sure to check back often for new content. Fee
 Thank you for being here, and I hope you find value in what I share!`,
     date: "2025-05-05",
     readTime: "2 min read",
-    imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+    imageUrl: "/lovable-uploads/b7f4222c-402c-4621-9437-54726053d142.png"
   },
   {
     id: "Kyle Lui-Bling Capital",
@@ -66,7 +66,7 @@ Then, there's the middle ground, Fintech that serves the prosumer and SMB's. The
 Those are my biggest learnings from my interview with Kyle, thanks for reading until the end and make sure to check out my blog for more interviews like this.`,
     date: "2025-08-05",
     readTime: "3 min read",
-    imageUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+    imageUrl: "https://www.svod.org/wp-content/uploads/2015/04/Kyle-Lui.jpg"
   },
   {
     id: "Geoff Entress-Pioneer Square Labs",
@@ -85,7 +85,7 @@ To date, PSL has successfully spun out 41 ventures (out of over 400 ideas), one 
 This building process greatly parallels unbacked startup construction, and I think it's a great model to follow for aspiring startups. Early-stage validation is everything, and while you may not have to work with a venture studio to achieve this, it sure is a nice path to consider.`,
     date: "2025-07-29",
     readTime: "3 min read",
-    imageUrl: "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=150&h=150&fit=crop&crop=face"
+    imageUrl: "https://cdn.prod.website-files.com/5d3152346d95065922960b3a/5db8926210ff3a24201739ff_Geoff.jpg"
   },
   {
     id: "Erik Benson-Voyager Capital",
