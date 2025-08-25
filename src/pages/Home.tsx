@@ -1,11 +1,9 @@
 
-import PostCard from '../components/PostCard';
-import { posts } from '../data/posts';
 import LogoCarousel from '../components/LogoCarousel';
 import NextGuests from '../components/NextGuests';
+import RecentPostsCarousel from '../components/RecentPostsCarousel';
 
 const Home = () => {
-  const recentPosts = posts.slice(0, 3);
 
   return (
     <div className="min-h-screen relative">
@@ -56,26 +54,7 @@ const Home = () => {
         </section>
 
         {/* Recent Posts Section */}
-        <section className="pt-32 pb-8 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">
-              Recent Posts
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {recentPosts.map((post) => (
-                <PostCard key={post.id} {...post} />
-              ))}
-            </div>
-            <div className="text-center mt-8">
-              <a 
-                href="/posts" 
-                className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors font-medium text-lg"
-              >
-                View all posts →
-              </a>
-            </div>
-          </div>
-        </section>
+        <RecentPostsCarousel />
         <section className="py-8 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <LogoCarousel direction="horizontal" />
