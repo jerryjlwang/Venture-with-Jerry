@@ -199,7 +199,7 @@ Until the next one!`,
     id: "Jake Nibley-Tola Capital",
     title: "Getting into VC early",
     excerpt: "Learn how Jake got into VC so early in his career.",
-    content: 'I recently got the chance to connect with Jake Nibley from Tola Capital, and his path into venture capital is a story worth sharing. Jake jumped into the startup world early on, picking up real operating experience before most people even think about VC. That early exposure gave him a unique perspective, and now at Tola he’s helping identify and back the next wave of enterprise software founders.
+    content: `I recently got the chance to connect with Jake Nibley from Tola Capital, and his path into venture capital is a story worth sharing. Jake jumped into the startup world early on, picking up real operating experience before most people even think about VC. That early exposure gave him a unique perspective, and now at Tola he’s helping identify and back the next wave of enterprise software founders.
 
 One of the most interesting parts of our conversation was around dilution in funding rounds. Jake explained how it’s one of the most overlooked parts of fundraising. Founders often just want to get a deal done, but don’t always think about the ripple effects a few years down the line.
 
