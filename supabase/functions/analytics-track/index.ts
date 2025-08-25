@@ -1,7 +1,7 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Origin': 'https://cgvgkucrmtugckcefryn.supabase.co',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
@@ -38,10 +38,25 @@ Deno.serve(async (req) => {
                     req.headers.get('x-real-ip') || 
                     'unknown';
 
-    // Rate limiting check
+    // Hash IP address for privacy protection
+    const { data: hashedIP, error: hashError } = await supabase
+      .rpc('hash_ip_address', { ip_text: clientIP });
+
+    if (hashError) {
+      console.error('IP hashing error:', hashError);
+      return new Response(
+        JSON.stringify({ error: 'Processing error' }),
+        { 
+          status: 500, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      );
+    }
+
+    // Rate limiting check using hashed IP
     const { data: isRateLimited, error: rateLimitError } = await supabase
       .rpc('check_rate_limit', {
-        ip: clientIP,
+        ip: hashedIP,
         session: analyticsData.session_id,
         max_requests: 60 // 60 requests per minute
       });
@@ -60,10 +75,10 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Increment rate limit counter
+    // Increment rate limit counter using hashed IP
     const { error: incrementError } = await supabase
       .rpc('increment_rate_limit', {
-        ip: clientIP,
+        ip: hashedIP,
         session: analyticsData.session_id
       });
 
@@ -79,10 +94,18 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Basic data validation
-    if (!analyticsData.page_path || !analyticsData.session_id) {
+    // Enhanced data validation using database function
+    const { data: isValid, error: validationError } = await supabase
+      .rpc('validate_analytics_data', {
+        p_page_path: analyticsData.page_path,
+        p_session_id: analyticsData.session_id,
+        p_visitor_id: analyticsData.visitor_id
+      });
+
+    if (validationError || !isValid) {
+      console.error('Data validation failed:', validationError);
       return new Response(
-        JSON.stringify({ error: 'Missing required fields' }),
+        JSON.stringify({ error: 'Invalid data format' }),
         { 
           status: 400, 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
@@ -102,7 +125,7 @@ Deno.serve(async (req) => {
       device_type: analyticsData.device_type || null,
       browser: analyticsData.browser || null,
       duration_seconds: analyticsData.duration_seconds || null,
-      ip_address: clientIP,
+      ip_address: hashedIP,
     };
 
     // Insert analytics data
