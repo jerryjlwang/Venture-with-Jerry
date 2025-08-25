@@ -169,6 +169,10 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: undefined
       }
+      hash_ip_address: {
+        Args: { ip_text: string }
+        Returns: string
+      }
       increment_rate_limit: {
         Args: { ip: unknown; session: string }
         Returns: undefined
@@ -180,6 +184,14 @@ export type Database = {
       update_analytics_summary: {
         Args: Record<PropertyKey, never>
         Returns: undefined
+      }
+      validate_analytics_data: {
+        Args: {
+          p_page_path: string
+          p_session_id: string
+          p_visitor_id?: string
+        }
+        Returns: boolean
       }
     }
     Enums: {
