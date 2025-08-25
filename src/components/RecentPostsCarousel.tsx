@@ -142,10 +142,6 @@ const RecentPostsCarousel = () => {
             View all posts →
           </a>
         </div>
-
-        <div className="text-center mt-4 text-sm text-gray-400">
-          Use arrow keys to navigate • Auto-rotates every 3 seconds
-        </div>
       </div>
     </section>
   );
