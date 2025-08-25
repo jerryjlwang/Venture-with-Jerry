@@ -1,29 +1,33 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { useInViewport } from '@/hooks/useInViewport';
+import { useOptimizedScroll } from '@/hooks/useOptimizedScroll';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const { ref: headerRef, isInViewport } = useInViewport({ threshold: 0.1 });
 
   const isActive = (path: string) => location.pathname === path;
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+  const handleScroll = useCallback(() => {
+    const scrollPosition = window.scrollY;
+    setIsScrolled(scrollPosition > 20);
   }, []);
 
+  // Use optimized scroll that only triggers when header is in viewport
+  useOptimizedScroll(handleScroll, { isActive: isInViewport });
+
   return (
-    <header className={`bg-gradient-to-r shadow-lg sticky top-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'from-blue-900/70 to-black/70 backdrop-blur-md' : 'from-blue-900 to-black'
-    }`}>
+    <header 
+      ref={headerRef}
+      className={`bg-gradient-to-r shadow-lg sticky top-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'from-blue-900/70 to-black/70 backdrop-blur-md' : 'from-blue-900 to-black'
+      }`}
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <Link to="/" className="text-2xl font-bold text-white hover:text-blue-300 transition-colors">
