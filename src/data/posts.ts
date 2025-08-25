@@ -196,6 +196,40 @@ Until the next one!`,
     imageUrl: "https://www.madrona.com/wp-content/uploads/2014/11/Goodrich_20A0303full.jpg"
   },
   {
+    id: "Jake Nibley-Tola Capital",
+    title: "Getting into VC early",
+    excerpt: "Learn how Jake got into VC so early in his career.",
+    content: 'I recently got the chance to connect with Jake Nibley from Tola Capital, and his path into venture capital is a story worth sharing. Jake jumped into the startup world early on, picking up real operating experience before most people even think about VC. That early exposure gave him a unique perspective, and now at Tola he’s helping identify and back the next wave of enterprise software founders.
+
+One of the most interesting parts of our conversation was around dilution in funding rounds. Jake explained how it’s one of the most overlooked parts of fundraising. Founders often just want to get a deal done, but don’t always think about the ripple effects a few years down the line.
+
+At the seed stage, giving up 10–15% might feel small. But by the time a company hits Series B or C, the cumulative dilution can leave founders with a lot less ownership—and in some cases, less control—than they expected. Jake stressed that smart founders think several rounds ahead. How much equity do you want to hold when you’re at scale? What’s the trade-off between raising more capital today vs. preserving flexibility for the future?
+
+He also shared how investors pay close attention to this. It’s not just about the product or the market—cap table management is a signal of how thoughtful and strategic a founder is. The ones who can balance raising enough to grow while still protecting ownership show the kind of foresight investors love to see.
+
+I walked away really impressed by Jake—not just because he’s carved out a space in VC at such a young age, but because of how clearly he’s able to break down complex topics like dilution into actionable lessons for founders. Definitely grateful for the chance to learn from him.`,
+    date: "2025-05-15",
+    readTime: "3 min read",
+    imageUrl: "https://tolacapital.com/wp-content/uploads/2023/06/jake-nibley.webp"
+  },
+  {
+    id: "Anthony Bontrager-West River Group",
+    title: "The path to VC",
+    excerpt: "See how Anthony made his way to VC and how he navigates diligence.",
+    content: `Today I had an amazing conversation with Anthony Bontrager, managing director at West River Group. They manage a staggering $2 billion in total assets in their portfolios, and Anthony has helped lead their investments for years.
+    
+    We discussed the diligence process, and how he works through deal flow. As a large fund, they cycle through tons of pitches every single day. Whether they're looking for pre-seed, seed, or even some series investments, the team will take a meticulous look at the team and their product offering. Sometimes, diligence can even take MONTHS, although that is more relatable for larger growth stage companies early in their funding level.
+    
+    With reference to their early stage validation, Anthony talked about how WestRiver Group does both founder-focused probing in addition to extensive internal research. Analysts will spend hours and hours conducting competitor analyses, customer validation, and realistic evaluations which are all assessed when determining if an investment is reliable.
+    
+    This process is tough and arduous, so I was curious as to what happens at the end of a long diligence period if there's no fit. Anthony told me that since West River Group is a generous fund, they make sure to help out founders as much as possible even if they aren't ultimately purchasing equity. This comes in the form of introducing them to new investors, presenting them to some big contracts, and even connecting them with their portfolio companies.
+    
+    That wraps up my learnings for today, I'm very grateful for Anthony's time and how generous he was with handing out free advice.`,
+    date: "2025-05-09",
+    readTime: "3 min read",
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4D03AQHJvaFx1KSfdg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1697129347380?e=2147483647&v=beta&t=MQHkIpgS3hMLGvDqB_7uw7yDplMgBGlEe3Z8WA2KlJg"
+  },
+  {
     id: "Kirby Winfield-Ascend",
     title: "Start Ups Galore",
     excerpt: "Learn about Kirby's journey and his tips on breaking into venture capital.",
