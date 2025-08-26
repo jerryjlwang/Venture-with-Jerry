@@ -30,8 +30,12 @@ const Header = () => {
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
-          <Link to="/" className="text-2xl font-bold text-white hover:text-blue-300 transition-colors">
-            Jerry Wang
+          <Link to="/" className="hover:opacity-80 transition-opacity">
+            <img 
+              src="/lovable-uploads/bf7aefe8-1b56-41a9-a239-f2cb492f68f2.png" 
+              alt="Venture with Jerry" 
+              className="h-8 w-auto"
+            />
           </Link>
           
           {/* Desktop Navigation */}
