@@ -34,7 +34,7 @@ const Header = () => {
             <img 
               src="/lovable-uploads/bf7aefe8-1b56-41a9-a239-f2cb492f68f2.png" 
               alt="Venture with Jerry" 
-              className="h-8 w-auto"
+              className="h-12 w-auto filter invert brightness-0 invert"
             />
           </Link>
           
