@@ -252,4 +252,21 @@ I walked away really impressed by Jake—not just because he’s carved out a sp
     readTime: "2 min read",
     imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSihBj705kxu4eM5TbGBxxE8_nHkU-Ka3yB7Q&s"
   },
+  {
+    id: "Pablo Casillimas-OneSixOne Ventures",
+    title: "Starting a VC right out of college",
+    excerpt: "Learn about Pablo's path from college to VC and how backyard meetups turned into full scale dealflow events.",
+    content: `Recently I got the chance to interview Pablo Casillimas, Managing Director at OneSixOne Ventures, for a school career exploration project. I met him at my internship the previous summer, so I knew he was a great person to reach out to. What we discussed was how he got into the VC space and what sort of things young, ambitious builders should be doing now to get a head start.
+    
+    Firstly, Pablo recalled his experience at the University of Florida, where he was was an engineering student. He found that engineering really wasn't that engaging so he started hosting backyard meetups that featured speakers and founders from all over Gainsville. Slowly but surely, these events started to make money, and Pablo went all in on creating a community-first venture capital. As of now, they've raised 4 million for their fund I and have several amazing portfolio companies in their belt.
+    
+    What OneSixOne excels at is making connections. In all the major tech hubs in the US--Seattle, San Francisco, and New York--they've built strong ties with prominent VC's and founders. In addition, they have an optimistic outlook on the future of tech in Florida. Thousands of capable migrants are flooding Florida cities every year and have the ability to massively contribute to wealth creation. OnesixOne is firm on staying ahead of this trend, so they've headquartered in Miami and have representative investments from there as well.
+    
+    Another thing that came across our conversation was how young builders should be thinking about their paths. The best thing, in Pablo's opinion, is identifying your strengths and your weaknesses. This way you can find people people that suppllement your strengths and complement your weaknesses. A key reseource that he unveiled as having helped him understand his strengths the most is the strengthsfinder 2.0 test. It helps assess your personality based on your responses to certain situations, and gives you your top traits that can make you successful. I highly recommend everyone try the test out as maybe it could change your perspective on everything.
+    
+    That's about it for our conversation, I'm super happy to have had Pablo as my first connection opportunity in the professional field and I hope it's just the start!`,
+    date: "2025-01-06",
+    readTime: "2 min read",
+    imageUrl: "https://emergeamericas.com/wp-content/uploads/2025/03/77a8-400o400o1-PV9L5rZTUqhWFzTVnUeTwb.png"
+  },
 ];
