@@ -29,15 +29,7 @@ const Header = () => {
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
-          <Link to="/" className="hover:opacity-80 transition-opacity flex items-center">
-            <img 
-              src="/lovable-uploads/bf7aefe8-1b56-41a9-a239-f2cb492f68f2.png" 
-              alt="Venture with Jerry" 
-              className="h-16 w-auto filter invert brightness-0 invert object-contain"
-            />
-          </Link>
-          
+        <div className="flex justify-between items-center py-2">
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             <Link 
