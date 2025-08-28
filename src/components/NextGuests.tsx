@@ -1,4 +1,5 @@
-import { Calendar, User } from 'lucide-react';
+import { Calendar } from 'lucide-react';
+import { Avatar, AvatarImage, AvatarFallback } from './ui/avatar';
 
 const NextGuests = () => {
   // Placeholder data - you can replace with real data later
@@ -7,7 +8,8 @@ const NextGuests = () => {
       name: "Alex Edelson", 
       title: "General Partner at Slipstream Investors",
       date: "Oct 1, 2025",
-      topic: "Fund of funds"
+      topic: "Fund of funds",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
     }
   ];
 
@@ -21,7 +23,12 @@ const NextGuests = () => {
         {upcomingGuests.map((guest, index) => (
           <div key={index} className="border-b border-white/10 pb-3 last:border-0 last:pb-0">
             <div className="flex items-start gap-3">
-              <User className="w-4 h-4 text-blue-400 mt-1 flex-shrink-0" />
+              <Avatar className="w-10 h-10 flex-shrink-0">
+                <AvatarImage src={guest.avatar} alt={guest.name} />
+                <AvatarFallback className="bg-blue-400/20 text-blue-400 text-sm">
+                  {guest.name.split(' ').map(n => n[0]).join('')}
+                </AvatarFallback>
+              </Avatar>
               <div>
                 <p className="text-white font-medium text-sm">{guest.name}</p>
                 <p className="text-gray-300 text-xs">{guest.title}</p>
