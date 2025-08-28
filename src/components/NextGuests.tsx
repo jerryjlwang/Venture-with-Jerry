@@ -9,7 +9,7 @@ const NextGuests = () => {
       title: "General Partner at Slipstream Investors",
       date: "Oct 1, 2025",
       topic: "Fund of funds",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+      avatar: "https://pbs.twimg.com/profile_images/1486367992292298766/8O9S46tb_400x400.jpg"
     }
   ];
 
