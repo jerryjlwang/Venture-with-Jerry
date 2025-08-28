@@ -3,12 +3,12 @@ import { Calendar, User } from 'lucide-react';
 const NextGuests = () => {
   // Placeholder data - you can replace with real data later
   const upcomingGuests = [
-    // {
-    //   name: "Kyle Lui", 
-    //   title: "General Partner at Bling Capital",
-    //   date: "Aug 1, 2025",
-    //   topic: "Picking Unicorns"
-    // }
+    {
+      name: "Alex Edelson", 
+      title: "General Partner at Slipstream Investors",
+      date: "Oct 1, 2025",
+      topic: "Fund of funds"
+    }
   ];
 
   return (
