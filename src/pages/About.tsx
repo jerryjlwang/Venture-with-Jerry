@@ -79,10 +79,10 @@ const About = () => {
               <h2 className="text-2xl font-bold text-white mb-4">My Background</h2>
               <div className="text-gray-300 leading-relaxed space-y-4">
                 <p>
-                  My name is Jerry Wang and I’m a junior at Interlake High School in Bellevue. My areas of
+                  My name is Jerry Wang and I’m a senior at Interlake High School in Bellevue. My areas of
                   interest lie in the intersection of AI and finance, and venture capital is one field that
                   encapsulates it all. I want to learn more about the evolution of AI and how it will break
-                  the finance industry, so over the past few months I’ve been learning as much as I can and
+                  the finance industry, so over the last year I’ve been learning as much as I can and
                   conducting interviews with venture capital professionals to start building my network.
                 </p>
                 <p>
