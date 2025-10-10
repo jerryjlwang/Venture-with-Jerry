@@ -7,7 +7,7 @@ const NextGuests = () => {
     {
       name: "Alex Edelson", 
       title: "General Partner at Slipstream Investors",
-      date: "Oct 1, 2025",
+      date: "Oct 16, 2025",
       topic: "Fund of funds",
       avatar: "https://pbs.twimg.com/profile_images/1486367992292298766/8O9S46tb_400x400.jpg"
     }
