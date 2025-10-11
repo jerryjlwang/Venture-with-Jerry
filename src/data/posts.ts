@@ -42,6 +42,57 @@ Thank you for being here, and I hope you find value in what I share!`,
     imageUrl: "/lovable-uploads/b7f4222c-402c-4621-9437-54726053d142.png"
   },
   {
+    id: "Charlie Pinto-Bling Capital",
+    title: "From D1 to YC to VC",
+    excerpt: "Explore the Brazilian Jiu Jitsu World Champion's journey to VC",
+    content: `Fintech's a field that has no right or wrong solution.
+
+Sometimes you break out by doing something wildly different, like how Robinhood democratized trading for the common investor. No huge fees. No friction.
+
+Other times you build deep technical moats that prevent competitors from catching up quickly.
+
+I had a conversation with Kyle Lui, General Partner at Bling Capital, about how fintech and other verticals are evaluated at Bling and how fintech can be seen as different industries.
+
+First, I want to point out that Bling has a very consistent framework for evaluating all startups. In fact, they publicly post this startup guide on their company blog. Even for a vertical like fintech which differs greatly from the others, the "hair on fire" method and Bling's other tools can conduct deep diligence and excel in early stage validation.
+
+Now, onto fintech.
+
+Consumer fintech is public facing and usually gains traction from ease of use. It's more so a consumer product than a financial service. For an early stage investor to find conviction, the startup must have a strong marketing scheme and deliver a product that scales with the average joe and not just experienced users. There's a little less focus on regulatory, as these startups are able to borrow things—such as banking licenses—and work around some of those regulatory considerations with partner integrations. They just need to meet the bare minimum of regulation, and focus most of their efforts of engagement and acquisition.
+
+Enterprise fintech, on the other hand, should be rooted in security and compliance. It needs to be a product that disrupts a current mode of utility. And to do that, they must be careful in either creating proprietary products that need to be compliant or finding new integrations that are so high friction for later startups that it is well protected. This large emphasis on security and compliance can actually be a USP for enterprise fintech, whereas for consumer tech it's just a hurdle.
+
+Then, there's the middle ground, Fintech that serves the prosumer and SMB's. There are a lot of tools that are typically used for enterprise use and fall in the hands of skilled individuals. For example, angel investors who utilize PitchBook services. This is an interesting domain because a lot of the time a financial service isn't created to target prosumers, but many individuals find so much utility in a tool that it makes sense to buy it for themselves. For small businesses, no matter how many employees work there, financial services like Quickbooks can work extremely well. So, anything outside of consumer and enterprise falls into this sort of range, where a large market still exists, but the usage is much more dependent on other factors.
+
+Those are my biggest learnings from my interview with Kyle, thanks for reading until the end and make sure to check out my blog for more interviews like this.`,
+    date: "2025-08-05",
+    readTime: "3 min read",
+    imageUrl: "https://www.blingcap.com/static/images/team/charlie-pinto.jpg"
+  },
+  {
+    id: "Ash Panchang-Bling Capital",
+    title: "Software is everything",
+    excerpt: "Listen to Ash's opinion on why building techincal skills is the most important",
+    content: ``,
+    date: "2025-08-28",
+    readTime: "3 min read",
+    imageUrl: "https://www.blingcap.com/static/images/team/ash-panchang.jpeg"
+  },
+  {
+    id: "Eric Theis-Bling Capital",
+    title: "Technical Frameworks",
+    excerpt: "Read about the different types of technical projects VCs go through.",
+    content: `Venture Capital in itself is a very tech-infused area, yet when I think about it individually I don't preclude there is lot's of technical work being done in the actualy day to day. My previous conversations focused on the social aspects of venture capital: meeting with founders, aspiring entrepreneurs, other investors. In fact, I thought apart from actualy diligence, an investors work is just talking to new people and attending events to meet even more new people. From what I've learned from Eric, there's a crucial techincal side to venture capital that provides the support for a successful fund.
+    
+    Technical projects can surround several aspects of a fund's workflow. Notably, the place where tech can reduce the most friction is in the actual diligence process itself. From invoice analysis to automated customer validation, startups can be evaluated by a simple python script which even ChatGPT can write. And, it's incredibly insightful.
+    
+    But that's not all, you can automate internal portfolio management as well, integrating a workflow with the fund's data rooms to actively assess and track key performance indicators to ensure the fund is progressing at the right pace. There's endless market opportunity here because new frameworks can be built everyday. There's no cracked code to VC, so build as much as you can and you'll find that the insurmountable amount of data and free integrations online right now make frictionless building easier than ever.
+    
+    Thanks for catching up on my blog, I hope to see you next time!`,
+    date: "2025-08-15",
+    readTime: "3 min read",
+    imageUrl: "https://www.blingcap.com/static/images/team/eric-theis.jpg"
+  },
+  {
     id: "Kyle Lui-Bling Capital",
     title: "Fintech's a pretty big industry",
     excerpt: "See Kyle Lui's thoughts on fintech and how it's broken down into consumer, prosumer, and enterprise.",
