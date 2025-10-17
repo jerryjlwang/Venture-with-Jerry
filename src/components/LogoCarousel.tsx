@@ -74,6 +74,12 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
       src: 'https://www.blingcap.com/static/images/logo-social.png',
       url: 'https://www.blingcap.com/'
     },
+    { 
+      id: '10', 
+      name: 'Slipstream', 
+      src: '/lovable-uploads/sslogo.webp',
+      url: 'https://www.slipstream.vc/'
+    },
   ];
   const [translateValue, setTranslateValue] = useState(() => direction === 'horizontal' ? logos.length * 180 : logos.length * 100);
 
