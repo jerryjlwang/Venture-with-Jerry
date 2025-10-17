@@ -42,6 +42,23 @@ Thank you for being here, and I hope you find value in what I share!`,
     imageUrl: "/lovable-uploads/b7f4222c-402c-4621-9437-54726053d142.png"
   },
   {
+    id: "Alex Edelson-Slipstream Investors",
+    title: "A Fund of Funds???",
+    excerpt: "See how Alex invests not in companies, but the investors who back companies.",
+    content: `Today I had a conversation with different type of General Partner. In fact, he's a limited partner. LP's are the backbone of venture capital. They supply the capital for early-stage investors to invest with, as a result they seek to make steady returns rather than 10x-100x multiples.
+    
+    Alex found himself in this position after a long path of trying things out. He started in law, as he had graduated from law school with the intention to practice. However, he soon realized that the monotonous, repetitive tasks were not for him at all. He took a massive risk, and full sent a fintech startup which failed. At that point he was worried no one would accept that he had any other skills but law, but Nigel from QED investors lent a helping hand.
+    
+    Alex became Chief of Staff at QED, a fintech-focused fund worth $4.3 billion. This kickstarted his career in venture, where he became prolific at identifying early-stage opportunities. it was random change that he landed on the LP side of venture, but his skillset pushed him to the top immediately.
+    
+    We talked about what differentiates a Fund of Funds from a traditional venture fund in terms of operations, and I was surprised to learn just how different it was. First off, LP's don't actually supervise the funds that they are invested in. They can't offer too much advice as to which companies to invest in, so they just sit back and reap the consistent returns. However, that doesn't mean their days aren't full. LP's will see hundreds of deals from firms that are raising every year. There is still an extensive diligence process to undertake, whether that's for emerging managers or experienced managers going into their third or fourth fund. They care about a lot of things, fund outlook, specialization, and portfolio structure are all really important to a successful fund.
+    
+    That's most of my learnings from this week, tune in next time for more interviews!`,
+    date: "2025-10-16",
+    readTime: "3 min read",
+    imageUrl: "https://media.licdn.com/dms/image/v2/C4E03AQFDmp2SW8XOoA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1583256366905?e=1762387200&v=beta&t=1zX0zk0mZfvYTVLFs1vNKYGbdG_vF1LPXSGSrE87ZLA"
+  },
+  {
     id: "Charlie Pinto-Bling Capital",
     title: "From D1 to YC to VC",
     excerpt: "Explore the Brazilian Jiu Jitsu World Champion's journey to VC",
@@ -64,7 +81,7 @@ Enterprise fintech, on the other hand, should be rooted in security and complian
 Then, there's the middle ground, Fintech that serves the prosumer and SMB's. There are a lot of tools that are typically used for enterprise use and fall in the hands of skilled individuals. For example, angel investors who utilize PitchBook services. This is an interesting domain because a lot of the time a financial service isn't created to target prosumers, but many individuals find so much utility in a tool that it makes sense to buy it for themselves. For small businesses, no matter how many employees work there, financial services like Quickbooks can work extremely well. So, anything outside of consumer and enterprise falls into this sort of range, where a large market still exists, but the usage is much more dependent on other factors.
 
 Those are my biggest learnings from my interview with Kyle, thanks for reading until the end and make sure to check out my blog for more interviews like this.`,
-    date: "2025-08-05",
+    date: "2025-09-15",
     readTime: "3 min read",
     imageUrl: "https://www.blingcap.com/static/images/team/charlie-pinto.jpg"
   },
