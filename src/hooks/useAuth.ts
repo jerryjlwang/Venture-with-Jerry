@@ -30,11 +30,14 @@ export const useAuth = () => {
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+      (event, session) => {
         setUser(session?.user ?? null);
         
         if (session?.user) {
-          await checkAdminRole(session.user.id);
+          // Defer async Supabase call to prevent deadlocks
+          setTimeout(() => {
+            checkAdminRole(session.user.id);
+          }, 0);
         } else {
           setIsAdmin(false);
         }
