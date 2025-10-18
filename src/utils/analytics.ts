@@ -70,29 +70,6 @@ class Analytics {
     return 'Other';
   }
 
-  private async generateSignature(data: string): Promise<string> {
-    const secret = 'default-analytics-secret-change-in-production';
-    const encoder = new TextEncoder();
-    const keyData = encoder.encode(secret);
-    const key = await crypto.subtle.importKey(
-      'raw',
-      keyData,
-      { name: 'HMAC', hash: 'SHA-256' },
-      false,
-      ['sign']
-    );
-    
-    const signature = await crypto.subtle.sign(
-      'HMAC',
-      key,
-      encoder.encode(data)
-    );
-    
-    return Array.from(new Uint8Array(signature))
-      .map(b => b.toString(16).padStart(2, '0'))
-      .join('');
-  }
-
   async trackPageView(customPath?: string) {
     if (!this.consentGiven) return;
 
@@ -118,16 +95,12 @@ class Analytics {
         ...data
       };
       
-      const bodyString = JSON.stringify(payload);
-      const signature = await this.generateSignature(bodyString);
-      
       const response = await fetch(`https://cgvgkucrmtugckcefryn.supabase.co/functions/v1/analytics-track`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-analytics-signature': signature,
         },
-        body: bodyString,
+        body: JSON.stringify(payload),
       });
       
       if (!response.ok) {
@@ -159,16 +132,12 @@ class Analytics {
         duration_seconds: duration
       };
       
-      const bodyString = JSON.stringify(payload);
-      const signature = await this.generateSignature(bodyString);
-      
       await fetch(`https://cgvgkucrmtugckcefryn.supabase.co/functions/v1/analytics-track`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-analytics-signature': signature,
         },
-        body: bodyString,
+        body: JSON.stringify(payload),
       });
     } catch (error) {
       console.error('Duration tracking failed:', error);
