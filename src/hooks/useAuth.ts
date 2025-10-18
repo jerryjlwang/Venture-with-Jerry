@@ -1,6 +1,12 @@
 import { useState, useEffect } from 'react';
 import { User } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
+import { z } from 'zod';
+
+const authSchema = z.object({
+  email: z.string().trim().email({ message: "Invalid email address" }),
+  password: z.string().min(6, { message: "Password must be at least 6 characters" })
+});
 
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -55,19 +61,41 @@ export const useAuth = () => {
   };
 
   const signIn = async (email: string, password: string) => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    return { data, error };
+    try {
+      const validated = authSchema.parse({ email, password });
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: validated.email,
+        password: validated.password,
+      });
+      return { data, error };
+    } catch (validationError) {
+      if (validationError instanceof z.ZodError) {
+        return { 
+          data: null, 
+          error: { message: validationError.errors[0].message, name: 'ValidationError', status: 400 } as any 
+        };
+      }
+      throw validationError;
+    }
   };
 
   const signUp = async (email: string, password: string) => {
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-    return { data, error };
+    try {
+      const validated = authSchema.parse({ email, password });
+      const { data, error } = await supabase.auth.signUp({
+        email: validated.email,
+        password: validated.password,
+      });
+      return { data, error };
+    } catch (validationError) {
+      if (validationError instanceof z.ZodError) {
+        return { 
+          data: null, 
+          error: { message: validationError.errors[0].message, name: 'ValidationError', status: 400 } as any 
+        };
+      }
+      throw validationError;
+    }
   };
 
   const signOut = async () => {

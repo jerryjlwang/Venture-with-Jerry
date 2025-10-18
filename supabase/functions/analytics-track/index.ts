@@ -1,8 +1,35 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
-  'Access-Control-Allow-Origin': 'https://cgvgkucrmtugckcefryn.supabase.co',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-analytics-signature',
+};
+
+// HMAC verification to prevent unauthorized analytics submissions
+const verifySignature = async (data: string, signature: string | null): Promise<boolean> => {
+  if (!signature) return false;
+  
+  const secret = Deno.env.get('ANALYTICS_SECRET') || 'default-analytics-secret-change-in-production';
+  const encoder = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    'raw',
+    encoder.encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign']
+  );
+  
+  const expectedSignature = await crypto.subtle.sign(
+    'HMAC',
+    key,
+    encoder.encode(data)
+  );
+  
+  const expectedHex = Array.from(new Uint8Array(expectedSignature))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+  
+  return signature === expectedHex;
 };
 
 interface AnalyticsData {
@@ -31,7 +58,23 @@ Deno.serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    const analyticsData: AnalyticsData = await req.json();
+    // Parse request body and verify signature
+    const requestBody = await req.text();
+    const analyticsData: AnalyticsData = JSON.parse(requestBody);
+    
+    const signature = req.headers.get('x-analytics-signature');
+    const isValidSignature = await verifySignature(requestBody, signature);
+    
+    if (!isValidSignature) {
+      console.warn('Invalid analytics signature detected');
+      return new Response(
+        JSON.stringify({ error: 'Invalid request signature' }),
+        { 
+          status: 401, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      );
+    }
     
     // Get client IP address
     const clientIP = req.headers.get('x-forwarded-for') || 

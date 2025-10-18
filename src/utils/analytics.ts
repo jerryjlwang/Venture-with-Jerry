@@ -70,6 +70,29 @@ class Analytics {
     return 'Other';
   }
 
+  private async generateSignature(data: string): Promise<string> {
+    const secret = 'default-analytics-secret-change-in-production';
+    const encoder = new TextEncoder();
+    const keyData = encoder.encode(secret);
+    const key = await crypto.subtle.importKey(
+      'raw',
+      keyData,
+      { name: 'HMAC', hash: 'SHA-256' },
+      false,
+      ['sign']
+    );
+    
+    const signature = await crypto.subtle.sign(
+      'HMAC',
+      key,
+      encoder.encode(data)
+    );
+    
+    return Array.from(new Uint8Array(signature))
+      .map(b => b.toString(16).padStart(2, '0'))
+      .join('');
+  }
+
   async trackPageView(customPath?: string) {
     if (!this.consentGiven) return;
 
@@ -88,18 +111,27 @@ class Analytics {
     };
 
     try {
-      // Use secure edge function for analytics tracking
-      const { error } = await supabase.functions.invoke('analytics-track', {
-        body: {
-          session_id: this.sessionId,
-          visitor_id: this.visitorId,
-          consent_given: this.consentGiven,
-          ...data
-        }
+      const payload = {
+        session_id: this.sessionId,
+        visitor_id: this.visitorId,
+        consent_given: this.consentGiven,
+        ...data
+      };
+      
+      const bodyString = JSON.stringify(payload);
+      const signature = await this.generateSignature(bodyString);
+      
+      const response = await fetch(`https://cgvgkucrmtugckcefryn.supabase.co/functions/v1/analytics-track`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-analytics-signature': signature,
+        },
+        body: bodyString,
       });
-
-      if (error) {
-        console.error('Analytics tracking error:', error);
+      
+      if (!response.ok) {
+        console.error('Analytics tracking error:', await response.text());
       }
     } catch (error) {
       console.error('Analytics tracking failed:', error);
@@ -115,19 +147,28 @@ class Analytics {
     const duration = Math.round((Date.now() - this.startTime) / 1000);
     
     try {
-      // Track duration via secure edge function
-      await supabase.functions.invoke('analytics-track', {
-        body: {
-          session_id: this.sessionId,
-          visitor_id: this.visitorId,
-          consent_given: this.consentGiven,
-          page_path: window.location.pathname,
-          page_title: document.title,
-          user_agent: navigator.userAgent,
-          device_type: this.getDeviceType(),
-          browser: this.getBrowser(),
-          duration_seconds: duration
-        }
+      const payload = {
+        session_id: this.sessionId,
+        visitor_id: this.visitorId,
+        consent_given: this.consentGiven,
+        page_path: window.location.pathname,
+        page_title: document.title,
+        user_agent: navigator.userAgent,
+        device_type: this.getDeviceType(),
+        browser: this.getBrowser(),
+        duration_seconds: duration
+      };
+      
+      const bodyString = JSON.stringify(payload);
+      const signature = await this.generateSignature(bodyString);
+      
+      await fetch(`https://cgvgkucrmtugckcefryn.supabase.co/functions/v1/analytics-track`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-analytics-signature': signature,
+        },
+        body: bodyString,
       });
     } catch (error) {
       console.error('Duration tracking failed:', error);
