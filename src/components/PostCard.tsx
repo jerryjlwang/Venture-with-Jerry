@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { ASSET_V } from '../lib/assetVersion';
 
 interface PostCardProps {
   id: string;
@@ -22,11 +23,11 @@ const PostCard = ({ id, title, excerpt, date, readTime, imageUrl, graphic }: Pos
       const link = document.createElement('link');
       link.rel = 'preload';
       link.as = 'image';
-      link.href = graphic;
+      link.href = `${graphic}?v=${ASSET_V}`;
       document.head.appendChild(link);
     } catch {}
     const img = new Image();
-    img.src = graphic;
+    img.src = `${graphic}?v=${ASSET_V}`;
   }, [graphic]);
   
   return (

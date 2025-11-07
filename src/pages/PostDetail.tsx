@@ -2,6 +2,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { posts } from '../data/posts';
 import { ArrowUp } from 'lucide-react';
+import { ASSET_V } from '../lib/assetVersion';
 
 const PostDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -43,7 +44,7 @@ const PostDetail = () => {
         <div className="prose prose-lg prose-invert max-w-none">
           {post.graphic && (
             <img 
-              src={post.graphic} 
+              src={`${post.graphic}?v=${ASSET_V}`}
               alt={`${post.title} graphic`}
               className="float-left w-64 md:w-80 mr-6 mb-4 rounded-lg shadow-lg"
             />
