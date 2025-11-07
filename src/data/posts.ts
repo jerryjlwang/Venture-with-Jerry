@@ -56,7 +56,7 @@ Thank you for being here, and I hope you find value in what I share!`,
     That's most of my learnings from this week, tune in next time for more interviews!`,
     date: "2025-10-16",
     readTime: "3 min read",
-    imageUrl: "https://media.licdn.com/dms/image/v2/C4E03AQFDmp2SW8XOoA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1583256366905?e=1762387200&v=beta&t=1zX0zk0mZfvYTVLFs1vNKYGbdG_vF1LPXSGSrE87ZLA"
+    imageUrl: "/lovable-uploads/alex-edelson.png"
   },
   {
     id: "Charlie Pinto-Bling Capital",

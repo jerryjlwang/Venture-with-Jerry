@@ -4,13 +4,13 @@ import { Avatar, AvatarImage, AvatarFallback } from './ui/avatar';
 const NextGuests = () => {
   // Placeholder data - you can replace with real data later
   const upcomingGuests = [
-    {
-      name: "Alex Edelson", 
-      title: "General Partner at Slipstream Investors",
-      date: "Oct 16, 2025",
-      topic: "Fund of funds",
-      avatar: "/lovable-uploads/alex-edelson.png"
-    }
+    // {
+    //   name: "Alex Edelson", 
+    //   title: "General Partner at Slipstream Investors",
+    //   date: "Oct 16, 2025",
+    //   topic: "Fund of funds",
+    //   avatar: "/lovable-uploads/alex-edelson.png"
+    // }
   ];
 
   return (
