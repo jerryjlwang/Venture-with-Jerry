@@ -40,20 +40,16 @@ const PostDetail = () => {
           </h1>
         </header>
 
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="prose prose-lg prose-invert max-w-none">
           {post.graphic && (
-            <div className="lg:w-1/3 flex-shrink-0">
-              <img 
-                src={post.graphic} 
-                alt={`${post.title} graphic`}
-                className="w-full h-auto rounded-lg shadow-lg sticky top-24"
-              />
-            </div>
+            <img 
+              src={post.graphic} 
+              alt={`${post.title} graphic`}
+              className="float-left w-64 md:w-80 mr-6 mb-4 rounded-lg shadow-lg"
+            />
           )}
-          <div className="prose prose-lg prose-invert max-w-none flex-1">
-            <div className="text-gray-300 leading-relaxed whitespace-pre-line">
-              {post.content}
-            </div>
+          <div className="text-gray-300 leading-relaxed whitespace-pre-line">
+            {post.content}
           </div>
         </div>
 
