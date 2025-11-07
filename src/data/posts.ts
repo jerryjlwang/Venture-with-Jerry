@@ -57,7 +57,8 @@ Thank you for being here, and I hope you find value in what I share!`,
     That's most of my learnings from this week, tune in next time for more interviews!`,
     date: "2025-10-16",
     readTime: "3 min read",
-    imageUrl: "/lovable-uploads/alex-edelson.png"
+    imageUrl: "/lovable-uploads/alex-edelson.png",
+    graphic: "/lovable-uploads/alex-edelson-graphic.png"
   },
   {
     id: "Charlie Pinto-Bling Capital",
@@ -84,7 +85,8 @@ Then, there's the middle ground, Fintech that serves the prosumer and SMB's. The
 Those are my biggest learnings from my interview with Kyle, thanks for reading until the end and make sure to check out my blog for more interviews like this.`,
     date: "2025-09-15",
     readTime: "3 min read",
-    imageUrl: "https://www.blingcap.com/static/images/team/charlie-pinto.jpg"
+    imageUrl: "https://www.blingcap.com/static/images/team/charlie-pinto.jpg",
+    graphic: "/lovable-uploads/charlie-pinto-graphic.png"
   },
   {
     id: "Ash Panchang-Bling Capital",
@@ -93,7 +95,8 @@ Those are my biggest learnings from my interview with Kyle, thanks for reading u
     content: ``,
     date: "2025-08-28",
     readTime: "3 min read",
-    imageUrl: "https://www.blingcap.com/static/images/team/ash-panchang.jpeg"
+    imageUrl: "https://www.blingcap.com/static/images/team/ash-panchang.jpeg",
+    graphic: "/lovable-uploads/ash-panchang-graphic.png"
   },
   {
     id: "Eric Theis-Bling Capital",
@@ -108,7 +111,8 @@ Those are my biggest learnings from my interview with Kyle, thanks for reading u
     Thanks for catching up on my blog, I hope to see you next time!`,
     date: "2025-08-15",
     readTime: "3 min read",
-    imageUrl: "https://www.blingcap.com/static/images/team/eric-theis.jpg"
+    imageUrl: "https://www.blingcap.com/static/images/team/eric-theis.jpg",
+    graphic: "/lovable-uploads/eric-theis-graphic.png"
   },
   {
     id: "Kyle Lui-Bling Capital",
@@ -267,7 +271,8 @@ That wraps up my learnings from this interview with Paul. Make sure to check him
 Until the next one!`,
     date: "2025-06-08",
     readTime: "4 min read",
-    imageUrl: "https://www.madrona.com/wp-content/uploads/2014/11/Goodrich_20A0303full.jpg"
+    imageUrl: "https://www.madrona.com/wp-content/uploads/2014/11/Goodrich_20A0303full.jpg",
+    graphic: "/lovable-uploads/paul-goodrich-graphic.png"
   },
   {
     id: "Jake Nibley-Tola Capital",
@@ -284,7 +289,8 @@ He also shared how investors pay close attention to this. It’s not just about 
 I walked away really impressed by Jake—not just because he’s carved out a space in VC at such a young age, but because of how clearly he’s able to break down complex topics like dilution into actionable lessons for founders. Definitely grateful for the chance to learn from him.`,
     date: "2025-05-15",
     readTime: "3 min read",
-    imageUrl: "https://tolacapital.com/wp-content/uploads/2023/06/jake-nibley.webp"
+    imageUrl: "https://tolacapital.com/wp-content/uploads/2023/06/jake-nibley.webp",
+    graphic: "/lovable-uploads/jake-nibley-graphic.png"
   },
   {
     id: "Anthony Bontrager-West River Group",
@@ -301,7 +307,8 @@ I walked away really impressed by Jake—not just because he’s carved out a sp
     That wraps up my learnings for today, I'm very grateful for Anthony's time and how generous he was with handing out free advice.`,
     date: "2025-05-09",
     readTime: "3 min read",
-    imageUrl: "https://media.licdn.com/dms/image/v2/D4D03AQHJvaFx1KSfdg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1697129347380?e=2147483647&v=beta&t=MQHkIpgS3hMLGvDqB_7uw7yDplMgBGlEe3Z8WA2KlJg"
+    imageUrl: "https://media.licdn.com/dms/image/v2/D4D03AQHJvaFx1KSfdg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1697129347380?e=2147483647&v=beta&t=MQHkIpgS3hMLGvDqB_7uw7yDplMgBGlEe3Z8WA2KlJg",
+    graphic: "/lovable-uploads/anthony-bontrager-graphic.png"
   },
   {
     id: "Kirby Winfield-Ascend",
@@ -324,7 +331,8 @@ I walked away really impressed by Jake—not just because he’s carved out a sp
     Until the next one!`,
     date: "2025-05-06",
     readTime: "2 min read",
-    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSihBj705kxu4eM5TbGBxxE8_nHkU-Ka3yB7Q&s"
+    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSihBj705kxu4eM5TbGBxxE8_nHkU-Ka3yB7Q&s",
+    graphic: "/lovable-uploads/kirby-winfield-graphic.png"
   },
   {
     id: "Pablo Casillimas-OneSixOne Ventures",
@@ -341,6 +349,7 @@ I walked away really impressed by Jake—not just because he’s carved out a sp
     That's about it for our conversation, I'm super happy to have had Pablo as my first connection opportunity in the professional field and I hope it's just the start!`,
     date: "2025-01-06",
     readTime: "2 min read",
-    imageUrl: "https://emergeamericas.com/wp-content/uploads/2025/03/77a8-400o400o1-PV9L5rZTUqhWFzTVnUeTwb.png"
+    imageUrl: "https://emergeamericas.com/wp-content/uploads/2025/03/77a8-400o400o1-PV9L5rZTUqhWFzTVnUeTwb.png",
+    graphic: "/lovable-uploads/pablo-casillimas-graphic.png"
   },
 ];
