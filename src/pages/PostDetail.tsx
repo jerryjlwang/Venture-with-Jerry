@@ -43,7 +43,7 @@ const PostDetail = () => {
         <div className="prose prose-lg prose-invert max-w-none">
           {post.graphic && (
             <img 
-              src={post.graphic} 
+              src={`${post.graphic}?v=${Date.now()}`}
               alt={`${post.title} graphic`}
               className="float-left w-64 md:w-80 mr-6 mb-4 rounded-lg shadow-lg"
             />
