@@ -10,7 +10,7 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "12.2.3 (519615d)"
+    PostgrestVersion: "13.0.5"
   }
   public: {
     Tables: {
@@ -23,7 +23,7 @@ export type Database = {
           device_type: string | null
           duration_seconds: number | null
           id: string
-          ip_address: unknown | null
+          ip_address: unknown
           page_path: string
           page_title: string | null
           referrer: string | null
@@ -40,7 +40,7 @@ export type Database = {
           device_type?: string | null
           duration_seconds?: number | null
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           page_path: string
           page_title?: string | null
           referrer?: string | null
@@ -57,7 +57,7 @@ export type Database = {
           device_type?: string | null
           duration_seconds?: number | null
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           page_path?: string
           page_title?: string | null
           referrer?: string | null
@@ -157,34 +157,19 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      backfill_analytics_summary: {
-        Args: Record<PropertyKey, never>
-        Returns: undefined
-      }
+      backfill_analytics_summary: { Args: never; Returns: undefined }
       check_rate_limit: {
         Args: { ip: unknown; max_requests?: number; session: string }
         Returns: boolean
       }
-      cleanup_old_rate_limits: {
-        Args: Record<PropertyKey, never>
-        Returns: undefined
-      }
-      hash_ip_address: {
-        Args: { ip_text: string }
-        Returns: string
-      }
+      cleanup_old_rate_limits: { Args: never; Returns: undefined }
+      hash_ip_address: { Args: { ip_text: string }; Returns: string }
       increment_rate_limit: {
         Args: { ip: unknown; session: string }
         Returns: undefined
       }
-      is_admin: {
-        Args: { user_id?: string }
-        Returns: boolean
-      }
-      update_analytics_summary: {
-        Args: Record<PropertyKey, never>
-        Returns: undefined
-      }
+      is_admin: { Args: { user_id?: string }; Returns: boolean }
+      update_analytics_summary: { Args: never; Returns: undefined }
       validate_analytics_data: {
         Args: {
           p_page_path: string
