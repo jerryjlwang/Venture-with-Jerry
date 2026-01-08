@@ -1,9 +1,47 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-};
+// Allowed origins for CORS - restrict to your domain
+const ALLOWED_ORIGINS = [
+  'https://cgvgkucrmtugckcefryn.lovableproject.com',
+  'https://startupseattle.lovable.app',
+  'http://localhost:5173',
+  'http://localhost:3000',
+];
+
+// Valid values for client-provided fields
+const VALID_DEVICE_TYPES = ['mobile', 'tablet', 'desktop'];
+const VALID_BROWSERS = ['Chrome', 'Firefox', 'Safari', 'Edge', 'Other'];
+
+function getCorsHeaders(origin: string | null): Record<string, string> {
+  const allowedOrigin = origin && ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  return {
+    'Access-Control-Allow-Origin': allowedOrigin,
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  };
+}
+
+// Sanitize text to prevent XSS - encode HTML entities
+function sanitizeText(str: string | undefined | null): string | null {
+  if (!str) return null;
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// Validate URL format for referrer
+function isValidUrl(str: string | undefined | null): boolean {
+  if (!str) return true; // null/undefined is valid (no referrer)
+  try {
+    new URL(str);
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 interface AnalyticsData {
   page_path: string;
@@ -19,9 +57,35 @@ interface AnalyticsData {
 }
 
 Deno.serve(async (req) => {
+  const origin = req.headers.get('origin');
+  const corsHeaders = getCorsHeaders(origin);
+
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
+  }
+
+  // Only allow POST method
+  if (req.method !== 'POST') {
+    return new Response(
+      JSON.stringify({ error: 'Method not allowed' }),
+      { 
+        status: 405, 
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+      }
+    );
+  }
+
+  // Validate Origin header - reject requests from unknown origins
+  if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+    console.warn('Rejected request from unauthorized origin:', origin);
+    return new Response(
+      JSON.stringify({ error: 'Unauthorized origin' }),
+      { 
+        status: 403, 
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+      }
+    );
   }
 
   try {
@@ -34,6 +98,43 @@ Deno.serve(async (req) => {
     // Parse request body
     const analyticsData: AnalyticsData = await req.json();
     
+    // Basic request validation
+    if (!analyticsData || typeof analyticsData !== 'object') {
+      return new Response(
+        JSON.stringify({ error: 'Invalid request body' }),
+        { 
+          status: 400, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      );
+    }
+
+    // Validate required fields exist and are strings
+    if (typeof analyticsData.page_path !== 'string' || typeof analyticsData.session_id !== 'string') {
+      return new Response(
+        JSON.stringify({ error: 'Missing required fields' }),
+        { 
+          status: 400, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      );
+    }
+
+    // Validate device_type against whitelist
+    const validatedDeviceType = analyticsData.device_type && VALID_DEVICE_TYPES.includes(analyticsData.device_type)
+      ? analyticsData.device_type
+      : null;
+
+    // Validate browser against whitelist
+    const validatedBrowser = analyticsData.browser && VALID_BROWSERS.includes(analyticsData.browser)
+      ? analyticsData.browser
+      : 'Other';
+
+    // Validate referrer URL format
+    if (analyticsData.referrer && !isValidUrl(analyticsData.referrer)) {
+      analyticsData.referrer = undefined; // Clear invalid referrer
+    }
+
     // Get client IP address
     const clientIP = req.headers.get('x-forwarded-for') || 
                     req.headers.get('x-real-ip') || 
@@ -114,18 +215,20 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Sanitize and prepare data for insertion
+    // Sanitize and prepare data for insertion with HTML entity encoding
     const sanitizedData = {
-      session_id: analyticsData.session_id,
-      visitor_id: analyticsData.visitor_id || null,
-      consent_given: analyticsData.consent_given,
-      page_path: analyticsData.page_path.substring(0, 500), // Limit length
-      page_title: analyticsData.page_title?.substring(0, 500) || null,
-      referrer: analyticsData.referrer?.substring(0, 500) || null,
-      user_agent: analyticsData.user_agent?.substring(0, 1000) || null,
-      device_type: analyticsData.device_type || null,
-      browser: analyticsData.browser || null,
-      duration_seconds: analyticsData.duration_seconds || null,
+      session_id: analyticsData.session_id.substring(0, 100),
+      visitor_id: analyticsData.visitor_id?.substring(0, 100) || null,
+      consent_given: analyticsData.consent_given === true,
+      page_path: analyticsData.page_path.substring(0, 500),
+      page_title: sanitizeText(analyticsData.page_title?.substring(0, 500)),
+      referrer: sanitizeText(analyticsData.referrer?.substring(0, 500)),
+      user_agent: sanitizeText(analyticsData.user_agent?.substring(0, 1000)),
+      device_type: validatedDeviceType,
+      browser: validatedBrowser,
+      duration_seconds: typeof analyticsData.duration_seconds === 'number' 
+        ? Math.max(0, Math.min(analyticsData.duration_seconds, 86400)) // Cap at 24 hours
+        : null,
       ip_address: hashedIP,
     };
 
