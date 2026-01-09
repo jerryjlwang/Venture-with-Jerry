@@ -1,7 +1,5 @@
-
-import PostCard from '../components/PostCard';
+import PostGraphicCard from '../components/PostGraphicCard';
 import { posts } from '../data/posts';
-
 const Posts = () => {
   return (
     <div 
@@ -25,7 +23,7 @@ const Posts = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post) => (
-            <PostCard key={post.id} {...post} />
+            <PostGraphicCard key={post.id} id={post.id} graphic={post.graphic} title={post.title} />
           ))}
         </div>
 
