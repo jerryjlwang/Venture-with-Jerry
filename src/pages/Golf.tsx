@@ -6,7 +6,7 @@ const Golf = () => {
       backgroundImage: `url(${golfBackground})`
     }}>
       {/* Dark overlay to ensure text readability */}
-      <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+      <div className="absolute inset-0 bg-green-950 bg-opacity-60"></div>
       
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center mb-16 pt-16">
