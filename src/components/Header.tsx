@@ -14,7 +14,7 @@ const Header = () => {
       {/* Logo/Home Link - Left Side */}
       <Link 
         to="/" 
-        className={`text-white hover:text-blue-300 transition-colors font-semibold text-lg ${isActive('/') ? 'text-blue-300' : ''}`}
+        className={`text-white hover:text-blue-300 transition-colors font-semibold text-lg ml-10 mt-10 ${isActive('/') ? 'text-blue-300' : ''}`}
       >
         Venture with Jerry
       </Link>
