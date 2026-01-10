@@ -13,6 +13,7 @@ import Home from "./pages/Home";
 import Posts from "./pages/Posts";
 import PostDetail from "./pages/PostDetail";
 import About from "./pages/About";
+import Golf from "./pages/Golf";
 
 import NotFound from "./pages/NotFound";
 
@@ -31,6 +32,7 @@ const AppContent = () => {
           <Route path="/" element={<Home />} />
           <Route path="/posts" element={<Posts />} />
           <Route path="/posts/:id" element={<PostDetail />} />
+          <Route path="/golf" element={<Golf />} />
           <Route path="/about" element={<About />} />
           
           <Route path="*" element={<NotFound />} />
