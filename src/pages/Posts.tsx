@@ -22,7 +22,7 @@ const Posts = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post) => (
+          {posts.filter((post) => post.graphic).map((post) => (
             <PostGraphicCard key={post.id} id={post.id} graphic={post.graphic} title={post.title} />
           ))}
         </div>
