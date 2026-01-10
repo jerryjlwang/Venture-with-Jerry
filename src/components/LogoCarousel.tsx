@@ -101,7 +101,7 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
               alt={`${logo.name} logo`}
               className={`object-contain transition-opacity duration-300 ${
                 imageLoaded ? 'opacity-100' : 'opacity-0'
-              } ${isFoundersCoop ? 'scale-[1.15]' : isBlingCapital ? 'scale-110' : 'max-w-full max-h-full'}`}
+              } ${isFoundersCoop || isBlingCapital ? 'scale-110' : 'max-w-full max-h-full'}`}
               onLoad={() => setImageLoaded(true)}
               onError={() => {
                 setImageError(true);
