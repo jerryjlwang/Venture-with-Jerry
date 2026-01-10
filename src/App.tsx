@@ -8,7 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import CookieConsent from "./components/CookieConsent";
+
 import Home from "./pages/Home";
 import Posts from "./pages/Posts";
 import PostDetail from "./pages/PostDetail";
@@ -35,7 +35,7 @@ const AppContent = () => {
         </Routes>
       </main>
       <Footer />
-      <CookieConsent />
+      
     </div>
   );
 };
