@@ -38,14 +38,14 @@ const PostCard = ({ id, title, excerpt, date, readTime, imageUrl, graphic }: Pos
       onFocus={preloadGraphic}
     >
       <Link to={`/posts/${id}`} className="block h-full">
-        {/* Gradient overlay on hover */}
-        <div className="absolute inset-0 bg-black/75" />
-        
         {/* Background image */}
         <div 
           className="absolute inset-0 bg-cover bg-center transform group-hover:scale-105 transition-transform duration-700"
           style={{ backgroundImage: `url(${displayImage})` }}
         />
+        
+        {/* Dark overlay on top of image */}
+        <div className="absolute inset-0 bg-black/70" />
         
         {/* Content */}
         <div className="relative z-10 p-6 flex flex-col justify-end h-full min-h-[320px]">
