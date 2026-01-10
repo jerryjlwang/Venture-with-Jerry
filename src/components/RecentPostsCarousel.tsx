@@ -42,7 +42,7 @@ const RecentPostsCarousel = () => {
   return <section className="pt-32 pb-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl md:text-4xl font-medium text-white tracking-widest font-mono">
+          <h2 className="text-3xl md:text-4xl font-playfair font-medium text-white tracking-widest">
             Recent Posts
           </h2>
           <div className="flex items-center gap-2">

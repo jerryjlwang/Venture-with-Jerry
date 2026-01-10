@@ -31,34 +31,52 @@ const PostCard = ({ id, title, excerpt, date, readTime, imageUrl, graphic }: Pos
   }, [graphic]);
   
   return (
-    <article className="bg-gradient-to-br from-gray-900 to-black hover:from-gray-800 hover:to-gray-900 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] overflow-hidden border border-blue-900/30 hover:border-blue-400/60 cursor-pointer group" onMouseEnter={preloadGraphic} onPointerEnter={preloadGraphic} onFocus={preloadGraphic}>
-      <Link to={`/posts/${id}`} className="block">
-        <div className="p-6">
-          {/* Avatar and meta info */}
-          <div className="flex items-center gap-3 mb-4">
-            <img 
-              src={displayImage} 
-              alt="Interviewee portrait"
-              className="w-12 h-12 rounded-full object-cover border-2 border-blue-400/30"
-            />
-            <div className="flex-1">
-              <div className="flex items-center justify-between text-sm text-blue-300">
-                <time dateTime={date}>{new Date(date).toLocaleDateString()}</time>
-                <span>{readTime}</span>
-              </div>
-            </div>
+    <article 
+      className="group relative bg-white/5 backdrop-blur-md rounded-xl overflow-hidden border border-white/20 hover:border-blue-400/50 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10 cursor-pointer h-full"
+      onMouseEnter={preloadGraphic} 
+      onPointerEnter={preloadGraphic} 
+      onFocus={preloadGraphic}
+    >
+      <Link to={`/posts/${id}`} className="block h-full">
+        {/* Gradient overlay on hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+        
+        {/* Background image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center transform group-hover:scale-105 transition-transform duration-700"
+          style={{ backgroundImage: `url(${displayImage})` }}
+        />
+        
+        {/* Content */}
+        <div className="relative z-10 p-6 flex flex-col justify-end h-full min-h-[320px]">
+          {/* Date badge */}
+          <div className="absolute top-4 right-4">
+            <span className="px-3 py-1 bg-blue-600/80 backdrop-blur-sm text-white text-xs font-playfair tracking-widest rounded-full">
+              {readTime}
+            </span>
           </div>
           
-          <h3 className="text-xl font-bold text-white mb-3 transition-colors font-public-sans">
-            {title}
-          </h3>
-          
-          <p className="text-gray-300 mb-4 leading-relaxed font-public-sans">
-            {excerpt}
-          </p>
-          
-          <div className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors font-medium font-public-sans">
-            Read more →
+          {/* Bottom content */}
+          <div className="mt-auto">
+            <time 
+              dateTime={date} 
+              className="text-blue-300/80 text-sm font-playfair tracking-widest mb-2 block"
+            >
+              {new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+            </time>
+            
+            <h3 className="text-xl font-playfair font-medium text-white mb-3 tracking-wide group-hover:text-blue-100 transition-colors duration-300">
+              {title}
+            </h3>
+            
+            <p className="text-gray-300/90 text-sm leading-relaxed font-playfair tracking-wide line-clamp-2 mb-4">
+              {excerpt}
+            </p>
+            
+            <div className="inline-flex items-center text-blue-400 group-hover:text-blue-300 transition-colors font-playfair tracking-widest text-sm">
+              Read more 
+              <span className="ml-2 transform group-hover:translate-x-1 transition-transform duration-300">→</span>
+            </div>
           </div>
         </div>
       </Link>
