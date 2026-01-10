@@ -120,7 +120,7 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
 
   return (
     <div className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-6 shadow-xl">
-      <h2 className="text-xl font-playfair font-medium text-white mb-4 text-center tracking-wide">Companies Interviewed</h2>
+      <h2 className="text-xl font-playfair font-medium text-white mb-4 text-center tracking-widest">Companies Interviewed</h2>
       <div 
         className={`overflow-hidden ${
           direction === 'horizontal' ? 'w-full h-28' : 'h-96'

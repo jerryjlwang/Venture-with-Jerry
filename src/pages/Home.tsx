@@ -24,24 +24,24 @@ const Home = () => {
         {/* Hero Section */}
         <section className="py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto text-center">
-            <h1 className="text-5xl md:text-7xl font-playfair font-medium text-white mb-6 leading-tight tracking-wide">
+            <h1 className="text-5xl md:text-7xl font-playfair font-medium text-white mb-6 leading-tight tracking-widest">
   Welcome to My
               <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"> Personal Page </span>
             </h1>
-            <p className="text-xl md:text-2xl font-playfair text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl font-playfair text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed tracking-widest">
               A place where you can get to know me and learn about my venture capital conversations.
             </p>
             <div className="relative flex justify-center w-full">
               <div className="flex flex-col sm:flex-row gap-4">
                 <a 
                   href="/posts" 
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-playfair font-medium transition-colors shadow-lg hover:shadow-xl tracking-wide"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-playfair font-medium transition-colors shadow-lg hover:shadow-xl tracking-widest"
                 >
                   Read My Posts
                 </a>
                 <a 
                   href="/about" 
-                  className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-playfair font-medium transition-all shadow-lg hover:shadow-xl tracking-wide"
+                  className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-playfair font-medium transition-all shadow-lg hover:shadow-xl tracking-widest"
                 >
                   Learn About Me
                 </a>
