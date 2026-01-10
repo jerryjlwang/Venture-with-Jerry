@@ -92,7 +92,7 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
         href={logo.url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${direction === 'horizontal' ? 'w-36 h-16' : 'h-16'} bg-white rounded-lg border border-white/30 hover:border-blue-400/50 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 p-3 flex items-center justify-center flex-shrink-0`}
+        className={`${direction === 'horizontal' ? 'w-36 h-16' : 'h-16'} bg-white rounded-lg border border-white/30 hover:border-blue-400/50 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 p-3 flex items-center justify-center flex-shrink-0 overflow-hidden`}
       >
         {!imageError ? (
           <>
@@ -101,7 +101,7 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
               alt={`${logo.name} logo`}
               className={`object-contain transition-opacity duration-300 ${
                 imageLoaded ? 'opacity-100' : 'opacity-0'
-              } ${isFoundersCoop ? 'scale-150' : isBlingCapital ? 'scale-125' : 'max-w-full max-h-full'}`}
+              } ${isFoundersCoop ? 'scale-[1.35]' : isBlingCapital ? 'scale-110' : 'max-w-full max-h-full'}`}
               onLoad={() => setImageLoaded(true)}
               onError={() => {
                 setImageError(true);
