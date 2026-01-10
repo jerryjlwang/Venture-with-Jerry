@@ -10,15 +10,17 @@ const Header = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="fixed top-0 right-0 z-50 p-4">
-      {/* Desktop Navigation */}
+    <header className="fixed top-0 left-0 right-0 z-50 p-4 flex justify-between items-center">
+      {/* Logo/Home Link - Left Side */}
+      <Link 
+        to="/" 
+        className={`text-white hover:text-blue-300 transition-colors font-semibold text-lg ${isActive('/') ? 'text-blue-300' : ''}`}
+      >
+        Venture with Jerry
+      </Link>
+
+      {/* Desktop Navigation - Right Side */}
       <nav className="hidden md:flex space-x-8">
-        <Link 
-          to="/" 
-          className={`text-white hover:text-blue-300 transition-colors ${isActive('/') ? 'text-blue-300' : ''}`}
-        >
-          Home
-        </Link>
         <Link 
           to="/posts" 
           className={`text-white hover:text-blue-300 transition-colors ${isActive('/posts') ? 'text-blue-300' : ''}`}
@@ -47,13 +49,6 @@ const Header = () => {
       {isMenuOpen && (
         <nav className="md:hidden absolute top-full right-0 bg-black/90 backdrop-blur-md p-4 rounded-lg mt-2">
           <div className="flex flex-col space-y-2">
-            <Link 
-              to="/" 
-              className={`text-white hover:text-blue-300 transition-colors py-2 ${isActive('/') ? 'text-blue-300' : ''}`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </Link>
             <Link 
               to="/posts" 
               className={`text-white hover:text-blue-300 transition-colors py-2 ${isActive('/posts') ? 'text-blue-300' : ''}`}
