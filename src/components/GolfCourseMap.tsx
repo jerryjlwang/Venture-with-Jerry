@@ -28,26 +28,26 @@ const journeyData: HoleData[] = [
   { hole: 18, title: "The Journey Continues", description: "Golf for life - what's next", year: "2024" },
 ];
 
-// Course layout positions for an 18-hole course (percentage-based)
+// Course layout positions matching the reference scorecard layout
 const holePositions = [
-  { x: 12, y: 15 },  // Hole 1
-  { x: 28, y: 12 },  // Hole 2
-  { x: 45, y: 18 },  // Hole 3
-  { x: 60, y: 10 },  // Hole 4
-  { x: 78, y: 15 },  // Hole 5
-  { x: 88, y: 28 },  // Hole 6
-  { x: 82, y: 42 },  // Hole 7
-  { x: 68, y: 38 },  // Hole 8
-  { x: 52, y: 45 },  // Hole 9 - The Turn
-  { x: 35, y: 50 },  // Hole 10
-  { x: 18, y: 55 },  // Hole 11
-  { x: 10, y: 68 },  // Hole 12
-  { x: 22, y: 78 },  // Hole 13
-  { x: 38, y: 72 },  // Hole 14
-  { x: 55, y: 80 },  // Hole 15
-  { x: 70, y: 75 },  // Hole 16
-  { x: 85, y: 82 },  // Hole 17
-  { x: 75, y: 92 },  // Hole 18 - Clubhouse
+  { x: 28, y: 52 },  // Hole 1
+  { x: 42, y: 22 },  // Hole 2
+  { x: 58, y: 18 },  // Hole 3
+  { x: 62, y: 75 },  // Hole 4
+  { x: 62, y: 55 },  // Hole 5
+  { x: 52, y: 48 },  // Hole 6
+  { x: 42, y: 72 },  // Hole 7
+  { x: 32, y: 88 },  // Hole 8
+  { x: 6, y: 68 },   // Hole 9
+  { x: 35, y: 48 },  // Hole 10
+  { x: 48, y: 38 },  // Hole 11
+  { x: 92, y: 42 },  // Hole 12
+  { x: 88, y: 82 },  // Hole 13
+  { x: 85, y: 58 },  // Hole 14
+  { x: 78, y: 28 },  // Hole 15
+  { x: 52, y: 12 },  // Hole 16
+  { x: 28, y: 8 },   // Hole 17
+  { x: 15, y: 42 },  // Hole 18
 ];
 
 const GolfCourseMap = () => {
@@ -121,27 +121,13 @@ const GolfCourseMap = () => {
                 onMouseEnter={() => !selectedHole && setHoveredHole(hole.hole)}
                 onMouseLeave={() => setHoveredHole(null)}
               >
-                {/* Flag pole */}
-                <div className={`absolute left-1/2 bottom-full h-8 w-0.5 bg-white/80 transform -translate-x-1/2 transition-all duration-300 ${
-                  isHovered || isSelected ? 'h-10' : 'h-8'
-                }`} />
-                
-                {/* Flag */}
-                <div className={`absolute left-1/2 bottom-full mb-6 transition-all duration-300 ${
-                  isHovered || isSelected ? 'mb-8' : 'mb-6'
-                }`}>
-                  <div className={`w-6 h-4 bg-red-500 clip-flag transform origin-left transition-transform ${
-                    isHovered || isSelected ? 'scale-110' : ''
-                  }`} style={{ clipPath: 'polygon(0 0, 100% 50%, 0 100%)' }} />
-                </div>
-                
-                {/* Hole circle */}
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center font-serif font-bold text-sm transition-all duration-300 ${
+                {/* Simple blue circle marker */}
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center font-sans font-semibold text-sm transition-all duration-300 shadow-lg ${
                   isSelected 
-                    ? 'bg-white text-green-900 scale-125 shadow-lg shadow-white/30' 
+                    ? 'bg-sky-400 text-white scale-125 ring-2 ring-white/50' 
                     : isHovered 
-                      ? 'bg-white/90 text-green-900 scale-110' 
-                      : 'bg-green-950/80 text-white border-2 border-white/60'
+                      ? 'bg-sky-400 text-white scale-110' 
+                      : 'bg-sky-500 text-white'
                 }`}>
                   {hole.hole}
                 </div>
