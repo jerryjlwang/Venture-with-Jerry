@@ -79,7 +79,7 @@ const PostDetail = () => {
                 </div>
               </div>
             )}
-            <div className="text-gray-200 leading-relaxed whitespace-pre-line font-playfair tracking-wide text-lg">
+            <div className="text-gray-200 leading-relaxed whitespace-pre-line font-public-sans tracking-normal text-lg">
               {post.content}
             </div>
           </div>
