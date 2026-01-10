@@ -9,7 +9,7 @@ const Home = () => {
     }} />
       
       {/* Dark overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/30" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/30 to-slate-900" />
       
       
       {/* Content */}
