@@ -84,7 +84,8 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
     const [imageError, setImageError] = useState(false);
     
     // Scale up specific logos that appear too small
-    const needsLargerSize = logo.name === "Founders' Co-op" || logo.name === "Bling Capital";
+    const isFoundersCoop = logo.name === "Founders' Co-op";
+    const isBlingCapital = logo.name === "Bling Capital";
 
     return (
       <a 
@@ -100,7 +101,7 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
               alt={`${logo.name} logo`}
               className={`object-contain transition-opacity duration-300 ${
                 imageLoaded ? 'opacity-100' : 'opacity-0'
-              } ${needsLargerSize ? 'max-w-[140%] max-h-[140%] scale-125' : 'max-w-full max-h-full'}`}
+              } ${isFoundersCoop ? 'scale-150' : isBlingCapital ? 'scale-125' : 'max-w-full max-h-full'}`}
               onLoad={() => setImageLoaded(true)}
               onError={() => {
                 setImageError(true);
