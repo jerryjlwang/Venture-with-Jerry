@@ -1,4 +1,3 @@
-import { Calendar } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from './ui/avatar';
 const NextGuests = () => {
   // Placeholder data - you can replace with real data later
@@ -12,8 +11,7 @@ const NextGuests = () => {
     // }
   ];
   return <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-      <h3 className="text-xl text-white mb-4 flex items-center gap-2 font-normal">
-        <Calendar className="w-5 h-5 text-blue-400" />
+      <h3 className="text-xl text-white mb-4 font-normal">
         Upcoming Interviews
       </h3>
       <div className="space-y-4">
