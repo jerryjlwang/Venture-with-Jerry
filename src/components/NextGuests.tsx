@@ -10,8 +10,8 @@ const NextGuests = () => {
     //   avatar: "/lovable-uploads/alex-edelson.png"
     // }
   ];
-  return <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-      <h3 className="text-xl text-white mb-4 font-normal">
+  return <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/30 shadow-lg">
+      <h3 className="text-xl text-white mb-4 font-normal text-center font-playfair tracking-widest">
         Upcoming Interviews
       </h3>
       <div className="space-y-4">
