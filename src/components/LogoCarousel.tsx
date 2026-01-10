@@ -244,9 +244,6 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
           ))}
         </div>
       </div>
-      <div className="mt-4 text-center">
-        <p className="text-sm text-gray-400">Scroll to interact • Auto-scrolling resumes</p>
-      </div>
     </div>
   );
 };
