@@ -1,13 +1,8 @@
 import LogoCarousel from '../components/LogoCarousel';
-
 const About = () => {
-  return (
-    <div 
-      className="min-h-screen bg-cover bg-center bg-no-repeat relative"
-      style={{
-        backgroundImage: `url('https://i.natgeofe.com/n/6e6d2eea-06d3-4ac4-94ca-2aba6f7f8757/mountain-pine-trees.jpg')`
-      }}
-    >
+  return <div className="min-h-screen bg-cover bg-center bg-no-repeat relative" style={{
+    backgroundImage: `url('https://i.natgeofe.com/n/6e6d2eea-06d3-4ac4-94ca-2aba6f7f8757/mountain-pine-trees.jpg')`
+  }}>
       {/* Dark overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black bg-opacity-60"></div>
       
@@ -26,47 +21,25 @@ const About = () => {
           <div className="lg:col-span-1 space-y-8">
             <div className="bg-gradient-to-br from-blue-800 to-blue-900 rounded-lg p-8 text-center shadow-xl">
               <div className="mb-4">
-                <img 
-                  src="/lovable-uploads/jerry-profile.jpg" 
-                  alt="Jerry Wang"
-                  className="w-full max-w-xs mx-auto rounded-lg shadow-lg object-cover"
-                />
+                <img alt="Jerry Wang" className="w-full max-w-xs mx-auto rounded-lg shadow-lg object-cover" src="/lovable-uploads/1bed9257-b6b5-4067-9485-4377fa434e79.png" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Jerry Wang</h3>
-              <p className="text-blue-300">Developer & Writer</p>
+              <h3 className="text-xl font-bold text-white mb-2 font-mono">Jerry Wang</h3>
+              <p className="text-blue-300 font-mono">Developer & Writer</p>
             </div>
 
             <div className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-8 shadow-xl">
               <h2 className="text-2xl font-bold text-white mb-4">Let's Connect</h2>
               <div className="flex flex-col gap-4">
-                <a 
-                  href="mailto:wang.jerryjl@gmail.com" 
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors text-center"
-                >
+                <a href="mailto:wang.jerryjl@gmail.com" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors text-center">
                   Email Me
                 </a>
-                <a 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://www.linkedin.com/in/jerry-wang-21a282368/" 
-                  className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center"
-                >
+                <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/jerry-wang-21a282368/" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center">
                   LinkedIn
                 </a>
-                <a 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://github.com/jerryjlwang" 
-                  className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center"
-                >
+                <a target="_blank" rel="noopener noreferrer" href="https://github.com/jerryjlwang" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center">
                   GitHub
                 </a>
-                <a 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://www.instagram.com/jerr_yw08/" 
-                  className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center"
-                >
+                <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/jerr_yw08/" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center">
                   Instagram
                 </a>
               </div>
@@ -76,21 +49,21 @@ const About = () => {
           {/* About Content */}
           <div className="lg:col-span-2 space-y-8">
             <section className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-8 shadow-xl">
-              <h2 className="text-2xl font-bold text-white mb-4">My Background</h2>
+              <h2 className="text-2xl font-bold text-white mb-4 font-serif">My Background</h2>
               <div className="text-gray-300 leading-relaxed space-y-4">
-                <p>
+                <p className="font-serif">
                   My name is Jerry Wang and I’m a senior at Interlake High School in Bellevue. My areas of
                   interest lie in the intersection of AI and finance, and venture capital is one field that
                   encapsulates it all. I want to learn more about the evolution of AI and how it will break
                   the finance industry, so over the last year I’ve been learning as much as I can and
                   conducting interviews with venture capital professionals to start building my network.
                 </p>
-                <p>
+                <p className="font-serif">
                   Some of my hobbies include golfing, where I’m working towards being a single-digit 
                   handicapper, and pursuing business ideas. I like to think I’m a curious individual, 
                   so I always chase what I want.
                 </p>
-                <p>
+                <p className="font-serif">
                   This blog serves as a medium for documenting my learnings throughout my venture capital
                   journey and also sharing personal insights which I find interesting. Be sure to connect
                   with me on any platform below and feel free to ask for advice or help!
@@ -131,8 +104,6 @@ const About = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default About;
