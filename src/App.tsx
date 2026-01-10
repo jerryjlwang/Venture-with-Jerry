@@ -21,9 +21,11 @@ const queryClient = new QueryClient();
 const AppContent = () => {
   useAnalytics();
   
+  const isPostDetail = location.pathname.startsWith('/posts/') && location.pathname !== '/posts';
+  
   return (
     <div className="min-h-screen flex flex-col bg-slate-900">
-      <Header />
+      {!isPostDetail && <Header />}
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
