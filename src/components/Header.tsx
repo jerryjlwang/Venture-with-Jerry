@@ -23,13 +23,13 @@ const Header = () => {
       <nav className="hidden md:flex space-x-8 mr-10 mt-10">
         <Link 
           to="/posts" 
-          className={`text-white hover:text-blue-300 transition-colors ${isActive('/posts') ? 'text-blue-300' : ''}`}
+          className={`text-white hover:text-blue-300 transition-colors text-lg font-playfair tracking-widest ${isActive('/posts') ? 'text-blue-300' : ''}`}
         >
           Posts
         </Link>
         <Link 
           to="/about" 
-          className={`text-white hover:text-blue-300 transition-colors ${isActive('/about') ? 'text-blue-300' : ''}`}
+          className={`text-white hover:text-blue-300 transition-colors text-lg font-playfair tracking-widest ${isActive('/about') ? 'text-blue-300' : ''}`}
         >
           About
         </Link>
