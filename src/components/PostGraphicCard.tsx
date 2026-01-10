@@ -18,7 +18,7 @@ const PostGraphicCard = ({ id, graphic, title }: PostGraphicCardProps) => {
   
   return (
     <article className="group cursor-pointer overflow-hidden rounded-lg border border-blue-900/30 hover:border-blue-400/60 transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-xl">
-      <Link to={`/posts/${id}`} className="block relative aspect-[4/3]">
+      <Link to={`/posts/${id}`} className="block relative aspect-square">
         {!isLoaded && !hasError && (
           <Skeleton className="absolute inset-0 w-full h-full bg-slate-700/50" />
         )}
