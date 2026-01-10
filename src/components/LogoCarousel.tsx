@@ -12,11 +12,8 @@ interface LogoCarouselProps {
 }
 
 const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const [isUserInteracting, setIsUserInteracting] = useState(false);
   const animationRef = useRef<number>();
-  const lastInteractionTime = useRef<number>(Date.now());
   
   // Company logos with actual image sources
   const logos: Logo[] = [
@@ -87,23 +84,19 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
   const tripleLogos = [...logos, ...logos, ...logos];
 
   useEffect(() => {
-    const logoSize = direction === 'horizontal' ? 180 : 100; // 160px logo + 20px gap for horizontal, 80px + 20px for vertical
+    const logoSize = direction === 'horizontal' ? 180 : 100;
     const singleSetSize = logos.length * logoSize;
     
     const animate = () => {
-      if (!isUserInteracting) {
-        setTranslateValue(prev => {
-          let newValue = prev + 0.8; // Smooth consistent speed
-          
-          // Use modulo for seamless infinite scroll
-          // When we've scrolled through one complete set, seamlessly continue
-          if (newValue >= singleSetSize * 2) {
-            newValue -= singleSetSize;
-          }
-          
-          return newValue;
-        });
-      }
+      setTranslateValue(prev => {
+        let newValue = prev + 0.8;
+        
+        if (newValue >= singleSetSize * 2) {
+          newValue -= singleSetSize;
+        }
+        
+        return newValue;
+      });
       
       animationRef.current = requestAnimationFrame(animate);
     };
@@ -115,62 +108,7 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [isUserInteracting, logos.length, direction]);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    
-    const handleNativeWheel = (e: WheelEvent) => {
-      // Prevent the wheel event from affecting the page, but allow manual scrolling
-      e.stopPropagation();
-      e.preventDefault();
-  
-      setIsUserInteracting(true);
-      lastInteractionTime.current = Date.now();
-      
-      // Manual scroll with wheel
-      setTranslateValue(prev => {
-        const logoSize = direction === 'horizontal' ? 180 : 100;
-        const singleSetSize = logos.length * logoSize;
-        const delta = (direction === 'horizontal' ? e.deltaX : e.deltaY) * 0.5;
-        let newValue = prev + delta;
-        
-        // Keep position within bounds using modulo for seamless wrapping
-        if (newValue < singleSetSize) {
-          newValue += singleSetSize;
-        } else if (newValue >= singleSetSize * 2) {
-          newValue -= singleSetSize;
-        }
-        
-        return newValue;
-      });
-  
-      // Resume auto-scroll after user stops
-      setTimeout(() => {
-        if (Date.now() - lastInteractionTime.current >= 800) {
-          setIsUserInteracting(false);
-        }
-      }, 800);
-    };
-    
-    container.addEventListener('wheel', handleNativeWheel, { passive: false });
-
-    return () => {
-      container.removeEventListener('wheel', handleNativeWheel);
-    };
   }, [logos.length, direction]);
-
-  const handleMouseEnter = () => {
-    setIsUserInteracting(true);
-  };
-
-  const handleMouseLeave = () => {
-    // No need to normalize position anymore since we're using modulo
-    setTimeout(() => {
-      setIsUserInteracting(false);
-    }, 50);
-  };
 
   const LogoItem = ({ logo, index }: { logo: Logo; index: number }) => {
     const [imageLoaded, setImageLoaded] = useState(false);
@@ -216,18 +154,9 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
     <div className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-6 shadow-xl">
       <h2 className="text-xl font-bold text-white mb-4 text-center">Companies Interviewed</h2>
       <div 
-        ref={containerRef}
-        className={`no-scrollbar overflow-hidden cursor-grab active:cursor-grabbing relative select-none ${
+        className={`overflow-hidden ${
           direction === 'horizontal' ? 'w-full h-28' : 'h-96'
         }`}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        style={{ 
-          overflow: 'hidden',
-          scrollbarWidth: 'none', 
-          msOverflowStyle: 'none',
-          touchAction: 'none'
-        }}
       >
         <div 
           ref={contentRef}
