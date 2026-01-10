@@ -30,16 +30,16 @@ const About = () => {
             <div className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-8 shadow-xl">
               <h2 className="text-2xl font-bold text-white mb-4">Let's Connect</h2>
               <div className="flex flex-col gap-4">
-                <a href="mailto:wang.jerryjl@gmail.com" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors text-center">
+                <a href="mailto:wang.jerryjl@gmail.com" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors text-center font-mono">
                   Email Me
                 </a>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/jerry-wang-21a282368/" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center">
+                <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/jerry-wang-21a282368/" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center font-mono">
                   LinkedIn
                 </a>
-                <a target="_blank" rel="noopener noreferrer" href="https://github.com/jerryjlwang" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center">
+                <a target="_blank" rel="noopener noreferrer" href="https://github.com/jerryjlwang" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center font-mono">
                   GitHub
                 </a>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/jerr_yw08/" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center">
+                <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/jerr_yw08/" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center font-mono">
                   Instagram
                 </a>
               </div>
@@ -72,10 +72,10 @@ const About = () => {
             </section>
 
             <section className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-8 shadow-xl">
-              <h2 className="text-2xl font-bold text-white mb-4">Skills & Interests</h2>
+              <h2 className="text-2xl font-bold text-white mb-4 font-serif">Skills & Interests</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h3 className="text-lg font-semibold text-blue-400 mb-3">Technical Skills</h3>
+                  <h3 className="text-lg font-semibold text-blue-400 mb-3 font-serif">Technical Skills</h3>
                   <ul className="text-gray-300 space-y-2">
                     <li>• Math</li>
                     <li>• Python</li>
@@ -85,7 +85,7 @@ const About = () => {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-blue-400 mb-3">Interests</h3>
+                  <h3 className="text-lg font-semibold text-blue-400 mb-3 font-serif">Interests</h3>
                   <ul className="text-gray-300 space-y-2">
                     <li>• Open Source Projects</li>
                     <li>• VC Writing</li>
