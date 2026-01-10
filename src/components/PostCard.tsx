@@ -39,7 +39,7 @@ const PostCard = ({ id, title, excerpt, date, readTime, imageUrl, graphic }: Pos
     >
       <Link to={`/posts/${id}`} className="block h-full">
         {/* Gradient overlay on hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/40 opacity-100 group-hover:opacity-90 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-black/75" />
         
         {/* Background image */}
         <div 
