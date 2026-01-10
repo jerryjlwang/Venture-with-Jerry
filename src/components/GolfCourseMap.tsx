@@ -164,12 +164,6 @@ const GolfCourseMap = () => {
           </div>
         </div>
 
-        {/* Legend - stays fixed, outside zoom */}
-        <div className={`absolute top-4 left-4 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/20 z-40 transition-opacity duration-300 ${
-          selectedHole ? 'opacity-0' : 'opacity-100'
-        }`}>
-          <span className="text-white text-sm font-serif">Click a hole to explore</span>
-        </div>
 
         {/* Expanded card overlay - appears when zoomed */}
         {selectedHole && (
