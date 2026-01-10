@@ -2,7 +2,7 @@ import golfBackground from '@/assets/golf-background.png';
 
 const Golf = () => {
   return (
-    <div className="min-h-screen bg-green-950 relative">
+    <div className="min-h-screen relative" style={{ backgroundColor: '#052e16' }}>
       {/* Background image section */}
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
         backgroundImage: `url(${golfBackground})`
