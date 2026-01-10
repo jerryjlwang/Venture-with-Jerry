@@ -20,9 +20,7 @@ const Home = () => {
         <div className="absolute inset-0 flex items-center justify-center pt-24">
           <div className="max-w-6xl mx-auto text-center px-4 sm:px-6 lg:px-8">
             <h1 className="text-5xl md:text-7xl font-playfair font-medium text-white mb-6 leading-tight tracking-widest">
-              Welcome to My
-              <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"> Personal Page </span>
-            </h1>
+              Welcome to My Personal Page            </h1>
             <p className="text-xl md:text-2xl font-playfair mb-8 max-w-3xl mx-auto leading-relaxed tracking-widest text-primary-foreground">
               A place where you can get to know me and learn about my venture capital conversations.
             </p>
