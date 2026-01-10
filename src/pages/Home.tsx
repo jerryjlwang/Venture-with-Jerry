@@ -1,19 +1,12 @@
-
 import LogoCarousel from '../components/LogoCarousel';
 import NextGuests from '../components/NextGuests';
 import RecentPostsCarousel from '../components/RecentPostsCarousel';
-
 const Home = () => {
-
-  return (
-    <div className="min-h-screen relative">
+  return <div className="min-h-screen relative">
       {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `url('https://te-cdn-marketing-site.storage.googleapis.com/littleamerica/America/parnter/stay/places/usa-washington-state-seattle-skyline.jpg')`
-        }}
-      />
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
+      backgroundImage: `url('https://te-cdn-marketing-site.storage.googleapis.com/littleamerica/America/parnter/stay/places/usa-washington-state-seattle-skyline.jpg')`
+    }} />
       
       {/* Dark overlay for better text readability */}
       <div className="absolute inset-0 bg-black/30" />
@@ -28,21 +21,15 @@ const Home = () => {
   Welcome to My
               <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"> Personal Page </span>
             </h1>
-            <p className="text-xl md:text-2xl font-playfair text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed tracking-widest">
+            <p className="text-xl md:text-2xl font-playfair mb-8 max-w-3xl mx-auto leading-relaxed tracking-widest text-primary-foreground">
               A place where you can get to know me and learn about my venture capital conversations.
             </p>
             <div className="relative flex justify-center w-full">
               <div className="flex flex-col sm:flex-row gap-4">
-                <a 
-                  href="/posts" 
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-playfair font-medium transition-colors shadow-lg hover:shadow-xl tracking-widest"
-                >
+                <a href="/posts" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-playfair font-medium transition-colors shadow-lg hover:shadow-xl tracking-widest">
                   Read My Posts
                 </a>
-                <a 
-                  href="/about" 
-                  className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-playfair font-medium transition-all shadow-lg hover:shadow-xl tracking-widest"
-                >
+                <a href="/about" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-playfair font-medium transition-all shadow-lg hover:shadow-xl tracking-widest">
                   Learn About Me
                 </a>
               </div>
@@ -61,8 +48,6 @@ const Home = () => {
           </div>
         </section>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Home;
