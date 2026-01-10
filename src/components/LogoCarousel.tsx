@@ -87,14 +87,15 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
     const isFoundersCoop = logo.name === "Founders' Co-op";
     const isBlingCapital = logo.name === "Bling Capital";
     const isAscend = logo.name === "Ascend VC";
+    const isOnesixone = logo.name === "Onesixone Ventures";
 
     return (
       <a 
         href={logo.url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${direction === 'horizontal' ? 'w-36 h-16' : 'h-16'} rounded-lg border border-white/30 hover:border-blue-400/50 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 p-3 flex items-center justify-center flex-shrink-0 overflow-hidden ${isAscend ? '' : 'bg-white'}`}
-        style={isAscend ? { backgroundColor: '#00aeef' } : undefined}
+        className={`${direction === 'horizontal' ? 'w-36 h-16' : 'h-16'} rounded-lg border border-white/30 hover:border-blue-400/50 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 p-3 flex items-center justify-center flex-shrink-0 overflow-hidden ${isAscend || isOnesixone ? '' : 'bg-white'}`}
+        style={isAscend ? { backgroundColor: '#00aeef' } : isOnesixone ? { backgroundColor: '#000000' } : undefined}
       >
         {!imageError ? (
           <>
@@ -103,7 +104,7 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
               alt={`${logo.name} logo`}
               className={`object-contain transition-opacity duration-300 ${
                 imageLoaded ? 'opacity-100' : 'opacity-0'
-              } ${isAscend ? 'scale-125' : isFoundersCoop ? 'scale-[1.05]' : isBlingCapital ? 'scale-110' : 'max-w-full max-h-full'}`}
+              } ${isAscend ? 'scale-125' : isOnesixone ? 'scale-[1.15]' : isFoundersCoop ? 'scale-[1.05]' : isBlingCapital ? 'scale-110' : 'max-w-full max-h-full'}`}
               onLoad={() => setImageLoaded(true)}
               onError={() => {
                 setImageError(true);
