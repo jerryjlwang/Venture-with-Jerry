@@ -1,7 +1,9 @@
+import golfBackground from '@/assets/golf-background.png';
+
 const Golf = () => {
   return (
     <div className="min-h-screen bg-cover bg-center bg-no-repeat relative" style={{
-      backgroundImage: `url('https://www.randalljhodges.com/images/xl/U001-Seattle-Skyline-at-Night-Kerry-Park-Seattle-WA.jpg')`
+      backgroundImage: `url(${golfBackground})`
     }}>
       {/* Dark overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black bg-opacity-60"></div>
