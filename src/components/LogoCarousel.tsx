@@ -88,15 +88,15 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
         href={logo.url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${direction === 'horizontal' ? 'w-36 h-16' : 'h-16'} bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 hover:border-blue-400/40 hover:bg-white/15 transition-all duration-300 p-3 flex items-center justify-center flex-shrink-0`}
+        className={`${direction === 'horizontal' ? 'w-36 h-16' : 'h-16'} bg-white rounded-lg border border-white/30 hover:border-blue-400/50 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 p-3 flex items-center justify-center flex-shrink-0`}
       >
         {!imageError ? (
           <>
             <img 
               src={logo.src}
               alt={`${logo.name} logo`}
-              className={`max-w-full max-h-full object-contain transition-opacity duration-300 brightness-0 invert opacity-70 hover:opacity-100 ${
-                imageLoaded ? '' : 'opacity-0'
+              className={`max-w-full max-h-full object-contain transition-opacity duration-300 ${
+                imageLoaded ? 'opacity-100' : 'opacity-0'
               }`}
               onLoad={() => setImageLoaded(true)}
               onError={() => {
@@ -106,11 +106,11 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
               loading="lazy"
             />
             {!imageLoaded && (
-              <div className="w-full h-full bg-white/10 animate-pulse rounded" />
+              <div className="w-full h-full bg-gray-100 animate-pulse rounded" />
             )}
           </>
         ) : (
-          <div className="w-full h-full rounded flex items-center justify-center text-white/70 text-xs font-playfair tracking-wide text-center p-1">
+          <div className="w-full h-full rounded flex items-center justify-center text-gray-700 text-xs font-playfair tracking-wide text-center p-1">
             {logo.name}
           </div>
         )}
