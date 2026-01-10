@@ -1,71 +1,50 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import useEmblaCarousel from 'embla-carousel-react';
 import PostCard from './PostCard';
 import { posts } from '../data/posts';
-import type { Post } from '../data/posts';
 
 const RecentPostsCarousel = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const postsPerSlide = 3;
-  const totalSlides = Math.ceil(posts.length / postsPerSlide);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+    loop: true,
+    align: 'start',
+    slidesToScroll: 1,
+  });
 
-  const getVisiblePosts = useCallback((index: number): Post[] => {
-    const startIndex = (index * postsPerSlide) % posts.length;
-    const visiblePosts: Post[] = [];
-    
-    for (let i = 0; i < postsPerSlide; i++) {
-      const postIndex = (startIndex + i) % posts.length;
-      visiblePosts.push(posts[postIndex]);
-    }
-    
-    return visiblePosts;
-  }, []);
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
 
-  const nextSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % totalSlides);
-  }, [totalSlides]);
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
 
-  const prevSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
-  }, [totalSlides]);
-
-  // Auto-rotation every 3 seconds
+  // Auto-rotation every 5 seconds
   useEffect(() => {
-    if (!isAutoPlaying) return;
+    if (!emblaApi) return;
     
-    const interval = setInterval(nextSlide, 5000);
+    const interval = setInterval(() => {
+      emblaApi.scrollNext();
+    }, 5000);
+    
     return () => clearInterval(interval);
-  }, [nextSlide, isAutoPlaying]);
+  }, [emblaApi]);
 
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'ArrowLeft') {
         event.preventDefault();
-        prevSlide();
-        setIsAutoPlaying(false);
+        scrollPrev();
       } else if (event.key === 'ArrowRight') {
         event.preventDefault();
-        nextSlide();
-        setIsAutoPlaying(false);
+        scrollNext();
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [nextSlide, prevSlide]);
-
-  const visiblePosts = getVisiblePosts(currentIndex);
-
-  const handleManualNavigation = (direction: 'prev' | 'next') => {
-    setIsAutoPlaying(false);
-    if (direction === 'prev') {
-      prevSlide();
-    } else {
-      nextSlide();
-    }
-  };
+  }, [scrollNext, scrollPrev]);
 
   return (
     <section className="pt-32 pb-8 px-4 sm:px-6 lg:px-8">
@@ -76,14 +55,14 @@ const RecentPostsCarousel = () => {
           </h2>
           <div className="flex items-center gap-2">
             <button
-              onClick={() => handleManualNavigation('prev')}
+              onClick={scrollPrev}
               className="p-2 rounded-full bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 hover:text-blue-300 transition-all duration-200"
               aria-label="Previous posts"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
-              onClick={() => handleManualNavigation('next')}
+              onClick={scrollNext}
               className="p-2 rounded-full bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 hover:text-blue-300 transition-all duration-200"
               aria-label="Next posts"
             >
@@ -92,46 +71,17 @@ const RecentPostsCarousel = () => {
           </div>
         </div>
         
-        <div className="relative overflow-hidden">
-          <div 
-            className="flex transition-transform duration-500 ease-in-out"
-            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-          >
-            {Array.from({ length: totalSlides }).map((_, slideIndex) => {
-              const slidePosts = getVisiblePosts(slideIndex);
-              return (
-                <div 
-                  key={slideIndex}
-                  className="w-full flex-shrink-0"
-                >
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {slidePosts.map((post) => (
-                      <PostCard key={`${slideIndex}-${post.id}`} {...post} />
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex gap-8">
+            {posts.map((post) => (
+              <div 
+                key={post.id}
+                className="flex-shrink-0 w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.333rem)]"
+              >
+                <PostCard {...post} />
+              </div>
+            ))}
           </div>
-        </div>
-
-        {/* Slide indicators */}
-        <div className="flex justify-center mt-6 gap-2">
-          {Array.from({ length: totalSlides }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => {
-                setCurrentIndex(index);
-                setIsAutoPlaying(false);
-              }}
-              className={`w-2 h-2 rounded-full transition-all duration-200 ${
-                index === currentIndex 
-                  ? 'bg-blue-400 w-6' 
-                  : 'bg-blue-400/30 hover:bg-blue-400/60'
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
         </div>
 
         <div className="text-center mt-8">
