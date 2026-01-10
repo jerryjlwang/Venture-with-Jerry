@@ -1,7 +1,11 @@
+import { useLocation } from 'react-router-dom';
 
 const Footer = () => {
+  const location = useLocation();
+  const isGolfPage = location.pathname === '/golf';
+  
   return (
-    <footer className="bg-slate-900 text-white py-8 mt-16">
+    <footer className={`text-white py-8 mt-16 ${isGolfPage ? 'bg-green-950' : 'bg-slate-900'}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <p className="text-gray-400">
