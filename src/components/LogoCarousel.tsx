@@ -88,15 +88,15 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
         href={logo.url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${direction === 'horizontal' ? 'w-40 h-20' : 'h-20'} bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-3 flex items-center justify-center flex-shrink-0`}
+        className={`${direction === 'horizontal' ? 'w-36 h-16' : 'h-16'} bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 hover:border-blue-400/40 hover:bg-white/15 transition-all duration-300 p-3 flex items-center justify-center flex-shrink-0`}
       >
         {!imageError ? (
           <>
             <img 
               src={logo.src}
               alt={`${logo.name} logo`}
-              className={`max-w-full max-h-full object-contain transition-opacity duration-300 ${
-                imageLoaded ? 'opacity-100' : 'opacity-0'
+              className={`max-w-full max-h-full object-contain transition-opacity duration-300 brightness-0 invert opacity-70 hover:opacity-100 ${
+                imageLoaded ? '' : 'opacity-0'
               }`}
               onLoad={() => setImageLoaded(true)}
               onError={() => {
@@ -106,11 +106,11 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
               loading="lazy"
             />
             {!imageLoaded && (
-              <div className="w-full h-full bg-gray-200 animate-pulse rounded" />
+              <div className="w-full h-full bg-white/10 animate-pulse rounded" />
             )}
           </>
         ) : (
-          <div className="w-full h-full bg-gray-100 rounded flex items-center justify-center text-gray-600 text-xs font-semibold text-center p-1">
+          <div className="w-full h-full rounded flex items-center justify-center text-white/70 text-xs font-playfair tracking-wide text-center p-1">
             {logo.name}
           </div>
         )}
@@ -119,15 +119,15 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-6 shadow-xl">
-      <h2 className="text-xl font-playfair font-medium text-white mb-4 text-center tracking-widest">Companies Interviewed</h2>
+    <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/20">
+      <h2 className="text-lg font-playfair font-normal text-white/80 mb-4 text-center tracking-widest">Companies Interviewed</h2>
       <div 
         className={`overflow-hidden ${
-          direction === 'horizontal' ? 'w-full h-28' : 'h-96'
+          direction === 'horizontal' ? 'w-full h-24' : 'h-80'
         }`}
       >
         <div 
-          className={`flex gap-5 ${direction === 'horizontal' ? 'flex-row animate-scroll-horizontal' : 'flex-col animate-scroll-vertical'}`}
+          className={`flex gap-4 ${direction === 'horizontal' ? 'flex-row animate-scroll-horizontal' : 'flex-col animate-scroll-vertical'}`}
           style={{ 
             willChange: 'transform',
           }}
