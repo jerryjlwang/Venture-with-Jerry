@@ -86,13 +86,15 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
     // Scale up specific logos that appear too small
     const isFoundersCoop = logo.name === "Founders' Co-op";
     const isBlingCapital = logo.name === "Bling Capital";
+    const isAscend = logo.name === "Ascend VC";
 
     return (
       <a 
         href={logo.url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${direction === 'horizontal' ? 'w-36 h-16' : 'h-16'} bg-white rounded-lg border border-white/30 hover:border-blue-400/50 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 p-3 flex items-center justify-center flex-shrink-0 overflow-hidden`}
+        className={`${direction === 'horizontal' ? 'w-36 h-16' : 'h-16'} rounded-lg border border-white/30 hover:border-blue-400/50 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 p-3 flex items-center justify-center flex-shrink-0 overflow-hidden ${isAscend ? '' : 'bg-white'}`}
+        style={isAscend ? { backgroundColor: '#00aeef' } : undefined}
       >
         {!imageError ? (
           <>
