@@ -3,23 +3,24 @@ import NextGuests from '../components/NextGuests';
 import RecentPostsCarousel from '../components/RecentPostsCarousel';
 import missionTeamImage from '@/assets/mission-team.png';
 const Home = () => {
-  return <div className="min-h-screen relative bg-slate-900">
-      {/* Background Image */}
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-      backgroundImage: `url('https://te-cdn-marketing-site.storage.googleapis.com/littleamerica/America/parnter/stay/places/usa-washington-state-seattle-skyline.jpg')`
-    }} />
-      
-      {/* Dark overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/30 to-slate-900" />
-      
-      
-      {/* Content */}
-      <div className="relative z-10 pt-48">
-        {/* Hero Section */}
-        <section className="py-12 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-6xl mx-auto text-center">
+  return <div className="min-h-screen bg-slate-900">
+      {/* Hero Section with Background Image */}
+      <div className="relative">
+        {/* Background Image - full width, natural height */}
+        <img 
+          src="https://te-cdn-marketing-site.storage.googleapis.com/littleamerica/America/parnter/stay/places/usa-washington-state-seattle-skyline.jpg"
+          alt="Seattle skyline"
+          className="w-full h-auto"
+        />
+        
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/30 to-slate-900" />
+        
+        {/* Hero Content */}
+        <div className="absolute inset-0 flex items-center justify-center pt-24">
+          <div className="max-w-6xl mx-auto text-center px-4 sm:px-6 lg:px-8">
             <h1 className="text-5xl md:text-7xl font-playfair font-medium text-white mb-6 leading-tight tracking-widest">
-  Welcome to My
+              Welcome to My
               <span className="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent"> Personal Page </span>
             </h1>
             <p className="text-xl md:text-2xl font-playfair mb-8 max-w-3xl mx-auto leading-relaxed tracking-widest text-primary-foreground">
@@ -39,8 +40,11 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </div>
 
+      {/* Content on blue slate background */}
+      <div className="bg-slate-900">
         {/* Recent Posts Section */}
         <RecentPostsCarousel />
         <section className="py-8 px-4 sm:px-6 lg:px-8">
