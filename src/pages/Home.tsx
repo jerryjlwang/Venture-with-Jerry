@@ -47,6 +47,20 @@ const Home = () => {
             <LogoCarousel direction="horizontal" />
           </div>
         </section>
+
+        {/* My Mission Section */}
+        <section className="py-12 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white/5 backdrop-blur-md rounded-xl p-8 border border-white/20">
+              <h2 className="text-2xl font-playfair font-medium text-white mb-6 text-center tracking-widest">
+                My Mission
+              </h2>
+              <p className="text-gray-300 font-playfair tracking-wide leading-relaxed text-center text-lg">
+                To demystify the world of venture capital by sharing authentic conversations with the people who shape Seattle's startup ecosystem. Through these interviews, I aim to provide aspiring entrepreneurs and curious minds with real insights into how VCs think, invest, and build lasting relationships with founders.
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
     </div>;
 };
