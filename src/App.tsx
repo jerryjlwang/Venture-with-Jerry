@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -21,11 +21,16 @@ const queryClient = new QueryClient();
 
 const AppContent = () => {
   useAnalytics();
-  
-  const isPostDetail = location.pathname.startsWith('/posts/') && location.pathname !== '/posts';
-  
+
+  const location = useLocation();
+  const isPostDetail =
+    location.pathname.startsWith("/posts/") && location.pathname !== "/posts";
+  const isGolfPage = location.pathname === "/golf";
+
   return (
-    <div className="min-h-screen flex flex-col bg-slate-900">
+    <div
+      className={`min-h-screen flex flex-col ${isGolfPage ? "bg-green-950" : "bg-slate-900"}`}
+    >
       {!isPostDetail && <Header />}
       <main className="flex-grow">
         <Routes>
@@ -34,12 +39,11 @@ const AppContent = () => {
           <Route path="/posts/:id" element={<PostDetail />} />
           <Route path="/golf" element={<Golf />} />
           <Route path="/about" element={<About />} />
-          
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />
-      
     </div>
   );
 };
