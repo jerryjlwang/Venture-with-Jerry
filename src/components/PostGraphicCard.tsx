@@ -17,6 +17,8 @@ const PostGraphicCard = ({ id, graphic, title }: PostGraphicCardProps) => {
         <img 
           src={displayGraphic}
           alt={title}
+          loading="lazy"
+          decoding="async"
           className="w-full h-auto object-cover"
         />
       </Link>
