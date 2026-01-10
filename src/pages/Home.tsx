@@ -2,7 +2,7 @@ import LogoCarousel from '../components/LogoCarousel';
 import NextGuests from '../components/NextGuests';
 import RecentPostsCarousel from '../components/RecentPostsCarousel';
 const Home = () => {
-  return <div className="min-h-screen relative">
+  return <div className="min-h-screen relative bg-slate-900">
       {/* Background Image */}
       <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
       backgroundImage: `url('https://te-cdn-marketing-site.storage.googleapis.com/littleamerica/America/parnter/stay/places/usa-washington-state-seattle-skyline.jpg')`
