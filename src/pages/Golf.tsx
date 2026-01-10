@@ -1,23 +1,31 @@
 import golfBackground from '@/assets/golf-background.png';
+import GolfCourseMap from '@/components/GolfCourseMap';
 
 const Golf = () => {
   return (
     <div className="min-h-screen relative" style={{ backgroundColor: '#052e16' }}>
       {/* Background image section */}
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30" style={{
         backgroundImage: `url(${golfBackground})`
       }}>
-        {/* Dark green overlay on the image */}
-        <div className="absolute inset-0 bg-green-950 bg-opacity-60"></div>
+        <div className="absolute inset-0 bg-green-950 bg-opacity-40"></div>
       </div>
       
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-16 pt-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 font-serif">
-            Golf
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="text-center mb-12 pt-16">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 font-serif tracking-widest">
+            My Golf Journey
           </h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto font-mono">
-            Coming soon...
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto font-mono">
+            From First Tee Greater Seattle to Varsity Golf — 18 holes, 18 milestones
+          </p>
+        </div>
+
+        <GolfCourseMap />
+
+        <div className="mt-16 text-center">
+          <p className="text-white/60 font-mono text-sm">
+            Each hole represents a chapter in my golf journey. Click to explore.
           </p>
         </div>
       </div>
