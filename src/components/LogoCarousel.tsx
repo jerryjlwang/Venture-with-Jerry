@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 interface Logo {
   id: string;
@@ -12,9 +12,6 @@ interface LogoCarouselProps {
 }
 
 const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
-  const contentRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number>();
-  
   // Company logos with actual image sources
   const logos: Logo[] = [
     { 
@@ -78,37 +75,9 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
       url: 'https://www.slipstream.vc/'
     },
   ];
-  const [translateValue, setTranslateValue] = useState(() => direction === 'horizontal' ? logos.length * 180 : logos.length * 100);
 
-  // Triple the logos for smoother infinite scroll
-  const tripleLogos = [...logos, ...logos, ...logos];
-
-  useEffect(() => {
-    const logoSize = direction === 'horizontal' ? 180 : 100;
-    const singleSetSize = logos.length * logoSize;
-    
-    const animate = () => {
-      setTranslateValue(prev => {
-        let newValue = prev + 0.8;
-        
-        if (newValue >= singleSetSize * 2) {
-          newValue -= singleSetSize;
-        }
-        
-        return newValue;
-      });
-      
-      animationRef.current = requestAnimationFrame(animate);
-    };
-
-    animationRef.current = requestAnimationFrame(animate);
-
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, [logos.length, direction]);
+  // Double the logos for seamless infinite scroll
+  const doubleLogos = [...logos, ...logos];
 
   const LogoItem = ({ logo, index }: { logo: Logo; index: number }) => {
     const [imageLoaded, setImageLoaded] = useState(false);
@@ -119,8 +88,7 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
         href={logo.url}
         target="_blank"
         rel="noopener noreferrer"
-        key={`${logo.id}-${Math.floor(index / logos.length)}-${index % logos.length}`}
-        className={`${direction === 'horizontal' ? 'w-40 h-20' : 'h-20'} bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-3 flex items-center justify-center cursor-pointer flex-shrink-0`}
+        className={`${direction === 'horizontal' ? 'w-40 h-20' : 'h-20'} bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-3 flex items-center justify-center flex-shrink-0`}
       >
         {!imageError ? (
           <>
@@ -159,17 +127,13 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
         }`}
       >
         <div 
-          ref={contentRef}
-          className={`flex gap-5 ${direction === 'horizontal' ? 'flex-row' : 'flex-col'}`}
+          className={`flex gap-5 ${direction === 'horizontal' ? 'flex-row animate-scroll-horizontal' : 'flex-col animate-scroll-vertical'}`}
           style={{ 
-            transform: direction === 'horizontal' 
-              ? `translateX(-${translateValue}px)` 
-              : `translateY(-${translateValue}px)`,
-            willChange: 'transform'
+            willChange: 'transform',
           }}
         >
-          {tripleLogos.map((logo, index) => (
-            <LogoItem key={`${logo.id}-${Math.floor(index / logos.length)}-${index % logos.length}`} logo={logo} index={index} />
+          {doubleLogos.map((logo, index) => (
+            <LogoItem key={`${logo.id}-${index}`} logo={logo} index={index} />
           ))}
         </div>
       </div>
