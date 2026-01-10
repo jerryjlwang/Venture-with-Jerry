@@ -54,124 +54,156 @@ const GolfCourseMap = () => {
   const [selectedHole, setSelectedHole] = useState<HoleData | null>(null);
   const [hoveredHole, setHoveredHole] = useState<number | null>(null);
 
+  const selectedIndex = selectedHole ? selectedHole.hole - 1 : null;
+  const selectedPos = selectedIndex !== null ? holePositions[selectedIndex] : null;
+
+  // Calculate transform to zoom into selected hole
+  const getTransformStyle = () => {
+    if (!selectedPos) return {};
+    
+    // Zoom scale
+    const scale = 2.5;
+    
+    // Calculate translation to center the selected hole
+    const translateX = 50 - selectedPos.x;
+    const translateY = 50 - selectedPos.y;
+    
+    return {
+      transform: `scale(${scale}) translate(${translateX}%, ${translateY}%)`,
+      transformOrigin: 'center center',
+    };
+  };
+
   return (
     <div className="w-full">
       {/* Course Map Container */}
       <div className="relative w-full aspect-[16/10] bg-gradient-to-br from-green-800 via-green-700 to-green-900 rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
-        {/* Decorative fairway paths */}
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-          {/* Fairway connections between holes */}
-          <path
-            d="M12,15 Q20,10 28,12 Q36,15 45,18 Q52,12 60,10 Q70,12 78,15 Q84,20 88,28 Q86,35 82,42 Q75,40 68,38 Q60,42 52,45 Q42,48 35,50 Q26,52 18,55 Q12,62 10,68 Q14,74 22,78 Q30,75 38,72 Q48,76 55,80 Q62,78 70,75 Q78,78 85,82 Q82,88 75,92"
-            fill="none"
-            stroke="rgba(134, 239, 172, 0.3)"
-            strokeWidth="8"
-            strokeLinecap="round"
-          />
-        </svg>
+        {/* Zoomable content wrapper */}
+        <div 
+          className="absolute inset-0 transition-transform duration-700 ease-out"
+          style={getTransformStyle()}
+        >
+          {/* Decorative fairway paths */}
+          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+            {/* Fairway connections between holes */}
+            <path
+              d="M12,15 Q20,10 28,12 Q36,15 45,18 Q52,12 60,10 Q70,12 78,15 Q84,20 88,28 Q86,35 82,42 Q75,40 68,38 Q60,42 52,45 Q42,48 35,50 Q26,52 18,55 Q12,62 10,68 Q14,74 22,78 Q30,75 38,72 Q48,76 55,80 Q62,78 70,75 Q78,78 85,82 Q82,88 75,92"
+              fill="none"
+              stroke="rgba(134, 239, 172, 0.3)"
+              strokeWidth="8"
+              strokeLinecap="round"
+            />
+          </svg>
 
-        {/* Water hazards */}
-        <div className="absolute top-[25%] left-[35%] w-16 h-10 bg-blue-400/40 rounded-full blur-sm" />
-        <div className="absolute top-[60%] right-[25%] w-20 h-12 bg-blue-400/40 rounded-full blur-sm" />
+          {/* Water hazards */}
+          <div className="absolute top-[25%] left-[35%] w-16 h-10 bg-blue-400/40 rounded-full blur-sm" />
+          <div className="absolute top-[60%] right-[25%] w-20 h-12 bg-blue-400/40 rounded-full blur-sm" />
 
-        {/* Sand bunkers */}
-        <div className="absolute top-[20%] left-[55%] w-8 h-6 bg-yellow-200/50 rounded-full blur-[2px]" />
-        <div className="absolute top-[70%] left-[15%] w-10 h-7 bg-yellow-200/50 rounded-full blur-[2px]" />
-        <div className="absolute top-[85%] right-[35%] w-8 h-5 bg-yellow-200/50 rounded-full blur-[2px]" />
+          {/* Sand bunkers */}
+          <div className="absolute top-[20%] left-[55%] w-8 h-6 bg-yellow-200/50 rounded-full blur-[2px]" />
+          <div className="absolute top-[70%] left-[15%] w-10 h-7 bg-yellow-200/50 rounded-full blur-[2px]" />
+          <div className="absolute top-[85%] right-[35%] w-8 h-5 bg-yellow-200/50 rounded-full blur-[2px]" />
 
-        {/* Hole markers */}
-        {journeyData.map((hole, index) => {
-          const pos = holePositions[index];
-          const isHovered = hoveredHole === hole.hole;
-          const isSelected = selectedHole?.hole === hole.hole;
-          
-          return (
-            <button
-              key={hole.hole}
-              className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 group ${
-                isSelected ? 'z-20' : 'z-10'
-              }`}
-              style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
-              onClick={() => setSelectedHole(isSelected ? null : hole)}
-              onMouseEnter={() => setHoveredHole(hole.hole)}
-              onMouseLeave={() => setHoveredHole(null)}
-            >
-              {/* Flag pole */}
-              <div className={`absolute left-1/2 bottom-full h-8 w-0.5 bg-white/80 transform -translate-x-1/2 transition-all duration-300 ${
-                isHovered || isSelected ? 'h-10' : 'h-8'
-              }`} />
-              
-              {/* Flag */}
-              <div className={`absolute left-1/2 bottom-full mb-6 transition-all duration-300 ${
-                isHovered || isSelected ? 'mb-8' : 'mb-6'
-              }`}>
-                <div className={`w-6 h-4 bg-red-500 clip-flag transform origin-left transition-transform ${
-                  isHovered || isSelected ? 'scale-110' : ''
-                }`} style={{ clipPath: 'polygon(0 0, 100% 50%, 0 100%)' }} />
-              </div>
-              
-              {/* Hole circle */}
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center font-serif font-bold text-sm transition-all duration-300 ${
-                isSelected 
-                  ? 'bg-white text-green-900 scale-125 shadow-lg shadow-white/30' 
-                  : isHovered 
-                    ? 'bg-white/90 text-green-900 scale-110' 
-                    : 'bg-green-950/80 text-white border-2 border-white/60'
-              }`}>
-                {hole.hole}
-              </div>
-
-              {/* Hover tooltip */}
-              {isHovered && !isSelected && (
-                <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap shadow-xl z-30">
-                  {hole.title}
+          {/* Hole markers */}
+          {journeyData.map((hole, index) => {
+            const pos = holePositions[index];
+            const isHovered = hoveredHole === hole.hole;
+            const isSelected = selectedHole?.hole === hole.hole;
+            
+            return (
+              <button
+                key={hole.hole}
+                className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 group ${
+                  isSelected ? 'z-30' : 'z-10'
+                } ${selectedHole && !isSelected ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
+                style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
+                onClick={() => setSelectedHole(isSelected ? null : hole)}
+                onMouseEnter={() => !selectedHole && setHoveredHole(hole.hole)}
+                onMouseLeave={() => setHoveredHole(null)}
+              >
+                {/* Flag pole */}
+                <div className={`absolute left-1/2 bottom-full h-8 w-0.5 bg-white/80 transform -translate-x-1/2 transition-all duration-300 ${
+                  isHovered || isSelected ? 'h-10' : 'h-8'
+                }`} />
+                
+                {/* Flag */}
+                <div className={`absolute left-1/2 bottom-full mb-6 transition-all duration-300 ${
+                  isHovered || isSelected ? 'mb-8' : 'mb-6'
+                }`}>
+                  <div className={`w-6 h-4 bg-red-500 clip-flag transform origin-left transition-transform ${
+                    isHovered || isSelected ? 'scale-110' : ''
+                  }`} style={{ clipPath: 'polygon(0 0, 100% 50%, 0 100%)' }} />
                 </div>
-              )}
-            </button>
-          );
-        })}
+                
+                {/* Hole circle */}
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center font-serif font-bold text-sm transition-all duration-300 ${
+                  isSelected 
+                    ? 'bg-white text-green-900 scale-125 shadow-lg shadow-white/30' 
+                    : isHovered 
+                      ? 'bg-white/90 text-green-900 scale-110' 
+                      : 'bg-green-950/80 text-white border-2 border-white/60'
+                }`}>
+                  {hole.hole}
+                </div>
 
-        {/* Clubhouse */}
-        <div className="absolute bottom-4 right-4 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/20">
-          <span className="text-white/80 text-xs font-mono">Clubhouse</span>
-        </div>
-
-        {/* Legend */}
-        <div className="absolute top-4 left-4 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/20">
-          <span className="text-white text-sm font-serif">Click a hole to explore</span>
-        </div>
-      </div>
-
-      {/* Selected Hole Detail Card */}
-      {selectedHole && (
-        <div className="mt-8 bg-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-8 animate-fade-in">
-          <div className="flex items-start gap-6">
-            <div className="w-20 h-20 rounded-full bg-green-800 border-4 border-white/40 flex items-center justify-center flex-shrink-0">
-              <span className="text-3xl font-serif font-bold text-white">{selectedHole.hole}</span>
-            </div>
-            <div className="flex-grow">
-              <div className="flex items-center gap-3 mb-2">
-                <h3 className="text-2xl font-serif text-white">{selectedHole.title}</h3>
-                {selectedHole.year && (
-                  <span className="px-2 py-0.5 bg-white/10 rounded text-sm font-mono text-white/70">
-                    {selectedHole.year}
-                  </span>
+                {/* Hover tooltip - only show when not zoomed */}
+                {isHovered && !selectedHole && (
+                  <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap shadow-xl z-30">
+                    {hole.title}
+                  </div>
                 )}
-              </div>
-              <p className="text-gray-300 font-mono leading-relaxed">{selectedHole.description}</p>
-            </div>
-            <button
-              onClick={() => setSelectedHole(null)}
-              className="text-white/60 hover:text-white transition-colors p-2"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            </button>
+              </button>
+            );
+          })}
+
+          {/* Clubhouse - hide when zoomed */}
+          <div className={`absolute bottom-4 right-4 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/20 transition-opacity duration-500 ${
+            selectedHole ? 'opacity-0' : 'opacity-100'
+          }`}>
+            <span className="text-white/80 text-xs font-mono">Clubhouse</span>
           </div>
         </div>
-      )}
+
+        {/* Legend - stays fixed, outside zoom */}
+        <div className={`absolute top-4 left-4 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/20 z-40 transition-opacity duration-300 ${
+          selectedHole ? 'opacity-0' : 'opacity-100'
+        }`}>
+          <span className="text-white text-sm font-serif">Click a hole to explore</span>
+        </div>
+
+        {/* Expanded card overlay - appears when zoomed */}
+        {selectedHole && (
+          <div className="absolute inset-0 flex items-end justify-center p-6 z-40">
+            <div className="w-full max-w-lg bg-green-950/95 backdrop-blur-xl border border-white/30 rounded-2xl p-6 animate-fade-in shadow-2xl">
+              <div className="flex items-start gap-5">
+                <div className="w-16 h-16 rounded-full bg-green-800 border-4 border-white/40 flex items-center justify-center flex-shrink-0">
+                  <span className="text-2xl font-serif font-bold text-white">{selectedHole.hole}</span>
+                </div>
+                <div className="flex-grow min-w-0">
+                  <div className="flex items-center gap-3 mb-2">
+                    <h3 className="text-xl font-serif text-white truncate">{selectedHole.title}</h3>
+                    {selectedHole.year && (
+                      <span className="px-2 py-0.5 bg-white/10 rounded text-sm font-mono text-white/70 flex-shrink-0">
+                        {selectedHole.year}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-gray-300 font-mono text-sm leading-relaxed">{selectedHole.description}</p>
+                </div>
+                <button
+                  onClick={() => setSelectedHole(null)}
+                  className="text-white/60 hover:text-white transition-colors p-1 flex-shrink-0 hover:bg-white/10 rounded-full"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
