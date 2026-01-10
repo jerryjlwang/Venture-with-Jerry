@@ -35,7 +35,7 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
     { 
       id: '4', 
       name: 'Ascend VC', 
-      src: 'https://images.squarespace-cdn.com/content/v1/5d6ed158d1024700012397dc/1574804203738-JYY4WYCNRJVQM2YK8SLO/ascend_logo_color_novc.png?format=1000w',
+      src: '/lovable-uploads/ascend-logo.png',
       url: 'https://www.ascend.vc'
     },
     { 
