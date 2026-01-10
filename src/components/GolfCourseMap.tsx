@@ -1,0 +1,179 @@
+import { useState } from 'react';
+
+interface HoleData {
+  hole: number;
+  title: string;
+  description: string;
+  year?: string;
+}
+
+const journeyData: HoleData[] = [
+  { hole: 1, title: "First Swing", description: "Discovered golf through First Tee Greater Seattle", year: "2018" },
+  { hole: 2, title: "Learning the Basics", description: "Grip, stance, and the fundamentals of the game", year: "2018" },
+  { hole: 3, title: "First Tee Values", description: "Learning honesty, integrity, and sportsmanship", year: "2018" },
+  { hole: 4, title: "First Par", description: "The thrill of my first par on a real course", year: "2019" },
+  { hole: 5, title: "Junior Tournaments", description: "Competing in my first junior golf events", year: "2019" },
+  { hole: 6, title: "The Mental Game", description: "Learning patience and focus on the course", year: "2019" },
+  { hole: 7, title: "Course Management", description: "Strategy over power - playing smart", year: "2020" },
+  { hole: 8, title: "Practice Routine", description: "Building discipline through daily practice", year: "2020" },
+  { hole: 9, title: "The Turn", description: "Halfway through - reflecting on growth", year: "2020" },
+  { hole: 10, title: "High School Golf", description: "Trying out for the varsity team", year: "2021" },
+  { hole: 11, title: "Making Varsity", description: "Earning a spot on the varsity golf team", year: "2021" },
+  { hole: 12, title: "Team Competition", description: "Learning to compete as part of a team", year: "2021" },
+  { hole: 13, title: "Breaking 80", description: "A milestone round in my golf journey", year: "2022" },
+  { hole: 14, title: "Leadership", description: "Mentoring younger players on the team", year: "2022" },
+  { hole: 15, title: "Overcoming Slumps", description: "Pushing through the challenging times", year: "2022" },
+  { hole: 16, title: "State Qualifiers", description: "Competing at the highest level", year: "2023" },
+  { hole: 17, title: "Senior Season", description: "Leading the team in my final year", year: "2023" },
+  { hole: 18, title: "The Journey Continues", description: "Golf for life - what's next", year: "2024" },
+];
+
+// Course layout positions for an 18-hole course (percentage-based)
+const holePositions = [
+  { x: 12, y: 15 },  // Hole 1
+  { x: 28, y: 12 },  // Hole 2
+  { x: 45, y: 18 },  // Hole 3
+  { x: 60, y: 10 },  // Hole 4
+  { x: 78, y: 15 },  // Hole 5
+  { x: 88, y: 28 },  // Hole 6
+  { x: 82, y: 42 },  // Hole 7
+  { x: 68, y: 38 },  // Hole 8
+  { x: 52, y: 45 },  // Hole 9 - The Turn
+  { x: 35, y: 50 },  // Hole 10
+  { x: 18, y: 55 },  // Hole 11
+  { x: 10, y: 68 },  // Hole 12
+  { x: 22, y: 78 },  // Hole 13
+  { x: 38, y: 72 },  // Hole 14
+  { x: 55, y: 80 },  // Hole 15
+  { x: 70, y: 75 },  // Hole 16
+  { x: 85, y: 82 },  // Hole 17
+  { x: 75, y: 92 },  // Hole 18 - Clubhouse
+];
+
+const GolfCourseMap = () => {
+  const [selectedHole, setSelectedHole] = useState<HoleData | null>(null);
+  const [hoveredHole, setHoveredHole] = useState<number | null>(null);
+
+  return (
+    <div className="w-full">
+      {/* Course Map Container */}
+      <div className="relative w-full aspect-[16/10] bg-gradient-to-br from-green-800 via-green-700 to-green-900 rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
+        {/* Decorative fairway paths */}
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+          {/* Fairway connections between holes */}
+          <path
+            d="M12,15 Q20,10 28,12 Q36,15 45,18 Q52,12 60,10 Q70,12 78,15 Q84,20 88,28 Q86,35 82,42 Q75,40 68,38 Q60,42 52,45 Q42,48 35,50 Q26,52 18,55 Q12,62 10,68 Q14,74 22,78 Q30,75 38,72 Q48,76 55,80 Q62,78 70,75 Q78,78 85,82 Q82,88 75,92"
+            fill="none"
+            stroke="rgba(134, 239, 172, 0.3)"
+            strokeWidth="8"
+            strokeLinecap="round"
+          />
+        </svg>
+
+        {/* Water hazards */}
+        <div className="absolute top-[25%] left-[35%] w-16 h-10 bg-blue-400/40 rounded-full blur-sm" />
+        <div className="absolute top-[60%] right-[25%] w-20 h-12 bg-blue-400/40 rounded-full blur-sm" />
+
+        {/* Sand bunkers */}
+        <div className="absolute top-[20%] left-[55%] w-8 h-6 bg-yellow-200/50 rounded-full blur-[2px]" />
+        <div className="absolute top-[70%] left-[15%] w-10 h-7 bg-yellow-200/50 rounded-full blur-[2px]" />
+        <div className="absolute top-[85%] right-[35%] w-8 h-5 bg-yellow-200/50 rounded-full blur-[2px]" />
+
+        {/* Hole markers */}
+        {journeyData.map((hole, index) => {
+          const pos = holePositions[index];
+          const isHovered = hoveredHole === hole.hole;
+          const isSelected = selectedHole?.hole === hole.hole;
+          
+          return (
+            <button
+              key={hole.hole}
+              className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 group ${
+                isSelected ? 'z-20' : 'z-10'
+              }`}
+              style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
+              onClick={() => setSelectedHole(isSelected ? null : hole)}
+              onMouseEnter={() => setHoveredHole(hole.hole)}
+              onMouseLeave={() => setHoveredHole(null)}
+            >
+              {/* Flag pole */}
+              <div className={`absolute left-1/2 bottom-full h-8 w-0.5 bg-white/80 transform -translate-x-1/2 transition-all duration-300 ${
+                isHovered || isSelected ? 'h-10' : 'h-8'
+              }`} />
+              
+              {/* Flag */}
+              <div className={`absolute left-1/2 bottom-full mb-6 transition-all duration-300 ${
+                isHovered || isSelected ? 'mb-8' : 'mb-6'
+              }`}>
+                <div className={`w-6 h-4 bg-red-500 clip-flag transform origin-left transition-transform ${
+                  isHovered || isSelected ? 'scale-110' : ''
+                }`} style={{ clipPath: 'polygon(0 0, 100% 50%, 0 100%)' }} />
+              </div>
+              
+              {/* Hole circle */}
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center font-serif font-bold text-sm transition-all duration-300 ${
+                isSelected 
+                  ? 'bg-white text-green-900 scale-125 shadow-lg shadow-white/30' 
+                  : isHovered 
+                    ? 'bg-white/90 text-green-900 scale-110' 
+                    : 'bg-green-950/80 text-white border-2 border-white/60'
+              }`}>
+                {hole.hole}
+              </div>
+
+              {/* Hover tooltip */}
+              {isHovered && !isSelected && (
+                <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap shadow-xl z-30">
+                  {hole.title}
+                </div>
+              )}
+            </button>
+          );
+        })}
+
+        {/* Clubhouse */}
+        <div className="absolute bottom-4 right-4 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/20">
+          <span className="text-white/80 text-xs font-mono">Clubhouse</span>
+        </div>
+
+        {/* Legend */}
+        <div className="absolute top-4 left-4 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/20">
+          <span className="text-white text-sm font-serif">Click a hole to explore</span>
+        </div>
+      </div>
+
+      {/* Selected Hole Detail Card */}
+      {selectedHole && (
+        <div className="mt-8 bg-white/5 backdrop-blur-md border border-white/20 rounded-2xl p-8 animate-fade-in">
+          <div className="flex items-start gap-6">
+            <div className="w-20 h-20 rounded-full bg-green-800 border-4 border-white/40 flex items-center justify-center flex-shrink-0">
+              <span className="text-3xl font-serif font-bold text-white">{selectedHole.hole}</span>
+            </div>
+            <div className="flex-grow">
+              <div className="flex items-center gap-3 mb-2">
+                <h3 className="text-2xl font-serif text-white">{selectedHole.title}</h3>
+                {selectedHole.year && (
+                  <span className="px-2 py-0.5 bg-white/10 rounded text-sm font-mono text-white/70">
+                    {selectedHole.year}
+                  </span>
+                )}
+              </div>
+              <p className="text-gray-300 font-mono leading-relaxed">{selectedHole.description}</p>
+            </div>
+            <button
+              onClick={() => setSelectedHole(null)}
+              className="text-white/60 hover:text-white transition-colors p-2"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default GolfCourseMap;
