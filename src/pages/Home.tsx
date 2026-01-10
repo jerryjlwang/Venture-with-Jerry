@@ -56,15 +56,15 @@ const Home = () => {
               <h2 className="text-2xl font-playfair font-medium text-white mb-6 text-center tracking-widest">
                 My Mission
               </h2>
-              <div className="flex flex-col md:flex-row items-center gap-8">
-                <div className="w-full md:w-2/5 flex-shrink-0">
+              <div className="flex flex-col items-center gap-8">
+                <div className="w-full max-w-2xl">
                   <img 
                     src={missionTeamImage} 
                     alt="Team collaboration" 
                     className="w-full h-auto rounded-lg shadow-lg border border-white/10"
                   />
                 </div>
-                <p className="text-gray-300 font-playfair tracking-wide leading-relaxed text-center md:text-left text-lg">
+                <p className="text-gray-300 font-playfair tracking-wide leading-relaxed text-center text-lg">
                   To demystify the world of venture capital by sharing authentic conversations with the people who shape Seattle's startup ecosystem. Through these interviews, I aim to provide aspiring entrepreneurs and curious minds with real insights into how VCs think, invest, and build lasting relationships with founders.
                 </p>
               </div>
