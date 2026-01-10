@@ -10,7 +10,7 @@ const Header = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 p-4 flex justify-between items-center">
+    <header className="absolute top-0 left-0 right-0 z-50 p-4 flex justify-between items-center">
       {/* Logo/Home Link - Left Side */}
       <Link 
         to="/" 
