@@ -39,7 +39,7 @@ const holePositions = [
   { x: 67.5, y: 59 },    // Hole 5
   { x: 55.5, y: 52 },    // Hole 6
   { x: 54.25, y: 73.5 },    // Hole 7
-  { x: 31, y: 90.5 },    // Hole 8
+  { x: 31, y: 91 },    // Hole 8
   { x: 9, y: 64 },     // Hole 9
   { x: 38, y: 43 },    // Hole 10
   { x: 52, y: 35 },    // Hole 11
