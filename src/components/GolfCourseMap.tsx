@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import golfScorecard from '@/assets/golf-scorecard.png';
+import clubhousePhoto from '@/assets/clubhouse-photo.jpeg';
 
 interface HoleData {
   hole: number | 'clubhouse' | 'halfway';
@@ -326,47 +327,61 @@ const GolfCourseMap = () => {
             >
               {/* Content fades in after expansion */}
               <div 
-                className="flex items-start gap-6 transition-opacity duration-300"
+                className="flex flex-col gap-6 transition-opacity duration-300 h-full"
                 style={{ opacity: animationPhase === 'expanded' ? 1 : 0 }}
               >
-                <div className={`w-20 h-20 ${zoomTarget.hole === 'clubhouse' || zoomTarget.hole === 'halfway' ? 'rounded-xl' : 'rounded-full'} ${zoomTarget.hole === 'clubhouse' ? 'bg-amber-700' : zoomTarget.hole === 'halfway' ? 'bg-orange-700' : 'bg-sky-500'} border-4 border-white/40 flex items-center justify-center flex-shrink-0`}>
-                  {zoomTarget.hole === 'clubhouse' ? (
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                      <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                    </svg>
-                  ) : zoomTarget.hole === 'halfway' ? (
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
-                      <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
-                      <line x1="6" x2="6" y1="2" y2="4"></line>
-                      <line x1="10" x2="10" y1="2" y2="4"></line>
-                      <line x1="14" x2="14" y1="2" y2="4"></line>
-                    </svg>
-                  ) : (
-                    <span className="text-3xl font-sans font-bold text-white">{zoomTarget.hole}</span>
-                  )}
-                </div>
-                <div className="flex-grow min-w-0">
-                  <div className="flex items-center gap-4 mb-3">
-                    <h3 className="text-3xl font-serif text-white">{zoomTarget.title}</h3>
-                    {zoomTarget.year && (
-                      <span className="px-3 py-1 bg-white/10 rounded-lg text-lg font-mono text-white/70">
-                        {zoomTarget.year}
-                      </span>
+                {/* Header row */}
+                <div className="flex items-start gap-6">
+                  <div className={`w-20 h-20 ${zoomTarget.hole === 'clubhouse' || zoomTarget.hole === 'halfway' ? 'rounded-xl' : 'rounded-full'} ${zoomTarget.hole === 'clubhouse' ? 'bg-amber-700' : zoomTarget.hole === 'halfway' ? 'bg-orange-700' : 'bg-sky-500'} border-4 border-white/40 flex items-center justify-center flex-shrink-0`}>
+                    {zoomTarget.hole === 'clubhouse' ? (
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                      </svg>
+                    ) : zoomTarget.hole === 'halfway' ? (
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
+                        <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
+                        <line x1="6" x2="6" y1="2" y2="4"></line>
+                        <line x1="10" x2="10" y1="2" y2="4"></line>
+                        <line x1="14" x2="14" y1="2" y2="4"></line>
+                      </svg>
+                    ) : (
+                      <span className="text-3xl font-sans font-bold text-white">{zoomTarget.hole}</span>
                     )}
                   </div>
-                  <p className="text-gray-300 font-mono text-xl leading-relaxed">{zoomTarget.description}</p>
+                  <div className="flex-grow min-w-0">
+                    <div className="flex items-center gap-4 mb-3">
+                      <h3 className="text-3xl font-serif text-white">{zoomTarget.title}</h3>
+                      {zoomTarget.year && (
+                        <span className="px-3 py-1 bg-white/10 rounded-lg text-lg font-mono text-white/70">
+                          {zoomTarget.year}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-gray-300 font-mono text-xl leading-relaxed">{zoomTarget.description}</p>
+                  </div>
+                  <button
+                    onClick={handleClose}
+                    className="text-white/60 hover:text-white transition-colors p-2 flex-shrink-0 hover:bg-white/10 rounded-full"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                  </button>
                 </div>
-                <button
-                  onClick={handleClose}
-                  className="text-white/60 hover:text-white transition-colors p-2 flex-shrink-0 hover:bg-white/10 rounded-full"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                  </svg>
-                </button>
+                
+                {/* Photo section - only for clubhouse */}
+                {zoomTarget.hole === 'clubhouse' && (
+                  <div className="flex-grow overflow-hidden rounded-xl">
+                    <img 
+                      src={clubhousePhoto} 
+                      alt="Clubhouse" 
+                      className="w-full h-full object-cover rounded-xl"
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </div>
