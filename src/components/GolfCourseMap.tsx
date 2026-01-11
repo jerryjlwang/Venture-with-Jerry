@@ -29,26 +29,27 @@ const journeyData: HoleData[] = [
   { hole: 18, title: "The Journey Continues", description: "Golf for life - what's next", year: "2024" },
 ];
 
-// Course layout positions aligned precisely to the scorecard image hole numbers
+// Course layout positions - precise coordinates as % of image grid
+// Measured from the scorecard image where each small blue circle appears
 const holePositions = [
-  { x: 29, y: 40 },  // Hole 1
-  { x: 48, y: 25 },  // Hole 2
-  { x: 60, y: 30 },  // Hole 3
-  { x: 72, y: 68 },  // Hole 4
-  { x: 68, y: 55 },  // Hole 5
-  { x: 57, y: 50 },  // Hole 6
-  { x: 48, y: 68 },  // Hole 7
-  { x: 36, y: 85 },  // Hole 8
-  { x: 10, y: 68 },  // Hole 9
-  { x: 40, y: 45 },  // Hole 10
-  { x: 53, y: 38 },  // Hole 11
-  { x: 89, y: 35 },  // Hole 12
-  { x: 94, y: 73 },  // Hole 13
-  { x: 88, y: 57 },  // Hole 14
-  { x: 79, y: 35 },  // Hole 15
-  { x: 52, y: 17 },  // Hole 16
-  { x: 33, y: 13 },  // Hole 17
-  { x: 25, y: 35 },  // Hole 18
+  { x: 26, y: 39 },    // Hole 1
+  { x: 49, y: 21 },    // Hole 2
+  { x: 59, y: 28 },    // Hole 3
+  { x: 68, y: 61 },    // Hole 4
+  { x: 64, y: 52 },    // Hole 5
+  { x: 55, y: 48 },    // Hole 6
+  { x: 44, y: 63 },    // Hole 7
+  { x: 33, y: 81 },    // Hole 8
+  { x: 9, y: 64 },     // Hole 9
+  { x: 38, y: 43 },    // Hole 10
+  { x: 52, y: 35 },    // Hole 11
+  { x: 91, y: 30 },    // Hole 12
+  { x: 94, y: 73 },    // Hole 13
+  { x: 89, y: 56 },    // Hole 14
+  { x: 79, y: 32 },    // Hole 15
+  { x: 52, y: 14 },    // Hole 16
+  { x: 31, y: 11 },    // Hole 17
+  { x: 21, y: 34 },    // Hole 18
 ];
 
 const GolfCourseMap = () => {
@@ -77,18 +78,18 @@ const GolfCourseMap = () => {
 
   return (
     <div className="w-full">
-      {/* Course Map Container */}
-      <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
+      {/* Course Map Container - aspect ratio matches the scorecard image */}
+      <div className="relative w-full aspect-[1140/760] rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
         {/* Zoomable content wrapper */}
         <div 
           className="absolute inset-0 transition-transform duration-700 ease-out"
           style={getTransformStyle()}
         >
-          {/* Scorecard background image */}
+          {/* Scorecard background image - object-contain ensures no cropping */}
           <img 
             src={golfScorecard} 
             alt="Golf course scorecard map" 
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-fill"
           />
 
           {/* Hole markers */}
