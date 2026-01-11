@@ -14,7 +14,7 @@ const clubhouseData: HoleData = {
   description: "A quick stop to refuel and reset before tackling the back nine",
 };
 
-const clubhousePosition = { x: 16, y: 65 };
+const clubhousePosition = { x: 14, y: 73 };
 
 const journeyData: HoleData[] = [
   { hole: 1, title: "First Swing", description: "Discovered golf through First Tee Greater Seattle", year: "2018" },
