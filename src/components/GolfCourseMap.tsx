@@ -55,36 +55,30 @@ const holePositions = [
 const GolfCourseMap = () => {
   const [selectedHole, setSelectedHole] = useState<HoleData | null>(null);
   const [hoveredHole, setHoveredHole] = useState<number | null>(null);
+  const [expandingHole, setExpandingHole] = useState<number | null>(null);
 
-  const selectedIndex = selectedHole ? selectedHole.hole - 1 : null;
-  const selectedPos = selectedIndex !== null ? holePositions[selectedIndex] : null;
+  const handleHoleClick = (hole: HoleData, isSelected: boolean) => {
+    if (isSelected) {
+      setSelectedHole(null);
+      setExpandingHole(null);
+    } else {
+      setExpandingHole(hole.hole);
+      // Small delay to allow the expansion animation to start
+      setTimeout(() => setSelectedHole(hole), 50);
+    }
+  };
 
-  // Calculate transform to zoom into selected hole
-  const getTransformStyle = () => {
-    if (!selectedPos) return {};
-    
-    // Zoom scale
-    const scale = 2.5;
-    
-    // Calculate translation to center the selected hole
-    const translateX = 50 - selectedPos.x;
-    const translateY = 50 - selectedPos.y;
-    
-    return {
-      transform: `scale(${scale}) translate(${translateX}%, ${translateY}%)`,
-      transformOrigin: 'center center',
-    };
+  const handleClose = () => {
+    setSelectedHole(null);
+    setExpandingHole(null);
   };
 
   return (
     <div className="w-full">
       {/* Course Map Container - aspect ratio matches the scorecard image */}
       <div className="relative w-full aspect-[1140/760] rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
-        {/* Zoomable content wrapper */}
-        <div 
-          className="absolute inset-0 transition-transform duration-700 ease-out"
-          style={getTransformStyle()}
-        >
+        {/* Static content wrapper - no zoom */}
+        <div className="absolute inset-0">
           {/* Scorecard background image - object-contain ensures no cropping */}
           <img 
             src={golfScorecard} 
@@ -97,30 +91,69 @@ const GolfCourseMap = () => {
             const pos = holePositions[index];
             const isHovered = hoveredHole === hole.hole;
             const isSelected = selectedHole?.hole === hole.hole;
+            const isExpanding = expandingHole === hole.hole;
             
             return (
               <button
                 key={hole.hole}
-                className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 group ${
-                  isSelected ? 'z-30' : 'z-10'
+                className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 group ${
+                  isExpanding ? 'z-50' : isSelected ? 'z-30' : 'z-10'
                 } ${selectedHole && !isSelected ? 'opacity-30 pointer-events-none' : 'opacity-100'}`}
                 style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
-                onClick={() => setSelectedHole(isSelected ? null : hole)}
+                onClick={() => handleHoleClick(hole, isSelected)}
                 onMouseEnter={() => !selectedHole && setHoveredHole(hole.hole)}
                 onMouseLeave={() => setHoveredHole(null)}
               >
-                {/* Simple blue circle marker */}
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center font-sans font-semibold text-sm transition-all duration-300 shadow-lg ${
-                  isSelected 
-                    ? 'bg-sky-400 text-white scale-125 ring-2 ring-white/50' 
-                    : isHovered 
-                      ? 'bg-sky-400 text-white scale-110' 
-                      : 'bg-sky-500 text-white'
-                }`}>
-                  {hole.hole}
+                {/* Marker that expands into popup */}
+                <div 
+                  className={`rounded-full flex items-center justify-center font-sans font-semibold transition-all shadow-lg origin-center ${
+                    isExpanding || isSelected
+                      ? 'w-64 h-auto min-h-[80px] rounded-2xl bg-amber-950/95 backdrop-blur-xl border border-white/30 p-4'
+                      : isHovered 
+                        ? 'w-10 h-10 bg-sky-400 text-white scale-110' 
+                        : 'w-8 h-8 bg-sky-500 text-white'
+                  }`}
+                  style={{
+                    transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  }}
+                >
+                  {isExpanding || isSelected ? (
+                    // Expanded content
+                    <div className="flex items-start gap-3 w-full animate-fade-in">
+                      <div className="w-10 h-10 rounded-full bg-sky-500 border-2 border-white/40 flex items-center justify-center flex-shrink-0">
+                        <span className="text-base font-sans font-bold text-white">{hole.hole}</span>
+                      </div>
+                      <div className="flex-grow min-w-0 text-left">
+                        <div className="flex items-center gap-2 mb-1">
+                          <h3 className="text-sm font-serif text-white truncate">{hole.title}</h3>
+                          {hole.year && (
+                            <span className="px-1.5 py-0.5 bg-white/10 rounded text-xs font-mono text-white/70 flex-shrink-0">
+                              {hole.year}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-gray-300 font-mono text-xs leading-relaxed">{hole.description}</p>
+                      </div>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleClose();
+                        }}
+                        className="text-white/60 hover:text-white transition-colors p-0.5 flex-shrink-0 hover:bg-white/10 rounded-full"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="18" y1="6" x2="6" y2="18"></line>
+                          <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                      </button>
+                    </div>
+                  ) : (
+                    // Collapsed number
+                    <span className="text-sm text-white">{hole.hole}</span>
+                  )}
                 </div>
 
-                {/* Hover tooltip - only show when not zoomed */}
+                {/* Hover tooltip - only show when not selected */}
                 {isHovered && !selectedHole && (
                   <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap shadow-xl z-30">
                     {hole.title}
@@ -129,42 +162,7 @@ const GolfCourseMap = () => {
               </button>
             );
           })}
-
         </div>
-
-
-        {/* Expanded card overlay - appears when zoomed */}
-        {selectedHole && (
-          <div className="absolute inset-0 flex items-end justify-center p-6 z-40">
-            <div className="w-full max-w-lg bg-amber-950/95 backdrop-blur-xl border border-white/30 rounded-2xl p-6 animate-fade-in shadow-2xl">
-              <div className="flex items-start gap-5">
-                <div className="w-16 h-16 rounded-full bg-sky-500 border-4 border-white/40 flex items-center justify-center flex-shrink-0">
-                  <span className="text-2xl font-sans font-bold text-white">{selectedHole.hole}</span>
-                </div>
-                <div className="flex-grow min-w-0">
-                  <div className="flex items-center gap-3 mb-2">
-                    <h3 className="text-xl font-serif text-white truncate">{selectedHole.title}</h3>
-                    {selectedHole.year && (
-                      <span className="px-2 py-0.5 bg-white/10 rounded text-sm font-mono text-white/70 flex-shrink-0">
-                        {selectedHole.year}
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-gray-300 font-mono text-sm leading-relaxed">{selectedHole.description}</p>
-                </div>
-                <button
-                  onClick={() => setSelectedHole(null)}
-                  className="text-white/60 hover:text-white transition-colors p-1 flex-shrink-0 hover:bg-white/10 rounded-full"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
