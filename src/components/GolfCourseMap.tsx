@@ -49,7 +49,7 @@ const holePositions = [
   { x: 78, y: 32 },    // Hole 15
   { x: 54, y: 19 },    // Hole 16
   { x: 30.75, y: 12 },    // Hole 17
-  { x: 21, y: 34 },    // Hole 18
+  { x: 20, y: 34.25 },    // Hole 18
 ];
 
 const GolfCourseMap = () => {
