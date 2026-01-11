@@ -55,19 +55,50 @@ const holePositions = [
 // Animation phases: idle -> zooming -> expanded
 type AnimationPhase = 'idle' | 'zooming' | 'expanded';
 
+// Calculate clamped translation to avoid empty space at edges
+const getClampedTranslation = (x: number, y: number, scale: number) => {
+  // At scale 1.3, we can translate up to 15% in each direction without showing empty space
+  // Formula: maxTranslate = (scale - 1) / scale * 50 = 0.3/1.3 * 50 ≈ 11.5%
+  const maxTranslate = ((scale - 1) / scale) * 50;
+  
+  // Calculate desired translation (move marker toward center, but not fully)
+  const targetX = (50 - x) * 0.5; // Only move 50% toward center
+  const targetY = (50 - y) * 0.5;
+  
+  // Clamp to avoid empty space
+  const clampedX = Math.max(-maxTranslate, Math.min(maxTranslate, targetX));
+  const clampedY = Math.max(-maxTranslate, Math.min(maxTranslate, targetY));
+  
+  return { x: clampedX, y: clampedY };
+};
+
 const GolfCourseMap = () => {
   const [selectedHole, setSelectedHole] = useState<HoleData | null>(null);
   const [hoveredHole, setHoveredHole] = useState<number | null>(null);
   const [animationPhase, setAnimationPhase] = useState<AnimationPhase>('idle');
   const [zoomTarget, setZoomTarget] = useState<HoleData | null>(null);
+  const [markerRect, setMarkerRect] = useState<{ x: number; y: number } | null>(null);
 
-  const handleHoleClick = (hole: HoleData, isSelected: boolean) => {
+  const handleHoleClick = (hole: HoleData, isSelected: boolean, event: React.MouseEvent) => {
     if (isSelected || animationPhase !== 'idle') {
       // Close
       setAnimationPhase('idle');
       setSelectedHole(null);
       setZoomTarget(null);
+      setMarkerRect(null);
     } else {
+      // Get marker position for morph animation
+      const button = event.currentTarget as HTMLElement;
+      const container = button.closest('.aspect-\\[1140\\/760\\]') as HTMLElement;
+      if (container) {
+        const containerRect = container.getBoundingClientRect();
+        const buttonRect = button.getBoundingClientRect();
+        // Store position as percentage of container
+        setMarkerRect({
+          x: ((buttonRect.left + buttonRect.width / 2) - containerRect.left) / containerRect.width * 100,
+          y: ((buttonRect.top + buttonRect.height / 2) - containerRect.top) / containerRect.height * 100,
+        });
+      }
       // Start zoom animation
       setZoomTarget(hole);
       setAnimationPhase('zooming');
@@ -80,7 +111,7 @@ const GolfCourseMap = () => {
       const timer = setTimeout(() => {
         setSelectedHole(zoomTarget);
         setAnimationPhase('expanded');
-      }, 400); // Wait for zoom animation to complete
+      }, 400);
       return () => clearTimeout(timer);
     }
   }, [animationPhase, zoomTarget]);
@@ -89,10 +120,20 @@ const GolfCourseMap = () => {
     setAnimationPhase('idle');
     setSelectedHole(null);
     setZoomTarget(null);
+    setMarkerRect(null);
   };
 
   const isZoomed = animationPhase === 'zooming' || animationPhase === 'expanded';
   const currentZoomHole = zoomTarget || selectedHole;
+  
+  // Calculate transform with clamped translation
+  const getZoomTransform = () => {
+    if (!isZoomed || !currentZoomHole) return 'scale(1) translate(0%, 0%)';
+    const pos = holePositions[currentZoomHole.hole - 1];
+    const scale = 1.3;
+    const { x, y } = getClampedTranslation(pos.x, pos.y, scale);
+    return `scale(${scale}) translate(${x}%, ${y}%)`;
+  };
 
   return (
     <div className="w-full">
@@ -101,11 +142,7 @@ const GolfCourseMap = () => {
         {/* Content wrapper with zoom animation */}
         <div 
           className="absolute inset-0 transition-transform duration-500 ease-out origin-center"
-          style={{
-            transform: isZoomed && currentZoomHole
-              ? `scale(1.3) translate(${50 - holePositions[currentZoomHole.hole - 1].x}%, ${50 - holePositions[currentZoomHole.hole - 1].y}%)`
-              : 'scale(1) translate(0%, 0%)',
-          }}
+          style={{ transform: getZoomTransform() }}
         >
           {/* Scorecard background image - object-contain ensures no cropping */}
           <img 
@@ -125,7 +162,7 @@ const GolfCourseMap = () => {
                 key={hole.hole}
                 className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 group z-10`}
                 style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
-                onClick={() => handleHoleClick(hole, isSelected)}
+                onClick={(e) => handleHoleClick(hole, isSelected, e)}
                 onMouseEnter={() => animationPhase === 'idle' && setHoveredHole(hole.hole)}
                 onMouseLeave={() => setHoveredHole(null)}
               >
@@ -153,33 +190,50 @@ const GolfCourseMap = () => {
           })}
         </div>
 
-        {/* Expanded popup overlay - appears after zoom completes */}
-        {animationPhase === 'expanded' && selectedHole && (
+        {/* Morphing popup - starts from marker position and expands */}
+        {(animationPhase === 'zooming' || animationPhase === 'expanded') && zoomTarget && markerRect && (
           <div 
-            className="absolute inset-4 z-50 flex items-center justify-center"
-            onClick={handleClose}
+            className="absolute z-50 pointer-events-none"
+            style={{
+              // Start from marker position, expand to full size
+              left: animationPhase === 'zooming' ? `${markerRect.x}%` : '16px',
+              top: animationPhase === 'zooming' ? `${markerRect.y}%` : '16px',
+              right: animationPhase === 'zooming' ? 'auto' : '16px',
+              bottom: animationPhase === 'zooming' ? 'auto' : '16px',
+              width: animationPhase === 'zooming' ? '40px' : 'auto',
+              height: animationPhase === 'zooming' ? '40px' : 'auto',
+              transform: animationPhase === 'zooming' ? 'translate(-50%, -50%)' : 'none',
+              transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+            }}
           >
             <div 
-              className="w-full h-full bg-amber-950/95 backdrop-blur-xl rounded-2xl border border-white/30 p-8 shadow-2xl flex flex-col justify-center"
-              onClick={(e) => e.stopPropagation()}
+              className={`w-full h-full bg-amber-950/95 backdrop-blur-xl rounded-2xl border border-white/30 shadow-2xl flex flex-col justify-center overflow-hidden ${
+                animationPhase === 'expanded' ? 'pointer-events-auto' : ''
+              }`}
               style={{
-                animation: 'scale-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                padding: animationPhase === 'expanded' ? '32px' : '0',
+                borderRadius: animationPhase === 'zooming' ? '50%' : '16px',
               }}
+              onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-start gap-6">
+              {/* Content fades in after expansion */}
+              <div 
+                className="flex items-start gap-6 transition-opacity duration-300"
+                style={{ opacity: animationPhase === 'expanded' ? 1 : 0 }}
+              >
                 <div className="w-20 h-20 rounded-full bg-sky-500 border-4 border-white/40 flex items-center justify-center flex-shrink-0">
-                  <span className="text-3xl font-sans font-bold text-white">{selectedHole.hole}</span>
+                  <span className="text-3xl font-sans font-bold text-white">{zoomTarget.hole}</span>
                 </div>
                 <div className="flex-grow min-w-0">
                   <div className="flex items-center gap-4 mb-3">
-                    <h3 className="text-3xl font-serif text-white">{selectedHole.title}</h3>
-                    {selectedHole.year && (
+                    <h3 className="text-3xl font-serif text-white">{zoomTarget.title}</h3>
+                    {zoomTarget.year && (
                       <span className="px-3 py-1 bg-white/10 rounded-lg text-lg font-mono text-white/70">
-                        {selectedHole.year}
+                        {zoomTarget.year}
                       </span>
                     )}
                   </div>
-                  <p className="text-gray-300 font-mono text-xl leading-relaxed">{selectedHole.description}</p>
+                  <p className="text-gray-300 font-mono text-xl leading-relaxed">{zoomTarget.description}</p>
                 </div>
                 <button
                   onClick={handleClose}
@@ -193,6 +247,11 @@ const GolfCourseMap = () => {
               </div>
             </div>
           </div>
+        )}
+
+        {/* Click overlay to close */}
+        {animationPhase === 'expanded' && (
+          <div className="absolute inset-0 z-40" onClick={handleClose} />
         )}
       </div>
     </div>
