@@ -10,8 +10,8 @@ interface HoleData {
 
 const clubhouseData: HoleData = {
   hole: 'clubhouse',
-  title: "Clubhouse",
-  description: "Where every round begins and ends - the heart of the course",
+  title: "Halfway House",
+  description: "A quick stop to refuel and reset before tackling the back nine",
 };
 
 const clubhousePosition = { x: 14, y: 50 };
