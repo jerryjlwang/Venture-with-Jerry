@@ -204,7 +204,7 @@ const GolfCourseMap = () => {
 
                 {/* Hover tooltip - only show when not selected */}
                 {isHovered && animationPhase === 'idle' && (
-                  <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap shadow-xl z-30">
+                  <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-mono whitespace-nowrap shadow-xl z-30">
                     {hole.title}
                   </div>
                 )}
@@ -246,7 +246,7 @@ const GolfCourseMap = () => {
 
                 {/* Hover tooltip */}
                 {isHovered && animationPhase === 'idle' && (
-                  <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap shadow-xl z-30">
+                  <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-mono whitespace-nowrap shadow-xl z-30">
                     Halfway House
                   </div>
                 )}
@@ -289,7 +289,7 @@ const GolfCourseMap = () => {
 
                 {/* Hover tooltip */}
                 {isHovered && animationPhase === 'idle' && (
-                  <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap shadow-xl z-30">
+                  <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-mono whitespace-nowrap shadow-xl z-30">
                     Clubhouse
                   </div>
                 )}
