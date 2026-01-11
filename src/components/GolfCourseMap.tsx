@@ -31,24 +31,24 @@ const journeyData: HoleData[] = [
 
 // Course layout positions aligned precisely to the scorecard image hole numbers
 const holePositions = [
-  { x: 29, y: 43 },  // Hole 1
-  { x: 53, y: 35 },  // Hole 2
-  { x: 62, y: 39 },  // Hole 3
-  { x: 74, y: 72 },  // Hole 4 - adjusted
-  { x: 68, y: 57 },  // Hole 5
-  { x: 60, y: 50 },  // Hole 6
-  { x: 57, y: 71 },  // Hole 7 - adjusted
-  { x: 35, y: 93 },  // Hole 8 - adjusted lower
-  { x: 20, y: 77 },  // Hole 9 - adjusted
-  { x: 40, y: 48 },  // Hole 10
-  { x: 54, y: 46 },  // Hole 11
-  { x: 87, y: 47 },  // Hole 12
-  { x: 94, y: 82 },  // Hole 13 - adjusted
-  { x: 84, y: 62 },  // Hole 14
-  { x: 77, y: 42 },  // Hole 15
-  { x: 56, y: 28 },  // Hole 16
-  { x: 41, y: 24 },  // Hole 17
-  { x: 31, y: 39 },  // Hole 18
+  { x: 29, y: 40 },  // Hole 1
+  { x: 48, y: 25 },  // Hole 2
+  { x: 60, y: 30 },  // Hole 3
+  { x: 72, y: 68 },  // Hole 4
+  { x: 68, y: 55 },  // Hole 5
+  { x: 57, y: 50 },  // Hole 6
+  { x: 48, y: 68 },  // Hole 7
+  { x: 36, y: 85 },  // Hole 8
+  { x: 10, y: 68 },  // Hole 9
+  { x: 40, y: 45 },  // Hole 10
+  { x: 53, y: 38 },  // Hole 11
+  { x: 89, y: 35 },  // Hole 12
+  { x: 94, y: 73 },  // Hole 13
+  { x: 88, y: 57 },  // Hole 14
+  { x: 79, y: 35 },  // Hole 15
+  { x: 52, y: 17 },  // Hole 16
+  { x: 33, y: 13 },  // Hole 17
+  { x: 25, y: 35 },  // Hole 18
 ];
 
 const GolfCourseMap = () => {
