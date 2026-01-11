@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import golfScorecard from '@/assets/golf-scorecard.png';
 
 interface HoleData {
@@ -52,21 +52,47 @@ const holePositions = [
   { x: 20, y: 34.25 },    // Hole 18
 ];
 
+// Animation phases: idle -> zooming -> expanded
+type AnimationPhase = 'idle' | 'zooming' | 'expanded';
+
 const GolfCourseMap = () => {
   const [selectedHole, setSelectedHole] = useState<HoleData | null>(null);
   const [hoveredHole, setHoveredHole] = useState<number | null>(null);
+  const [animationPhase, setAnimationPhase] = useState<AnimationPhase>('idle');
+  const [zoomTarget, setZoomTarget] = useState<HoleData | null>(null);
 
   const handleHoleClick = (hole: HoleData, isSelected: boolean) => {
-    if (isSelected) {
+    if (isSelected || animationPhase !== 'idle') {
+      // Close
+      setAnimationPhase('idle');
       setSelectedHole(null);
+      setZoomTarget(null);
     } else {
-      setSelectedHole(hole);
+      // Start zoom animation
+      setZoomTarget(hole);
+      setAnimationPhase('zooming');
     }
   };
 
+  // After zoom completes, show the popup
+  useEffect(() => {
+    if (animationPhase === 'zooming' && zoomTarget) {
+      const timer = setTimeout(() => {
+        setSelectedHole(zoomTarget);
+        setAnimationPhase('expanded');
+      }, 400); // Wait for zoom animation to complete
+      return () => clearTimeout(timer);
+    }
+  }, [animationPhase, zoomTarget]);
+
   const handleClose = () => {
+    setAnimationPhase('idle');
     setSelectedHole(null);
+    setZoomTarget(null);
   };
+
+  const isZoomed = animationPhase === 'zooming' || animationPhase === 'expanded';
+  const currentZoomHole = zoomTarget || selectedHole;
 
   return (
     <div className="w-full">
@@ -76,8 +102,8 @@ const GolfCourseMap = () => {
         <div 
           className="absolute inset-0 transition-transform duration-500 ease-out origin-center"
           style={{
-            transform: selectedHole 
-              ? `scale(1.3) translate(${50 - holePositions[selectedHole.hole - 1].x}%, ${50 - holePositions[selectedHole.hole - 1].y}%)`
+            transform: isZoomed && currentZoomHole
+              ? `scale(1.3) translate(${50 - holePositions[currentZoomHole.hole - 1].x}%, ${50 - holePositions[currentZoomHole.hole - 1].y}%)`
               : 'scale(1) translate(0%, 0%)',
           }}
         >
@@ -100,7 +126,7 @@ const GolfCourseMap = () => {
                 className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 group z-10`}
                 style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
                 onClick={() => handleHoleClick(hole, isSelected)}
-                onMouseEnter={() => !selectedHole && setHoveredHole(hole.hole)}
+                onMouseEnter={() => animationPhase === 'idle' && setHoveredHole(hole.hole)}
                 onMouseLeave={() => setHoveredHole(null)}
               >
                 {/* Marker circle */}
@@ -117,7 +143,7 @@ const GolfCourseMap = () => {
                 </div>
 
                 {/* Hover tooltip - only show when not selected */}
-                {isHovered && !selectedHole && (
+                {isHovered && animationPhase === 'idle' && (
                   <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap shadow-xl z-30">
                     {hole.title}
                   </div>
@@ -127,17 +153,17 @@ const GolfCourseMap = () => {
           })}
         </div>
 
-        {/* Expanded popup overlay - almost covers the whole map, outside zoom wrapper */}
-        {selectedHole && (
+        {/* Expanded popup overlay - appears after zoom completes */}
+        {animationPhase === 'expanded' && selectedHole && (
           <div 
-            className="absolute inset-4 z-50 flex items-center justify-center animate-scale-in"
+            className="absolute inset-4 z-50 flex items-center justify-center"
             onClick={handleClose}
           >
             <div 
               className="w-full h-full bg-amber-950/95 backdrop-blur-xl rounded-2xl border border-white/30 p-8 shadow-2xl flex flex-col justify-center"
               onClick={(e) => e.stopPropagation()}
               style={{
-                animation: 'scale-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                animation: 'scale-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)',
               }}
             >
               <div className="flex items-start gap-6">
