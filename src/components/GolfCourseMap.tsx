@@ -269,7 +269,7 @@ const GolfCourseMap = () => {
               >
                 {/* Pulse ring animation */}
                 {!isSelected && (
-                  <div className="absolute inset-[-8px] rounded-xl bg-amber-400/50 animate-[ping_1.5s_cubic-bezier(0,0,0.2,1)_infinite]" />
+                  <div className="absolute inset-[-8px] rounded-xl bg-amber-400/50 animate-[ping_3s_cubic-bezier(0,0,0.2,1)_infinite]" />
                 )}
                 {/* Marker - home icon style with scale pulse */}
                 <div 
