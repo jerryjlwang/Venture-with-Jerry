@@ -2,19 +2,27 @@ import { useState, useEffect } from 'react';
 import golfScorecard from '@/assets/golf-scorecard.png';
 
 interface HoleData {
-  hole: number | 'clubhouse';
+  hole: number | 'clubhouse' | 'halfway';
   title: string;
   description: string;
   year?: string;
 }
 
-const clubhouseData: HoleData = {
-  hole: 'clubhouse',
+const halfwayHouseData: HoleData = {
+  hole: 'halfway',
   title: "Halfway House",
   description: "A quick stop to refuel and reset before tackling the back nine",
 };
 
-const clubhousePosition = { x: 14, y: 73 };
+const halfwayHousePosition = { x: 14, y: 73 };
+
+const clubhouseData: HoleData = {
+  hole: 'clubhouse',
+  title: "Clubhouse",
+  description: "Where every round begins and ends - the heart of the course",
+};
+
+const clubhousePosition = { x: 8, y: 50 };
 
 const journeyData: HoleData[] = [
   { hole: 1, title: "First Swing", description: "Discovered golf through First Tee Greater Seattle", year: "2018" },
@@ -82,7 +90,7 @@ const getClampedTranslation = (x: number, y: number, scale: number) => {
 
 const GolfCourseMap = () => {
   const [selectedHole, setSelectedHole] = useState<HoleData | null>(null);
-  const [hoveredHole, setHoveredHole] = useState<number | 'clubhouse' | null>(null);
+  const [hoveredHole, setHoveredHole] = useState<number | 'clubhouse' | 'halfway' | null>(null);
   const [animationPhase, setAnimationPhase] = useState<AnimationPhase>('idle');
   const [zoomTarget, setZoomTarget] = useState<HoleData | null>(null);
   const [markerRect, setMarkerRect] = useState<{ x: number; y: number } | null>(null);
@@ -134,9 +142,10 @@ const GolfCourseMap = () => {
   const isZoomed = animationPhase === 'zooming' || animationPhase === 'expanded';
   const currentZoomHole = zoomTarget || selectedHole;
   
-  // Get position for a hole (works for both numbered holes and clubhouse)
+  // Get position for a hole (works for both numbered holes and special markers)
   const getHolePosition = (hole: HoleData) => {
     if (hole.hole === 'clubhouse') return clubhousePosition;
+    if (hole.hole === 'halfway') return halfwayHousePosition;
     return holePositions[hole.hole - 1];
   };
   
@@ -203,6 +212,48 @@ const GolfCourseMap = () => {
             );
           })}
 
+          {/* Halfway House marker */}
+          {(() => {
+            const isHovered = hoveredHole === 'halfway';
+            const isSelected = selectedHole?.hole === 'halfway';
+            
+            return (
+              <button
+                className="absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 group z-10"
+                style={{ left: `${halfwayHousePosition.x}%`, top: `${halfwayHousePosition.y}%` }}
+                onClick={(e) => handleHoleClick(halfwayHouseData, isSelected, e)}
+                onMouseEnter={() => animationPhase === 'idle' && setHoveredHole('halfway')}
+                onMouseLeave={() => setHoveredHole(null)}
+              >
+                {/* Marker - coffee/food icon style */}
+                <div 
+                  className={`rounded-lg flex items-center justify-center font-sans font-semibold shadow-lg transition-all duration-200 ${
+                    isSelected
+                      ? 'w-10 h-10 bg-amber-500 text-white ring-2 ring-white/50'
+                      : isHovered 
+                        ? 'w-10 h-10 bg-orange-600 text-white scale-110' 
+                        : 'w-8 h-8 bg-orange-700 text-white'
+                  }`}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
+                    <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
+                    <line x1="6" x2="6" y1="2" y2="4"></line>
+                    <line x1="10" x2="10" y1="2" y2="4"></line>
+                    <line x1="14" x2="14" y1="2" y2="4"></line>
+                  </svg>
+                </div>
+
+                {/* Hover tooltip */}
+                {isHovered && animationPhase === 'idle' && (
+                  <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap shadow-xl z-30">
+                    Halfway House
+                  </div>
+                )}
+              </button>
+            );
+          })()}
+
           {/* Clubhouse marker */}
           {(() => {
             const isHovered = hoveredHole === 'clubhouse';
@@ -235,7 +286,7 @@ const GolfCourseMap = () => {
                 {/* Hover tooltip */}
                 {isHovered && animationPhase === 'idle' && (
                   <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap shadow-xl z-30">
-                    Halfway House
+                    Clubhouse
                   </div>
                 )}
               </button>
@@ -274,11 +325,19 @@ const GolfCourseMap = () => {
                 className="flex items-start gap-6 transition-opacity duration-300"
                 style={{ opacity: animationPhase === 'expanded' ? 1 : 0 }}
               >
-                <div className={`w-20 h-20 ${zoomTarget.hole === 'clubhouse' ? 'rounded-xl bg-amber-700' : 'rounded-full bg-sky-500'} border-4 border-white/40 flex items-center justify-center flex-shrink-0`}>
+                <div className={`w-20 h-20 ${zoomTarget.hole === 'clubhouse' || zoomTarget.hole === 'halfway' ? 'rounded-xl' : 'rounded-full'} ${zoomTarget.hole === 'clubhouse' ? 'bg-amber-700' : zoomTarget.hole === 'halfway' ? 'bg-orange-700' : 'bg-sky-500'} border-4 border-white/40 flex items-center justify-center flex-shrink-0`}>
                   {zoomTarget.hole === 'clubhouse' ? (
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                       <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                  ) : zoomTarget.hole === 'halfway' ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
+                      <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
+                      <line x1="6" x2="6" y1="2" y2="4"></line>
+                      <line x1="10" x2="10" y1="2" y2="4"></line>
+                      <line x1="14" x2="14" y1="2" y2="4"></line>
                     </svg>
                   ) : (
                     <span className="text-3xl font-sans font-bold text-white">{zoomTarget.hole}</span>
