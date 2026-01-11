@@ -34,7 +34,7 @@ const journeyData: HoleData[] = [
 const holePositions = [
   { x: 26.5, y: 37.5 },    // Hole 1
   { x: 48.5, y: 24.5 },    // Hole 2
-  { x: 65, y: 34 },    // Hole 3 - down 6%, right 6%
+  { x: 62, y: 32.5 },    // Hole 3
   { x: 78, y: 77 },    // Hole 4 - down 16%, right 10%
   { x: 64, y: 52 },    // Hole 5
   { x: 55, y: 48 },    // Hole 6
