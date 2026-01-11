@@ -102,7 +102,7 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'pulse-scale': 'pulse-scale 1.5s ease-in-out infinite'
+				'pulse-scale': 'pulse-scale 3s ease-in-out infinite'
 			}
 		}
 	},
