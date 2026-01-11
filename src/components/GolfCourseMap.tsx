@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import golfScorecard from '@/assets/golf-scorecard.png';
 
 interface HoleData {
   hole: number;
@@ -77,120 +78,18 @@ const GolfCourseMap = () => {
   return (
     <div className="w-full">
       {/* Course Map Container */}
-      <div className="relative w-full aspect-[16/10] bg-gradient-to-br from-amber-700 via-amber-800 to-amber-900 rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
+      <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
         {/* Zoomable content wrapper */}
         <div 
           className="absolute inset-0 transition-transform duration-700 ease-out"
           style={getTransformStyle()}
         >
-          {/* Individual hole fairways */}
-          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            {/* Hole 1 - vertical fairway */}
-            <ellipse cx="28" cy="45" rx="4" ry="12" fill="rgb(134, 197, 94)" transform="rotate(-10, 28, 45)" />
-            <ellipse cx="28" cy="52" rx="2.5" ry="2.5" fill="rgb(144, 217, 104)" /> {/* green */}
-            
-            {/* Hole 2 - angled fairway */}
-            <ellipse cx="42" cy="28" rx="3.5" ry="10" fill="rgb(134, 197, 94)" transform="rotate(15, 42, 28)" />
-            <ellipse cx="42" cy="22" rx="2" ry="2" fill="rgb(144, 217, 104)" />
-            
-            {/* Hole 3 - horizontal fairway */}
-            <ellipse cx="58" cy="20" rx="8" ry="3" fill="rgb(134, 197, 94)" transform="rotate(-5, 58, 20)" />
-            <ellipse cx="58" cy="18" rx="2" ry="2" fill="rgb(144, 217, 104)" />
-            
-            {/* Hole 4 - large fairway bottom right */}
-            <ellipse cx="62" cy="68" rx="5" ry="12" fill="rgb(134, 197, 94)" transform="rotate(10, 62, 68)" />
-            <ellipse cx="62" cy="75" rx="2.5" ry="2.5" fill="rgb(144, 217, 104)" />
-            
-            {/* Hole 5 - mid right */}
-            <ellipse cx="62" cy="52" rx="3" ry="6" fill="rgb(134, 197, 94)" transform="rotate(-5, 62, 52)" />
-            <ellipse cx="62" cy="55" rx="2" ry="2" fill="rgb(144, 217, 104)" />
-            
-            {/* Hole 6 - center */}
-            <ellipse cx="52" cy="45" rx="4" ry="7" fill="rgb(134, 197, 94)" transform="rotate(20, 52, 45)" />
-            <ellipse cx="52" cy="48" rx="2" ry="2" fill="rgb(144, 217, 104)" />
-            
-            {/* Hole 7 - center bottom */}
-            <ellipse cx="42" cy="68" rx="5" ry="8" fill="rgb(134, 197, 94)" transform="rotate(-15, 42, 68)" />
-            <ellipse cx="42" cy="72" rx="2.5" ry="2.5" fill="rgb(144, 217, 104)" />
-            
-            {/* Hole 8 - bottom center */}
-            <ellipse cx="32" cy="82" rx="6" ry="4" fill="rgb(134, 197, 94)" transform="rotate(5, 32, 82)" />
-            <ellipse cx="32" cy="88" rx="2" ry="2" fill="rgb(144, 217, 104)" />
-            
-            {/* Hole 9 - far left */}
-            <ellipse cx="10" cy="62" rx="4" ry="10" fill="rgb(134, 197, 94)" transform="rotate(-20, 10, 62)" />
-            <ellipse cx="6" cy="68" rx="2.5" ry="2.5" fill="rgb(144, 217, 104)" />
-            
-            {/* Hole 10 - center left */}
-            <ellipse cx="35" cy="44" rx="3" ry="8" fill="rgb(134, 197, 94)" transform="rotate(10, 35, 44)" />
-            <ellipse cx="35" cy="48" rx="2" ry="2" fill="rgb(144, 217, 104)" />
-            
-            {/* Hole 11 - center */}
-            <ellipse cx="48" cy="35" rx="4" ry="6" fill="rgb(134, 197, 94)" transform="rotate(-10, 48, 35)" />
-            <ellipse cx="48" cy="38" rx="2" ry="2" fill="rgb(144, 217, 104)" />
-            
-            {/* Hole 12 - far right */}
-            <ellipse cx="88" cy="42" rx="6" ry="4" fill="rgb(134, 197, 94)" />
-            <ellipse cx="92" cy="42" rx="2.5" ry="2.5" fill="rgb(144, 217, 104)" />
-            
-            {/* Hole 13 - bottom right */}
-            <ellipse cx="85" cy="78" rx="4" ry="8" fill="rgb(134, 197, 94)" transform="rotate(15, 85, 78)" />
-            <ellipse cx="88" cy="82" rx="2" ry="2" fill="rgb(144, 217, 104)" />
-            
-            {/* Hole 14 - right side */}
-            <ellipse cx="82" cy="55" rx="4" ry="7" fill="rgb(134, 197, 94)" transform="rotate(-10, 82, 55)" />
-            <ellipse cx="85" cy="58" rx="2" ry="2" fill="rgb(144, 217, 104)" />
-            
-            {/* Hole 15 - upper right */}
-            <ellipse cx="78" cy="32" rx="3" ry="8" fill="rgb(134, 197, 94)" transform="rotate(5, 78, 32)" />
-            <ellipse cx="78" cy="28" rx="2" ry="2" fill="rgb(144, 217, 104)" />
-            
-            {/* Hole 16 - top center */}
-            <ellipse cx="52" cy="15" rx="5" ry="6" fill="rgb(134, 197, 94)" transform="rotate(-5, 52, 15)" />
-            <ellipse cx="52" cy="12" rx="2" ry="2" fill="rgb(144, 217, 104)" />
-            
-            {/* Hole 17 - top left */}
-            <ellipse cx="28" cy="12" rx="4" ry="7" fill="rgb(134, 197, 94)" transform="rotate(-15, 28, 12)" />
-            <ellipse cx="28" cy="8" rx="2" ry="2" fill="rgb(144, 217, 104)" />
-            
-            {/* Hole 18 - left side */}
-            <ellipse cx="18" cy="38" rx="4" ry="8" fill="rgb(134, 197, 94)" transform="rotate(10, 18, 38)" />
-            <ellipse cx="15" cy="42" rx="2.5" ry="2.5" fill="rgb(144, 217, 104)" />
-            
-            {/* Sand bunkers scattered */}
-            <ellipse cx="30" cy="40" rx="2" ry="1.5" fill="rgb(250, 240, 220)" />
-            <ellipse cx="60" cy="25" rx="2.5" ry="1" fill="rgb(250, 240, 220)" />
-            <ellipse cx="45" cy="70" rx="2" ry="1.2" fill="rgb(250, 240, 220)" />
-            <ellipse cx="80" cy="50" rx="1.8" ry="1" fill="rgb(250, 240, 220)" />
-            <ellipse cx="55" cy="52" rx="1.5" ry="1" fill="rgb(250, 240, 220)" />
-            <ellipse cx="38" cy="82" rx="2" ry="1.2" fill="rgb(250, 240, 220)" />
-            <ellipse cx="90" cy="75" rx="1.8" ry="1" fill="rgb(250, 240, 220)" />
-            <ellipse cx="25" cy="18" rx="1.5" ry="1" fill="rgb(250, 240, 220)" />
-            <ellipse cx="72" cy="35" rx="2" ry="1.2" fill="rgb(250, 240, 220)" />
-            
-            {/* Cart paths */}
-            <path
-              d="M15,50 Q25,55 35,50 Q45,45 55,50 Q65,55 75,48 Q85,42 92,45"
-              fill="none"
-              stroke="rgba(156, 163, 175, 0.5)"
-              strokeWidth="0.8"
-              strokeDasharray="2,1"
-            />
-            <path
-              d="M10,70 Q20,75 30,85 Q40,80 50,75 Q60,78 70,72 Q80,78 88,80"
-              fill="none"
-              stroke="rgba(156, 163, 175, 0.5)"
-              strokeWidth="0.8"
-              strokeDasharray="2,1"
-            />
-          </svg>
-
-          {/* Water hazard - ocean on the right */}
-          <div className="absolute top-0 right-0 w-[8%] h-full bg-gradient-to-l from-sky-600/60 via-sky-500/40 to-transparent" />
-          
-          {/* Tree clusters */}
-          <div className="absolute top-[35%] right-[5%] w-12 h-16 bg-green-900/70 rounded-full blur-sm" />
-          <div className="absolute top-[25%] left-[3%] w-8 h-10 bg-green-900/60 rounded-full blur-sm" />
+          {/* Scorecard background image */}
+          <img 
+            src={golfScorecard} 
+            alt="Golf course scorecard map" 
+            className="absolute inset-0 w-full h-full object-cover"
+          />
 
           {/* Hole markers */}
           {journeyData.map((hole, index) => {
@@ -230,12 +129,6 @@ const GolfCourseMap = () => {
             );
           })}
 
-          {/* Clubhouse - hide when zoomed */}
-          <div className={`absolute bottom-4 right-4 bg-white/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/20 transition-opacity duration-500 ${
-            selectedHole ? 'opacity-0' : 'opacity-100'
-          }`}>
-            <span className="text-white/80 text-xs font-mono">Clubhouse</span>
-          </div>
         </div>
 
 
