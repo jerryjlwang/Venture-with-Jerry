@@ -269,7 +269,7 @@ const GolfCourseMap = () => {
               >
                 {/* Pulse ring animation */}
                 {!isSelected && (
-                  <div className="absolute inset-[-8px] rounded-xl bg-amber-400/50 animate-[ping_3s_cubic-bezier(0,0,0.2,1)_infinite]" />
+                  <div className="clubhouse-ring absolute inset-[-8px] rounded-xl bg-amber-400/50" />
                 )}
                 {/* Marker - home icon style with scale pulse */}
                 <div 
@@ -278,7 +278,7 @@ const GolfCourseMap = () => {
                       ? 'w-12 h-12 bg-amber-500 text-white ring-2 ring-white/50'
                       : isHovered 
                         ? 'w-12 h-12 bg-amber-600 text-white scale-110' 
-                        : 'w-10 h-10 bg-amber-700 text-white animate-pulse-scale'
+                        : 'w-10 h-10 bg-amber-700 text-white clubhouse-pulse'
                   }`}
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
