@@ -25,7 +25,7 @@ const Golf = () => {
 
         <div className="mt-16 text-center">
           <p className="text-white/60 font-mono text-sm">
-            Each hole represents a chapter in my golf journey. Click to explore.
+            ​
           </p>
         </div>
       </div>
