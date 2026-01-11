@@ -2,11 +2,19 @@ import { useState, useEffect } from 'react';
 import golfScorecard from '@/assets/golf-scorecard.png';
 
 interface HoleData {
-  hole: number;
+  hole: number | 'clubhouse';
   title: string;
   description: string;
   year?: string;
 }
+
+const clubhouseData: HoleData = {
+  hole: 'clubhouse',
+  title: "Clubhouse",
+  description: "Where every round begins and ends - the heart of the course",
+};
+
+const clubhousePosition = { x: 14, y: 50 };
 
 const journeyData: HoleData[] = [
   { hole: 1, title: "First Swing", description: "Discovered golf through First Tee Greater Seattle", year: "2018" },
@@ -74,7 +82,7 @@ const getClampedTranslation = (x: number, y: number, scale: number) => {
 
 const GolfCourseMap = () => {
   const [selectedHole, setSelectedHole] = useState<HoleData | null>(null);
-  const [hoveredHole, setHoveredHole] = useState<number | null>(null);
+  const [hoveredHole, setHoveredHole] = useState<number | 'clubhouse' | null>(null);
   const [animationPhase, setAnimationPhase] = useState<AnimationPhase>('idle');
   const [zoomTarget, setZoomTarget] = useState<HoleData | null>(null);
   const [markerRect, setMarkerRect] = useState<{ x: number; y: number } | null>(null);
@@ -126,10 +134,16 @@ const GolfCourseMap = () => {
   const isZoomed = animationPhase === 'zooming' || animationPhase === 'expanded';
   const currentZoomHole = zoomTarget || selectedHole;
   
+  // Get position for a hole (works for both numbered holes and clubhouse)
+  const getHolePosition = (hole: HoleData) => {
+    if (hole.hole === 'clubhouse') return clubhousePosition;
+    return holePositions[hole.hole - 1];
+  };
+  
   // Calculate transform with clamped translation
   const getZoomTransform = () => {
     if (!isZoomed || !currentZoomHole) return 'scale(1) translate(0%, 0%)';
-    const pos = holePositions[currentZoomHole.hole - 1];
+    const pos = getHolePosition(currentZoomHole);
     const scale = 1.3;
     const { x, y } = getClampedTranslation(pos.x, pos.y, scale);
     return `scale(${scale}) translate(${x}%, ${y}%)`;
@@ -188,6 +202,45 @@ const GolfCourseMap = () => {
               </button>
             );
           })}
+
+          {/* Clubhouse marker */}
+          {(() => {
+            const isHovered = hoveredHole === 'clubhouse';
+            const isSelected = selectedHole?.hole === 'clubhouse';
+            
+            return (
+              <button
+                className="absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 group z-10"
+                style={{ left: `${clubhousePosition.x}%`, top: `${clubhousePosition.y}%` }}
+                onClick={(e) => handleHoleClick(clubhouseData, isSelected, e)}
+                onMouseEnter={() => animationPhase === 'idle' && setHoveredHole('clubhouse')}
+                onMouseLeave={() => setHoveredHole(null)}
+              >
+                {/* Marker - home icon style */}
+                <div 
+                  className={`rounded-lg flex items-center justify-center font-sans font-semibold shadow-lg transition-all duration-200 ${
+                    isSelected
+                      ? 'w-10 h-10 bg-amber-500 text-white ring-2 ring-white/50'
+                      : isHovered 
+                        ? 'w-10 h-10 bg-amber-600 text-white scale-110' 
+                        : 'w-8 h-8 bg-amber-700 text-white'
+                  }`}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                  </svg>
+                </div>
+
+                {/* Hover tooltip */}
+                {isHovered && animationPhase === 'idle' && (
+                  <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap shadow-xl z-30">
+                    Clubhouse
+                  </div>
+                )}
+              </button>
+            );
+          })()}
         </div>
 
         {/* Morphing popup - starts from marker position and expands */}
@@ -221,8 +274,15 @@ const GolfCourseMap = () => {
                 className="flex items-start gap-6 transition-opacity duration-300"
                 style={{ opacity: animationPhase === 'expanded' ? 1 : 0 }}
               >
-                <div className="w-20 h-20 rounded-full bg-sky-500 border-4 border-white/40 flex items-center justify-center flex-shrink-0">
-                  <span className="text-3xl font-sans font-bold text-white">{zoomTarget.hole}</span>
+                <div className={`w-20 h-20 ${zoomTarget.hole === 'clubhouse' ? 'rounded-xl bg-amber-700' : 'rounded-full bg-sky-500'} border-4 border-white/40 flex items-center justify-center flex-shrink-0`}>
+                  {zoomTarget.hole === 'clubhouse' ? (
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                      <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                  ) : (
+                    <span className="text-3xl font-sans font-bold text-white">{zoomTarget.hole}</span>
+                  )}
                 </div>
                 <div className="flex-grow min-w-0">
                   <div className="flex items-center gap-4 mb-3">
