@@ -267,17 +267,21 @@ const GolfCourseMap = () => {
                 onMouseEnter={() => animationPhase === 'idle' && setHoveredHole('clubhouse')}
                 onMouseLeave={() => setHoveredHole(null)}
               >
+                {/* Pulse ring animation */}
+                {!isSelected && (
+                  <div className="absolute inset-0 w-12 h-12 -translate-x-1 -translate-y-1 rounded-lg bg-amber-500/40 animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite]" />
+                )}
                 {/* Marker - home icon style */}
                 <div 
-                  className={`rounded-lg flex items-center justify-center font-sans font-semibold shadow-lg transition-all duration-200 ${
+                  className={`relative rounded-lg flex items-center justify-center font-sans font-semibold shadow-lg transition-all duration-200 ${
                     isSelected
-                      ? 'w-10 h-10 bg-amber-500 text-white ring-2 ring-white/50'
+                      ? 'w-12 h-12 bg-amber-500 text-white ring-2 ring-white/50'
                       : isHovered 
-                        ? 'w-10 h-10 bg-amber-600 text-white scale-110' 
-                        : 'w-8 h-8 bg-amber-700 text-white'
+                        ? 'w-12 h-12 bg-amber-600 text-white scale-110' 
+                        : 'w-10 h-10 bg-amber-700 text-white'
                   }`}
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                     <polyline points="9 22 9 12 15 12 15 22"></polyline>
                   </svg>
