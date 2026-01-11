@@ -17,7 +17,7 @@ const Golf = () => {
             My Life Through Golf   
           </h1>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto font-mono">
-            From First Tee Greater Seattle to Varsity Golf — 18 holes, 18 milestones
+            18 holes, 18 milestones
           </p>
         </div>
 
