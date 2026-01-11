@@ -11,7 +11,7 @@ interface HoleData {
 const halfwayHouseData: HoleData = {
   hole: 'halfway',
   title: "Halfway House",
-  description: "A quick stop to refuel and reset before tackling the back nine",
+  description: "At this point in time, I took a step back to think about what I really wanted. After interviewing a venture capital partner for a class project, my eyes caught a glimpse of the startup world for the first time.",
 };
 
 const halfwayHousePosition = { x: 14, y: 73 };
@@ -19,30 +19,30 @@ const halfwayHousePosition = { x: 14, y: 73 };
 const clubhouseData: HoleData = {
   hole: 'clubhouse',
   title: "Clubhouse",
-  description: "Where every round begins and ends - the heart of the course",
+  description: "The clubhouse is where every round begins and ends. For me, this cycle looked like picking up my first club after leaving my previous passion, soccer, behind.",
 };
 
 const clubhousePosition = { x: 8, y: 50 };
 
 const journeyData: HoleData[] = [
-  { hole: 1, title: "First Swing", description: "Discovered golf through First Tee Greater Seattle", year: "2018" },
-  { hole: 2, title: "Learning the Basics", description: "Grip, stance, and the fundamentals of the game", year: "2018" },
-  { hole: 3, title: "First Tee Values", description: "Learning honesty, integrity, and sportsmanship", year: "2018" },
-  { hole: 4, title: "First Par", description: "The thrill of my first par on a real course", year: "2019" },
-  { hole: 5, title: "Junior Tournaments", description: "Competing in my first junior golf events", year: "2019" },
-  { hole: 6, title: "The Mental Game", description: "Learning patience and focus on the course", year: "2019" },
-  { hole: 7, title: "Course Management", description: "Strategy over power - playing smart", year: "2020" },
-  { hole: 8, title: "Practice Routine", description: "Building discipline through daily practice", year: "2020" },
-  { hole: 9, title: "The Turn", description: "Halfway through - reflecting on growth", year: "2020" },
-  { hole: 10, title: "High School Golf", description: "Trying out for the varsity team", year: "2021" },
-  { hole: 11, title: "Making Varsity", description: "Earning a spot on the varsity golf team", year: "2021" },
-  { hole: 12, title: "Team Competition", description: "Learning to compete as part of a team", year: "2021" },
-  { hole: 13, title: "Breaking 80", description: "A milestone round in my golf journey", year: "2022" },
-  { hole: 14, title: "Leadership", description: "Mentoring younger players on the team", year: "2022" },
-  { hole: 15, title: "Overcoming Slumps", description: "Pushing through the challenging times", year: "2022" },
-  { hole: 16, title: "State Qualifiers", description: "Competing at the highest level", year: "2023" },
-  { hole: 17, title: "Senior Season", description: "Leading the team in my final year", year: "2023" },
-  { hole: 18, title: "The Journey Continues", description: "Golf for life - what's next", year: "2024" },
+  { hole: 1, title: "First swings", description: "My primary interest at this time was math and programming. Mostly through competitions, I aspired to be a software developer because I loved using computational methods to solve problems.", year: "2018" },
+  { hole: 2, title: "A chunk and a hole out", description: "After my first round of 168 at Bellevue Golf Course, I was ready to toss the clubs. However, seeing the $5 tee times offered through Youth on Course, I decided to give it another shot. After a thinned chip-in on the second par-5 for quadruple bogey, I became hooked.", year: "2018" },
+  { hole: 3, title: "First Tee", description: "I started volunteering with First Tee, representing the non-profit at the Seattle Golf Show and helping out with equipment sales.", year: "2018" },
+  { hole: 4, title: "High School Varsity", description: "After relentless driving range practice and dozens of balls lost to the pond, I made the Varsity team in my second year of golfing.", year: "2019" },
+  { hole: 5, title: "Junior Tournaments", description: "I played in my first WJGA tournaments that summer and performed...horribly.", year: "2019" },
+  { hole: 6, title: "Passion Projects", description: "I built a lot of projects at this time (i.e. A pricing algorithm so my family wouldn't overcharge for rent or a course management tool using machine learning to make better swing decisions.", year: "2019" },
+  { hole: 7, title: "AIME", description: "After my 3rd AIME, I learned that I wanted to use computation for more ambitious projects.", year: "2020" },
+  { hole: 8, title: "DECA", description: "I also joined DECA to build my business acumen, though I faced many pitfalls due to lack of commitment.", year: "2020" },
+  { hole: 9, title: "Wyze Internship", description: "Summer after sophomore year: I finally got real life experience while interning at Wyze Labs.", year: "2020" },
+  { hole: 10, title: "Networking", description: "I was invited to several networking at this time with the help of gracious mentors who valued my passion.", year: "2021" },
+  { hole: 11, title: "Economics Olympiad", description: "I took a shot with the Economics Olympiad, and ended up being one of 50 to qualify to the national round.", year: "2021" },
+  { hole: 12, title: "Venture with Jerry", description: "I started reaching out to venture capital investors/operators, then built the blog you're on right now.", year: "2021" },
+  { hole: 13, title: "PitchFork", description: "Drawing from my interviews and other experiences at tech events, I found a new problem to tackle that had amazing potential to scale.", year: "2022" },
+  { hole: 14, title: "Taper", description: "I joined the Taper team as well, a matchmaking platform for student barbers and college students.", year: "2022" },
+  { hole: 15, title: "Director of Sales", description: "After junior year, I was elected by my peers to lead the Junior Advisory Board as the Director of Sales. With this agency, I could now address many of the problems I had observed.", year: "2022" },
+  { hole: 16, title: "The Golden Ratio", description: "I was recruited for an internship by one of my interviewees because he respected my tenacity. I helped with growth, co-hosted events, and even rebuilt the entire web platform for the new year.", year: "2023" },
+  { hole: 17, title: "Senior Season", description: "My final golf season didn't go expected, but it was the most fun I've had playng golf. I'm glad I could share my experiences with my teammates and the memories will carry on for every swing I make in the future.", year: "2023" },
+  { hole: 18, title: "The Journey Continues", description: "Golf, startups, I'm not sure what's next. I do know that I wont be sitting still, there's too much to uncover.", year: "2024" },
 ];
 
 // Course layout positions - precise coordinates as % of image grid
