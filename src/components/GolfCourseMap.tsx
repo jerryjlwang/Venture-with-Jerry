@@ -327,12 +327,12 @@ const GolfCourseMap = () => {
             >
               {/* Content fades in after expansion */}
               <div 
-                className="flex flex-col gap-6 transition-opacity duration-300 h-full"
+                className="flex gap-8 transition-opacity duration-300 h-full"
                 style={{ opacity: animationPhase === 'expanded' ? 1 : 0 }}
               >
-                {/* Header row */}
-                <div className="flex items-start gap-6">
-                  <div className={`w-20 h-20 ${zoomTarget.hole === 'clubhouse' || zoomTarget.hole === 'halfway' ? 'rounded-xl' : 'rounded-full'} ${zoomTarget.hole === 'clubhouse' ? 'bg-amber-700' : zoomTarget.hole === 'halfway' ? 'bg-orange-700' : 'bg-sky-500'} border-4 border-white/40 flex items-center justify-center flex-shrink-0`}>
+                {/* Icon column - centered vertically */}
+                <div className="flex items-center justify-center flex-shrink-0">
+                  <div className={`w-20 h-20 ${zoomTarget.hole === 'clubhouse' || zoomTarget.hole === 'halfway' ? 'rounded-xl' : 'rounded-full'} ${zoomTarget.hole === 'clubhouse' ? 'bg-amber-700' : zoomTarget.hole === 'halfway' ? 'bg-orange-700' : 'bg-sky-500'} border-4 border-white/40 flex items-center justify-center`}>
                     {zoomTarget.hole === 'clubhouse' ? (
                       <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
@@ -350,38 +350,45 @@ const GolfCourseMap = () => {
                       <span className="text-3xl font-sans font-bold text-white">{zoomTarget.hole}</span>
                     )}
                   </div>
-                  <div className="flex-grow min-w-0">
-                    <div className="flex items-center gap-4 mb-3">
-                      <h3 className="text-3xl font-serif text-white">{zoomTarget.title}</h3>
-                      {zoomTarget.year && (
-                        <span className="px-3 py-1 bg-white/10 rounded-lg text-lg font-mono text-white/70">
-                          {zoomTarget.year}
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-gray-300 font-mono text-xl leading-relaxed">{zoomTarget.description}</p>
-                  </div>
-                  <button
-                    onClick={handleClose}
-                    className="text-white/60 hover:text-white transition-colors p-2 flex-shrink-0 hover:bg-white/10 rounded-full"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="18" y1="6" x2="6" y2="18"></line>
-                      <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                  </button>
                 </div>
-                
-                {/* Photo section - only for clubhouse */}
-                {zoomTarget.hole === 'clubhouse' && (
-                  <div className="flex-grow overflow-hidden rounded-xl">
-                    <img 
-                      src={clubhousePhoto} 
-                      alt="Clubhouse" 
-                      className="w-full h-full object-cover rounded-xl"
-                    />
+
+                {/* Content column - text and image aligned */}
+                <div className="flex flex-col gap-4 flex-grow min-w-0">
+                  {/* Header with title and close button */}
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <div className="flex items-center gap-4 mb-2">
+                        <h3 className="text-3xl font-serif text-white">{zoomTarget.title}</h3>
+                        {zoomTarget.year && (
+                          <span className="px-3 py-1 bg-white/10 rounded-lg text-lg font-mono text-white/70">
+                            {zoomTarget.year}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-gray-300 font-mono text-xl leading-relaxed">{zoomTarget.description}</p>
+                    </div>
+                    <button
+                      onClick={handleClose}
+                      className="text-white/60 hover:text-white transition-colors p-2 flex-shrink-0 hover:bg-white/10 rounded-full ml-4"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                      </svg>
+                    </button>
                   </div>
-                )}
+                  
+                  {/* Photo section - only for clubhouse */}
+                  {zoomTarget.hole === 'clubhouse' && (
+                    <div className="flex-grow overflow-hidden rounded-xl">
+                      <img 
+                        src={clubhousePhoto} 
+                        alt="Clubhouse" 
+                        className="w-full h-full object-cover rounded-xl"
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
