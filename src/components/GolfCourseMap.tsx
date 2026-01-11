@@ -72,8 +72,15 @@ const GolfCourseMap = () => {
     <div className="w-full">
       {/* Course Map Container - aspect ratio matches the scorecard image */}
       <div className="relative w-full aspect-[1140/760] rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
-        {/* Static content wrapper - no zoom */}
-        <div className="absolute inset-0">
+        {/* Content wrapper with zoom animation */}
+        <div 
+          className="absolute inset-0 transition-transform duration-500 ease-out origin-center"
+          style={{
+            transform: selectedHole 
+              ? `scale(1.3) translate(${50 - holePositions[selectedHole.hole - 1].x}%, ${50 - holePositions[selectedHole.hole - 1].y}%)`
+              : 'scale(1) translate(0%, 0%)',
+          }}
+        >
           {/* Scorecard background image - object-contain ensures no cropping */}
           <img 
             src={golfScorecard} 
@@ -118,49 +125,49 @@ const GolfCourseMap = () => {
               </button>
             );
           })}
+        </div>
 
-          {/* Expanded popup overlay - almost covers the whole map */}
-          {selectedHole && (
+        {/* Expanded popup overlay - almost covers the whole map, outside zoom wrapper */}
+        {selectedHole && (
+          <div 
+            className="absolute inset-4 z-50 flex items-center justify-center animate-scale-in"
+            onClick={handleClose}
+          >
             <div 
-              className="absolute inset-4 z-50 flex items-center justify-center animate-scale-in"
-              onClick={handleClose}
+              className="w-full h-full bg-amber-950/95 backdrop-blur-xl rounded-2xl border border-white/30 p-8 shadow-2xl flex flex-col justify-center"
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                animation: 'scale-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+              }}
             >
-              <div 
-                className="w-full h-full bg-amber-950/95 backdrop-blur-xl rounded-2xl border border-white/30 p-8 shadow-2xl flex flex-col justify-center"
-                onClick={(e) => e.stopPropagation()}
-                style={{
-                  animation: 'scale-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                }}
-              >
-                <div className="flex items-start gap-6">
-                  <div className="w-20 h-20 rounded-full bg-sky-500 border-4 border-white/40 flex items-center justify-center flex-shrink-0">
-                    <span className="text-3xl font-sans font-bold text-white">{selectedHole.hole}</span>
-                  </div>
-                  <div className="flex-grow min-w-0">
-                    <div className="flex items-center gap-4 mb-3">
-                      <h3 className="text-3xl font-serif text-white">{selectedHole.title}</h3>
-                      {selectedHole.year && (
-                        <span className="px-3 py-1 bg-white/10 rounded-lg text-lg font-mono text-white/70">
-                          {selectedHole.year}
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-gray-300 font-mono text-xl leading-relaxed">{selectedHole.description}</p>
-                  </div>
-                  <button
-                    onClick={handleClose}
-                    className="text-white/60 hover:text-white transition-colors p-2 flex-shrink-0 hover:bg-white/10 rounded-full"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="18" y1="6" x2="6" y2="18"></line>
-                      <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                  </button>
+              <div className="flex items-start gap-6">
+                <div className="w-20 h-20 rounded-full bg-sky-500 border-4 border-white/40 flex items-center justify-center flex-shrink-0">
+                  <span className="text-3xl font-sans font-bold text-white">{selectedHole.hole}</span>
                 </div>
+                <div className="flex-grow min-w-0">
+                  <div className="flex items-center gap-4 mb-3">
+                    <h3 className="text-3xl font-serif text-white">{selectedHole.title}</h3>
+                    {selectedHole.year && (
+                      <span className="px-3 py-1 bg-white/10 rounded-lg text-lg font-mono text-white/70">
+                        {selectedHole.year}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-gray-300 font-mono text-xl leading-relaxed">{selectedHole.description}</p>
+                </div>
+                <button
+                  onClick={handleClose}
+                  className="text-white/60 hover:text-white transition-colors p-2 flex-shrink-0 hover:bg-white/10 rounded-full"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
