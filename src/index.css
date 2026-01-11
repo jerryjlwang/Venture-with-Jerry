@@ -156,9 +156,9 @@
 }
 
 .clubhouse-pulse {
-  animation: clubhouse-pulse-scale 5s ease-in-out infinite;
+  animation: clubhouse-pulse-scale 3.5s ease-in-out infinite;
 }
 
 .clubhouse-ring {
-  animation: clubhouse-ring 5s ease-out infinite;
+  animation: clubhouse-ring 3.5s ease-out infinite;
 }
