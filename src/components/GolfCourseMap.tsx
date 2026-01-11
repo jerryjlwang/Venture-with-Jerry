@@ -33,7 +33,7 @@ const journeyData: HoleData[] = [
 // Measured from the scorecard image where each small blue circle appears
 const holePositions = [
   { x: 26.5, y: 37.5 },    // Hole 1
-  { x: 49, y: 25 },    // Hole 2
+  { x: 48.5, y: 24.5 },    // Hole 2
   { x: 65, y: 34 },    // Hole 3 - down 6%, right 6%
   { x: 78, y: 77 },    // Hole 4 - down 16%, right 10%
   { x: 64, y: 52 },    // Hole 5
