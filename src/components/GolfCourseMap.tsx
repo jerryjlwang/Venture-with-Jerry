@@ -32,10 +32,10 @@ const journeyData: HoleData[] = [
 // Course layout positions - precise coordinates as % of image grid
 // Measured from the scorecard image where each small blue circle appears
 const holePositions = [
-  { x: 26, y: 39 },    // Hole 1
-  { x: 49, y: 21 },    // Hole 2
-  { x: 59, y: 28 },    // Hole 3
-  { x: 68, y: 61 },    // Hole 4
+  { x: 29, y: 35 },    // Hole 1 - up 4%, right 3%
+  { x: 47, y: 27 },    // Hole 2 - down 6%, left 2%
+  { x: 65, y: 34 },    // Hole 3 - down 6%, right 6%
+  { x: 78, y: 77 },    // Hole 4 - down 16%, right 10%
   { x: 64, y: 52 },    // Hole 5
   { x: 55, y: 48 },    // Hole 6
   { x: 44, y: 63 },    // Hole 7
