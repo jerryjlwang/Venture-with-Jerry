@@ -6,6 +6,7 @@ import hole3Photo from '@/assets/hole3-photo.png';
 import hole4Photo from '@/assets/hole4-photo.jpeg';
 import hole5Photo from '@/assets/hole5-photo.png';
 import hole6Photo from '@/assets/hole6-photo.jpeg';
+import hole7Photo from '@/assets/hole7-photo.png';
 
 interface HoleData {
   hole: number | 'clubhouse' | 'halfway';
