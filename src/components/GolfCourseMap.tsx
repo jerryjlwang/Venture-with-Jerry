@@ -1,6 +1,21 @@
 import { useState, useEffect, useCallback } from 'react';
 import golfScorecard from '@/assets/golf-scorecard.png';
 
+// User's original photos for popup content
+import clubhousePhoto from '@/assets/clubhouse-photo.jpeg';
+import hole2Photo from '@/assets/hole2-photo.jpeg';
+import hole3Photo from '@/assets/hole3-photo.png';
+import hole4Photo from '@/assets/hole4-photo.jpeg';
+import hole5Photo from '@/assets/hole5-photo.png';
+import hole6Photo from '@/assets/hole6-photo.jpeg';
+import hole7Photo from '@/assets/hole7-photo.png';
+import hole8Photo from '@/assets/hole8-photo.jpeg';
+import hole9Photo from '@/assets/hole9-photo.png';
+import hole10Photo from '@/assets/hole10-photo.jpeg';
+import hole11Photo from '@/assets/hole11-photo.png';
+import hole12Photo from '@/assets/hole12-photo.png';
+import hole13Photo from '@/assets/hole13-photo.png';
+
 // Chambers Bay background images for popups
 import chambersBayClubhouse from '@/assets/chambers-bay-clubhouse.jpg';
 import chambersBayHalfway from '@/assets/chambers-bay-halfway.jpg';
@@ -108,6 +123,26 @@ const getClampedTranslation = (x: number, y: number, scale: number) => {
   const clampedX = Math.max(-maxTranslate, Math.min(maxTranslate, targetX));
   const clampedY = Math.max(-maxTranslate, Math.min(maxTranslate, targetY));
   return { x: clampedX, y: clampedY };
+};
+
+// Get user's photo for popup content
+const getHolePhoto = (hole: number | 'clubhouse' | 'halfway') => {
+  switch (hole) {
+    case 'clubhouse': return clubhousePhoto;
+    case 2: return hole2Photo;
+    case 3: return hole3Photo;
+    case 4: return hole4Photo;
+    case 5: return hole5Photo;
+    case 6: return hole6Photo;
+    case 7: return hole7Photo;
+    case 8: return hole8Photo;
+    case 9: return hole9Photo;
+    case 10: return hole10Photo;
+    case 11: return hole11Photo;
+    case 12: return hole12Photo;
+    case 13: return hole13Photo;
+    default: return null;
+  }
 };
 
 // Get Chambers Bay background for each hole
@@ -288,6 +323,7 @@ const GolfCourseMap = () => {
   };
 
   const holeBackground = zoomTarget ? getHoleBackground(zoomTarget.hole) : null;
+  const holePhoto = zoomTarget ? getHolePhoto(zoomTarget.hole) : null;
 
   return (
     <div className="w-full">
@@ -501,10 +537,10 @@ const GolfCourseMap = () => {
                 </div>
 
                 {/* Content column */}
-                <div className="flex flex-col gap-4 flex-grow min-w-0 justify-center">
+                <div className="flex flex-col gap-4 flex-grow min-w-0 justify-center overflow-hidden">
                   {/* Header with title, progress, and close button */}
                   <div className="flex items-start justify-between">
-                    <div>
+                    <div className="flex-grow">
                       <div className="flex items-center gap-4 mb-2">
                         <h3 className="text-3xl font-serif text-white drop-shadow-lg">{zoomTarget.title}</h3>
                         {zoomTarget.year && (
@@ -531,6 +567,17 @@ const GolfCourseMap = () => {
                       </button>
                     </div>
                   </div>
+                  
+                  {/* User's photo section */}
+                  {holePhoto && (
+                    <div className="flex-grow overflow-hidden rounded-xl max-h-48">
+                      <img 
+                        src={holePhoto} 
+                        alt={zoomTarget.title} 
+                        className="w-full h-full object-contain rounded-xl"
+                      />
+                    </div>
+                  )}
                 </div>
 
                 {/* Navigation arrow - Next */}
