@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import golfScorecard from '@/assets/golf-scorecard.png';
 import clubhousePhoto from '@/assets/clubhouse-photo.jpeg';
 import hole2Photo from '@/assets/hole2-photo.jpeg';
+import hole3Photo from '@/assets/hole3-photo.png';
 
 interface HoleData {
   hole: number | 'clubhouse' | 'halfway';
@@ -380,10 +381,10 @@ const GolfCourseMap = () => {
                   </div>
                   
                   {/* Photo section - for holes with photos */}
-                  {(zoomTarget.hole === 'clubhouse' || zoomTarget.hole === 2) && (
+                  {(zoomTarget.hole === 'clubhouse' || zoomTarget.hole === 2 || zoomTarget.hole === 3) && (
                     <div className="flex-grow overflow-hidden rounded-xl">
                       <img 
-                        src={zoomTarget.hole === 'clubhouse' ? clubhousePhoto : hole2Photo} 
+                        src={zoomTarget.hole === 'clubhouse' ? clubhousePhoto : zoomTarget.hole === 2 ? hole2Photo : hole3Photo} 
                         alt={zoomTarget.title} 
                         className="w-full h-full object-cover rounded-xl"
                       />
