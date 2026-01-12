@@ -390,7 +390,7 @@ const GolfCourseMap = () => {
                       <img 
                         src={zoomTarget.hole === 'clubhouse' ? clubhousePhoto : zoomTarget.hole === 2 ? hole2Photo : zoomTarget.hole === 3 ? hole3Photo : zoomTarget.hole === 4 ? hole4Photo : zoomTarget.hole === 5 ? hole5Photo : zoomTarget.hole === 6 ? hole6Photo : hole7Photo} 
                         alt={zoomTarget.title} 
-                        className="w-full h-full object-cover rounded-xl"
+                        className="w-full h-full object-contain rounded-xl"
                       />
                     </div>
                   )}
