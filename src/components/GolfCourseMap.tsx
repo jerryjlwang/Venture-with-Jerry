@@ -468,10 +468,10 @@ const GolfCourseMap = () => {
             <div 
               className="relative flex items-center overflow-hidden transition-all duration-500 ease-out"
               style={{
-                width: animationPhase === 'zooming' ? '32px' : '85%',
-                height: animationPhase === 'zooming' ? '32px' : '75%',
-                maxWidth: animationPhase === 'zooming' ? '32px' : '1000px',
-                maxHeight: animationPhase === 'zooming' ? '32px' : '500px',
+                width: animationPhase === 'zooming' ? '32px' : '90%',
+                height: animationPhase === 'zooming' ? '32px' : '85%',
+                maxWidth: animationPhase === 'zooming' ? '32px' : '1200px',
+                maxHeight: animationPhase === 'zooming' ? '32px' : '700px',
                 opacity: animationPhase === 'transitioning' ? 0 : 1,
                 transform: animationPhase === 'zooming' 
                   ? `translate(${(markerRect.x - 50) * 2}%, ${(markerRect.y - 50) * 2}%)`
@@ -570,7 +570,7 @@ const GolfCourseMap = () => {
                   
                   {/* User's photo section */}
                   {holePhoto && (
-                    <div className="flex-grow overflow-hidden rounded-xl max-h-48">
+                    <div className="flex-grow overflow-hidden rounded-xl">
                       <img 
                         src={holePhoto} 
                         alt={zoomTarget.title} 
