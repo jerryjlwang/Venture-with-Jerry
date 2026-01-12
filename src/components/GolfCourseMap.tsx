@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import golfScorecard from '@/assets/golf-scorecard.png';
 import clubhousePhoto from '@/assets/clubhouse-photo.jpeg';
 import hole2Photo from '@/assets/hole2-photo.jpeg';
@@ -58,8 +58,15 @@ const journeyData: HoleData[] = [
   { hole: 18, title: "The Journey Continues", description: "Golf, startups, I'm not sure what's next. I do know that I wont be sitting still, there's too much to uncover.", year: "2024" },
 ];
 
+// Complete journey order: clubhouse -> holes 1-9 -> halfway house -> holes 10-18 -> back to clubhouse
+const journeyOrder: (HoleData)[] = [
+  clubhouseData,
+  ...journeyData.slice(0, 9), // Holes 1-9
+  halfwayHouseData,
+  ...journeyData.slice(9), // Holes 10-18
+];
+
 // Course layout positions - precise coordinates as % of image grid
-// Measured from the scorecard image where each small blue circle appears
 const holePositions = [
   { x: 26.5, y: 37.5 },    // Hole 1
   { x: 48.5, y: 24.5 },    // Hole 2
@@ -81,24 +88,37 @@ const holePositions = [
   { x: 20, y: 34.25 },    // Hole 18
 ];
 
-// Animation phases: idle -> zooming -> expanded
-type AnimationPhase = 'idle' | 'zooming' | 'expanded';
+// Animation phases: idle -> zooming -> expanded -> transitioning (zoom out then zoom in)
+type AnimationPhase = 'idle' | 'zooming' | 'expanded' | 'transitioning';
 
 // Calculate clamped translation to avoid empty space at edges
 const getClampedTranslation = (x: number, y: number, scale: number) => {
-  // At scale 1.3, we can translate up to 15% in each direction without showing empty space
-  // Formula: maxTranslate = (scale - 1) / scale * 50 = 0.3/1.3 * 50 ≈ 11.5%
   const maxTranslate = ((scale - 1) / scale) * 50;
-  
-  // Calculate desired translation (move marker toward center, but not fully)
-  const targetX = (50 - x) * 0.5; // Only move 50% toward center
+  const targetX = (50 - x) * 0.5;
   const targetY = (50 - y) * 0.5;
-  
-  // Clamp to avoid empty space
   const clampedX = Math.max(-maxTranslate, Math.min(maxTranslate, targetX));
   const clampedY = Math.max(-maxTranslate, Math.min(maxTranslate, targetY));
-  
   return { x: clampedX, y: clampedY };
+};
+
+// Get photo for a hole
+const getHolePhoto = (hole: number | 'clubhouse' | 'halfway') => {
+  switch (hole) {
+    case 'clubhouse': return clubhousePhoto;
+    case 2: return hole2Photo;
+    case 3: return hole3Photo;
+    case 4: return hole4Photo;
+    case 5: return hole5Photo;
+    case 6: return hole6Photo;
+    case 7: return hole7Photo;
+    case 8: return hole8Photo;
+    case 9: return hole9Photo;
+    case 10: return hole10Photo;
+    case 11: return hole11Photo;
+    case 12: return hole12Photo;
+    case 13: return hole13Photo;
+    default: return null;
+  }
 };
 
 const GolfCourseMap = () => {
@@ -107,31 +127,83 @@ const GolfCourseMap = () => {
   const [animationPhase, setAnimationPhase] = useState<AnimationPhase>('idle');
   const [zoomTarget, setZoomTarget] = useState<HoleData | null>(null);
   const [markerRect, setMarkerRect] = useState<{ x: number; y: number } | null>(null);
+  const [currentJourneyIndex, setCurrentJourneyIndex] = useState<number>(0);
+  const [isPresentationMode, setIsPresentationMode] = useState(false);
+  const [autoProgressTimer, setAutoProgressTimer] = useState<NodeJS.Timeout | null>(null);
+
+  // Get position for a hole
+  const getHolePosition = useCallback((hole: HoleData) => {
+    if (hole.hole === 'clubhouse') return clubhousePosition;
+    if (hole.hole === 'halfway') return halfwayHousePosition;
+    return holePositions[(hole.hole as number) - 1];
+  }, []);
+
+  // Navigate to a specific hole with animation
+  const navigateToHole = useCallback((hole: HoleData, index: number) => {
+    const pos = getHolePosition(hole);
+    setMarkerRect({ x: pos.x, y: pos.y });
+    setZoomTarget(hole);
+    setCurrentJourneyIndex(index);
+    setAnimationPhase('zooming');
+  }, [getHolePosition]);
+
+  // Go to next hole
+  const goToNext = useCallback(() => {
+    if (currentJourneyIndex < journeyOrder.length - 1) {
+      // First zoom out
+      setAnimationPhase('transitioning');
+      setTimeout(() => {
+        const nextIndex = currentJourneyIndex + 1;
+        const nextHole = journeyOrder[nextIndex];
+        navigateToHole(nextHole, nextIndex);
+      }, 400);
+    } else {
+      // End of journey - close
+      handleClose();
+    }
+  }, [currentJourneyIndex, navigateToHole]);
+
+  // Go to previous hole
+  const goToPrev = useCallback(() => {
+    if (currentJourneyIndex > 0) {
+      setAnimationPhase('transitioning');
+      setTimeout(() => {
+        const prevIndex = currentJourneyIndex - 1;
+        const prevHole = journeyOrder[prevIndex];
+        navigateToHole(prevHole, prevIndex);
+      }, 400);
+    }
+  }, [currentJourneyIndex, navigateToHole]);
 
   const handleHoleClick = (hole: HoleData, isSelected: boolean, event: React.MouseEvent) => {
     if (isSelected || animationPhase !== 'idle') {
-      // Close
-      setAnimationPhase('idle');
-      setSelectedHole(null);
-      setZoomTarget(null);
-      setMarkerRect(null);
-    } else {
-      // Get marker position for morph animation
-      const button = event.currentTarget as HTMLElement;
-      const container = button.closest('.aspect-\\[1140\\/760\\]') as HTMLElement;
-      if (container) {
-        const containerRect = container.getBoundingClientRect();
-        const buttonRect = button.getBoundingClientRect();
-        // Store position as percentage of container
-        setMarkerRect({
-          x: ((buttonRect.left + buttonRect.width / 2) - containerRect.left) / containerRect.width * 100,
-          y: ((buttonRect.top + buttonRect.height / 2) - containerRect.top) / containerRect.height * 100,
-        });
-      }
-      // Start zoom animation
-      setZoomTarget(hole);
-      setAnimationPhase('zooming');
+      handleClose();
+      return;
     }
+
+    // Find index in journey order
+    const index = journeyOrder.findIndex(h => h.hole === hole.hole);
+    
+    // If clicking clubhouse, start presentation mode
+    if (hole.hole === 'clubhouse') {
+      setIsPresentationMode(true);
+    }
+
+    // Get marker position
+    const button = event.currentTarget as HTMLElement;
+    const container = button.closest('.aspect-\\[1140\\/760\\]') as HTMLElement;
+    if (container) {
+      const containerRect = container.getBoundingClientRect();
+      const buttonRect = button.getBoundingClientRect();
+      setMarkerRect({
+        x: ((buttonRect.left + buttonRect.width / 2) - containerRect.left) / containerRect.width * 100,
+        y: ((buttonRect.top + buttonRect.height / 2) - containerRect.top) / containerRect.height * 100,
+      });
+    }
+    
+    setZoomTarget(hole);
+    setCurrentJourneyIndex(index >= 0 ? index : 0);
+    setAnimationPhase('zooming');
   };
 
   // After zoom completes, show the popup
@@ -145,25 +217,53 @@ const GolfCourseMap = () => {
     }
   }, [animationPhase, zoomTarget]);
 
+  // Auto-progress in presentation mode
+  useEffect(() => {
+    if (isPresentationMode && animationPhase === 'expanded') {
+      const timer = setTimeout(() => {
+        goToNext();
+      }, 5000); // 5 seconds per hole
+      setAutoProgressTimer(timer);
+      return () => clearTimeout(timer);
+    }
+  }, [isPresentationMode, animationPhase, goToNext]);
+
   const handleClose = () => {
+    if (autoProgressTimer) {
+      clearTimeout(autoProgressTimer);
+    }
     setAnimationPhase('idle');
     setSelectedHole(null);
     setZoomTarget(null);
     setMarkerRect(null);
+    setIsPresentationMode(false);
+    setCurrentJourneyIndex(0);
   };
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (animationPhase !== 'expanded') return;
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        goToNext();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goToPrev();
+      } else if (e.key === 'Escape') {
+        handleClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [animationPhase, goToNext, goToPrev]);
 
   const isZoomed = animationPhase === 'zooming' || animationPhase === 'expanded';
   const currentZoomHole = zoomTarget || selectedHole;
   
-  // Get position for a hole (works for both numbered holes and special markers)
-  const getHolePosition = (hole: HoleData) => {
-    if (hole.hole === 'clubhouse') return clubhousePosition;
-    if (hole.hole === 'halfway') return halfwayHousePosition;
-    return holePositions[hole.hole - 1];
-  };
-  
   // Calculate transform with clamped translation
   const getZoomTransform = () => {
+    if (animationPhase === 'transitioning') return 'scale(1) translate(0%, 0%)';
     if (!isZoomed || !currentZoomHole) return 'scale(1) translate(0%, 0%)';
     const pos = getHolePosition(currentZoomHole);
     const scale = 1.3;
@@ -171,23 +271,25 @@ const GolfCourseMap = () => {
     return `scale(${scale}) translate(${x}%, ${y}%)`;
   };
 
+  const holePhoto = zoomTarget ? getHolePhoto(zoomTarget.hole) : null;
+
   return (
     <div className="w-full">
-      {/* Course Map Container - aspect ratio matches the scorecard image */}
+      {/* Course Map Container */}
       <div className="relative w-full aspect-[1140/760] rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
         {/* Content wrapper with zoom animation */}
         <div 
           className="absolute inset-0 transition-transform duration-500 ease-out origin-center"
           style={{ transform: getZoomTransform() }}
         >
-          {/* Scorecard background image - object-contain ensures no cropping */}
+          {/* Scorecard background image */}
           <img 
             src={golfScorecard} 
             alt="Golf course scorecard map" 
             className="absolute inset-0 w-full h-full object-fill"
           />
 
-          {/* Hole markers - always visible */}
+          {/* Hole markers */}
           {journeyData.map((hole, index) => {
             const pos = holePositions[index];
             const isHovered = hoveredHole === hole.hole;
@@ -202,7 +304,6 @@ const GolfCourseMap = () => {
                 onMouseEnter={() => animationPhase === 'idle' && setHoveredHole(hole.hole)}
                 onMouseLeave={() => setHoveredHole(null)}
               >
-                {/* Marker circle */}
                 <div 
                   className={`rounded-full flex items-center justify-center font-sans font-semibold shadow-lg transition-all duration-200 ${
                     isSelected
@@ -215,7 +316,6 @@ const GolfCourseMap = () => {
                   <span className="text-sm text-white">{hole.hole}</span>
                 </div>
 
-                {/* Hover tooltip - only show when not selected */}
                 {isHovered && animationPhase === 'idle' && (
                   <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-mono whitespace-nowrap shadow-xl z-30">
                     {hole.title}
@@ -238,7 +338,6 @@ const GolfCourseMap = () => {
                 onMouseEnter={() => animationPhase === 'idle' && setHoveredHole('halfway')}
                 onMouseLeave={() => setHoveredHole(null)}
               >
-                {/* Marker - coffee/food icon style */}
                 <div 
                   className={`rounded-lg flex items-center justify-center font-sans font-semibold shadow-lg transition-all duration-200 ${
                     isSelected
@@ -257,7 +356,6 @@ const GolfCourseMap = () => {
                   </svg>
                 </div>
 
-                {/* Hover tooltip */}
                 {isHovered && animationPhase === 'idle' && (
                   <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-mono whitespace-nowrap shadow-xl z-30">
                     Halfway House
@@ -280,11 +378,9 @@ const GolfCourseMap = () => {
                 onMouseEnter={() => animationPhase === 'idle' && setHoveredHole('clubhouse')}
                 onMouseLeave={() => setHoveredHole(null)}
               >
-                {/* Pulse ring animation */}
                 {!isSelected && (
                   <div className="clubhouse-ring absolute inset-[-8px] rounded-xl bg-amber-400/50" />
                 )}
-                {/* Marker - home icon style with scale pulse */}
                 <div 
                   className={`relative rounded-lg flex items-center justify-center font-sans font-semibold shadow-lg transition-all duration-200 ${
                     isSelected
@@ -300,10 +396,9 @@ const GolfCourseMap = () => {
                   </svg>
                 </div>
 
-                {/* Hover tooltip */}
                 {isHovered && animationPhase === 'idle' && (
                   <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-mono whitespace-nowrap shadow-xl z-30">
-                    Clubhouse
+                    Click to start the journey
                   </div>
                 )}
               </button>
@@ -311,12 +406,11 @@ const GolfCourseMap = () => {
           })()}
         </div>
 
-        {/* Morphing popup - starts from marker position and expands */}
+        {/* Morphing popup */}
         {(animationPhase === 'zooming' || animationPhase === 'expanded') && zoomTarget && markerRect && (
           <div 
             className="absolute z-50 pointer-events-none"
             style={{
-              // Start from marker position, expand to full size
               left: animationPhase === 'zooming' ? `${markerRect.x}%` : '16px',
               top: animationPhase === 'zooming' ? `${markerRect.y}%` : '16px',
               right: animationPhase === 'zooming' ? 'auto' : '16px',
@@ -342,7 +436,22 @@ const GolfCourseMap = () => {
                 className="flex gap-8 transition-opacity duration-300 h-full"
                 style={{ opacity: animationPhase === 'expanded' ? 1 : 0 }}
               >
-                {/* Icon column - centered vertically */}
+                {/* Navigation arrow - Previous */}
+                <button
+                  onClick={goToPrev}
+                  disabled={currentJourneyIndex === 0}
+                  className={`flex items-center justify-center flex-shrink-0 transition-all duration-200 ${
+                    currentJourneyIndex === 0 
+                      ? 'opacity-20 cursor-not-allowed' 
+                      : 'opacity-60 hover:opacity-100 hover:scale-110'
+                  }`}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+
+                {/* Icon column */}
                 <div className="flex items-center justify-center flex-shrink-0">
                   <div className={`w-20 h-20 ${zoomTarget.hole === 'clubhouse' || zoomTarget.hole === 'halfway' ? 'rounded-xl' : 'rounded-full'} ${zoomTarget.hole === 'clubhouse' ? 'bg-amber-700' : zoomTarget.hole === 'halfway' ? 'bg-orange-700' : 'bg-sky-500'} border-4 border-white/40 flex items-center justify-center`}>
                     {zoomTarget.hole === 'clubhouse' ? (
@@ -364,9 +473,9 @@ const GolfCourseMap = () => {
                   </div>
                 </div>
 
-                {/* Content column - text and image aligned */}
+                {/* Content column */}
                 <div className="flex flex-col gap-4 flex-grow min-w-0">
-                  {/* Header with title and close button */}
+                  {/* Header with title, progress, and close button */}
                   <div className="flex items-start justify-between">
                     <div>
                       <div className="flex items-center gap-4 mb-2">
@@ -379,29 +488,57 @@ const GolfCourseMap = () => {
                       </div>
                       <p className="text-gray-300 font-mono text-xl leading-relaxed">{zoomTarget.description}</p>
                     </div>
-                    <button
-                      onClick={handleClose}
-                      className="text-white/60 hover:text-white transition-colors p-2 flex-shrink-0 hover:bg-white/10 rounded-full ml-4"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                      </svg>
-                    </button>
+                    <div className="flex items-center gap-2 flex-shrink-0 ml-4">
+                      {/* Progress indicator */}
+                      <span className="text-white/50 font-mono text-sm">
+                        {currentJourneyIndex + 1} / {journeyOrder.length}
+                      </span>
+                      <button
+                        onClick={handleClose}
+                        className="text-white/60 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="18" y1="6" x2="6" y2="18"></line>
+                          <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                      </button>
+                    </div>
                   </div>
                   
-                  {/* Photo section - for holes with photos */}
-                  {(zoomTarget.hole === 'clubhouse' || zoomTarget.hole === 2 || zoomTarget.hole === 3 || zoomTarget.hole === 4 || zoomTarget.hole === 5 || zoomTarget.hole === 6 || zoomTarget.hole === 7 || zoomTarget.hole === 8 || zoomTarget.hole === 9 || zoomTarget.hole === 10 || zoomTarget.hole === 11 || zoomTarget.hole === 12 || zoomTarget.hole === 13) && (
+                  {/* Photo section */}
+                  {holePhoto && (
                     <div className="flex-grow overflow-hidden rounded-xl">
                       <img 
-                        src={zoomTarget.hole === 'clubhouse' ? clubhousePhoto : zoomTarget.hole === 2 ? hole2Photo : zoomTarget.hole === 3 ? hole3Photo : zoomTarget.hole === 4 ? hole4Photo : zoomTarget.hole === 5 ? hole5Photo : zoomTarget.hole === 6 ? hole6Photo : zoomTarget.hole === 7 ? hole7Photo : zoomTarget.hole === 8 ? hole8Photo : zoomTarget.hole === 9 ? hole9Photo : zoomTarget.hole === 10 ? hole10Photo : zoomTarget.hole === 11 ? hole11Photo : zoomTarget.hole === 12 ? hole12Photo : hole13Photo} 
+                        src={holePhoto} 
                         alt={zoomTarget.title} 
                         className="w-full h-full object-contain rounded-xl"
                       />
                     </div>
                   )}
                 </div>
+
+                {/* Navigation arrow - Next */}
+                <button
+                  onClick={goToNext}
+                  className="flex items-center justify-center flex-shrink-0 opacity-60 hover:opacity-100 hover:scale-110 transition-all duration-200"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
               </div>
+
+              {/* Progress bar for auto-advance */}
+              {isPresentationMode && animationPhase === 'expanded' && (
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/10">
+                  <div 
+                    className="h-full bg-amber-500 transition-all duration-100"
+                    style={{
+                      animation: 'progress-bar 5s linear forwards',
+                    }}
+                  />
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -411,6 +548,14 @@ const GolfCourseMap = () => {
           <div className="absolute inset-0 z-40" onClick={handleClose} />
         )}
       </div>
+
+      {/* Add keyframes for progress bar */}
+      <style>{`
+        @keyframes progress-bar {
+          from { width: 0%; }
+          to { width: 100%; }
+        }
+      `}</style>
     </div>
   );
 };
