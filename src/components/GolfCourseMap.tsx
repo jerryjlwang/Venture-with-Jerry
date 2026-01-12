@@ -3,6 +3,7 @@ import golfScorecard from '@/assets/golf-scorecard.png';
 import clubhousePhoto from '@/assets/clubhouse-photo.jpeg';
 import hole2Photo from '@/assets/hole2-photo.jpeg';
 import hole3Photo from '@/assets/hole3-photo.png';
+import hole4Photo from '@/assets/hole4-photo.jpeg';
 
 interface HoleData {
   hole: number | 'clubhouse' | 'halfway';
@@ -381,10 +382,10 @@ const GolfCourseMap = () => {
                   </div>
                   
                   {/* Photo section - for holes with photos */}
-                  {(zoomTarget.hole === 'clubhouse' || zoomTarget.hole === 2 || zoomTarget.hole === 3) && (
+                  {(zoomTarget.hole === 'clubhouse' || zoomTarget.hole === 2 || zoomTarget.hole === 3 || zoomTarget.hole === 4) && (
                     <div className="flex-grow overflow-hidden rounded-xl">
                       <img 
-                        src={zoomTarget.hole === 'clubhouse' ? clubhousePhoto : zoomTarget.hole === 2 ? hole2Photo : hole3Photo} 
+                        src={zoomTarget.hole === 'clubhouse' ? clubhousePhoto : zoomTarget.hole === 2 ? hole2Photo : zoomTarget.hole === 3 ? hole3Photo : hole4Photo} 
                         alt={zoomTarget.title} 
                         className="w-full h-full object-cover rounded-xl"
                       />
