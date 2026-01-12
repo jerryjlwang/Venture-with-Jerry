@@ -1,18 +1,27 @@
 import { useState, useEffect, useCallback } from 'react';
 import golfScorecard from '@/assets/golf-scorecard.png';
-import clubhousePhoto from '@/assets/clubhouse-photo.jpeg';
-import hole2Photo from '@/assets/hole2-photo.jpeg';
-import hole3Photo from '@/assets/hole3-photo.png';
-import hole4Photo from '@/assets/hole4-photo.jpeg';
-import hole5Photo from '@/assets/hole5-photo.png';
-import hole6Photo from '@/assets/hole6-photo.jpeg';
-import hole7Photo from '@/assets/hole7-photo.png';
-import hole8Photo from '@/assets/hole8-photo.jpeg';
-import hole9Photo from '@/assets/hole9-photo.png';
-import hole10Photo from '@/assets/hole10-photo.jpeg';
-import hole11Photo from '@/assets/hole11-photo.png';
-import hole12Photo from '@/assets/hole12-photo.png';
-import hole13Photo from '@/assets/hole13-photo.png';
+
+// Chambers Bay background images for popups
+import chambersBayClubhouse from '@/assets/chambers-bay-clubhouse.jpg';
+import chambersBayHalfway from '@/assets/chambers-bay-halfway.jpg';
+import chambersBayHole1 from '@/assets/chambers-bay-hole1.jpg';
+import chambersBayHole2 from '@/assets/chambers-bay-hole2.jpg';
+import chambersBayHole3 from '@/assets/chambers-bay-hole3.jpg';
+import chambersBayHole4 from '@/assets/chambers-bay-hole4.jpg';
+import chambersBayHole5 from '@/assets/chambers-bay-hole5.jpg';
+import chambersBayHole6 from '@/assets/chambers-bay-hole6.jpg';
+import chambersBayHole7 from '@/assets/chambers-bay-hole7.jpg';
+import chambersBayHole8 from '@/assets/chambers-bay-hole8.jpg';
+import chambersBayHole9 from '@/assets/chambers-bay-hole9.jpg';
+import chambersBayHole10 from '@/assets/chambers-bay-hole10.jpg';
+import chambersBayHole11 from '@/assets/chambers-bay-hole11.jpg';
+import chambersBayHole12 from '@/assets/chambers-bay-hole12.jpg';
+import chambersBayHole13 from '@/assets/chambers-bay-hole13.jpg';
+import chambersBayHole14 from '@/assets/chambers-bay-hole14.jpg';
+import chambersBayHole15 from '@/assets/chambers-bay-hole15.jpg';
+import chambersBayHole16 from '@/assets/chambers-bay-hole16.jpg';
+import chambersBayHole17 from '@/assets/chambers-bay-hole17.jpg';
+import chambersBayHole18 from '@/assets/chambers-bay-hole18.jpg';
 
 interface HoleData {
   hole: number | 'clubhouse' | 'halfway';
@@ -101,23 +110,30 @@ const getClampedTranslation = (x: number, y: number, scale: number) => {
   return { x: clampedX, y: clampedY };
 };
 
-// Get photo for a hole
-const getHolePhoto = (hole: number | 'clubhouse' | 'halfway') => {
+// Get Chambers Bay background for each hole
+const getHoleBackground = (hole: number | 'clubhouse' | 'halfway') => {
   switch (hole) {
-    case 'clubhouse': return clubhousePhoto;
-    case 2: return hole2Photo;
-    case 3: return hole3Photo;
-    case 4: return hole4Photo;
-    case 5: return hole5Photo;
-    case 6: return hole6Photo;
-    case 7: return hole7Photo;
-    case 8: return hole8Photo;
-    case 9: return hole9Photo;
-    case 10: return hole10Photo;
-    case 11: return hole11Photo;
-    case 12: return hole12Photo;
-    case 13: return hole13Photo;
-    default: return null;
+    case 'clubhouse': return chambersBayClubhouse;
+    case 'halfway': return chambersBayHalfway;
+    case 1: return chambersBayHole1;
+    case 2: return chambersBayHole2;
+    case 3: return chambersBayHole3;
+    case 4: return chambersBayHole4;
+    case 5: return chambersBayHole5;
+    case 6: return chambersBayHole6;
+    case 7: return chambersBayHole7;
+    case 8: return chambersBayHole8;
+    case 9: return chambersBayHole9;
+    case 10: return chambersBayHole10;
+    case 11: return chambersBayHole11;
+    case 12: return chambersBayHole12;
+    case 13: return chambersBayHole13;
+    case 14: return chambersBayHole14;
+    case 15: return chambersBayHole15;
+    case 16: return chambersBayHole16;
+    case 17: return chambersBayHole17;
+    case 18: return chambersBayHole18;
+    default: return chambersBayHole1;
   }
 };
 
@@ -271,7 +287,7 @@ const GolfCourseMap = () => {
     return `scale(${scale}) translate(${x}%, ${y}%)`;
   };
 
-  const holePhoto = zoomTarget ? getHolePhoto(zoomTarget.hole) : null;
+  const holeBackground = zoomTarget ? getHoleBackground(zoomTarget.hole) : null;
 
   return (
     <div className="w-full">
@@ -378,19 +394,20 @@ const GolfCourseMap = () => {
                 onMouseEnter={() => animationPhase === 'idle' && setHoveredHole('clubhouse')}
                 onMouseLeave={() => setHoveredHole(null)}
               >
-                {!isSelected && (
-                  <div className="clubhouse-ring absolute inset-[-8px] rounded-xl bg-amber-400/50" />
-                )}
                 <div 
-                  className={`relative rounded-lg flex items-center justify-center font-sans font-semibold shadow-lg transition-all duration-200 ${
+                  className={`rounded-xl flex items-center justify-center font-sans font-semibold shadow-lg transition-all duration-200 relative ${
                     isSelected
-                      ? 'w-12 h-12 bg-amber-500 text-white ring-2 ring-white/50'
+                      ? 'w-14 h-14 bg-amber-600 text-white ring-2 ring-white/50'
                       : isHovered 
-                        ? 'w-12 h-12 bg-amber-600 text-white scale-110' 
-                        : 'w-10 h-10 bg-amber-700 text-white clubhouse-pulse'
+                        ? 'w-14 h-14 bg-amber-600 text-white scale-110' 
+                        : 'w-12 h-12 bg-amber-700 text-white clubhouse-pulse'
                   }`}
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  {/* Pulsing ring - only when not hovered and not selected */}
+                  {!isHovered && !isSelected && (
+                    <span className="absolute inset-0 rounded-xl clubhouse-ring" />
+                  )}
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 relative z-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                     <polyline points="9 22 9 12 15 12 15 22"></polyline>
                   </svg>
@@ -398,7 +415,7 @@ const GolfCourseMap = () => {
 
                 {isHovered && animationPhase === 'idle' && (
                   <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-mono whitespace-nowrap shadow-xl z-30">
-                    Click to start the journey
+                    Start Journey Here
                   </div>
                 )}
               </button>
@@ -406,34 +423,44 @@ const GolfCourseMap = () => {
           })()}
         </div>
 
-        {/* Morphing popup */}
-        {(animationPhase === 'zooming' || animationPhase === 'expanded') && zoomTarget && markerRect && (
+        {/* Morphing popup from marker to full content */}
+        {(animationPhase !== 'idle') && zoomTarget && markerRect && (
           <div 
-            className="absolute z-50 pointer-events-none"
-            style={{
-              left: animationPhase === 'zooming' ? `${markerRect.x}%` : '16px',
-              top: animationPhase === 'zooming' ? `${markerRect.y}%` : '16px',
-              right: animationPhase === 'zooming' ? 'auto' : '16px',
-              bottom: animationPhase === 'zooming' ? 'auto' : '16px',
-              width: animationPhase === 'zooming' ? '40px' : 'auto',
-              height: animationPhase === 'zooming' ? '40px' : 'auto',
-              transform: animationPhase === 'zooming' ? 'translate(-50%, -50%)' : 'none',
-              transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
-            }}
+            className="absolute inset-0 z-50 flex items-center justify-center"
           >
+            {/* Popup container with background image */}
             <div 
-              className={`w-full h-full bg-amber-950/95 backdrop-blur-xl rounded-2xl border border-white/30 shadow-2xl flex flex-col justify-center overflow-hidden ${
-                animationPhase === 'expanded' ? 'pointer-events-auto' : ''
-              }`}
+              className="relative flex items-center overflow-hidden transition-all duration-500 ease-out"
               style={{
-                padding: animationPhase === 'expanded' ? '32px' : '0',
+                width: animationPhase === 'zooming' ? '32px' : '85%',
+                height: animationPhase === 'zooming' ? '32px' : '75%',
+                maxWidth: animationPhase === 'zooming' ? '32px' : '1000px',
+                maxHeight: animationPhase === 'zooming' ? '32px' : '500px',
+                opacity: animationPhase === 'transitioning' ? 0 : 1,
+                transform: animationPhase === 'zooming' 
+                  ? `translate(${(markerRect.x - 50) * 2}%, ${(markerRect.y - 50) * 2}%)`
+                  : 'translate(0, 0)',
                 borderRadius: animationPhase === 'zooming' ? '50%' : '16px',
               }}
               onClick={(e) => e.stopPropagation()}
             >
+              {/* Background image */}
+              {holeBackground && (
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-opacity duration-500"
+                  style={{ 
+                    backgroundImage: `url(${holeBackground})`,
+                    opacity: animationPhase === 'expanded' ? 1 : 0
+                  }}
+                />
+              )}
+              
+              {/* Dark overlay for readability */}
+              <div className="absolute inset-0 bg-black/60" />
+              
               {/* Content fades in after expansion */}
               <div 
-                className="flex gap-8 transition-opacity duration-300 h-full"
+                className="relative flex gap-8 transition-opacity duration-300 h-full w-full p-8"
                 style={{ opacity: animationPhase === 'expanded' ? 1 : 0 }}
               >
                 {/* Navigation arrow - Previous */}
@@ -474,23 +501,23 @@ const GolfCourseMap = () => {
                 </div>
 
                 {/* Content column */}
-                <div className="flex flex-col gap-4 flex-grow min-w-0">
+                <div className="flex flex-col gap-4 flex-grow min-w-0 justify-center">
                   {/* Header with title, progress, and close button */}
                   <div className="flex items-start justify-between">
                     <div>
                       <div className="flex items-center gap-4 mb-2">
-                        <h3 className="text-3xl font-serif text-white">{zoomTarget.title}</h3>
+                        <h3 className="text-3xl font-serif text-white drop-shadow-lg">{zoomTarget.title}</h3>
                         {zoomTarget.year && (
-                          <span className="px-3 py-1 bg-white/10 rounded-lg text-lg font-mono text-white/70">
+                          <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-lg text-lg font-mono text-white">
                             {zoomTarget.year}
                           </span>
                         )}
                       </div>
-                      <p className="text-gray-300 font-mono text-xl leading-relaxed">{zoomTarget.description}</p>
+                      <p className="text-gray-100 font-mono text-xl leading-relaxed drop-shadow-md">{zoomTarget.description}</p>
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0 ml-4">
                       {/* Progress indicator */}
-                      <span className="text-white/50 font-mono text-sm">
+                      <span className="text-white/70 font-mono text-sm">
                         {currentJourneyIndex + 1} / {journeyOrder.length}
                       </span>
                       <button
@@ -504,17 +531,6 @@ const GolfCourseMap = () => {
                       </button>
                     </div>
                   </div>
-                  
-                  {/* Photo section */}
-                  {holePhoto && (
-                    <div className="flex-grow overflow-hidden rounded-xl">
-                      <img 
-                        src={holePhoto} 
-                        alt={zoomTarget.title} 
-                        className="w-full h-full object-contain rounded-xl"
-                      />
-                    </div>
-                  )}
                 </div>
 
                 {/* Navigation arrow - Next */}
