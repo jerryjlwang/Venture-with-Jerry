@@ -385,10 +385,10 @@ const GolfCourseMap = () => {
                   </div>
                   
                   {/* Photo section - for holes with photos */}
-                  {(zoomTarget.hole === 'clubhouse' || zoomTarget.hole === 2 || zoomTarget.hole === 3 || zoomTarget.hole === 4 || zoomTarget.hole === 5 || zoomTarget.hole === 6) && (
+                  {(zoomTarget.hole === 'clubhouse' || zoomTarget.hole === 2 || zoomTarget.hole === 3 || zoomTarget.hole === 4 || zoomTarget.hole === 5 || zoomTarget.hole === 6 || zoomTarget.hole === 7) && (
                     <div className="flex-grow overflow-hidden rounded-xl">
                       <img 
-                        src={zoomTarget.hole === 'clubhouse' ? clubhousePhoto : zoomTarget.hole === 2 ? hole2Photo : zoomTarget.hole === 3 ? hole3Photo : zoomTarget.hole === 4 ? hole4Photo : zoomTarget.hole === 5 ? hole5Photo : hole6Photo} 
+                        src={zoomTarget.hole === 'clubhouse' ? clubhousePhoto : zoomTarget.hole === 2 ? hole2Photo : zoomTarget.hole === 3 ? hole3Photo : zoomTarget.hole === 4 ? hole4Photo : zoomTarget.hole === 5 ? hole5Photo : zoomTarget.hole === 6 ? hole6Photo : hole7Photo} 
                         alt={zoomTarget.title} 
                         className="w-full h-full object-cover rounded-xl"
                       />
