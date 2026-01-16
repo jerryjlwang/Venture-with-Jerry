@@ -483,12 +483,12 @@ const GolfCourseMap = () => {
               {/* Background image with Ken Burns effect */}
               {holeBackground && (
                 <div 
-                  className={`absolute inset-0 bg-cover bg-center transition-opacity duration-500 ${animationPhase === 'expanded' ? 'ken-burns' : ''}`}
+                  className={`absolute bg-cover bg-center transition-opacity duration-500 ${animationPhase === 'expanded' ? 'ken-burns' : ''}`}
                   style={{ 
                     backgroundImage: `url(${holeBackground})`,
                     opacity: animationPhase === 'expanded' ? 1 : 0,
-                    // Slightly larger to allow for Ken Burns movement without showing edges
-                    inset: '-10%',
+                    top: '-10%',
+                    left: '-10%',
                     width: '120%',
                     height: '120%'
                   }}
