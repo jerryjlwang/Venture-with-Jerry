@@ -14,7 +14,7 @@ const Header = () => {
       {/* Logo/Home Link - Left Side */}
       <Link 
         to="/" 
-        className={`text-white hover:text-blue-300 transition-colors font-playfair font-medium text-2xl ml-10 mt-10 tracking-widest ${isActive('/') ? 'text-blue-300' : ''}`}
+        className={`text-white hover:text-blue-300 transition-colors font-courier font-medium text-2xl ml-10 mt-10 tracking-wide ${isActive('/') ? 'text-blue-300' : ''}`}
       >
         Venture with Jerry
       </Link>
@@ -23,19 +23,19 @@ const Header = () => {
       <nav className="hidden md:flex space-x-8 mr-10 mt-10">
         <Link 
           to="/posts" 
-          className={`text-white hover:text-blue-300 transition-colors text-lg font-playfair tracking-widest ${isActive('/posts') ? 'text-blue-300' : ''}`}
+          className={`text-white hover:text-blue-300 transition-colors text-lg font-courier tracking-wide ${isActive('/posts') ? 'text-blue-300' : ''}`}
         >
           Posts
         </Link>
         <Link 
           to="/golf" 
-          className={`text-white hover:text-blue-300 transition-colors text-lg font-playfair tracking-widest ${isActive('/golf') ? 'text-blue-300' : ''}`}
+          className={`text-white hover:text-blue-300 transition-colors text-lg font-courier tracking-wide ${isActive('/golf') ? 'text-blue-300' : ''}`}
         >
           Golf
         </Link>
         <Link 
           to="/about" 
-          className={`text-white hover:text-blue-300 transition-colors text-lg font-playfair tracking-widest ${isActive('/about') ? 'text-blue-300' : ''}`}
+          className={`text-white hover:text-blue-300 transition-colors text-lg font-courier tracking-wide ${isActive('/about') ? 'text-blue-300' : ''}`}
         >
           About
         </Link>
@@ -57,21 +57,21 @@ const Header = () => {
           <div className="flex flex-col space-y-2">
             <Link 
               to="/posts" 
-              className={`text-white hover:text-blue-300 transition-colors py-2 ${isActive('/posts') ? 'text-blue-300' : ''}`}
+              className={`text-white hover:text-blue-300 transition-colors py-2 font-courier ${isActive('/posts') ? 'text-blue-300' : ''}`}
               onClick={() => setIsMenuOpen(false)}
             >
               Posts
             </Link>
             <Link 
               to="/golf" 
-              className={`text-white hover:text-blue-300 transition-colors py-2 ${isActive('/golf') ? 'text-blue-300' : ''}`}
+              className={`text-white hover:text-blue-300 transition-colors py-2 font-courier ${isActive('/golf') ? 'text-blue-300' : ''}`}
               onClick={() => setIsMenuOpen(false)}
             >
               Golf
             </Link>
             <Link 
               to="/about" 
-              className={`text-white hover:text-blue-300 transition-colors py-2 ${isActive('/about') ? 'text-blue-300' : ''}`}
+              className={`text-white hover:text-blue-300 transition-colors py-2 font-courier ${isActive('/about') ? 'text-blue-300' : ''}`}
               onClick={() => setIsMenuOpen(false)}
             >
               About
