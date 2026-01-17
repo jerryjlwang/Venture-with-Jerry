@@ -2,6 +2,9 @@ import { useParams, Link } from 'react-router-dom';
 import { posts } from '../data/posts';
 import { ArrowUp, ArrowLeft } from 'lucide-react';
 import { ASSET_V } from '../lib/assetVersion';
+import OptimizedBackground from '../components/OptimizedBackground';
+
+const SEATTLE_SKYLINE = 'https://te-cdn-marketing-site.storage.googleapis.com/littleamerica/America/parnter/stay/places/usa-washington-state-seattle-skyline.jpg';
 
 const PostDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -9,16 +12,12 @@ const PostDetail = () => {
 
   if (!post) {
     return (
-      <div className="min-h-screen relative bg-slate-900">
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
-          style={{
-            backgroundImage: `url('https://te-cdn-marketing-site.storage.googleapis.com/littleamerica/America/parnter/stay/places/usa-washington-state-seattle-skyline.jpg')`
-          }} 
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/30 to-slate-900" />
-        
+      <OptimizedBackground
+        src={SEATTLE_SKYLINE}
+        alt="Seattle skyline"
+        className="min-h-screen"
+        overlayClassName="bg-gradient-to-b from-black/30 via-black/30 to-slate-900"
+      >
         <div className="relative z-10 flex items-center justify-center min-h-screen">
           <div className="text-center">
             <h1 className="text-4xl font-courier font-bold text-white mb-4 tracking-wide">Post Not Found</h1>
@@ -27,22 +26,19 @@ const PostDetail = () => {
             </Link>
           </div>
         </div>
-      </div>
+      </OptimizedBackground>
     );
   }
 
   return (
     <div className="min-h-screen relative bg-slate-900">
-      {/* Background Image - visible on sides */}
-      <div 
-        className="fixed inset-0 bg-cover bg-center bg-no-repeat" 
-        style={{
-          backgroundImage: `url('https://te-cdn-marketing-site.storage.googleapis.com/littleamerica/America/parnter/stay/places/usa-washington-state-seattle-skyline.jpg')`
-        }} 
+      {/* Optimized Background Image */}
+      <OptimizedBackground
+        src={SEATTLE_SKYLINE}
+        alt="Seattle skyline"
+        className="fixed inset-0"
+        overlayClassName="bg-gradient-to-b from-black/50 via-black/40 to-slate-900/95"
       />
-      
-      {/* Dark overlay */}
-      <div className="fixed inset-0 bg-gradient-to-b from-black/50 via-black/40 to-slate-900/95" />
       
       {/* Content */}
       <article className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
