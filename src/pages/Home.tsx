@@ -13,7 +13,7 @@ const Home = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/30 to-slate-900" />
         
         {/* Hero Content */}
-        <div className="absolute inset-0 flex flex-col justify-between pt-56 pb-8">
+        <div className="absolute inset-0 flex flex-col justify-start pt-56">
           <div className="max-w-6xl mx-auto text-center px-4 sm:px-6 lg:px-8">
             <h1 className="text-5xl md:text-7xl font-courier font-medium text-white mb-6 leading-tight tracking-widest">
               Welcome to My Personal Page            </h1>
@@ -34,16 +34,18 @@ const Home = () => {
               </div>
             </div>
           </div>
-          
-          {/* Logo Carousel at bottom of hero */}
-          <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8">
-            <LogoCarousel direction="horizontal" />
-          </div>
         </div>
       </div>
 
       {/* Content on blue slate background */}
       <div className="bg-slate-900">
+        {/* Logo Carousel */}
+        <section className="py-6 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto">
+            <LogoCarousel direction="horizontal" />
+          </div>
+        </section>
+        
         {/* Recent Posts Section */}
         <RecentPostsCarousel />
 
