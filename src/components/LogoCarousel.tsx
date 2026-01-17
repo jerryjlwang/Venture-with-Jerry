@@ -117,7 +117,7 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
             )}
           </>
         ) : (
-          <div className="w-full h-full rounded flex items-center justify-center text-gray-700 text-xs font-playfair tracking-wide text-center p-1">
+          <div className="w-full h-full rounded flex items-center justify-center text-gray-700 text-xs font-courier tracking-wide text-center p-1">
             {logo.name}
           </div>
         )}

@@ -11,7 +11,7 @@ const About = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 font-courier tracking-wide">
             About Me
           </h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto font-courier tracking-wide">
             Get to know the person behind the posts
           </p>
         </div>
@@ -76,7 +76,7 @@ const About = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <h3 className="text-lg font-semibold text-blue-400 mb-3 font-courier tracking-wide">Technical Skills</h3>
-                  <ul className="text-gray-300 space-y-2">
+                  <ul className="text-gray-300 space-y-2 font-courier">
                     <li>• Math</li>
                     <li>• Python</li>
                     <li>• Financial Analysis</li>
@@ -86,7 +86,7 @@ const About = () => {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-blue-400 mb-3 font-courier tracking-wide">Interests</h3>
-                  <ul className="text-gray-300 space-y-2">
+                  <ul className="text-gray-300 space-y-2 font-courier">
                     <li>• Open Source Projects</li>
                     <li>• VC Writing</li>
                     <li>• Golf Course Design</li>
