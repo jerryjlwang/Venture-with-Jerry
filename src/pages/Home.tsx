@@ -21,13 +21,20 @@ const Home = () => {
               A place where you can get to know me and learn about my venture capital conversations.
             </p>
             <div className="relative flex justify-center w-full">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a href="/posts" className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-courier font-medium transition-colors shadow-lg hover:shadow-xl tracking-wide">
-                  Read My Posts
-                </a>
-                <a href="/about" className="inline-flex items-center justify-center border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-courier font-medium transition-all shadow-lg hover:shadow-xl tracking-wide">
-                  Learn About Me
-                </a>
+              <div className="flex flex-col items-center gap-4">
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a href="/posts" className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-courier font-medium transition-colors shadow-lg hover:shadow-xl tracking-wide">
+                    Read My Posts
+                  </a>
+                  <a href="/about" className="inline-flex items-center justify-center border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-courier font-medium transition-all shadow-lg hover:shadow-xl tracking-wide">
+                    Learn About Me
+                  </a>
+                </div>
+                <div className="mt-4 animate-bounce">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                </div>
               </div>
               <div className="absolute top-0 right-0 w-72 hidden lg:block">
                 <NextGuests />
