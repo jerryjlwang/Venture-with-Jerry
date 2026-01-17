@@ -51,7 +51,7 @@ const Home = () => {
         <section className="py-12 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="bg-white/5 backdrop-blur-md rounded-xl p-8 border border-white/20">
-              <h2 className="text-2xl font-playfair font-medium text-white mb-6 text-center tracking-widest">
+              <h2 className="text-2xl font-courier font-medium text-white mb-6 text-center tracking-wide">
                 My Mission
               </h2>
               <div className="flex flex-col items-center gap-8">
