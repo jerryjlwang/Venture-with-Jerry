@@ -7,11 +7,7 @@ const Home = () => {
       {/* Hero Section with Background Image */}
       <div className="relative">
         {/* Background Image - full width, natural height */}
-        <img 
-          src="https://te-cdn-marketing-site.storage.googleapis.com/littleamerica/America/parnter/stay/places/usa-washington-state-seattle-skyline.jpg"
-          alt="Seattle skyline"
-          className="w-full h-auto"
-        />
+        <img src="https://te-cdn-marketing-site.storage.googleapis.com/littleamerica/America/parnter/stay/places/usa-washington-state-seattle-skyline.jpg" alt="Seattle skyline" className="w-full h-auto" />
         
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/30 to-slate-900" />
@@ -19,7 +15,7 @@ const Home = () => {
         {/* Hero Content */}
         <div className="absolute inset-0 flex items-center justify-center pt-24">
           <div className="max-w-6xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-            <h1 className="text-5xl md:text-7xl font-playfair font-medium text-white mb-6 leading-tight tracking-widest">
+            <h1 className="text-5xl md:text-7xl font-courrier font-medium text-white mb-6 leading-tight tracking-widest">
               Welcome to My Personal Page            </h1>
             <p className="text-xl md:text-2xl font-playfair mb-8 max-w-3xl mx-auto leading-relaxed tracking-widest text-primary-foreground">
               A place where you can get to know me and learn about my venture capital conversations.
@@ -60,11 +56,7 @@ const Home = () => {
               </h2>
               <div className="flex flex-col items-center gap-8">
                 <div className="w-full max-w-2xl">
-                  <img 
-                    src={missionTeamImage} 
-                    alt="Team collaboration" 
-                    className="w-full h-auto rounded-lg shadow-lg border border-white/10"
-                  />
+                  <img src={missionTeamImage} alt="Team collaboration" className="w-full h-auto rounded-lg shadow-lg border border-white/10" />
                 </div>
                 <p className="text-gray-300 font-mono tracking-wide leading-relaxed text-center text-lg">
                   To demystify the world of venture capital by sharing authentic conversations with the people who shape Seattle's startup ecosystem. Through these interviews, I aim to provide aspiring entrepreneurs and curious minds with real insights into how VCs think, invest, and build lasting relationships with founders.
