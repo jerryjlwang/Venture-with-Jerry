@@ -8,7 +8,7 @@ const About = () => {
       
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 font-courier tracking-wide">
             About Me
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
@@ -28,7 +28,7 @@ const About = () => {
             </div>
 
             <div className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-8 shadow-xl">
-              <h2 className="text-2xl font-bold text-white mb-4">Let's Connect</h2>
+              <h2 className="text-2xl font-bold text-white mb-4 font-courier tracking-wide">Let's Connect</h2>
               <div className="flex flex-col gap-4">
                 <a href="mailto:wang.jerryjl@gmail.com" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors text-center font-mono">
                   Email Me
@@ -49,7 +49,7 @@ const About = () => {
           {/* About Content */}
           <div className="lg:col-span-2 space-y-8">
             <section className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-8 shadow-xl">
-              <h2 className="text-2xl font-bold text-white mb-4 font-serif">My Background</h2>
+              <h2 className="text-2xl font-bold text-white mb-4 font-courier tracking-wide">My Background</h2>
               <div className="text-gray-300 leading-relaxed space-y-4">
                 <p className="font-serif">
                   My name is Jerry Wang and I’m a senior at Interlake High School in Bellevue. My areas of
@@ -72,10 +72,10 @@ const About = () => {
             </section>
 
             <section className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-8 shadow-xl">
-              <h2 className="text-2xl font-bold text-white mb-4 font-serif">Skills & Interests</h2>
+              <h2 className="text-2xl font-bold text-white mb-4 font-courier tracking-wide">Skills & Interests</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h3 className="text-lg font-semibold text-blue-400 mb-3 font-serif">Technical Skills</h3>
+                  <h3 className="text-lg font-semibold text-blue-400 mb-3 font-courier tracking-wide">Technical Skills</h3>
                   <ul className="text-gray-300 space-y-2">
                     <li>• Math</li>
                     <li>• Python</li>
@@ -85,7 +85,7 @@ const About = () => {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-blue-400 mb-3 font-serif">Interests</h3>
+                  <h3 className="text-lg font-semibold text-blue-400 mb-3 font-courier tracking-wide">Interests</h3>
                   <ul className="text-gray-300 space-y-2">
                     <li>• Open Source Projects</li>
                     <li>• VC Writing</li>

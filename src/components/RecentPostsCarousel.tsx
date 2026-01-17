@@ -42,7 +42,7 @@ const RecentPostsCarousel = () => {
   return <section className="pt-32 pb-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl md:text-4xl font-playfair font-medium text-white tracking-widest">
+          <h2 className="text-3xl md:text-4xl font-courier font-medium text-white tracking-wide">
             Recent Posts
           </h2>
           <div className="flex items-center gap-2">
@@ -64,7 +64,7 @@ const RecentPostsCarousel = () => {
         </div>
 
         <div className="text-center mt-8">
-          <a href="/posts" className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors font-playfair font-medium text-lg tracking-widest">
+          <a href="/posts" className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors font-courier font-medium text-lg tracking-wide">
             View all posts →
           </a>
         </div>
