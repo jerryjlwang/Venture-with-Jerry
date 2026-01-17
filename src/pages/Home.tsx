@@ -5,15 +5,15 @@ import missionTeamImage from '@/assets/mission-team.png';
 const Home = () => {
   return <div className="min-h-screen bg-slate-900">
       {/* Hero Section with Background Image */}
-      <div className="relative">
-        {/* Background Image - full width, natural height */}
-        <img src="https://te-cdn-marketing-site.storage.googleapis.com/littleamerica/America/parnter/stay/places/usa-washington-state-seattle-skyline.jpg" alt="Seattle skyline" className="w-full h-auto" />
+      <div className="relative h-auto lg:h-screen lg:max-h-[900px]">
+        {/* Background Image - full width, capped height on desktop */}
+        <img src="https://te-cdn-marketing-site.storage.googleapis.com/littleamerica/America/parnter/stay/places/usa-washington-state-seattle-skyline.jpg" alt="Seattle skyline" className="w-full h-full object-cover" />
         
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/30 to-slate-900" />
         
         {/* Hero Content */}
-        <div className="absolute inset-0 flex flex-col justify-start pt-56">
+        <div className="absolute inset-0 flex flex-col justify-between pt-32 md:pt-40 lg:pt-32 pb-6 lg:pb-10">
           <div className="max-w-6xl mx-auto text-center px-4 sm:px-6 lg:px-8">
             <h1 className="text-5xl md:text-7xl font-courier font-medium text-white mb-6 leading-tight tracking-widest">
               Welcome to My Personal Page            </h1>
@@ -34,18 +34,16 @@ const Home = () => {
               </div>
             </div>
           </div>
+          
+          {/* Logo Carousel at bottom of hero */}
+          <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+            <LogoCarousel direction="horizontal" />
+          </div>
         </div>
       </div>
 
       {/* Content on blue slate background */}
       <div className="bg-slate-900">
-        {/* Logo Carousel */}
-        <section className="-mt-4 md:-mt-8 lg:-mt-32 xl:-mt-40 pb-2 px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-6xl mx-auto">
-            <LogoCarousel direction="horizontal" />
-          </div>
-        </section>
-        
         {/* Recent Posts Section */}
         <RecentPostsCarousel />
 
