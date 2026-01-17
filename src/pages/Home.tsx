@@ -40,7 +40,7 @@ const Home = () => {
       {/* Content on blue slate background */}
       <div className="bg-slate-900">
         {/* Logo Carousel */}
-        <section className="-mt-4 pb-2 px-4 sm:px-6 lg:px-8">
+        <section className="-mt-8 pb-2 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <LogoCarousel direction="horizontal" />
           </div>
