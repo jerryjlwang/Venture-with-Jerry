@@ -27,7 +27,7 @@ const About = () => {
               <p className="text-blue-300 font-mono">Developer & Writer</p>
             </div>
 
-            <div className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-8 shadow-xl">
+            <div className="bg-white/5 backdrop-blur-md rounded-lg p-8 shadow-xl border border-white/20">
               <h2 className="text-2xl font-bold text-white mb-4 font-courier tracking-wide">Let's Connect</h2>
               <div className="flex flex-col gap-4">
                 <a href="mailto:wang.jerryjl@gmail.com" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors text-center font-mono">
