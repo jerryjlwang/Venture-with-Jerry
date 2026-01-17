@@ -1,22 +1,27 @@
 import LogoCarousel from '../components/LogoCarousel';
 import NextGuests from '../components/NextGuests';
 import RecentPostsCarousel from '../components/RecentPostsCarousel';
+import OptimizedBackground from '../components/OptimizedBackground';
 import missionTeamImage from '@/assets/mission-team.png';
+
+const SEATTLE_SKYLINE = 'https://te-cdn-marketing-site.storage.googleapis.com/littleamerica/America/parnter/stay/places/usa-washington-state-seattle-skyline.jpg';
+
 const Home = () => {
-  return <div className="min-h-screen bg-slate-900">
+  return (
+    <div className="min-h-screen bg-slate-900">
       {/* Hero Section with Background Image */}
-      <div className="relative h-auto lg:h-screen lg:max-h-[900px]">
-        {/* Background Image - full width, capped height on desktop */}
-        <img src="https://te-cdn-marketing-site.storage.googleapis.com/littleamerica/America/parnter/stay/places/usa-washington-state-seattle-skyline.jpg" alt="Seattle skyline" className="w-full h-full object-cover" />
-        
-        {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/30 to-slate-900" />
-        
+      <OptimizedBackground 
+        src={SEATTLE_SKYLINE}
+        alt="Seattle skyline"
+        className="h-auto lg:h-screen lg:max-h-[900px]"
+        overlayClassName="bg-gradient-to-b from-black/30 via-black/30 to-slate-900"
+      >
         {/* Hero Content */}
         <div className="absolute inset-0 flex flex-col justify-between pt-48 md:pt-56 lg:pt-48 pb-6 lg:pb-10">
           <div className="max-w-6xl mx-auto text-center px-4 sm:px-6 lg:px-8">
             <h1 className="text-5xl md:text-7xl font-courier font-medium text-white mb-6 leading-tight tracking-widest">
-              Welcome to My Personal Page            </h1>
+              Welcome to My Personal Page
+            </h1>
             <p className="text-xl md:text-2xl font-courier mb-8 max-w-3xl mx-auto leading-relaxed tracking-wide text-primary-foreground">
               A place where you can get to know me and learn about my venture capital conversations.
             </p>
@@ -48,7 +53,7 @@ const Home = () => {
             <LogoCarousel direction="horizontal" />
           </div>
         </div>
-      </div>
+      </OptimizedBackground>
 
       {/* Content on blue slate background */}
       <div className="bg-slate-900">
@@ -74,6 +79,8 @@ const Home = () => {
           </div>
         </section>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default Home;
