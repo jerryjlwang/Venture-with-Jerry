@@ -13,7 +13,7 @@ const Home = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/30 to-slate-900" />
         
         {/* Hero Content */}
-        <div className="absolute inset-0 flex items-start justify-center pt-32">
+        <div className="absolute inset-0 flex items-start justify-center pt-40">
           <div className="max-w-6xl mx-auto text-center px-4 sm:px-6 lg:px-8">
             <h1 className="text-5xl md:text-7xl font-courier font-medium text-white mb-6 leading-tight tracking-widest">
               Welcome to My Personal Page            </h1>
