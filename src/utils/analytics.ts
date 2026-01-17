@@ -1,5 +1,7 @@
-
 import { supabase } from '@/integrations/supabase/client';
+
+// API key for analytics tracking - must match server-side key
+const ANALYTICS_API_KEY = 'vwj-analytics-2025-secure';
 
 interface AnalyticsData {
   page_path: string;
@@ -99,6 +101,7 @@ class Analytics {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'x-analytics-key': ANALYTICS_API_KEY,
         },
         body: JSON.stringify(payload),
       });
@@ -136,6 +139,7 @@ class Analytics {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'x-analytics-key': ANALYTICS_API_KEY,
         },
         body: JSON.stringify(payload),
       });
