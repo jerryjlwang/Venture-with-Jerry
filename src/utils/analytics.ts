@@ -83,7 +83,7 @@ class Analytics {
     const data: AnalyticsData = {
       page_path: customPath || window.location.pathname,
       page_title: document.title,
-      referrer: document.referrer || null,
+      referrer: document.referrer || undefined,
       user_agent: navigator.userAgent,
       device_type: this.getDeviceType(),
       browser: this.getBrowser(),
@@ -97,17 +97,16 @@ class Analytics {
         ...data
       };
       
-      const response = await fetch(`https://cgvgkucrmtugckcefryn.supabase.co/functions/v1/analytics-track`, {
-        method: 'POST',
+      // Use Supabase functions.invoke instead of hardcoded URL
+      const { error } = await supabase.functions.invoke('analytics-track', {
+        body: payload,
         headers: {
-          'Content-Type': 'application/json',
           'x-analytics-key': ANALYTICS_API_KEY,
         },
-        body: JSON.stringify(payload),
       });
       
-      if (!response.ok) {
-        console.error('Analytics tracking error:', await response.text());
+      if (error) {
+        console.error('Analytics tracking error:', error.message);
       }
     } catch (error) {
       console.error('Analytics tracking failed:', error);
@@ -135,13 +134,12 @@ class Analytics {
         duration_seconds: duration
       };
       
-      await fetch(`https://cgvgkucrmtugckcefryn.supabase.co/functions/v1/analytics-track`, {
-        method: 'POST',
+      // Use Supabase functions.invoke instead of hardcoded URL
+      await supabase.functions.invoke('analytics-track', {
+        body: payload,
         headers: {
-          'Content-Type': 'application/json',
           'x-analytics-key': ANALYTICS_API_KEY,
         },
-        body: JSON.stringify(payload),
       });
     } catch (error) {
       console.error('Duration tracking failed:', error);
