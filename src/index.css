@@ -96,7 +96,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-public-sans;
+    @apply bg-background text-foreground font-courier;
   }
 }
 

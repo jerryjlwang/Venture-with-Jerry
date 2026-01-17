@@ -12,7 +12,7 @@ const Posts = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 font-courier tracking-wide">
             All Posts
           </h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto font-mono">
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto font-courier">
             Check out my insights after interviewing notable venture capital professionals.
           </p>
         </div>

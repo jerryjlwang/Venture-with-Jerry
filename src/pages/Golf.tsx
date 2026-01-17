@@ -16,7 +16,7 @@ const Golf = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 font-courier tracking-wide">
             My Life Through Golf   
           </h1>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto font-mono">
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto font-courier">
             18 holes, 18 milestones
           </p>
         </div>
@@ -24,7 +24,7 @@ const Golf = () => {
         <GolfCourseMap />
 
         <div className="mt-16 text-center">
-          <p className="text-white/60 font-mono text-sm">
+          <p className="text-white/60 font-courier text-sm">
             ​
           </p>
         </div>

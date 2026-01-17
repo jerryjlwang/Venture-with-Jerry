@@ -369,7 +369,7 @@ const GolfCourseMap = () => {
                 </div>
 
                 {isHovered && animationPhase === 'idle' && (
-                  <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-mono whitespace-nowrap shadow-xl z-30">
+                  <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-courier whitespace-nowrap shadow-xl z-30">
                     {hole.title}
                   </div>
                 )}
@@ -409,7 +409,7 @@ const GolfCourseMap = () => {
                 </div>
 
                 {isHovered && animationPhase === 'idle' && (
-                  <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-mono whitespace-nowrap shadow-xl z-30">
+                  <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-courier whitespace-nowrap shadow-xl z-30">
                     Halfway House
                   </div>
                 )}
@@ -450,7 +450,7 @@ const GolfCourseMap = () => {
                 </div>
 
                 {isHovered && animationPhase === 'idle' && (
-                  <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-mono whitespace-nowrap shadow-xl z-30">
+                  <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-courier whitespace-nowrap shadow-xl z-30">
                     Start Journey Here
                   </div>
                 )}
@@ -548,16 +548,16 @@ const GolfCourseMap = () => {
                       <div className="flex items-center gap-4 mb-2">
                         <h3 className="text-3xl font-courier text-white drop-shadow-lg">{zoomTarget.title}</h3>
                         {zoomTarget.year && (
-                          <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-lg text-lg font-mono text-white">
+                          <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-lg text-lg font-courier text-white">
                             {zoomTarget.year}
                           </span>
                         )}
                       </div>
-                      <p className="text-gray-100 font-mono text-xl leading-relaxed drop-shadow-md">{zoomTarget.description}</p>
+                      <p className="text-gray-100 font-courier text-xl leading-relaxed drop-shadow-md">{zoomTarget.description}</p>
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0 ml-4">
                       {/* Progress indicator */}
-                      <span className="text-white/70 font-mono text-sm">
+                      <span className="text-white/70 font-courier text-sm">
                         {currentJourneyIndex + 1} / {journeyOrder.length}
                       </span>
                       <button

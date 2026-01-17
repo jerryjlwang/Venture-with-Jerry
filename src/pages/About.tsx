@@ -23,23 +23,23 @@ const About = () => {
               <div className="mb-4">
                 <img alt="Jerry Wang" className="w-full max-w-xs mx-auto rounded-lg shadow-lg object-cover" src="/lovable-uploads/1bed9257-b6b5-4067-9485-4377fa434e79.png" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2 font-mono">Jerry Wang</h3>
-              <p className="text-blue-300 font-mono">Developer & Writer</p>
+              <h3 className="text-xl font-bold text-white mb-2 font-courier">Jerry Wang</h3>
+              <p className="text-blue-300 font-courier">Developer & Writer</p>
             </div>
 
             <div className="bg-white/5 backdrop-blur-md rounded-lg p-8 shadow-xl border border-white/20">
               <h2 className="text-2xl font-bold text-white mb-4 font-courier tracking-wide">Let's Connect</h2>
               <div className="flex flex-col gap-4">
-                <a href="mailto:wang.jerryjl@gmail.com" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors text-center font-mono">
+                <a href="mailto:wang.jerryjl@gmail.com" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors text-center font-courier">
                   Email Me
                 </a>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/jerry-wang-21a282368/" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center font-mono">
+                <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/jerry-wang-21a282368/" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center font-courier">
                   LinkedIn
                 </a>
-                <a target="_blank" rel="noopener noreferrer" href="https://github.com/jerryjlwang" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center font-mono">
+                <a target="_blank" rel="noopener noreferrer" href="https://github.com/jerryjlwang" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center font-courier">
                   GitHub
                 </a>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/jerr_yw08/" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center font-mono">
+                <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/jerr_yw08/" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center font-courier">
                   Instagram
                 </a>
               </div>
