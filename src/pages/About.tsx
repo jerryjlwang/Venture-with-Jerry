@@ -19,7 +19,7 @@ const About = () => {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
           {/* Profile Image and Let's Connect */}
           <div className="lg:col-span-1 space-y-8">
-            <div className="bg-gradient-to-br from-blue-800 to-blue-900 rounded-lg p-8 text-center shadow-xl">
+            <div className="bg-white/5 backdrop-blur-md rounded-lg p-8 text-center shadow-xl border border-white/20">
               <div className="mb-4">
                 <img alt="Jerry Wang" className="w-full max-w-xs mx-auto rounded-lg shadow-lg object-cover" src="/lovable-uploads/1bed9257-b6b5-4067-9485-4377fa434e79.png" />
               </div>
