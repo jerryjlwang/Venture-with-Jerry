@@ -51,7 +51,7 @@ const PostCard = ({ id, title, excerpt, date, readTime, imageUrl, graphic }: Pos
         <div className="relative z-10 p-6 flex flex-col justify-end h-full min-h-[320px]">
           {/* Date badge */}
           <div className="absolute top-4 right-4">
-            <span className="px-3 py-1 bg-blue-600/80 backdrop-blur-sm text-white text-xs font-playfair tracking-widest rounded-full">
+            <span className="px-3 py-1 bg-blue-600/80 backdrop-blur-sm text-white text-xs font-courier tracking-wide rounded-full">
               {readTime}
             </span>
           </div>
@@ -60,20 +60,20 @@ const PostCard = ({ id, title, excerpt, date, readTime, imageUrl, graphic }: Pos
           <div className="mt-auto">
             <time 
               dateTime={date} 
-              className="text-blue-300/80 text-sm font-playfair tracking-widest mb-2 block"
+              className="text-blue-300/80 text-sm font-courier tracking-wide mb-2 block"
             >
               {new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
             </time>
             
-            <h3 className="text-xl font-playfair font-medium text-white mb-3 tracking-wide group-hover:text-blue-100 transition-colors duration-300">
+            <h3 className="text-xl font-courier font-medium text-white mb-3 tracking-wide group-hover:text-blue-100 transition-colors duration-300">
               {title}
             </h3>
             
-            <p className="text-gray-300/90 text-sm leading-relaxed font-playfair tracking-wide line-clamp-2 mb-4">
+            <p className="text-gray-300/90 text-sm leading-relaxed font-courier tracking-wide line-clamp-2 mb-4">
               {excerpt}
             </p>
             
-            <div className="inline-flex items-center text-blue-400 group-hover:text-blue-300 transition-colors font-playfair tracking-widest text-sm">
+            <div className="inline-flex items-center text-blue-400 group-hover:text-blue-300 transition-colors font-courier tracking-wide text-sm">
               Read more 
               <span className="ml-2 transform group-hover:translate-x-1 transition-transform duration-300">→</span>
             </div>

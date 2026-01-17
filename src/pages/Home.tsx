@@ -58,7 +58,7 @@ const Home = () => {
                 <div className="w-full max-w-2xl">
                   <img src={missionTeamImage} alt="Team collaboration" className="w-full h-auto rounded-lg shadow-lg border border-white/10" />
                 </div>
-                <p className="text-gray-300 font-mono tracking-wide leading-relaxed text-center text-lg">
+                <p className="text-gray-300 font-courier tracking-wide leading-relaxed text-center text-lg">
                   To demystify the world of venture capital by sharing authentic conversations with the people who shape Seattle's startup ecosystem. Through these interviews, I aim to provide aspiring entrepreneurs and curious minds with real insights into how VCs think, invest, and build lasting relationships with founders.
                 </p>
               </div>
