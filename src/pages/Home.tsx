@@ -41,14 +41,14 @@ const Home = () => {
       <div className="bg-slate-900">
         {/* Recent Posts Section */}
         <RecentPostsCarousel />
-        <section className="py-8 px-4 sm:px-6 lg:px-8">
+        <section className="py-4 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <LogoCarousel direction="horizontal" />
           </div>
         </section>
 
         {/* My Mission Section */}
-        <section className="py-12 px-4 sm:px-6 lg:px-8">
+        <section className="py-6 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="bg-white/5 backdrop-blur-md rounded-xl p-8 border border-white/20">
               <h2 className="text-2xl font-courier font-medium text-white mb-6 text-center tracking-wide">
