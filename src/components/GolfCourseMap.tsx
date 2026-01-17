@@ -546,7 +546,7 @@ const GolfCourseMap = () => {
                   <div className="flex items-start justify-between">
                     <div className="flex-grow">
                       <div className="flex items-center gap-4 mb-2">
-                        <h3 className="text-3xl font-serif text-white drop-shadow-lg">{zoomTarget.title}</h3>
+                        <h3 className="text-3xl font-courier text-white drop-shadow-lg">{zoomTarget.title}</h3>
                         {zoomTarget.year && (
                           <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-lg text-lg font-mono text-white">
                             {zoomTarget.year}
