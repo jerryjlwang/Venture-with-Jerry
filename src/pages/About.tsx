@@ -51,19 +51,19 @@ const About = () => {
             <section className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-8 shadow-xl">
               <h2 className="text-2xl font-bold text-white mb-4 font-courier tracking-wide">My Background</h2>
               <div className="text-gray-300 leading-relaxed space-y-4">
-                <p className="font-serif">
+                <p className="font-courier">
                   My name is Jerry Wang and I’m a senior at Interlake High School in Bellevue. My areas of
                   interest lie in the intersection of AI and finance, and venture capital is one field that
                   encapsulates it all. I want to learn more about the evolution of AI and how it will break
                   the finance industry, so over the last year I’ve been learning as much as I can and
                   conducting interviews with venture capital professionals to start building my network.
                 </p>
-                <p className="font-serif">
+                <p className="font-courier">
                   Some of my hobbies include golfing, where I’m working towards being a single-digit 
                   handicapper, and pursuing business ideas. I like to think I’m a curious individual, 
                   so I always chase what I want.
                 </p>
-                <p className="font-serif">
+                <p className="font-courier">
                   This blog serves as a medium for documenting my learnings throughout my venture capital
                   journey and also sharing personal insights which I find interesting. Be sure to connect
                   with me on any platform below and feel free to ask for advice or help!
