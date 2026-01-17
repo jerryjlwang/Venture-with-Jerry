@@ -22,10 +22,10 @@ const Home = () => {
             </p>
             <div className="relative flex justify-center w-full">
               <div className="flex flex-col sm:flex-row gap-4">
-                <a href="/posts" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-courier font-medium transition-colors shadow-lg hover:shadow-xl tracking-wide">
+                <a href="/posts" className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-courier font-medium transition-colors shadow-lg hover:shadow-xl tracking-wide">
                   Read My Posts
                 </a>
-                <a href="/about" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-courier font-medium transition-all shadow-lg hover:shadow-xl tracking-wide">
+                <a href="/about" className="inline-flex items-center justify-center border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-courier font-medium transition-all shadow-lg hover:shadow-xl tracking-wide">
                   Learn About Me
                 </a>
               </div>
