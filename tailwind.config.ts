@@ -18,11 +18,12 @@ export default {
 			}
 		},
 		extend: {
-			fontFamily: {
-				'public-sans': ['Public Sans', 'sans-serif'],
-        		merriweather: ["Merriweather", "serif"],
-				'playfair': ['Playfair Display', 'serif'],
-      			},
+		fontFamily: {
+			'public-sans': ['Public Sans', 'sans-serif'],
+			'merriweather': ["Merriweather", "serif"],
+			'playfair': ['Playfair Display', 'serif'],
+			'courier': ['Courier New', 'Courier', 'monospace'],
+		},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
