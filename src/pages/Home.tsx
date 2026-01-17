@@ -17,7 +17,7 @@ const Home = () => {
           <div className="max-w-6xl mx-auto text-center px-4 sm:px-6 lg:px-8">
             <h1 className="text-5xl md:text-7xl font-courier font-medium text-white mb-6 leading-tight tracking-widest">
               Welcome to My Personal Page            </h1>
-            <p className="text-xl md:text-2xl font-playfair mb-8 max-w-3xl mx-auto leading-relaxed tracking-widest text-primary-foreground">
+            <p className="text-xl md:text-2xl font-courier mb-8 max-w-3xl mx-auto leading-relaxed tracking-widest text-primary-foreground">
               A place where you can get to know me and learn about my venture capital conversations.
             </p>
             <div className="relative flex justify-center w-full">
