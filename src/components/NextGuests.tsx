@@ -24,10 +24,10 @@ const NextGuests = () => {
                 </AvatarFallback>
               </Avatar>
               <div>
-                <p className="text-white font-medium text-sm">{guest.name}</p>
-                <p className="text-gray-300 text-xs">{guest.title}</p>
-                <p className="text-blue-400 text-xs mt-1">{guest.date}</p>
-                <p className="text-gray-400 text-xs mt-1">{guest.topic}</p>
+                <p className="text-white font-medium text-sm font-courier">{guest.name}</p>
+                <p className="text-gray-300 text-xs font-courier">{guest.title}</p>
+                <p className="text-blue-400 text-xs mt-1 font-courier">{guest.date}</p>
+                <p className="text-gray-400 text-xs mt-1 font-courier">{guest.topic}</p>
               </div>
             </div>
           </div>)}
