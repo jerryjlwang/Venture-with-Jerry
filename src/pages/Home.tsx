@@ -49,7 +49,8 @@ const Home = () => {
                 <TypewriterText 
                   text="Get to know me and my venture capital conversations." 
                   speed={30} 
-                  onComplete={() => setSubtitleComplete(true)} 
+                  onComplete={() => setSubtitleComplete(true)}
+                  keepCursorAfterComplete={true}
                 />
               ) : (
                 <span className="invisible">Get to know me and my venture capital conversations.</span>
