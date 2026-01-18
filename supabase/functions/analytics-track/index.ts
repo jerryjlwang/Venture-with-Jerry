@@ -12,14 +12,11 @@ const ALLOWED_ORIGINS = [
 const VALID_DEVICE_TYPES = ['mobile', 'tablet', 'desktop'];
 const VALID_BROWSERS = ['Chrome', 'Firefox', 'Safari', 'Edge', 'Other'];
 
-// API key for analytics tracking - must match client-side key
-const ANALYTICS_API_KEY = Deno.env.get('ANALYTICS_API_KEY') || 'vwj-analytics-2025-secure';
-
 function getCorsHeaders(origin: string | null): Record<string, string> {
   const allowedOrigin = origin && ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
   return {
     'Access-Control-Allow-Origin': allowedOrigin,
-    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-analytics-key',
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
   };
 }
@@ -80,25 +77,13 @@ Deno.serve(async (req) => {
   }
 
   // Validate Origin header - reject requests from unknown origins
-  if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+  // This is the primary security measure along with rate limiting
+  if (!origin || !ALLOWED_ORIGINS.includes(origin)) {
     console.warn('Rejected request from unauthorized origin:', origin);
     return new Response(
       JSON.stringify({ error: 'Unauthorized origin' }),
       { 
         status: 403, 
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
-      }
-    );
-  }
-
-  // Validate API key - provides additional security layer beyond origin checks
-  const apiKey = req.headers.get('x-analytics-key');
-  if (!apiKey || apiKey !== ANALYTICS_API_KEY) {
-    console.warn('Rejected request with invalid or missing API key');
-    return new Response(
-      JSON.stringify({ error: 'Invalid API key' }),
-      { 
-        status: 401, 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
       }
     );
