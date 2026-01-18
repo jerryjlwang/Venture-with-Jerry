@@ -10,6 +10,7 @@ const SEATTLE_SKYLINE = 'https://te-cdn-marketing-site.storage.googleapis.com/li
 
 const Home = () => {
   const [headingComplete, setHeadingComplete] = useState(false);
+  const [subtitleComplete, setSubtitleComplete] = useState(false);
 
   return (
     <div className="min-h-screen bg-slate-900">
@@ -28,12 +29,20 @@ const Home = () => {
             </h1>
             <p className="text-xl md:text-2xl font-courier mb-8 max-w-3xl mx-auto leading-relaxed tracking-wide text-primary-foreground">
               {headingComplete ? (
-                <TypewriterText text="A place where you can get to know me and learn about my venture capital conversations." speed={30} />
+                <TypewriterText 
+                  text="A place where you can get to know me and learn about my venture capital conversations." 
+                  speed={30} 
+                  onComplete={() => setSubtitleComplete(true)} 
+                />
               ) : (
                 <span className="invisible">A place where you can get to know me and learn about my venture capital conversations.</span>
               )}
             </p>
-            <div className="relative flex justify-center w-full">
+            <div 
+              className={`relative flex justify-center w-full transition-all duration-700 ease-out ${
+                subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+            >
               <div className="flex flex-col items-center gap-4">
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a href="/posts" className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-courier font-medium transition-colors shadow-lg hover:shadow-xl tracking-wide">
@@ -57,7 +66,11 @@ const Home = () => {
           </div>
           
           {/* Logo Carousel at bottom of hero */}
-          <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+          <div 
+            className={`max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 transition-all duration-700 ease-out delay-200 ${
+              subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}
+          >
             <LogoCarousel direction="horizontal" />
           </div>
         </div>
