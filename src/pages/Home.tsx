@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import LogoCarousel from '../components/LogoCarousel';
 import NextGuests from '../components/NextGuests';
 import RecentPostsCarousel from '../components/RecentPostsCarousel';
@@ -8,6 +9,8 @@ import missionTeamImage from '@/assets/mission-team.png';
 const SEATTLE_SKYLINE = 'https://te-cdn-marketing-site.storage.googleapis.com/littleamerica/America/parnter/stay/places/usa-washington-state-seattle-skyline.jpg';
 
 const Home = () => {
+  const [headingComplete, setHeadingComplete] = useState(false);
+
   return (
     <div className="min-h-screen bg-slate-900">
       {/* Hero Section with Background Image */}
@@ -21,10 +24,14 @@ const Home = () => {
         <div className="absolute inset-0 flex flex-col justify-between pt-48 md:pt-56 lg:pt-48 pb-6 lg:pb-10">
           <div className="max-w-6xl mx-auto text-center px-4 sm:px-6 lg:px-8">
             <h1 className="text-5xl md:text-7xl font-courier font-medium text-white mb-6 leading-tight tracking-widest">
-              <TypewriterText text="Welcome to My Personal Page" speed={60} />
+              <TypewriterText text="Welcome to My Personal Page" speed={60} onComplete={() => setHeadingComplete(true)} />
             </h1>
             <p className="text-xl md:text-2xl font-courier mb-8 max-w-3xl mx-auto leading-relaxed tracking-wide text-primary-foreground">
-              A place where you can get to know me and learn about my venture capital conversations.
+              {headingComplete ? (
+                <TypewriterText text="A place where you can get to know me and learn about my venture capital conversations." speed={30} />
+              ) : (
+                <span className="invisible">A place where you can get to know me and learn about my venture capital conversations.</span>
+              )}
             </p>
             <div className="relative flex justify-center w-full">
               <div className="flex flex-col items-center gap-4">
