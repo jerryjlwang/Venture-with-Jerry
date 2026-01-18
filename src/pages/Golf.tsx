@@ -1,6 +1,18 @@
+import { useState, useEffect } from 'react';
+import { ChevronDown } from 'lucide-react';
 import golfBackground from '@/assets/golf-background.png';
 import GolfCourseMap from '@/components/GolfCourseMap';
+
 const Golf = () => {
+  const [showArrow, setShowArrow] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowArrow(true);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return <div className="min-h-screen relative" style={{
     backgroundColor: '#052e16'
   }}>
@@ -16,6 +28,14 @@ const Golf = () => {
         <div className="text-center">
           <h1 className="text-4xl md:text-5xl text-white mb-4 font-courier tracking-wide font-medium">18 Holes, 18 Milestones</h1>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto font-courier">My life through golf.</p>
+          
+          <div 
+            className={`mt-8 transition-all duration-700 ${
+              showArrow ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}
+          >
+            <ChevronDown className="w-8 h-8 text-white/60 mx-auto animate-bounce" />
+          </div>
         </div>
       </div>
 
