@@ -30,16 +30,16 @@ const About = () => {
             <div className="bg-white/5 backdrop-blur-md rounded-lg p-8 shadow-xl border border-white/20">
               <h2 className="text-2xl font-bold text-white mb-4 font-courier tracking-wide">Let's Connect</h2>
               <div className="flex flex-col gap-4">
-                <a href="mailto:wang.jerryjl@gmail.com" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors text-center font-courier">
+                <a href="mailto:wang.jerryjl@gmail.com" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors text-center font-courier">
                   Email Me
                 </a>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/jerry-wang-21a282368/" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center font-courier">
+                <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/jerry-wang-21a282368/" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg transition-all text-center font-courier">
                   LinkedIn
                 </a>
-                <a target="_blank" rel="noopener noreferrer" href="https://github.com/jerryjlwang" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center font-courier">
+                <a target="_blank" rel="noopener noreferrer" href="https://github.com/jerryjlwang" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg transition-all text-center font-courier">
                   GitHub
                 </a>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/jerr_yw08/" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg font-semibold transition-all text-center font-courier">
+                <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/jerr_yw08/" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg transition-all text-center font-courier">
                   Instagram
                 </a>
               </div>
