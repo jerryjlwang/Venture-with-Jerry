@@ -24,17 +24,15 @@ const TypewriterText = ({ text, speed = 50, className = '', onComplete }: Typewr
     }
   }, [currentIndex, text, speed, onComplete]);
 
+  const remainingText = text.slice(currentIndex);
+
   return (
-    <span className={`relative inline-block ${className}`}>
-      {/* Invisible text to maintain full width */}
-      <span className="invisible">{text}</span>
-      {/* Visible typed text positioned on top */}
-      <span className="absolute inset-0">
-        {displayedText}
-        {currentIndex < text.length && (
-          <span className="animate-pulse">|</span>
-        )}
-      </span>
+    <span className={className}>
+      {displayedText}
+      {currentIndex < text.length && (
+        <span className="animate-pulse">|</span>
+      )}
+      <span className="invisible">{remainingText}</span>
     </span>
   );
 };
