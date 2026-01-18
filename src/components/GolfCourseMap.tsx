@@ -366,7 +366,7 @@ const GolfCourseMap = () => {
                   }`}
                   style={{
                     clipPath: 'polygon(0 0, 100% 50%, 0 100%)',
-                    width: isSelected || isHovered ? '42px' : '36px',
+                    width: isSelected || isHovered ? '56px' : '48px',
                     height: isSelected || isHovered ? '48px' : '42px',
                   }}
                 >
