@@ -356,28 +356,21 @@ const GolfCourseMap = () => {
                 onMouseEnter={() => animationPhase === 'idle' && setHoveredHole(hole.hole)}
                 onMouseLeave={() => setHoveredHole(null)}
               >
-                <div className="relative flex flex-col items-center">
-                  {/* Flag pole */}
-                  <div className={`absolute transition-all duration-200 ${
-                    isSelected || isHovered ? 'h-8' : 'h-6'
-                  } w-0.5 bg-white/90 shadow-sm`} style={{ bottom: '0', left: '50%', transform: 'translateX(-50%)' }} />
-                  {/* Flag */}
-                  <div 
-                    className={`relative flex items-center justify-center font-courier shadow-lg transition-all duration-200 ${
-                      isSelected
-                        ? 'bg-amber-500 text-white ring-2 ring-white/50'
-                        : isHovered 
-                          ? 'bg-sky-400 text-white scale-110' 
-                          : 'bg-sky-500 text-white'
-                    }`}
-                    style={{
-                      clipPath: 'polygon(0 0, 100% 25%, 100% 75%, 0 100%)',
-                      width: isSelected || isHovered ? '28px' : '24px',
-                      height: isSelected || isHovered ? '20px' : '16px',
-                    }}
-                  >
-                    <span className="text-xs text-white font-bold">{hole.hole}</span>
-                  </div>
+                <div 
+                  className={`flex items-center justify-center font-courier shadow-lg transition-all duration-200 ${
+                    isSelected
+                      ? 'bg-amber-500 text-white ring-2 ring-white/50'
+                      : isHovered 
+                        ? 'bg-sky-400 text-white scale-110' 
+                        : 'bg-sky-500 text-white'
+                  }`}
+                  style={{
+                    clipPath: 'polygon(0 0, 100% 25%, 100% 75%, 0 100%)',
+                    width: isSelected || isHovered ? '42px' : '36px',
+                    height: isSelected || isHovered ? '30px' : '24px',
+                  }}
+                >
+                  <span className="text-sm text-white font-bold">{hole.hole}</span>
                 </div>
 
                 {isHovered && animationPhase === 'idle' && (
