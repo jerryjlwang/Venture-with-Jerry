@@ -33,13 +33,13 @@ const About = () => {
                 <a href="mailto:wang.jerryjl@gmail.com" className="bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 hover:from-blue-600 hover:via-blue-700 hover:to-indigo-700 text-white px-6 py-3 rounded-lg transition-all text-center font-courier shadow-lg hover:shadow-blue-500/25">
                   Email Me
                 </a>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/jerry-wang-21a282368/" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg transition-all text-center font-courier">
+                <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/jerry-wang-21a282368/" className="relative px-6 py-3 rounded-lg text-center font-courier text-blue-400 border-2 border-blue-600 transition-all duration-300 hover:border-transparent hover:bg-gradient-to-r hover:from-blue-500 hover:via-blue-600 hover:to-indigo-600 hover:text-white">
                   LinkedIn
                 </a>
-                <a target="_blank" rel="noopener noreferrer" href="https://github.com/jerryjlwang" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg transition-all text-center font-courier">
+                <a target="_blank" rel="noopener noreferrer" href="https://github.com/jerryjlwang" className="relative px-6 py-3 rounded-lg text-center font-courier text-blue-400 border-2 border-blue-600 transition-all duration-300 hover:border-transparent hover:bg-gradient-to-r hover:from-blue-500 hover:via-blue-600 hover:to-indigo-600 hover:text-white">
                   GitHub
                 </a>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/jerr_yw08/" className="border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg transition-all text-center font-courier">
+                <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/jerr_yw08/" className="relative px-6 py-3 rounded-lg text-center font-courier text-blue-400 border-2 border-blue-600 transition-all duration-300 hover:border-transparent hover:bg-gradient-to-r hover:from-blue-500 hover:via-blue-600 hover:to-indigo-600 hover:text-white">
                   Instagram
                 </a>
               </div>
