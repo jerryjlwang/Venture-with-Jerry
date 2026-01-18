@@ -367,7 +367,7 @@ const GolfCourseMap = () => {
                   style={{
                     clipPath: 'polygon(0 0, 100% 50%, 0 100%)',
                     width: isSelected || isHovered ? '56px' : '48px',
-                    height: isSelected || isHovered ? '48px' : '42px',
+                    height: isSelected || isHovered ? '38px' : '32px',
                   }}
                 >
                   <span className="text-sm text-white font-bold">{hole.hole}</span>
