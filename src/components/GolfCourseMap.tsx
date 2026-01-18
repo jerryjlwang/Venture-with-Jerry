@@ -361,8 +361,8 @@ const GolfCourseMap = () => {
                     isSelected
                       ? 'bg-amber-500 text-white ring-2 ring-white/50'
                       : isHovered 
-                        ? 'bg-sky-400 text-white scale-110' 
-                        : 'bg-sky-500 text-white'
+                        ? 'bg-red-400 text-white scale-110' 
+                        : 'bg-red-500 text-white'
                   }`}
                   style={{
                     clipPath: 'polygon(0 0, 100% 50%, 0 100%)',
