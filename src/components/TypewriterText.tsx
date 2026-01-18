@@ -5,9 +5,10 @@ interface TypewriterTextProps {
   speed?: number;
   className?: string;
   onComplete?: () => void;
+  keepCursorAfterComplete?: boolean;
 }
 
-const TypewriterText = ({ text, speed = 50, className = '', onComplete }: TypewriterTextProps) => {
+const TypewriterText = ({ text, speed = 50, className = '', onComplete, keepCursorAfterComplete = false }: TypewriterTextProps) => {
   const [displayedText, setDisplayedText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -29,7 +30,7 @@ const TypewriterText = ({ text, speed = 50, className = '', onComplete }: Typewr
   return (
     <span className={className}>
       {displayedText}
-      {currentIndex < text.length && (
+      {(currentIndex < text.length || keepCursorAfterComplete) && (
         <span className="animate-pulse">|</span>
       )}
       <span className="invisible">{remainingText}</span>
