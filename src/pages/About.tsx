@@ -8,7 +8,7 @@ const About = () => {
       
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 font-courier tracking-wide">
+          <h1 className="text-4xl md:text-5xl text-white mb-6 font-courier tracking-wide font-medium">
             About Me
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto font-courier tracking-wide">
@@ -24,11 +24,11 @@ const About = () => {
                 <img alt="Jerry Wang" className="w-full max-w-xs mx-auto rounded-lg shadow-lg object-cover" src="/lovable-uploads/1bed9257-b6b5-4067-9485-4377fa434e79.png" />
               </div>
               <h3 className="text-xl text-white mb-2 font-courier font-normal">Jerry Wang</h3>
-              <p className="text-blue-300 font-courier">Developer & Writer</p>
+              <p className="text-blue-300 font-courier">Interviewer and Managing Editor</p>
             </div>
 
             <div className="bg-white/5 backdrop-blur-md rounded-lg p-8 shadow-xl border border-white/20">
-              <h2 className="text-2xl font-bold text-white mb-4 font-courier tracking-wide">Let's Connect</h2>
+              <h2 className="text-2xl text-white mb-4 font-courier tracking-wide font-medium">Let's Connect</h2>
               <div className="flex flex-col gap-4">
                 <a href="mailto:wang.jerryjl@gmail.com" className="bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 hover:from-blue-600 hover:via-blue-700 hover:to-indigo-700 text-white px-6 py-3 rounded-lg transition-all text-center font-courier shadow-lg hover:shadow-blue-500/25">
                   Email Me
@@ -49,7 +49,7 @@ const About = () => {
           {/* About Content */}
           <div className="lg:col-span-2 space-y-8">
             <section className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-8 shadow-xl">
-              <h2 className="text-2xl font-bold text-white mb-4 font-courier tracking-wide">My Background</h2>
+              <h2 className="text-2xl text-white mb-4 font-courier tracking-wide font-medium">My Background</h2>
               <div className="text-gray-300 leading-relaxed space-y-4">
                 <p className="font-courier">
                   My name is Jerry Wang and I’m a senior at Interlake High School in Bellevue. My areas of
