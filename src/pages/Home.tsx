@@ -30,12 +30,12 @@ const Home = () => {
             <p className="text-xl md:text-2xl font-courier mb-8 max-w-3xl mx-auto leading-relaxed tracking-wide text-primary-foreground">
               {headingComplete ? (
                 <TypewriterText 
-                  text="A place where you can get to know me and learn about my venture capital conversations." 
+                  text="Get to know me and my venture capital conversations." 
                   speed={30} 
                   onComplete={() => setSubtitleComplete(true)} 
                 />
               ) : (
-                <span className="invisible">A place where you can get to know me and learn about my venture capital conversations.</span>
+                <span className="invisible">Get to know me and my venture capital conversations.</span>
               )}
             </p>
             <div className="relative flex justify-center w-full">
