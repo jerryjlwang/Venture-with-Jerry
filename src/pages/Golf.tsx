@@ -11,12 +11,16 @@ const Golf = () => {
         <div className="absolute inset-0 bg-green-950 bg-opacity-20"></div>
       </div>
       
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-12 pt-16">
+      {/* Hero section - centered in viewport */}
+      <div className="relative z-10 h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+        <div className="text-center">
           <h1 className="text-4xl md:text-5xl text-white mb-4 font-courier tracking-wide font-medium">18 Holes, 18 Milestones</h1>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto font-courier">My life through golf.</p>
         </div>
+      </div>
 
+      {/* Map section - below the fold */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         <GolfCourseMap />
 
         <div className="mt-16 text-center">
