@@ -31,14 +31,14 @@ const PostDetail = () => {
   }
 
   return (
-    <div className="min-h-screen relative bg-slate-900">
-      {/* Optimized Background Image */}
-      <OptimizedBackground
-        src={SEATTLE_SKYLINE}
-        alt="Seattle skyline"
-        className="fixed inset-0"
-        overlayClassName="bg-gradient-to-b from-black/50 via-black/40 to-slate-900/95"
+    <div className="min-h-screen relative">
+      {/* Fixed Background Image */}
+      <div 
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url('${SEATTLE_SKYLINE}')` }}
       />
+      {/* Gradient overlay */}
+      <div className="fixed inset-0 bg-gradient-to-b from-black/50 via-black/40 to-slate-900/95" />
       
       {/* Content */}
       <article className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
