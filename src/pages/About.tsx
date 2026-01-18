@@ -23,7 +23,7 @@ const About = () => {
               <div className="mb-4">
                 <img alt="Jerry Wang" className="w-full max-w-xs mx-auto rounded-lg shadow-lg object-cover" src="/lovable-uploads/1bed9257-b6b5-4067-9485-4377fa434e79.png" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2 font-courier">Jerry Wang</h3>
+              <h3 className="text-xl text-white mb-2 font-courier font-normal">Jerry Wang</h3>
               <p className="text-blue-300 font-courier">Developer & Writer</p>
             </div>
 
