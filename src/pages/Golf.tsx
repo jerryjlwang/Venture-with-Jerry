@@ -5,10 +5,10 @@ const Golf = () => {
     backgroundColor: '#052e16'
   }}>
       {/* Background image section */}
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30" style={{
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40" style={{
       backgroundImage: `url(${golfBackground})`
     }}>
-        <div className="absolute inset-0 bg-green-950 bg-opacity-40"></div>
+        <div className="absolute inset-0 bg-green-950 bg-opacity-20"></div>
       </div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
