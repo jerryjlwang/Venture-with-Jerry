@@ -38,28 +38,46 @@ const Home = () => {
                 <span className="invisible">A place where you can get to know me and learn about my venture capital conversations.</span>
               )}
             </p>
-            <div 
-              className={`relative flex justify-center w-full transition-all duration-700 ease-out ${
-                subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-              }`}
-            >
+            <div className="relative flex justify-center w-full">
               <div className="flex flex-col items-center gap-4">
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <a href="/posts" className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-courier font-medium transition-colors shadow-lg hover:shadow-xl tracking-wide">
+                  <a 
+                    href="/posts" 
+                    className={`inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-courier font-medium transition-all shadow-lg hover:shadow-xl tracking-wide duration-700 ease-out ${
+                      subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                    }`}
+                    style={{ transitionDelay: '0ms' }}
+                  >
                     Read My Posts
                   </a>
-                  <a href="/about" className="inline-flex items-center justify-center border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-courier font-medium transition-all shadow-lg hover:shadow-xl tracking-wide">
+                  <a 
+                    href="/about" 
+                    className={`inline-flex items-center justify-center border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-courier font-medium transition-all shadow-lg hover:shadow-xl tracking-wide duration-700 ease-out ${
+                      subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                    }`}
+                    style={{ transitionDelay: '150ms' }}
+                  >
                     Learn About Me
                   </a>
                 </div>
-                <div className="mt-4 flex flex-col items-center gap-2 animate-bounce">
+                <div 
+                  className={`mt-4 flex flex-col items-center gap-2 transition-all duration-700 ease-out ${
+                    subtitleComplete ? 'opacity-100 translate-y-0 animate-bounce' : 'opacity-0 translate-y-4'
+                  }`}
+                  style={{ transitionDelay: '300ms' }}
+                >
                   <span className="text-white/70 font-courier text-sm tracking-wide">Scroll for More</span>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                   </svg>
                 </div>
               </div>
-              <div className="absolute top-0 right-0 w-72 hidden lg:block">
+              <div 
+                className={`absolute top-0 right-0 w-72 hidden lg:block transition-all duration-700 ease-out ${
+                  subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
+                style={{ transitionDelay: '450ms' }}
+              >
                 <NextGuests />
               </div>
             </div>
@@ -67,9 +85,10 @@ const Home = () => {
           
           {/* Logo Carousel at bottom of hero */}
           <div 
-            className={`max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 transition-all duration-700 ease-out delay-200 ${
+            className={`max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 transition-all duration-700 ease-out ${
               subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
+            style={{ transitionDelay: '600ms' }}
           >
             <LogoCarousel direction="horizontal" />
           </div>
