@@ -109,7 +109,7 @@ const holePositions = [
   { x: 79, y: 32.5 },    // Hole 15
   { x: 55.25, y: 19 },    // Hole 16
   { x: 31.25, y: 12 },    // Hole 17
-  { x: 21.25, y: 34 },    // Hole 18
+  { x: 21.25, y: 34.25 },    // Hole 18
 ];
 
 // Animation phases: idle -> zooming -> expanded -> transitioning (zoom out then zoom in)
