@@ -357,7 +357,7 @@ const GolfCourseMap = () => {
                 onMouseLeave={() => setHoveredHole(null)}
               >
                 <div 
-                  className={`rounded-full flex items-center justify-center font-sans font-semibold shadow-lg transition-all duration-200 ${
+                  className={`rounded-full flex items-center justify-center font-courier shadow-lg transition-all duration-200 ${
                     isSelected
                       ? 'w-10 h-10 bg-amber-500 text-white ring-2 ring-white/50'
                       : isHovered 
