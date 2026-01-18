@@ -368,6 +368,7 @@ const GolfCourseMap = () => {
                     clipPath: 'polygon(0 0, 100% 50%, 0 100%)',
                     width: isSelected || isHovered ? '64px' : '55px',
                     height: isSelected || isHovered ? '44px' : '37px',
+                    filter: 'drop-shadow(0 0 1px white) drop-shadow(0 0 1px white)',
                   }}
                 >
                   <span className="text-sm text-white font-bold">{hole.hole}</span>
