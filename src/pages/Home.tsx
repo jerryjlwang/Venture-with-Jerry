@@ -79,7 +79,7 @@ const Home = () => {
                   </a>
                 </div>
                 <div 
-                  className={`mt-4 flex flex-col items-center gap-2 transition-all duration-700 ease-out ${
+                  className={`mt-8 flex flex-col items-center gap-2 transition-all duration-700 ease-out ${
                     subtitleComplete ? 'opacity-100 translate-y-0 animate-bounce' : 'opacity-0 translate-y-4'
                   }`}
                   style={{ transitionDelay: '300ms' }}
