@@ -13,12 +13,8 @@ const Golf = () => {
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center mb-12 pt-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 font-courier tracking-wide">
-            My Life Through Golf   
-          </h1>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto font-courier">
-            18 holes, 18 milestones
-          </p>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 font-courier tracking-wide">18 Holes, 18 Milestones</h1>
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto font-courier">My life through golf.</p>
         </div>
 
         <GolfCourseMap />
