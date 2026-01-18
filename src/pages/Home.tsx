@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import LogoCarousel from '../components/LogoCarousel';
 import NextGuests from '../components/NextGuests';
 import RecentPostsCarousel from '../components/RecentPostsCarousel';
@@ -7,10 +7,21 @@ import TypewriterText from '../components/TypewriterText';
 import missionTeamImage from '@/assets/mission-team.png';
 
 const SEATTLE_SKYLINE = 'https://te-cdn-marketing-site.storage.googleapis.com/littleamerica/America/parnter/stay/places/usa-washington-state-seattle-skyline.jpg';
+const ANIMATION_PLAYED_KEY = 'home-animation-played';
 
 const Home = () => {
-  const [headingComplete, setHeadingComplete] = useState(false);
-  const [subtitleComplete, setSubtitleComplete] = useState(false);
+  // Check if animations have already played this session
+  const hasAnimationPlayed = sessionStorage.getItem(ANIMATION_PLAYED_KEY) === 'true';
+  
+  const [headingComplete, setHeadingComplete] = useState(hasAnimationPlayed);
+  const [subtitleComplete, setSubtitleComplete] = useState(hasAnimationPlayed);
+
+  // Mark animation as played when subtitle completes
+  useEffect(() => {
+    if (subtitleComplete && !hasAnimationPlayed) {
+      sessionStorage.setItem(ANIMATION_PLAYED_KEY, 'true');
+    }
+  }, [subtitleComplete, hasAnimationPlayed]);
 
   return (
     <div className="min-h-screen bg-slate-900">
@@ -25,10 +36,16 @@ const Home = () => {
         <div className="absolute inset-0 flex flex-col justify-between pt-48 md:pt-56 lg:pt-48 pb-6 lg:pb-10">
           <div className="max-w-6xl mx-auto text-center px-4 sm:px-6 lg:px-8">
             <h1 className="text-5xl md:text-7xl font-courier font-medium text-white mb-6 leading-tight tracking-widest">
-              <TypewriterText text="Welcome to My Personal Page" speed={60} onComplete={() => setHeadingComplete(true)} />
+              {hasAnimationPlayed ? (
+                "Welcome to My Personal Page"
+              ) : (
+                <TypewriterText text="Welcome to My Personal Page" speed={60} onComplete={() => setHeadingComplete(true)} />
+              )}
             </h1>
             <p className="text-xl md:text-2xl font-courier mb-8 max-w-3xl mx-auto leading-relaxed tracking-wide text-primary-foreground">
-              {headingComplete ? (
+              {hasAnimationPlayed ? (
+                "Get to know me and my venture capital conversations."
+              ) : headingComplete ? (
                 <TypewriterText 
                   text="Get to know me and my venture capital conversations." 
                   speed={30} 
