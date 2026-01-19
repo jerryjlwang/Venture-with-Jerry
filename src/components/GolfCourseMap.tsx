@@ -100,16 +100,16 @@ const holePositions = [
   { x: 56, y: 51.25 },    // Hole 6
   { x: 54.5, y: 72.5 },    // Hole 7
   { x: 31.25, y: 89.75 },    // Hole 8
-  { x: 6, y: 73.5 },     // Hole 9
+  { x: 6, y: 73.25 },     // Hole 9
   { x: 34.25, y: 44.25 },    // Hole 10
   { x: 52.25, y: 39.25 },    // Hole 11
   { x: 89.5, y: 42.75 },    // Hole 12
   { x: 94.75, y: 82.5 },    // Hole 13
-  { x: 87.5, y: 68 },    // Hole 14
-  { x: 78, y: 31.5 },    // Hole 15
-  { x: 54.25, y: 18 },    // Hole 16
-  { x: 30.25, y: 11 },    // Hole 17
-  { x: 20.25, y: 33.25 },    // Hole 18
+  { x: 87.5, y: 67.5 },    // Hole 14
+  { x: 78, y: 31.25 },    // Hole 15
+  { x: 54.25, y: 17.75 },    // Hole 16
+  { x: 30.25, y: 10.75 },    // Hole 17
+  { x: 20.25, y: 33 },    // Hole 18
 ];
 
 // Animation phases: idle -> zooming -> expanded -> transitioning (zoom out then zoom in)
