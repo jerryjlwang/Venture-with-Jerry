@@ -92,8 +92,8 @@ const journeyOrder: (HoleData)[] = [
 
 // Course layout positions - precise coordinates as % of image grid
 const holePositions = [
-  { x: 27, y: 36.5 },    // Hole 1
-  { x: 49, y: 23.5 },    // Hole 2
+  { x: 26.75, y: 36.25 },    // Hole 1
+  { x: 48.75, y: 23.25 },    // Hole 2
   { x: 61.5, y: 30.5 },    // Hole 3
   { x: 74.25, y: 76 },    // Hole 4
   { x: 67.75, y: 58.5 },    // Hole 5
