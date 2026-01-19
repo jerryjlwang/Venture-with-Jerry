@@ -13,6 +13,35 @@ const Golf = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  const smoothScrollTo = (elementId: string) => {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+    
+    const targetPosition = element.getBoundingClientRect().top + window.scrollY;
+    const startPosition = window.scrollY;
+    const distance = targetPosition - startPosition;
+    const duration = 1500; // 1.5 seconds
+    let startTime: number | null = null;
+
+    const easeInOutCubic = (t: number) => {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    };
+
+    const animation = (currentTime: number) => {
+      if (startTime === null) startTime = currentTime;
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      window.scrollTo(0, startPosition + distance * easeInOutCubic(progress));
+      
+      if (elapsed < duration) {
+        requestAnimationFrame(animation);
+      }
+    };
+
+    requestAnimationFrame(animation);
+  };
+
   return <div className="min-h-screen relative" style={{
     backgroundColor: '#052e16'
   }}>
@@ -30,7 +59,7 @@ const Golf = () => {
           <p className="text-lg text-gray-300 max-w-2xl mx-auto font-courier">My life through golf.</p>
           
           <button 
-            onClick={() => document.getElementById('golf-map')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => smoothScrollTo('golf-map')}
             className={`mt-8 transition-all duration-700 cursor-pointer ${
               showArrow ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
