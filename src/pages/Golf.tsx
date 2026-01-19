@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
-import golfBackground from '@/assets/golf-background.png';
 import GolfCourseMap from '@/components/GolfCourseMap';
 
 const Golf = () => {
@@ -45,15 +44,18 @@ const Golf = () => {
   return <div className="min-h-screen relative" style={{
     backgroundColor: '#052e16'
   }}>
-      {/* Background image section */}
-      <div 
-        className="absolute inset-0 bg-no-repeat opacity-40" 
-        style={{
-          backgroundImage: `url(${golfBackground})`,
-          backgroundSize: '100% auto',
-          backgroundPosition: 'top'
-        }}
-      >
+      {/* Background video section */}
+      <div className="absolute inset-0 overflow-hidden">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover opacity-40"
+        >
+          <source src="/videos/golf-background.mov" type="video/quicktime" />
+        </video>
         <div className="absolute inset-0 bg-green-950 bg-opacity-20"></div>
         <div 
           className="absolute inset-0" 
