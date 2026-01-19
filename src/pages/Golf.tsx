@@ -84,14 +84,8 @@ const Golf = () => {
     backgroundPosition: 'center',
     backgroundAttachment: 'fixed'
   }}>
-      {/* Green tint overlay for the background image below the video */}
-      <div 
-        className="absolute inset-0 pointer-events-none" 
-        style={{ 
-          zIndex: 0,
-          background: 'linear-gradient(to bottom, transparent 0%, transparent 100vh, rgba(5, 46, 22, 0.7) 100vh, rgba(5, 46, 22, 0.7) 100%)'
-        }}
-      ></div>
+      {/* Green tint overlay for consistency across video + background image */}
+      <div className="absolute inset-0 bg-green-950/20 pointer-events-none" style={{ zIndex: 0 }}></div>
       
       {/* Background video section */}
       <div 
@@ -111,7 +105,7 @@ const Golf = () => {
           preload="auto"
           onEnded={() => handleVideoEnded(0)}
           className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000 ${
-            activeVideo === 0 ? 'opacity-40' : 'opacity-0'
+            activeVideo === 0 ? 'opacity-55' : 'opacity-0'
           }`}
         />
         {/* Video 2 */}
@@ -123,7 +117,7 @@ const Golf = () => {
           preload="auto"
           onEnded={() => handleVideoEnded(1)}
           className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000 ${
-            activeVideo === 1 ? 'opacity-40' : 'opacity-0'
+            activeVideo === 1 ? 'opacity-55' : 'opacity-0'
           }`}
         />
         <div className="absolute inset-0 bg-green-950 bg-opacity-20"></div>
