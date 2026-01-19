@@ -69,14 +69,9 @@ const PostCard = ({ id, title, excerpt, date, readTime, imageUrl, graphic }: Pos
               {title}
             </h3>
             
-            <p className="text-gray-300/90 text-sm leading-relaxed font-courier tracking-wide line-clamp-2 mb-4">
+            <p className="text-gray-300/90 text-sm leading-relaxed font-courier tracking-wide line-clamp-2">
               {excerpt}
             </p>
-            
-            <div className="inline-flex items-center text-blue-400 group-hover:text-blue-300 transition-colors font-courier tracking-wide text-sm">
-              Read more 
-              <span className="ml-2 transform group-hover:translate-x-1 transition-transform duration-300">→</span>
-            </div>
           </div>
         </div>
       </Link>
