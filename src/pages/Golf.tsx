@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
 import GolfCourseMap from '@/components/GolfCourseMap';
 
@@ -9,9 +9,10 @@ const VIDEOS = [
 
 const Golf = () => {
   const [showArrow, setShowArrow] = useState(false);
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-  const [nextVideoIndex, setNextVideoIndex] = useState(1);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [activeVideo, setActiveVideo] = useState(0); // 0 or 1 for which video element is active
+  const [videoSources, setVideoSources] = useState([VIDEOS[0], VIDEOS[1]]);
+  const video1Ref = useRef<HTMLVideoElement>(null);
+  const video2Ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -20,15 +21,31 @@ const Golf = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleVideoEnded = () => {
-    setIsTransitioning(true);
+  const handleVideoEnded = (endedIndex: number) => {
+    // Only handle if this is the currently active video
+    if (endedIndex !== activeVideo) return;
     
-    // After fade completes, swap videos
+    const nextActive = activeVideo === 0 ? 1 : 0;
+    const inactiveRef = nextActive === 0 ? video1Ref : video2Ref;
+    
+    // Reset and play the next video from the start
+    if (inactiveRef.current) {
+      inactiveRef.current.currentTime = 0;
+      inactiveRef.current.play();
+    }
+    
+    // Start the crossfade
+    setActiveVideo(nextActive);
+    
+    // After transition, update the source of the now-inactive video to the next in queue
     setTimeout(() => {
-      setCurrentVideoIndex(nextVideoIndex);
-      setNextVideoIndex((nextVideoIndex + 1) % VIDEOS.length);
-      setIsTransitioning(false);
-    }, 1000); // Match transition duration
+      const nextSourceIndex = (VIDEOS.indexOf(videoSources[nextActive]) + 1) % VIDEOS.length;
+      setVideoSources(prev => {
+        const updated = [...prev];
+        updated[endedIndex] = VIDEOS[nextSourceIndex];
+        return updated;
+      });
+    }, 1000);
   };
 
   const smoothScrollTo = (elementId: string) => {
@@ -65,29 +82,29 @@ const Golf = () => {
   }}>
       {/* Background video section */}
       <div className="absolute top-0 left-0 w-full h-screen overflow-hidden">
-        {/* Next video (underneath, fades in during transition) */}
+        {/* Video 1 */}
         <video
-          key={`next-${nextVideoIndex}`}
-          src={VIDEOS[nextVideoIndex]}
+          ref={video1Ref}
+          src={videoSources[0]}
           autoPlay
           muted
           playsInline
           preload="auto"
+          onEnded={() => handleVideoEnded(0)}
           className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000 ${
-            isTransitioning ? 'opacity-40' : 'opacity-0'
+            activeVideo === 0 ? 'opacity-40' : 'opacity-0'
           }`}
         />
-        {/* Current video (on top, fades out during transition) */}
+        {/* Video 2 */}
         <video
-          key={`current-${currentVideoIndex}`}
-          src={VIDEOS[currentVideoIndex]}
-          autoPlay
+          ref={video2Ref}
+          src={videoSources[1]}
           muted
           playsInline
           preload="auto"
-          onEnded={handleVideoEnded}
+          onEnded={() => handleVideoEnded(1)}
           className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000 ${
-            isTransitioning ? 'opacity-0' : 'opacity-40'
+            activeVideo === 1 ? 'opacity-40' : 'opacity-0'
           }`}
         />
         <div className="absolute inset-0 bg-green-950 bg-opacity-20"></div>
