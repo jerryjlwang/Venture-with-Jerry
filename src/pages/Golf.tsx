@@ -10,6 +10,8 @@ const VIDEOS = [
 const Golf = () => {
   const [showArrow, setShowArrow] = useState(false);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [nextVideoIndex, setNextVideoIndex] = useState(1);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -19,7 +21,14 @@ const Golf = () => {
   }, []);
 
   const handleVideoEnded = () => {
-    setCurrentVideoIndex((prev) => (prev + 1) % VIDEOS.length);
+    setIsTransitioning(true);
+    
+    // After fade completes, swap videos
+    setTimeout(() => {
+      setCurrentVideoIndex(nextVideoIndex);
+      setNextVideoIndex((nextVideoIndex + 1) % VIDEOS.length);
+      setIsTransitioning(false);
+    }, 1000); // Match transition duration
   };
 
   const smoothScrollTo = (elementId: string) => {
@@ -56,15 +65,30 @@ const Golf = () => {
   }}>
       {/* Background video section */}
       <div className="absolute top-0 left-0 w-full h-screen overflow-hidden">
+        {/* Next video (underneath, fades in during transition) */}
         <video
-          key={currentVideoIndex}
+          key={`next-${nextVideoIndex}`}
+          src={VIDEOS[nextVideoIndex]}
+          autoPlay
+          muted
+          playsInline
+          preload="auto"
+          className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000 ${
+            isTransitioning ? 'opacity-40' : 'opacity-0'
+          }`}
+        />
+        {/* Current video (on top, fades out during transition) */}
+        <video
+          key={`current-${currentVideoIndex}`}
           src={VIDEOS[currentVideoIndex]}
           autoPlay
           muted
           playsInline
           preload="auto"
           onEnded={handleVideoEnded}
-          className="absolute inset-0 w-full h-full object-cover object-top opacity-40"
+          className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000 ${
+            isTransitioning ? 'opacity-0' : 'opacity-40'
+          }`}
         />
         <div className="absolute inset-0 bg-green-950 bg-opacity-20"></div>
         <div 
