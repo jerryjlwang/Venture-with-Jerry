@@ -94,8 +94,8 @@ const journeyOrder: (HoleData)[] = [
 const holePositions = [
   { x: 26.75, y: 36.25 },    // Hole 1
   { x: 48.75, y: 23.25 },    // Hole 2
-  { x: 61.5, y: 30.5 },    // Hole 3
-  { x: 74.25, y: 76 },    // Hole 4
+  { x: 61.25, y: 30 },    // Hole 3
+  { x: 74, y: 75.5 },    // Hole 4
   { x: 67.75, y: 58.5 },    // Hole 5
   { x: 56, y: 51.25 },    // Hole 6
   { x: 54.5, y: 72.5 },    // Hole 7
