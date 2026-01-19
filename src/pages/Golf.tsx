@@ -89,7 +89,7 @@ const Golf = () => {
         className="absolute inset-0 pointer-events-none" 
         style={{ 
           zIndex: 0,
-          background: 'linear-gradient(to bottom, #052e16 0%, #052e16 80vh, rgba(5, 46, 22, 0.85) 100vh, rgba(5, 46, 22, 0.7) 100%)'
+          background: 'linear-gradient(to bottom, transparent 0%, transparent 80vh, rgba(5, 46, 22, 0.7) 100%)'
         }}
       ></div>
       
