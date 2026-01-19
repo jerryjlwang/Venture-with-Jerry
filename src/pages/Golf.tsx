@@ -52,7 +52,7 @@ const Golf = () => {
           loop
           playsInline
           preload="auto"
-          className="absolute inset-0 w-full h-full object-cover opacity-40"
+          className="absolute top-0 left-0 w-full opacity-40"
         >
           <source src="/videos/golf-background.mp4" type="video/mp4" />
         </video>
