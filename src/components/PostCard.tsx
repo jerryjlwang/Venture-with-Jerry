@@ -51,7 +51,7 @@ const PostCard = ({ id, title, excerpt, date, readTime, imageUrl, graphic }: Pos
         <div className="relative z-10 p-6 flex flex-col justify-end h-full min-h-[320px]">
           {/* Date badge */}
           <div className="absolute top-4 right-4">
-            <span className="px-3 py-1 bg-blue-600/80 backdrop-blur-sm text-white text-xs font-courier tracking-wide rounded-full">
+            <span className="px-3 py-1 bg-white backdrop-blur-sm text-black text-xs font-courier tracking-wide rounded-full">
               {readTime}
             </span>
           </div>
