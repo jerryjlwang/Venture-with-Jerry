@@ -54,7 +54,7 @@ const Golf = () => {
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover opacity-40"
         >
-          <source src="/videos/golf-background.mov" type="video/quicktime" />
+          <source src="/videos/golf-background.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-green-950 bg-opacity-20"></div>
         <div 
