@@ -84,8 +84,14 @@ const Golf = () => {
     backgroundPosition: 'center',
     backgroundAttachment: 'fixed'
   }}>
-      {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-green-950/70 pointer-events-none" style={{ zIndex: 0 }}></div>
+      {/* Gradient overlay for smooth transition from video to background */}
+      <div 
+        className="absolute inset-0 pointer-events-none" 
+        style={{ 
+          zIndex: 0,
+          background: 'linear-gradient(to bottom, #052e16 0%, #052e16 80vh, rgba(5, 46, 22, 0.85) 100vh, rgba(5, 46, 22, 0.7) 100%)'
+        }}
+      ></div>
       
       {/* Background video section */}
       <div className="absolute top-0 left-0 w-full h-screen overflow-hidden">
