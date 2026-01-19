@@ -60,7 +60,7 @@ const PostCard = ({ id, title, excerpt, date, readTime, imageUrl, graphic }: Pos
           <div className="mt-auto">
             <time 
               dateTime={date} 
-              className="text-blue-300/80 text-sm font-courier tracking-wide mb-2 block"
+              className="text-white/80 text-sm font-courier tracking-wide mb-2 block"
             >
               {new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
             </time>
