@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
 import GolfCourseMap from '@/components/GolfCourseMap';
+import golfCourseBackground from '@/assets/golf-course-background.png';
 
 const VIDEOS = [
   '/videos/golf-background.mp4',
@@ -78,7 +79,10 @@ const Golf = () => {
   };
 
   return <div className="min-h-screen relative" style={{
-    backgroundColor: '#052e16'
+    backgroundImage: `url(${golfCourseBackground})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundAttachment: 'fixed'
   }}>
       {/* Background video section */}
       <div className="absolute top-0 left-0 w-full h-screen overflow-hidden">
