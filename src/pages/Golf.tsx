@@ -84,17 +84,23 @@ const Golf = () => {
     backgroundPosition: 'center',
     backgroundAttachment: 'fixed'
   }}>
-      {/* Gradient overlay for smooth transition from video to background */}
+      {/* Green tint overlay for the background image below the video */}
       <div 
         className="absolute inset-0 pointer-events-none" 
         style={{ 
           zIndex: 0,
-          background: 'linear-gradient(to bottom, transparent 0%, transparent 80vh, rgba(5, 46, 22, 0.7) 100%)'
+          background: 'linear-gradient(to bottom, transparent 0%, transparent 100vh, rgba(5, 46, 22, 0.7) 100vh, rgba(5, 46, 22, 0.7) 100%)'
         }}
       ></div>
       
       {/* Background video section */}
-      <div className="absolute top-0 left-0 w-full h-screen overflow-hidden">
+      <div 
+        className="absolute top-0 left-0 w-full h-screen overflow-hidden"
+        style={{
+          maskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)'
+        }}
+      >
         {/* Video 1 */}
         <video
           ref={video1Ref}
@@ -121,12 +127,6 @@ const Golf = () => {
           }`}
         />
         <div className="absolute inset-0 bg-green-950 bg-opacity-20"></div>
-        <div 
-          className="absolute inset-0" 
-          style={{
-            background: 'linear-gradient(to bottom, transparent 0%, transparent 50%, #052e16 95%, #052e16 100%)'
-          }}
-        ></div>
       </div>
       
       {/* Hero section - centered in viewport */}
