@@ -334,11 +334,12 @@ const GolfCourseMap = () => {
           className="absolute inset-0 transition-transform duration-500 ease-out origin-center"
           style={{ transform: getZoomTransform() }}
         >
-          {/* Scorecard background image */}
+          {/* Scorecard background image - desaturated for sophisticated look */}
           <img 
             src={golfScorecard} 
             alt="Golf course scorecard map" 
             className="absolute inset-0 w-full h-full object-fill"
+            style={{ filter: 'saturate(0.4) brightness(0.95)' }}
           />
 
           {/* Hole markers */}
@@ -350,32 +351,49 @@ const GolfCourseMap = () => {
             return (
               <button
                 key={hole.hole}
-                className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 group z-10`}
+                className={`absolute transform -translate-x-1/2 transition-all duration-300 group z-10`}
                 style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
                 onClick={(e) => handleHoleClick(hole, isSelected, e)}
                 onMouseEnter={() => animationPhase === 'idle' && setHoveredHole(hole.hole)}
                 onMouseLeave={() => setHoveredHole(null)}
               >
-                <div 
-                  className={`flex items-center justify-start pl-2 font-courier shadow-lg transition-all duration-200 ${
-                    isSelected
-                      ? 'bg-amber-500 text-white ring-2 ring-white/50'
-                      : isHovered 
-                        ? 'bg-red-400 text-white scale-110' 
-                        : 'bg-red-500 text-white'
-                  }`}
-                  style={{
-                    clipPath: 'polygon(0 0, 100% 50%, 0 100%)',
-                    width: isSelected || isHovered ? '64px' : '55px',
-                    height: isSelected || isHovered ? '44px' : '37px',
-                    filter: 'drop-shadow(0 0 2px white) drop-shadow(0 0 2px white) drop-shadow(0 0 1px white)',
-                  }}
-                >
-                  <span className="text-sm text-white font-bold">{hole.hole}</span>
+                {/* Elegant pin marker */}
+                <div className="relative flex flex-col items-center">
+                  {/* Pin head with number */}
+                  <div 
+                    className={`rounded-full flex items-center justify-center font-courier font-bold shadow-lg transition-all duration-200 ${
+                      isSelected
+                        ? 'w-9 h-9 bg-amber-400 text-amber-950 ring-2 ring-white/60'
+                        : isHovered 
+                          ? 'w-9 h-9 bg-amber-500 text-amber-950 scale-110' 
+                          : 'w-8 h-8 bg-amber-600/90 text-white'
+                    }`}
+                    style={{
+                      boxShadow: isSelected || isHovered 
+                        ? '0 4px 12px rgba(0,0,0,0.3), 0 0 20px rgba(251,191,36,0.4)' 
+                        : '0 2px 8px rgba(0,0,0,0.3)',
+                    }}
+                  >
+                    <span className="text-sm">{hole.hole}</span>
+                  </div>
+                  {/* Pin point */}
+                  <div 
+                    className={`w-0 h-0 transition-all duration-200 ${
+                      isSelected ? 'border-l-[6px] border-r-[6px] border-t-[10px]' 
+                      : isHovered ? 'border-l-[6px] border-r-[6px] border-t-[10px]' 
+                      : 'border-l-[5px] border-r-[5px] border-t-[8px]'
+                    }`}
+                    style={{
+                      borderLeftColor: 'transparent',
+                      borderRightColor: 'transparent',
+                      borderTopColor: isSelected ? '#fbbf24' : isHovered ? '#f59e0b' : 'rgba(217, 119, 6, 0.9)',
+                      marginTop: '-1px',
+                    }}
+                  />
                 </div>
 
                 {isHovered && animationPhase === 'idle' && (
-                  <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-courier whitespace-nowrap shadow-xl z-30">
+                  <div className="absolute left-1/2 top-full mt-1 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-courier whitespace-nowrap shadow-xl z-30">
                     {hole.title}
                   </div>
                 )}
@@ -390,32 +408,51 @@ const GolfCourseMap = () => {
             
             return (
               <button
-                className="absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 group z-10"
+                className="absolute transform -translate-x-1/2 transition-all duration-300 group z-10"
                 style={{ left: `${halfwayHousePosition.x}%`, top: `${halfwayHousePosition.y}%` }}
                 onClick={(e) => handleHoleClick(halfwayHouseData, isSelected, e)}
                 onMouseEnter={() => animationPhase === 'idle' && setHoveredHole('halfway')}
                 onMouseLeave={() => setHoveredHole(null)}
               >
-                <div 
-                  className={`rounded-lg flex items-center justify-center font-sans font-semibold shadow-lg transition-all duration-200 ${
-                    isSelected
-                      ? 'w-10 h-10 bg-amber-500 text-white ring-2 ring-white/50'
-                      : isHovered 
-                        ? 'w-10 h-10 bg-orange-600 text-white scale-110' 
-                        : 'w-8 h-8 bg-orange-700 text-white'
-                  }`}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
-                    <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
-                    <line x1="6" x2="6" y1="2" y2="4"></line>
-                    <line x1="10" x2="10" y1="2" y2="4"></line>
-                    <line x1="14" x2="14" y1="2" y2="4"></line>
-                  </svg>
+                <div className="relative flex flex-col items-center">
+                  <div 
+                    className={`rounded-full flex items-center justify-center shadow-lg transition-all duration-200 ${
+                      isSelected
+                        ? 'w-10 h-10 bg-amber-400 text-amber-950 ring-2 ring-white/60'
+                        : isHovered 
+                          ? 'w-10 h-10 bg-amber-500 text-amber-950 scale-110' 
+                          : 'w-9 h-9 bg-amber-600/90 text-white'
+                    }`}
+                    style={{
+                      boxShadow: isSelected || isHovered 
+                        ? '0 4px 12px rgba(0,0,0,0.3), 0 0 20px rgba(251,191,36,0.4)' 
+                        : '0 2px 8px rgba(0,0,0,0.3)',
+                    }}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
+                      <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
+                      <line x1="6" x2="6" y1="2" y2="4"></line>
+                      <line x1="10" x2="10" y1="2" y2="4"></line>
+                      <line x1="14" x2="14" y1="2" y2="4"></line>
+                    </svg>
+                  </div>
+                  <div 
+                    className={`w-0 h-0 transition-all duration-200 ${
+                      isSelected || isHovered ? 'border-l-[6px] border-r-[6px] border-t-[10px]' 
+                      : 'border-l-[5px] border-r-[5px] border-t-[8px]'
+                    }`}
+                    style={{
+                      borderLeftColor: 'transparent',
+                      borderRightColor: 'transparent',
+                      borderTopColor: isSelected ? '#fbbf24' : isHovered ? '#f59e0b' : 'rgba(217, 119, 6, 0.9)',
+                      marginTop: '-1px',
+                    }}
+                  />
                 </div>
 
                 {isHovered && animationPhase === 'idle' && (
-                  <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-courier whitespace-nowrap shadow-xl z-30">
+                  <div className="absolute left-1/2 top-full mt-1 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-courier whitespace-nowrap shadow-xl z-30">
                     Halfway House
                   </div>
                 )}
@@ -430,33 +467,52 @@ const GolfCourseMap = () => {
             
             return (
               <button
-                className="absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 group z-10"
+                className="absolute transform -translate-x-1/2 transition-all duration-300 group z-10"
                 style={{ left: `${clubhousePosition.x}%`, top: `${clubhousePosition.y}%` }}
                 onClick={(e) => handleHoleClick(clubhouseData, isSelected, e)}
                 onMouseEnter={() => animationPhase === 'idle' && setHoveredHole('clubhouse')}
                 onMouseLeave={() => setHoveredHole(null)}
               >
-                <div 
-                  className={`rounded-xl flex items-center justify-center font-sans font-semibold shadow-lg transition-all duration-200 relative ${
-                    isSelected
-                      ? 'w-14 h-14 bg-amber-600 text-white ring-2 ring-white/50'
-                      : isHovered 
-                        ? 'w-14 h-14 bg-amber-600 text-white scale-110' 
-                        : 'w-12 h-12 bg-amber-700 text-white clubhouse-pulse'
-                  }`}
-                >
-                  {/* Pulsing ring - only when not hovered and not selected */}
-                  {!isHovered && !isSelected && (
-                    <span className="absolute inset-0 rounded-xl clubhouse-ring" />
-                  )}
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 relative z-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                  </svg>
+                <div className="relative flex flex-col items-center">
+                  <div 
+                    className={`rounded-full flex items-center justify-center shadow-lg transition-all duration-200 relative ${
+                      isSelected
+                        ? 'w-12 h-12 bg-amber-400 text-amber-950 ring-2 ring-white/60'
+                        : isHovered 
+                          ? 'w-12 h-12 bg-amber-500 text-amber-950 scale-110' 
+                          : 'w-11 h-11 bg-amber-500/90 text-white clubhouse-pulse'
+                    }`}
+                    style={{
+                      boxShadow: isSelected || isHovered 
+                        ? '0 4px 16px rgba(0,0,0,0.3), 0 0 24px rgba(251,191,36,0.5)' 
+                        : '0 2px 10px rgba(0,0,0,0.3), 0 0 16px rgba(251,191,36,0.3)',
+                    }}
+                  >
+                    {/* Pulsing ring - only when not hovered and not selected */}
+                    {!isHovered && !isSelected && (
+                      <span className="absolute inset-0 rounded-full clubhouse-ring" />
+                    )}
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 relative z-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                      <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                  </div>
+                  <div 
+                    className={`w-0 h-0 transition-all duration-200 ${
+                      isSelected || isHovered ? 'border-l-[8px] border-r-[8px] border-t-[12px]' 
+                      : 'border-l-[7px] border-r-[7px] border-t-[10px]'
+                    }`}
+                    style={{
+                      borderLeftColor: 'transparent',
+                      borderRightColor: 'transparent',
+                      borderTopColor: isSelected ? '#fbbf24' : isHovered ? '#f59e0b' : 'rgba(245, 158, 11, 0.9)',
+                      marginTop: '-1px',
+                    }}
+                  />
                 </div>
 
                 {isHovered && animationPhase === 'idle' && (
-                  <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-courier whitespace-nowrap shadow-xl z-30">
+                  <div className="absolute left-1/2 top-full mt-1 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-courier whitespace-nowrap shadow-xl z-30">
                     Start Journey Here
                   </div>
                 )}
