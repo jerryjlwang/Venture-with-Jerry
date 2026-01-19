@@ -46,9 +46,14 @@ const Golf = () => {
     backgroundColor: '#052e16'
   }}>
       {/* Background image section */}
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40" style={{
-      backgroundImage: `url(${golfBackground})`
-    }}>
+      <div 
+        className="absolute inset-0 bg-no-repeat opacity-40" 
+        style={{
+          backgroundImage: `url(${golfBackground})`,
+          backgroundSize: '100% auto',
+          backgroundPosition: 'top'
+        }}
+      >
         <div className="absolute inset-0 bg-green-950 bg-opacity-20"></div>
       </div>
       
