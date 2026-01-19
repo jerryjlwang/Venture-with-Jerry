@@ -55,6 +55,12 @@ const Golf = () => {
         }}
       >
         <div className="absolute inset-0 bg-green-950 bg-opacity-20"></div>
+        <div 
+          className="absolute inset-0" 
+          style={{
+            background: 'linear-gradient(to bottom, transparent 40%, #052e16 100%)'
+          }}
+        ></div>
       </div>
       
       {/* Hero section - centered in viewport */}
