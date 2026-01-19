@@ -124,7 +124,7 @@ const Golf = () => {
         <div 
           className="absolute inset-0" 
           style={{
-            background: 'linear-gradient(to bottom, transparent 40%, #052e16 100%)'
+            background: 'linear-gradient(to bottom, transparent 0%, transparent 50%, #052e16 95%, #052e16 100%)'
           }}
         ></div>
       </div>
