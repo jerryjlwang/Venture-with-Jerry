@@ -85,7 +85,7 @@ const Golf = () => {
     backgroundAttachment: 'fixed'
   }}>
       {/* Green tint overlay for consistency across video + background image */}
-      <div className="absolute inset-0 bg-green-950/20 pointer-events-none" style={{ zIndex: 0 }}></div>
+      <div className="absolute inset-0 bg-green-950/50 pointer-events-none" style={{ zIndex: 0 }}></div>
       
       {/* Background video section */}
       <div 
