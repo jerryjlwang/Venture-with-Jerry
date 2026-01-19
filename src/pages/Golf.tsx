@@ -55,7 +55,7 @@ const Golf = () => {
     backgroundColor: '#052e16'
   }}>
       {/* Background video section */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-screen overflow-hidden">
         <video
           key={currentVideoIndex}
           src={VIDEOS[currentVideoIndex]}
@@ -64,7 +64,7 @@ const Golf = () => {
           playsInline
           preload="auto"
           onEnded={handleVideoEnded}
-          className="absolute inset-0 w-full h-full object-contain opacity-40"
+          className="absolute inset-0 w-full h-full object-cover object-top opacity-40"
         />
         <div className="absolute inset-0 bg-green-950 bg-opacity-20"></div>
         <div 
