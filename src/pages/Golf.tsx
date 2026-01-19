@@ -85,7 +85,7 @@ const Golf = () => {
     backgroundAttachment: 'fixed'
   }}>
       {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-black/60 pointer-events-none" style={{ zIndex: 0 }}></div>
+      <div className="absolute inset-0 bg-green-950/70 pointer-events-none" style={{ zIndex: 0 }}></div>
       
       {/* Background video section */}
       <div className="absolute top-0 left-0 w-full h-screen overflow-hidden">
