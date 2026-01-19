@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import GolfCourseMap from '@/components/GolfCourseMap';
 
@@ -10,7 +10,6 @@ const VIDEOS = [
 const Golf = () => {
   const [showArrow, setShowArrow] = useState(false);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -22,13 +21,6 @@ const Golf = () => {
   const handleVideoEnded = () => {
     setCurrentVideoIndex((prev) => (prev + 1) % VIDEOS.length);
   };
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.load();
-      videoRef.current.play();
-    }
-  }, [currentVideoIndex]);
 
   const smoothScrollTo = (elementId: string) => {
     const element = document.getElementById(elementId);
@@ -65,16 +57,15 @@ const Golf = () => {
       {/* Background video section */}
       <div className="absolute inset-0 overflow-hidden">
         <video
-          ref={videoRef}
+          key={currentVideoIndex}
+          src={VIDEOS[currentVideoIndex]}
           autoPlay
           muted
           playsInline
           preload="auto"
           onEnded={handleVideoEnded}
-          className="absolute top-0 left-0 w-full opacity-40"
-        >
-          <source src={VIDEOS[currentVideoIndex]} type="video/mp4" />
-        </video>
+          className="absolute inset-0 w-full h-full object-contain opacity-40"
+        />
         <div className="absolute inset-0 bg-green-950 bg-opacity-20"></div>
         <div 
           className="absolute inset-0" 
