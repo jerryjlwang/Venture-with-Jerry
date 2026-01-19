@@ -582,7 +582,7 @@ const GolfCourseMap = () => {
 
                 {/* Icon column */}
                 <div className="flex items-center justify-center flex-shrink-0">
-                  <div className={`w-20 h-20 ${zoomTarget.hole === 'clubhouse' || zoomTarget.hole === 'halfway' ? 'rounded-xl' : 'rounded-full'} ${zoomTarget.hole === 'clubhouse' ? 'bg-amber-700' : zoomTarget.hole === 'halfway' ? 'bg-orange-700' : 'bg-sky-500'} border-4 border-white/40 flex items-center justify-center`}>
+                  <div className={`w-20 h-20 rounded-full bg-amber-500 border-4 border-white/40 flex items-center justify-center`}>
                     {zoomTarget.hole === 'clubhouse' ? (
                       <svg xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
