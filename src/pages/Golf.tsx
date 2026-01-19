@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
 import GolfCourseMap from '@/components/GolfCourseMap';
-import golfScorecard from '@/assets/golf-scorecard.png';
 
 const VIDEOS = [
   '/videos/golf-background.mp4',
@@ -78,16 +77,9 @@ const Golf = () => {
     requestAnimationFrame(animation);
   };
 
-  return (
-    <div className="min-h-screen relative">
-      {/* Background scorecard image - covers entire page */}
-      <div 
-        className="fixed inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ 
-          backgroundImage: `url(${golfScorecard})`,
-          filter: 'saturate(0.4) brightness(0.6)'
-        }}
-      />
+  return <div className="min-h-screen relative" style={{
+    backgroundColor: '#052e16'
+  }}>
       {/* Background video section */}
       <div className="absolute top-0 left-0 w-full h-screen overflow-hidden">
         {/* Video 1 */}
@@ -119,7 +111,7 @@ const Golf = () => {
         <div 
           className="absolute inset-0" 
           style={{
-            background: 'linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.7) 100%)'
+            background: 'linear-gradient(to bottom, transparent 40%, #052e16 100%)'
           }}
         ></div>
       </div>
@@ -152,7 +144,6 @@ const Golf = () => {
           </p>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
 export default Golf;
