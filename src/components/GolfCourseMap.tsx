@@ -51,7 +51,7 @@ const halfwayHouseData: HoleData = {
   description: "At this point in time, I took a step back to think about what I really wanted. After interviewing a venture capital partner for a class project, my eyes caught a glimpse of the startup world for the first time.",
 };
 
-const halfwayHousePosition = { x: 14, y: 73 };
+const halfwayHousePosition = { x: 13, y: 72 };
 
 const clubhouseData: HoleData = {
   hole: 'clubhouse',
@@ -59,7 +59,7 @@ const clubhouseData: HoleData = {
   description: "The clubhouse is where every round begins and ends. For me, this cycle looked like picking up my first club after leaving my previous passion, soccer, behind.",
 };
 
-const clubhousePosition = { x: 8, y: 50 };
+const clubhousePosition = { x: 7, y: 49 };
 
 const journeyData: HoleData[] = [
   { hole: 1, title: "First swings", description: "My primary interest at this time was math and programming. Mostly through competitions, I aspired to be a software developer because I loved using computational methods to solve problems.", year: "2018" },
@@ -92,24 +92,24 @@ const journeyOrder: (HoleData)[] = [
 
 // Course layout positions - precise coordinates as % of image grid
 const holePositions = [
-  { x: 28, y: 37.5 },    // Hole 1
-  { x: 50, y: 24.5 },    // Hole 2
-  { x: 62.5, y: 31.5 },    // Hole 3
-  { x: 75.25, y: 77 },    // Hole 4
-  { x: 68.75, y: 59.5 },    // Hole 5
-  { x: 57, y: 52.25 },    // Hole 6
-  { x: 55.5, y: 73.5 },    // Hole 7
-  { x: 32.25, y: 91 },    // Hole 8
-  { x: 7, y: 75 },     // Hole 9
-  { x: 35.25, y: 45.5 },    // Hole 10
-  { x: 53.25, y: 40.5 },    // Hole 11
-  { x: 90.5, y: 44 },    // Hole 12
-  { x: 95.75, y: 84 },    // Hole 13
-  { x: 88.5, y: 69 },    // Hole 14
-  { x: 79, y: 32.5 },    // Hole 15
-  { x: 55.25, y: 19 },    // Hole 16
-  { x: 31.25, y: 12 },    // Hole 17
-  { x: 21.25, y: 34.25 },    // Hole 18
+  { x: 27, y: 36.5 },    // Hole 1
+  { x: 49, y: 23.5 },    // Hole 2
+  { x: 61.5, y: 30.5 },    // Hole 3
+  { x: 74.25, y: 76 },    // Hole 4
+  { x: 67.75, y: 58.5 },    // Hole 5
+  { x: 56, y: 51.25 },    // Hole 6
+  { x: 54.5, y: 72.5 },    // Hole 7
+  { x: 31.25, y: 90 },    // Hole 8
+  { x: 6, y: 74 },     // Hole 9
+  { x: 34.25, y: 44.5 },    // Hole 10
+  { x: 52.25, y: 39.5 },    // Hole 11
+  { x: 89.5, y: 43 },    // Hole 12
+  { x: 94.75, y: 83 },    // Hole 13
+  { x: 87.5, y: 68 },    // Hole 14
+  { x: 78, y: 31.5 },    // Hole 15
+  { x: 54.25, y: 18 },    // Hole 16
+  { x: 30.25, y: 11 },    // Hole 17
+  { x: 20.25, y: 33.25 },    // Hole 18
 ];
 
 // Animation phases: idle -> zooming -> expanded -> transitioning (zoom out then zoom in)
