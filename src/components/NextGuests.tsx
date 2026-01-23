@@ -10,6 +10,12 @@ const NextGuests = () => {
     //   avatar: "/lovable-uploads/alex-edelson.png"
     // }
   ];
+
+  // Don't render anything if there are no upcoming guests
+  if (upcomingGuests.length === 0) {
+    return null;
+  }
+
   return <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/30 shadow-lg">
       <h3 className="text-xl text-white mb-4 font-normal text-center font-courier tracking-wide">
         Upcoming Interviews
