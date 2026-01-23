@@ -1,7 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { ChevronDown } from 'lucide-react';
-import GolfCourseMap from '@/components/GolfCourseMap';
 import golfCourseBackground from '@/assets/golf-course-background.png';
+
+// Lazy load the heavy GolfCourseMap component
+const GolfCourseMap = lazy(() => import('@/components/GolfCourseMap'));
 
 const VIDEOS = [
   '/videos/golf-background.mp4',
@@ -10,10 +12,19 @@ const VIDEOS = [
 
 const Golf = () => {
   const [showArrow, setShowArrow] = useState(false);
-  const [activeVideo, setActiveVideo] = useState(0); // 0 or 1 for which video element is active
+  const [videosReady, setVideosReady] = useState(false);
+  const [activeVideo, setActiveVideo] = useState(0);
   const [videoSources, setVideoSources] = useState([VIDEOS[0], VIDEOS[1]]);
   const video1Ref = useRef<HTMLVideoElement>(null);
   const video2Ref = useRef<HTMLVideoElement>(null);
+
+  // Defer video loading to after initial paint
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setVideosReady(true);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -23,22 +34,18 @@ const Golf = () => {
   }, []);
 
   const handleVideoEnded = (endedIndex: number) => {
-    // Only handle if this is the currently active video
     if (endedIndex !== activeVideo) return;
     
     const nextActive = activeVideo === 0 ? 1 : 0;
     const inactiveRef = nextActive === 0 ? video1Ref : video2Ref;
     
-    // Reset and play the next video from the start
     if (inactiveRef.current) {
       inactiveRef.current.currentTime = 0;
       inactiveRef.current.play();
     }
     
-    // Start the crossfade
     setActiveVideo(nextActive);
     
-    // After transition, update the source of the now-inactive video to the next in queue
     setTimeout(() => {
       const nextSourceIndex = (VIDEOS.indexOf(videoSources[nextActive]) + 1) % VIDEOS.length;
       setVideoSources(prev => {
@@ -95,31 +102,34 @@ const Golf = () => {
           WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)'
         }}
       >
-        {/* Video 1 */}
-        <video
-          ref={video1Ref}
-          src={videoSources[0]}
-          autoPlay
-          muted
-          playsInline
-          preload="auto"
-          onEnded={() => handleVideoEnded(0)}
-          className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000 ${
-            activeVideo === 0 ? 'opacity-55' : 'opacity-0'
-          }`}
-        />
-        {/* Video 2 */}
-        <video
-          ref={video2Ref}
-          src={videoSources[1]}
-          muted
-          playsInline
-          preload="auto"
-          onEnded={() => handleVideoEnded(1)}
-          className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000 ${
-            activeVideo === 1 ? 'opacity-55' : 'opacity-0'
-          }`}
-        />
+        {/* Only render videos after initial paint */}
+        {videosReady && (
+          <>
+            <video
+              ref={video1Ref}
+              src={videoSources[0]}
+              autoPlay
+              muted
+              playsInline
+              preload="metadata"
+              onEnded={() => handleVideoEnded(0)}
+              className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000 ${
+                activeVideo === 0 ? 'opacity-55' : 'opacity-0'
+              }`}
+            />
+            <video
+              ref={video2Ref}
+              src={videoSources[1]}
+              muted
+              playsInline
+              preload="none"
+              onEnded={() => handleVideoEnded(1)}
+              className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000 ${
+                activeVideo === 1 ? 'opacity-55' : 'opacity-0'
+              }`}
+            />
+          </>
+        )}
         <div className="absolute inset-0 bg-green-950 bg-opacity-20"></div>
       </div>
       
@@ -143,7 +153,9 @@ const Golf = () => {
 
       {/* Map section - below the fold */}
       <div id="golf-map" className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        <GolfCourseMap />
+        <Suspense fallback={<div className="h-96 flex items-center justify-center"><div className="text-white/60 font-courier">Loading map...</div></div>}>
+          <GolfCourseMap />
+        </Suspense>
 
         <div className="mt-16 text-center">
           <p className="text-white/60 font-courier text-sm">
