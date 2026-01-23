@@ -152,7 +152,7 @@ const Golf = () => {
       </div>
 
       {/* Map section - below the fold */}
-      <div id="golf-map" className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+      <div id="golf-map" className="relative z-10 w-full pb-16">
         <Suspense fallback={<div className="h-96 flex items-center justify-center"><div className="text-white/60 font-courier">Loading map...</div></div>}>
           <GolfCourseMap />
         </Suspense>
