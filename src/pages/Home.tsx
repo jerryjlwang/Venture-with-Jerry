@@ -26,17 +26,24 @@ const Home = () => {
         {/* Hero Content */}
         <div className="absolute inset-0 flex flex-col justify-between pt-32 md:pt-40 lg:pt-32 pb-6 lg:pb-10">
           <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
-            {/* Main hero grid - asymmetric layout */}
+            {/* Main hero grid - right-skewed asymmetric layout */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-              {/* Left column - main content */}
-              <div className="lg:col-span-8 text-left">
+              {/* Left column - NextGuests */}
+              <div className={`lg:col-span-4 hidden lg:flex lg:justify-start lg:pt-4 transition-all duration-700 ease-out ${subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{
+                transitionDelay: '300ms'
+              }}>
+                <NextGuests />
+              </div>
+              
+              {/* Right column - main content */}
+              <div className="lg:col-span-8 text-left lg:text-right">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-courier font-medium text-white mb-4 lg:mb-6 leading-[1.1] tracking-wide">
                   {hasAnimationPlayed ? "Welcome to My Personal Page" : <TypewriterText text="Welcome to My Personal Page" speed={60} onComplete={() => setHeadingComplete(true)} />}
                 </h1>
-                <p className="text-lg sm:text-xl md:text-2xl font-courier mb-6 lg:mb-8 max-w-2xl leading-relaxed tracking-wide text-primary-foreground">
+                <p className="text-lg sm:text-xl md:text-2xl font-courier mb-6 lg:mb-8 lg:ml-auto max-w-2xl leading-relaxed tracking-wide text-primary-foreground">
                   {hasAnimationPlayed ? "Get to know me and my venture capital conversations." : headingComplete ? <TypewriterText text="Get to know me and my venture capital conversations." speed={30} onComplete={() => setSubtitleComplete(true)} keepCursorAfterComplete={true} /> : <span className="invisible">Get to know me and my venture capital conversations.</span>}
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:justify-end">
                   <a href="/posts" className={`inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-courier font-medium transition-all shadow-lg hover:shadow-xl tracking-wide duration-700 ease-out ${subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{
                     transitionDelay: '0ms'
                   }}>
@@ -48,13 +55,6 @@ const Home = () => {
                     Learn About Me
                   </a>
                 </div>
-              </div>
-              
-              {/* Right column - NextGuests */}
-              <div className={`lg:col-span-4 hidden lg:flex lg:justify-end lg:pt-4 transition-all duration-700 ease-out ${subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{
-                transitionDelay: '300ms'
-              }}>
-                <NextGuests />
               </div>
             </div>
             
