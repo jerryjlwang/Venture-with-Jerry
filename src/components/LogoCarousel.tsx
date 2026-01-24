@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface Logo {
   id: string;
@@ -7,11 +7,11 @@ interface Logo {
   url: string;
 }
 
-interface LogoCarouselProps {
-  direction?: 'vertical' | 'horizontal';
-}
+const LogoCarousel = () => {
+  const [visibleLogos, setVisibleLogos] = useState<Set<number>>(new Set());
+  const [hasTriggered, setHasTriggered] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
   // Company logos with actual image sources
   const logos: Logo[] = [
     { 
@@ -76,12 +76,33 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
     },
   ];
 
-  // Double the logos for seamless infinite scroll
-  const doubleLogos = [...logos, ...logos];
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasTriggered) {
+          setHasTriggered(true);
+          // Stagger reveal each logo
+          logos.forEach((_, index) => {
+            setTimeout(() => {
+              setVisibleLogos(prev => new Set([...prev, index]));
+            }, index * 120); // 120ms stagger between each logo
+          });
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [hasTriggered, logos.length]);
 
   const LogoItem = ({ logo, index }: { logo: Logo; index: number }) => {
     const [imageLoaded, setImageLoaded] = useState(false);
     const [imageError, setImageError] = useState(false);
+    const isVisible = visibleLogos.has(index);
     
     // Scale up specific logos that appear too small
     const isFoundersCoop = logo.name === "Founders' Co-op";
@@ -94,17 +115,26 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
         href={logo.url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${direction === 'horizontal' ? 'w-36 h-16' : 'h-16'} rounded-lg border border-white/30 hover:border-blue-400/50 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 p-3 flex items-center justify-center flex-shrink-0 overflow-hidden ${isAscend || isOnesixone ? '' : 'bg-white'}`}
-        style={isAscend ? { backgroundColor: '#00aeef' } : isOnesixone ? { backgroundColor: '#000000' } : undefined}
+        className={`aspect-[2/1] rounded-lg hover:scale-105 transition-all duration-500 p-4 flex items-center justify-center overflow-hidden ${
+          isAscend || isOnesixone ? '' : 'bg-white/90'
+        } ${
+          isVisible 
+            ? 'opacity-100 translate-y-0 scale-100' 
+            : 'opacity-0 translate-y-8 scale-90'
+        }`}
+        style={{
+          backgroundColor: isAscend ? '#00aeef' : isOnesixone ? '#000000' : undefined,
+          transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+        }}
       >
         {!imageError ? (
           <>
             <img 
               src={logo.src}
               alt={`${logo.name} logo`}
-              className={`object-contain transition-opacity duration-300 ${
+              className={`object-contain max-w-full max-h-full transition-opacity duration-300 ${
                 imageLoaded ? 'opacity-100' : 'opacity-0'
-              } ${isAscend ? 'scale-125' : isOnesixone ? 'scale-[1.15]' : isFoundersCoop ? 'scale-[1.05]' : isBlingCapital ? 'scale-110' : 'max-w-full max-h-full'}`}
+              } ${isAscend ? 'scale-125' : isOnesixone ? 'scale-[1.15]' : isFoundersCoop ? 'scale-[1.05]' : isBlingCapital ? 'scale-110' : ''}`}
               onLoad={() => setImageLoaded(true)}
               onError={() => {
                 setImageError(true);
@@ -126,23 +156,14 @@ const LogoCarousel = ({ direction = 'vertical' }: LogoCarouselProps) => {
   };
 
   return (
-    <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/20">
-      <h2 className="text-lg font-courier font-normal text-white/80 mb-4 text-center tracking-wide">Companies Interviewed</h2>
-      <div 
-        className={`overflow-hidden ${
-          direction === 'horizontal' ? 'w-full h-24' : 'h-80'
-        }`}
-      >
-        <div 
-          className={`flex gap-4 ${direction === 'horizontal' ? 'flex-row animate-scroll-horizontal' : 'flex-col animate-scroll-vertical'}`}
-          style={{ 
-            willChange: 'transform',
-          }}
-        >
-          {doubleLogos.map((logo, index) => (
-            <LogoItem key={`${logo.id}-${index}`} logo={logo} index={index} />
-          ))}
-        </div>
+    <div ref={containerRef} className="w-full">
+      <p className="text-sm font-courier text-white/50 mb-6 text-center tracking-widest uppercase">
+        Companies Interviewed
+      </p>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+        {logos.map((logo, index) => (
+          <LogoItem key={logo.id} logo={logo} index={index} />
+        ))}
       </div>
     </div>
   );
