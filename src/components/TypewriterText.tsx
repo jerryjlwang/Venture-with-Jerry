@@ -31,7 +31,7 @@ const TypewriterText = ({ text, speed = 50, className = '', onComplete, keepCurs
     <span className={className}>
       {displayedText}
       {(currentIndex < text.length || keepCursorAfterComplete) && (
-        <span className="animate-pulse">|</span>
+        <span className="animate-blink">|</span>
       )}
       <span className="invisible">{remainingText}</span>
     </span>
