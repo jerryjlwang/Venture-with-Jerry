@@ -57,7 +57,7 @@ const TypewriterText = ({ text, speed = 50, className = '', onComplete, keepCurs
   }, [currentIndex, text, keepCursorAfterComplete]);
 
   return (
-    <span className={`inline-block whitespace-pre-wrap ${className}`}>
+    <span className={className}>
       {/*
         Why it “typed from the center”:
         when the parent is text-center (or text-right), concatenating characters changes the element width every tick,
