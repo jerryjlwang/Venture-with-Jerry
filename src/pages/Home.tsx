@@ -104,7 +104,7 @@ const Home = () => {
           
           {/* Logo Carousel at bottom of hero */}
           <div 
-            className={`max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 transition-all duration-700 ease-out ${
+            className={`max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 mt-8 transition-all duration-700 ease-out ${
               subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
             style={{ transitionDelay: '600ms' }}
