@@ -326,7 +326,7 @@ const GolfCourseMap = () => {
   const holePhoto = zoomTarget ? getHolePhoto(zoomTarget.hole) : null;
 
   return (
-    <div className="w-full max-w-5xl mx-auto">
+    <div className="w-full px-4 sm:px-6 lg:px-8">
       {/* Course Map Container */}
       <div className="relative w-full aspect-[1140/760] rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
         {/* Content wrapper with zoom animation */}
