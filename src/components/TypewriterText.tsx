@@ -33,13 +33,28 @@ const TypewriterText = ({ text, speed = 50, className = '', onComplete, keepCurs
     }
   }, [currentIndex, text.length, speed, onComplete]);
 
-  const { visible, hidden } = useMemo(() => {
+  const { visible, hidden, layoutHidden, cursorActive } = useMemo(() => {
     const clamped = Math.max(0, Math.min(currentIndex, text.length));
+    const cursorOn = clamped < text.length || keepCursorAfterComplete;
+
+    const hiddenText = text.slice(clamped);
+    // Keep the overall layout width stable:
+    // - If we are showing a cursor while typing, let the cursor take the width of the NEXT character
+    //   by removing that first hidden character from the invisible layout text.
+    // - If keepCursorAfterComplete is true, the cursor is part of the final layout, so don't remove anything.
+    const layoutHiddenText = keepCursorAfterComplete
+      ? hiddenText
+      : cursorOn
+        ? hiddenText.slice(1)
+        : hiddenText;
+
     return {
       visible: text.slice(0, clamped),
-      hidden: text.slice(clamped)
+      hidden: hiddenText,
+      layoutHidden: layoutHiddenText,
+      cursorActive: cursorOn
     };
-  }, [currentIndex, text]);
+  }, [currentIndex, text, keepCursorAfterComplete]);
 
   return (
     <span className={`inline-block whitespace-pre-wrap ${className}`}>
@@ -51,11 +66,11 @@ const TypewriterText = ({ text, speed = 50, className = '', onComplete, keepCurs
         Fix: render the full string's width at all times (hidden part keeps layout), and only reveal characters.
       */}
       <span>{visible}</span>
-      {(currentIndex < text.length || keepCursorAfterComplete) && (
+      {cursorActive && (
         <span className="animate-blink">|</span>
       )}
       <span className="opacity-0" aria-hidden="true">
-        {hidden}
+        {layoutHidden}
       </span>
     </span>
   );
