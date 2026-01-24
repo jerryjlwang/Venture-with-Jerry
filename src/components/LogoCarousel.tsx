@@ -109,6 +109,15 @@ const LogoCarousel = () => {
     const isBlingCapital = logo.name === "Bling Capital";
     const isAscend = logo.name === "Ascend VC";
     const isOnesixone = logo.name === "Onesixone Ventures";
+    const isPSL = logo.name === "Pioneer Square Labs";
+
+    // Determine background color
+    const getBackgroundColor = () => {
+      if (isAscend) return '#00aeef';
+      if (isOnesixone) return '#000000';
+      if (isBlingCapital || isPSL) return '#ffffff';
+      return undefined;
+    };
 
     return (
       <a 
@@ -116,14 +125,14 @@ const LogoCarousel = () => {
         target="_blank"
         rel="noopener noreferrer"
         className={`aspect-[2/1] rounded-lg hover:scale-105 transition-all duration-500 p-4 flex items-center justify-center overflow-hidden ${
-          isAscend || isOnesixone ? '' : 'bg-white/90'
+          isAscend || isOnesixone || isBlingCapital || isPSL ? '' : 'bg-white/90'
         } ${
           isVisible 
             ? 'opacity-100 translate-y-0 scale-100' 
             : 'opacity-0 translate-y-8 scale-90'
         }`}
         style={{
-          backgroundColor: isAscend ? '#00aeef' : isOnesixone ? '#000000' : undefined,
+          backgroundColor: getBackgroundColor(),
           transitionTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
         }}
       >
