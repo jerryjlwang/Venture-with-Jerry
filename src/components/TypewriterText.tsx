@@ -25,15 +25,17 @@ const TypewriterText = ({ text, speed = 50, className = '', onComplete, keepCurs
     }
   }, [currentIndex, text, speed, onComplete]);
 
-  const remainingText = text.slice(currentIndex);
-
   return (
-    <span className={className}>
-      {displayedText}
-      {(currentIndex < text.length || keepCursorAfterComplete) && (
-        <span className="animate-blink">|</span>
-      )}
-      <span className="invisible">{remainingText}</span>
+    <span className={`relative inline-block ${className}`}>
+      {/* Full text to establish width - invisible but takes space */}
+      <span className="invisible">{text}</span>
+      {/* Typed text overlaid on top */}
+      <span className="absolute left-0 top-0">
+        {displayedText}
+        {(currentIndex < text.length || keepCursorAfterComplete) && (
+          <span className="animate-blink">|</span>
+        )}
+      </span>
     </span>
   );
 };
