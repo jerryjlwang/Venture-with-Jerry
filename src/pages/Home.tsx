@@ -11,7 +11,6 @@ const ANIMATION_PLAYED_KEY = 'home-animation-played';
 const Home = () => {
   // Check if animations have already played this session
   const hasAnimationPlayed = sessionStorage.getItem(ANIMATION_PLAYED_KEY) === 'true';
-  const [headingComplete, setHeadingComplete] = useState(hasAnimationPlayed);
   const [subtitleComplete, setSubtitleComplete] = useState(hasAnimationPlayed);
 
   // Mark animation as played when subtitle completes
@@ -37,11 +36,8 @@ const Home = () => {
               
               {/* Right column - main content */}
               <div className="lg:col-span-8 text-left lg:text-right">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-courier font-medium text-white mb-4 lg:mb-6 leading-[1.1] tracking-wide">
-                  {hasAnimationPlayed ? "Welcome to My Personal Page" : <TypewriterText text="Welcome to My Personal Page" speed={60} onComplete={() => setHeadingComplete(true)} />}
-                </h1>
-                <p className="text-lg sm:text-xl md:text-2xl font-courier mb-6 lg:mb-8 lg:ml-auto max-w-2xl leading-relaxed tracking-wide text-primary-foreground">
-                  {hasAnimationPlayed ? "Get to know me and my venture capital conversations." : headingComplete ? <TypewriterText text="Get to know me and my venture capital conversations." speed={30} onComplete={() => setSubtitleComplete(true)} keepCursorAfterComplete={true} /> : <span className="invisible">Get to know me and my venture capital conversations.</span>}
+                <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-courier mb-6 lg:mb-8 lg:ml-auto max-w-2xl leading-relaxed tracking-wide text-white">
+                  {hasAnimationPlayed ? "Get to know me and my venture capital conversations." : <TypewriterText text="Get to know me and my venture capital conversations." speed={30} onComplete={() => setSubtitleComplete(true)} keepCursorAfterComplete={true} />}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:justify-end">
                   <a href="/posts" className={`inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-courier font-medium transition-all shadow-lg hover:shadow-xl tracking-wide duration-700 ease-out ${subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{
