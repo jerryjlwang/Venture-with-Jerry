@@ -51,12 +51,12 @@ const TypewriterText = ({ text, speed = 50, className = '', onComplete, keepCurs
         Fix: render the full string's width at all times (hidden part keeps layout), and only reveal characters.
       */}
       <span>{visible}</span>
-      <span className="opacity-0" aria-hidden="true">
-        {hidden}
-      </span>
       {(currentIndex < text.length || keepCursorAfterComplete) && (
         <span className="animate-blink">|</span>
       )}
+      <span className="opacity-0" aria-hidden="true">
+        {hidden}
+      </span>
     </span>
   );
 };
