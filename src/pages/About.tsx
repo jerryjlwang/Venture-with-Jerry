@@ -1,5 +1,4 @@
 import ScrollTypewriterText from '../components/ScrollTypewriterText';
-
 const About = () => {
   return <div className="min-h-screen bg-cover bg-center bg-no-repeat relative" style={{
     backgroundImage: `url('https://i.natgeofe.com/n/6e6d2eea-06d3-4ac4-94ca-2aba6f7f8757/mountain-pine-trees.jpg')`
@@ -25,7 +24,7 @@ const About = () => {
                 <img alt="Jerry Wang" className="w-full max-w-xs mx-auto rounded-lg shadow-lg object-cover" src="/lovable-uploads/1bed9257-b6b5-4067-9485-4377fa434e79.png" />
               </div>
               <h3 className="text-xl text-white mb-2 font-courier font-normal">Jerry Wang</h3>
-              <p className="text-blue-300 font-courier">Interviewer and Managing Editor</p>
+              <p className="font-courier text-primary-foreground">Interviewer and Managing Editor</p>
             </div>
 
             <div>
@@ -73,10 +72,10 @@ const About = () => {
             </section>
 
             <section className="bg-gradient-to-br from-gray-900 to-black rounded-lg p-8 shadow-xl">
-              <h2 className="text-2xl font-bold text-white mb-4 font-courier tracking-wide">Skills & Interests</h2>
+              <h2 className="text-2xl text-white mb-4 font-courier tracking-wide font-medium">Skills & Interests</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h3 className="text-lg font-semibold text-blue-400 mb-3 font-courier tracking-wide">Technical Skills</h3>
+                  <h3 className="text-lg text-blue-400 mb-3 font-courier tracking-wide font-medium">Technical Skills</h3>
                   <ul className="text-gray-300 space-y-2 font-courier">
                     <li>• Math</li>
                     <li>• Python</li>
@@ -86,7 +85,7 @@ const About = () => {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-blue-400 mb-3 font-courier tracking-wide">Interests</h3>
+                  <h3 className="text-lg text-blue-400 mb-3 font-courier tracking-wide font-medium">Interests</h3>
                   <ul className="text-gray-300 space-y-2 font-courier">
                     <li>• Open Source Projects</li>
                     <li>• VC Writing</li>
