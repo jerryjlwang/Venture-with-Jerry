@@ -6,6 +6,7 @@ import OptimizedBackground from '../components/OptimizedBackground';
 import TypewriterText from '../components/TypewriterText';
 import ScrollTypewriterText from '../components/ScrollTypewriterText';
 import missionTeamImage from '@/assets/mission-team.png';
+import mountainBackground from '@/assets/mountain-background.jpeg';
 const SEATTLE_SKYLINE = 'https://te-cdn-marketing-site.storage.googleapis.com/littleamerica/America/parnter/stay/places/usa-washington-state-seattle-skyline.jpg';
 const ANIMATION_PLAYED_KEY = 'home-animation-played';
 const Home = () => {
@@ -60,6 +61,18 @@ const Home = () => {
         }}>
             <LogoCarousel />
           </div>
+        </div>
+      </OptimizedBackground>
+
+      {/* Mountain Background Section */}
+      <OptimizedBackground 
+        src={mountainBackground} 
+        alt="Snow covered mountains" 
+        className="h-[60vh] lg:h-[80vh]" 
+        overlayClassName="bg-gradient-to-b from-slate-900 via-black/30 to-slate-900"
+      >
+        <div className="absolute inset-0 flex items-center justify-center">
+          {/* Content can be added here if needed */}
         </div>
       </OptimizedBackground>
 
