@@ -26,7 +26,7 @@ const TypewriterText = ({ text, speed = 50, className = '', onComplete, keepCurs
   }, [currentIndex, text, speed, onComplete]);
 
   return (
-    <span className={className}>
+    <span className={`block ${className}`}>
       {displayedText}
       {(currentIndex < text.length || keepCursorAfterComplete) && (
         <span className="animate-blink">|</span>
