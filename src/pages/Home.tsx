@@ -109,7 +109,7 @@ const Home = () => {
             }`}
             style={{ transitionDelay: '600ms' }}
           >
-            <LogoCarousel direction="horizontal" />
+            <LogoCarousel />
           </div>
         </div>
       </OptimizedBackground>
