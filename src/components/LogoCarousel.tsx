@@ -143,7 +143,7 @@ const LogoCarousel = () => {
               alt={`${logo.name} logo`}
               className={`object-contain max-w-full max-h-full transition-opacity duration-300 ${
                 imageLoaded ? 'opacity-100' : 'opacity-0'
-              } ${isAscend ? 'scale-125' : isOnesixone ? 'scale-[1.15]' : isFoundersCoop ? 'scale-[1.05]' : isBlingCapital ? 'scale-110' : ''}`}
+              } ${isAscend ? 'scale-125' : isOnesixone ? 'scale-[1.15]' : isFoundersCoop ? 'scale-[1.4]' : isBlingCapital ? 'scale-110' : ''}`}
               onLoad={() => setImageLoaded(true)}
               onError={() => {
                 setImageError(true);
