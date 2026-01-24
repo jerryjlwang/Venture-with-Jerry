@@ -64,22 +64,20 @@ const Home = () => {
         </div>
       </OptimizedBackground>
 
-      {/* Mountain Background Section */}
+      {/* Mountain Background Section with Posts overlaid */}
       <OptimizedBackground 
         src={mountainBackground} 
         alt="Snow covered mountains" 
-        className="h-[60vh] lg:h-[80vh]" 
-        overlayClassName="bg-gradient-to-b from-slate-900 via-black/30 to-slate-900"
+        className="min-h-[60vh]" 
+        overlayClassName="bg-gradient-to-b from-slate-900 via-black/50 to-slate-900"
       >
-        <div className="absolute inset-0 flex items-center justify-center">
-          {/* Content can be added here if needed */}
+        <div className="relative z-10 py-8">
+          <RecentPostsCarousel />
         </div>
       </OptimizedBackground>
 
       {/* Content on blue slate background */}
       <div className="bg-slate-900">
-        {/* Recent Posts Section */}
-        <RecentPostsCarousel />
 
         {/* My Mission Section */}
         <section className="py-6 px-4 sm:px-6 lg:px-8">
