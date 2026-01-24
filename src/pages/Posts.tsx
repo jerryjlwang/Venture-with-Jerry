@@ -1,5 +1,7 @@
 import PostGraphicCard from '../components/PostGraphicCard';
 import { posts } from '../data/posts';
+import ScrollTypewriterText from '../components/ScrollTypewriterText';
+
 const Posts = () => {
   return <div className="min-h-screen bg-top bg-no-repeat relative" style={{
     backgroundImage: `url('https://www.randalljhodges.com/images/xl/U001-Seattle-Skyline-at-Night-Kerry-Park-Seattle-WA.jpg')`,
@@ -11,7 +13,7 @@ const Posts = () => {
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl text-white mb-6 font-courier tracking-wide font-medium">
-            All Posts
+            <ScrollTypewriterText text="All Posts" speed={80} />
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto font-courier">
             Check out my insights after interviewing notable venture capital professionals.

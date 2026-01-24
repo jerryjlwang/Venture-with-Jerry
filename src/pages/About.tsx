@@ -1,4 +1,6 @@
 import LogoCarousel from '../components/LogoCarousel';
+import ScrollTypewriterText from '../components/ScrollTypewriterText';
+
 const About = () => {
   return <div className="min-h-screen bg-cover bg-center bg-no-repeat relative" style={{
     backgroundImage: `url('https://i.natgeofe.com/n/6e6d2eea-06d3-4ac4-94ca-2aba6f7f8757/mountain-pine-trees.jpg')`
@@ -9,7 +11,7 @@ const About = () => {
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl text-white mb-6 font-courier tracking-wide font-medium">
-            About Me
+            <ScrollTypewriterText text="About Me" speed={80} />
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto font-courier tracking-wide">
             Get to know the person behind the posts
