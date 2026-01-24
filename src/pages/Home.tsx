@@ -42,8 +42,8 @@ const Home = () => {
               </div>
             </div>
             
-            {/* Scroll indicator - centered below subheading */}
-            <div className={`mt-8 lg:mt-12 flex flex-col items-center gap-2 transition-all duration-700 ease-out ${subtitleComplete ? 'opacity-100 translate-y-0 animate-bounce' : 'opacity-0 translate-y-4'}`} style={{
+            {/* Scroll indicator - right-aligned below subheading */}
+            <div className={`mt-8 lg:mt-12 flex flex-col items-center lg:items-end gap-2 transition-all duration-700 ease-out ${subtitleComplete ? 'opacity-100 translate-y-0 animate-bounce' : 'opacity-0 translate-y-4'}`} style={{
               transitionDelay: '150ms'
             }}>
               <span className="font-courier text-sm tracking-wide text-primary-foreground">Scroll for More</span>
