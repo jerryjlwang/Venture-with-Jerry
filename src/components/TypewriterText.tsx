@@ -26,13 +26,12 @@ const TypewriterText = ({ text, speed = 50, className = '', onComplete, keepCurs
   }, [currentIndex, text, speed, onComplete]);
 
   return (
-    <span className={`relative inline-block ${className}`}>
-      {/* Reserve final layout so the typing doesn't appear to expand from center when parent is text-center */}
-      <span className="invisible" aria-hidden>
+    <span className={`inline-grid ${className}`}>
+      {/* Ghost text reserves the final layout; both spans occupy the same grid cell */}
+      <span className="opacity-0 [grid-area:1/1] whitespace-pre-wrap" aria-hidden="true">
         {text}
       </span>
-
-      <span className="absolute inset-0 whitespace-pre-wrap">
+      <span className="[grid-area:1/1] whitespace-pre-wrap">
         {displayedText}
         {(currentIndex < text.length || keepCursorAfterComplete) && (
           <span className="animate-blink">|</span>
