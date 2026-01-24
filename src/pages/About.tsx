@@ -1,4 +1,3 @@
-import LogoCarousel from '../components/LogoCarousel';
 import ScrollTypewriterText from '../components/ScrollTypewriterText';
 
 const About = () => {
@@ -18,7 +17,7 @@ const About = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Profile Image and Let's Connect */}
           <div className="lg:col-span-1 space-y-8">
             <div className="bg-white/5 backdrop-blur-md rounded-lg p-8 text-center shadow-xl border border-white/20">
@@ -98,12 +97,7 @@ const About = () => {
                 </div>
               </div>
             </section>
-          </div>
-
-          {/* Logo Carousel */}
-          <div className="lg:col-span-1">
-            <LogoCarousel />
-          </div>
+        </div>
         </div>
       </div>
     </div>;
