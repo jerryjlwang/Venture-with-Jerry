@@ -36,22 +36,24 @@ const Home = () => {
               
               {/* Right column - main content */}
               <div className="lg:col-span-8 text-left lg:text-right">
-                <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-courier mb-6 lg:mb-8 lg:ml-auto max-w-2xl leading-relaxed tracking-wide text-white">
+                <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-courier mb-6 lg:mb-8 lg:ml-auto max-w-2xl leading-relaxed tracking-wide text-white mt-8 lg:mt-16">
                   {hasAnimationPlayed ? "Get to know me and my venture capital conversations." : <TypewriterText text="Get to know me and my venture capital conversations." speed={30} onComplete={() => setSubtitleComplete(true)} keepCursorAfterComplete={true} />}
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:justify-end">
-                  <a href="/posts" className={`inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-courier font-medium transition-all shadow-lg hover:shadow-xl tracking-wide duration-700 ease-out ${subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{
-                    transitionDelay: '0ms'
-                  }}>
-                    Read My Posts
-                  </a>
-                  <a href="/about" className={`inline-flex items-center justify-center border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-courier font-medium transition-all shadow-lg hover:shadow-xl tracking-wide duration-700 ease-out ${subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{
-                    transitionDelay: '150ms'
-                  }}>
-                    Learn About Me
-                  </a>
-                </div>
               </div>
+            </div>
+            
+            {/* CTA buttons - centered */}
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mt-8 lg:mt-12">
+              <a href="/posts" className={`inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-courier font-medium transition-all shadow-lg hover:shadow-xl tracking-wide duration-700 ease-out ${subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{
+                transitionDelay: '0ms'
+              }}>
+                Read My Posts
+              </a>
+              <a href="/about" className={`inline-flex items-center justify-center border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-courier font-medium transition-all shadow-lg hover:shadow-xl tracking-wide duration-700 ease-out ${subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{
+                transitionDelay: '150ms'
+              }}>
+                Learn About Me
+              </a>
             </div>
             
             {/* Scroll indicator - positioned below on mobile, absolute bottom-left on desktop */}
