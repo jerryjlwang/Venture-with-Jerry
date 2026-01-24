@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { ChevronDown } from 'lucide-react';
 import golfCourseBackground from '@/assets/golf-course-background.png';
+import ScrollTypewriterText from '@/components/ScrollTypewriterText';
 
 // Lazy load the heavy GolfCourseMap component
 const GolfCourseMap = lazy(() => import('@/components/GolfCourseMap'));
@@ -136,7 +137,9 @@ const Golf = () => {
       {/* Hero section - centered in viewport */}
       <div className="relative z-10 h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h1 className="text-4xl md:text-5xl text-white mb-4 font-courier tracking-wide font-medium">18 Holes, 18 Milestones</h1>
+          <h1 className="text-4xl md:text-5xl text-white mb-4 font-courier tracking-wide font-medium">
+            <ScrollTypewriterText text="18 Holes, 18 Milestones" speed={60} />
+          </h1>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto font-courier">My life through golf.</p>
           
           <button 

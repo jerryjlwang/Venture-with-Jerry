@@ -4,6 +4,7 @@ import NextGuests from '../components/NextGuests';
 import RecentPostsCarousel from '../components/RecentPostsCarousel';
 import OptimizedBackground from '../components/OptimizedBackground';
 import TypewriterText from '../components/TypewriterText';
+import ScrollTypewriterText from '../components/ScrollTypewriterText';
 import missionTeamImage from '@/assets/mission-team.png';
 
 const SEATTLE_SKYLINE = 'https://te-cdn-marketing-site.storage.googleapis.com/littleamerica/America/parnter/stay/places/usa-washington-state-seattle-skyline.jpg';
@@ -123,7 +124,7 @@ const Home = () => {
           <div className="max-w-4xl mx-auto">
             <div className="bg-white/5 backdrop-blur-md rounded-xl p-8 border border-white/20">
               <h2 className="text-2xl font-courier font-medium text-white mb-6 text-center tracking-wide">
-                My Mission
+                <ScrollTypewriterText text="My Mission" speed={80} />
               </h2>
               <div className="flex flex-col items-center gap-8">
                 <div className="w-full max-w-2xl">
