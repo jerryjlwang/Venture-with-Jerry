@@ -21,7 +21,7 @@ const About = () => {
           <div className="lg:col-span-1 space-y-8">
             <div className="text-center">
               <div className="mb-4">
-                <img alt="Jerry Wang" className="w-full max-w-xs mx-auto rounded-lg shadow-lg object-cover" src="/lovable-uploads/1bed9257-b6b5-4067-9485-4377fa434e79.png" />
+                <img alt="Jerry Wang" className="w-full max-w-xs mx-auto rounded-lg shadow-lg object-cover" src="/lovable-uploads/jerry-profile-new.jpeg" />
               </div>
               <h3 className="text-xl text-white mb-2 font-courier font-normal">Jerry Wang</h3>
               <p className="font-courier text-primary-foreground">Interviewer and Managing Editor</p>
