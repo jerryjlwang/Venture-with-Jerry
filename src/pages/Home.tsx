@@ -24,42 +24,48 @@ const Home = () => {
       {/* Hero Section with Background Image */}
       <OptimizedBackground src={SEATTLE_SKYLINE} alt="Seattle skyline" className="h-auto lg:h-screen lg:max-h-[900px]" overlayClassName="bg-gradient-to-b from-black/30 via-black/30 to-slate-900">
         {/* Hero Content */}
-        <div className="absolute inset-0 flex flex-col justify-between pt-48 md:pt-56 lg:pt-48 pb-6 lg:pb-10">
-          <div className="max-w-6xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-            <h1 className="text-5xl md:text-7xl font-courier font-medium text-white mb-6 leading-tight tracking-widest">
-              {hasAnimationPlayed ? "Welcome to My Personal Page" : <TypewriterText text="Welcome to My Personal Page" speed={60} onComplete={() => setHeadingComplete(true)} />}
-            </h1>
-            <p className="text-xl md:text-2xl font-courier mb-8 max-w-3xl mx-auto leading-relaxed tracking-wide text-primary-foreground">
-              {hasAnimationPlayed ? "Get to know me and my venture capital conversations." : headingComplete ? <TypewriterText text="Get to know me and my venture capital conversations." speed={30} onComplete={() => setSubtitleComplete(true)} keepCursorAfterComplete={true} /> : <span className="invisible">Get to know me and my venture capital conversations.</span>}
-            </p>
-            <div className="relative flex justify-center w-full">
-              <div className="flex flex-col items-center gap-4">
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <a href="/posts" className={`inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-courier font-medium transition-all shadow-lg hover:shadow-xl tracking-wide duration-700 ease-out ${subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{
-                  transitionDelay: '0ms'
-                }}>
+        <div className="absolute inset-0 flex flex-col justify-between pt-32 md:pt-40 lg:pt-32 pb-6 lg:pb-10">
+          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+            {/* Main hero grid - asymmetric layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+              {/* Left column - main content */}
+              <div className="lg:col-span-8 text-left">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-courier font-medium text-white mb-4 lg:mb-6 leading-[1.1] tracking-wide">
+                  {hasAnimationPlayed ? "Welcome to My Personal Page" : <TypewriterText text="Welcome to My Personal Page" speed={60} onComplete={() => setHeadingComplete(true)} />}
+                </h1>
+                <p className="text-lg sm:text-xl md:text-2xl font-courier mb-6 lg:mb-8 max-w-2xl leading-relaxed tracking-wide text-primary-foreground">
+                  {hasAnimationPlayed ? "Get to know me and my venture capital conversations." : headingComplete ? <TypewriterText text="Get to know me and my venture capital conversations." speed={30} onComplete={() => setSubtitleComplete(true)} keepCursorAfterComplete={true} /> : <span className="invisible">Get to know me and my venture capital conversations.</span>}
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                  <a href="/posts" className={`inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-courier font-medium transition-all shadow-lg hover:shadow-xl tracking-wide duration-700 ease-out ${subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{
+                    transitionDelay: '0ms'
+                  }}>
                     Read My Posts
                   </a>
-                  <a href="/about" className={`inline-flex items-center justify-center border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-8 py-4 rounded-lg font-courier font-medium transition-all shadow-lg hover:shadow-xl tracking-wide duration-700 ease-out ${subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{
-                  transitionDelay: '150ms'
-                }}>
+                  <a href="/about" className={`inline-flex items-center justify-center border-2 border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-courier font-medium transition-all shadow-lg hover:shadow-xl tracking-wide duration-700 ease-out ${subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{
+                    transitionDelay: '150ms'
+                  }}>
                     Learn About Me
                   </a>
                 </div>
-                <div className={`mt-8 flex flex-col items-center gap-2 transition-all duration-700 ease-out ${subtitleComplete ? 'opacity-100 translate-y-0 animate-bounce' : 'opacity-0 translate-y-4'}`} style={{
+              </div>
+              
+              {/* Right column - NextGuests */}
+              <div className={`lg:col-span-4 hidden lg:flex lg:justify-end lg:pt-4 transition-all duration-700 ease-out ${subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{
                 transitionDelay: '300ms'
               }}>
-                  <span className="font-courier text-sm tracking-wide text-primary-foreground">Scroll for More</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                  </svg>
-                </div>
-              </div>
-              <div className={`absolute top-0 right-0 w-72 hidden lg:block transition-all duration-700 ease-out ${subtitleComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{
-              transitionDelay: '450ms'
-            }}>
                 <NextGuests />
               </div>
+            </div>
+            
+            {/* Scroll indicator - positioned below on mobile, absolute bottom-left on desktop */}
+            <div className={`mt-10 lg:mt-16 flex flex-col items-start gap-2 transition-all duration-700 ease-out ${subtitleComplete ? 'opacity-100 translate-y-0 animate-bounce' : 'opacity-0 translate-y-4'}`} style={{
+              transitionDelay: '450ms'
+            }}>
+              <span className="font-courier text-sm tracking-wide text-primary-foreground">Scroll for More</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
             </div>
           </div>
           
