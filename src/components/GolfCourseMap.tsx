@@ -66,6 +66,33 @@ const holePositions = [
 const GolfCourseMap = () => {
   const [hoveredHole, setHoveredHole] = useState<number | 'clubhouse' | 'halfway' | null>(null);
 
+  const scrollToCard = (holeId: number | 'clubhouse' | 'halfway') => {
+    const element = document.getElementById(`hole-card-${holeId}`);
+    if (!element) return;
+    
+    const targetPosition = element.getBoundingClientRect().top + window.scrollY;
+    const startPosition = window.scrollY;
+    const distance = targetPosition - startPosition - 32; // offset for scroll-mt-8
+    const duration = 1200;
+    let startTime: number | null = null;
+
+    const easeInOutCubic = (t: number) => {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    };
+
+    const animation = (currentTime: number) => {
+      if (startTime === null) startTime = currentTime;
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      window.scrollTo(0, startPosition + distance * easeInOutCubic(progress));
+      if (elapsed < duration) {
+        requestAnimationFrame(animation);
+      }
+    };
+
+    requestAnimationFrame(animation);
+  };
+
   return (
     <div className="w-full px-4 sm:px-6 lg:px-8">
       {/* Course Map Container */}
@@ -86,10 +113,11 @@ const GolfCourseMap = () => {
           return (
             <div
               key={hole.hole}
-              className="absolute transform -translate-x-1/2 transition-all duration-300 group z-10"
+              className="absolute transform -translate-x-1/2 transition-all duration-300 group z-10 cursor-pointer"
               style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
               onMouseEnter={() => setHoveredHole(hole.hole)}
               onMouseLeave={() => setHoveredHole(null)}
+              onClick={() => scrollToCard(hole.hole)}
             >
               {/* Elegant pin marker */}
               <div className="relative flex flex-col items-center">
@@ -138,10 +166,11 @@ const GolfCourseMap = () => {
           
           return (
             <div
-              className="absolute transform -translate-x-1/2 transition-all duration-300 group z-10"
+              className="absolute transform -translate-x-1/2 transition-all duration-300 group z-10 cursor-pointer"
               style={{ left: `${halfwayHousePosition.x}%`, top: `${halfwayHousePosition.y}%` }}
               onMouseEnter={() => setHoveredHole('halfway')}
               onMouseLeave={() => setHoveredHole(null)}
+              onClick={() => scrollToCard('halfway')}
             >
               <div className="relative flex flex-col items-center">
                 <div 
@@ -193,10 +222,11 @@ const GolfCourseMap = () => {
           
           return (
             <div
-              className="absolute transform -translate-x-1/2 transition-all duration-300 group z-10"
+              className="absolute transform -translate-x-1/2 transition-all duration-300 group z-10 cursor-pointer"
               style={{ left: `${clubhousePosition.x}%`, top: `${clubhousePosition.y}%` }}
               onMouseEnter={() => setHoveredHole('clubhouse')}
               onMouseLeave={() => setHoveredHole(null)}
+              onClick={() => scrollToCard('clubhouse')}
             >
               <div className="relative flex flex-col items-center">
                 <div 
