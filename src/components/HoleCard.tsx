@@ -81,16 +81,12 @@ const HoleCard = ({ hole, index, isLast, photo, background, position }: HoleCard
           }`}
           style={{ transitionDelay: `${index * 50}ms` }}
         >
-          {/* Background with Ken Burns effect */}
+          {/* Background */}
           {isVisible && (
             <div 
-              className="absolute inset-0 bg-cover bg-center ken-burns"
+              className="absolute inset-0 bg-cover bg-center"
               style={{ 
                 backgroundImage: `url(${background})`,
-                top: '-10%',
-                left: '-10%',
-                width: '120%',
-                height: '120%'
               }}
             />
           )}
