@@ -22,7 +22,7 @@ import hole8Photo from '@/assets/hole8-photo.jpeg';
 import hole9Photo from '@/assets/hole9-photo.png';
 import hole10Photo from '@/assets/hole10-photo.jpeg';
 import hole10Onesixone from '@/assets/hole10-onesixone.png';
-import hole11Photo from '@/assets/hole11-photo.png';
+import hole11Boardy from '@/assets/hole11-boardy.png';
 import hole12Photo from '@/assets/hole12-photo.png';
 import hole13Photo from '@/assets/hole13-photo.png';
 
@@ -92,7 +92,7 @@ const holePhotos: Record<number, string[]> = {
   8: [hole8Photo],
   9: [hole9Photo],
   10: [hole10Photo, hole10Onesixone],
-  11: [hole11Photo],
+  11: [hole11Boardy],
   12: [hole12Photo],
   13: [hole13Photo],
 };
