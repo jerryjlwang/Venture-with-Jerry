@@ -66,8 +66,10 @@ const HoleCard = ({ hole, index, isLast, photo, background, position }: HoleCard
     return <span className="text-lg font-bold text-white font-courier">{hole.hole}</span>;
   };
 
+  const cardId = `hole-card-${hole.hole}`;
+
   return (
-    <div ref={cardRef} className="w-full max-w-4xl">
+    <div ref={cardRef} id={cardId} className="w-full max-w-4xl scroll-mt-8">
       {/* Card row with positioning */}
       <div className={`flex ${position === 'left' ? 'justify-start' : 'justify-end'}`}>
         {/* Card */}
