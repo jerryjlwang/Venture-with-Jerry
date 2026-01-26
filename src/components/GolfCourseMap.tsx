@@ -1,24 +1,9 @@
 import { useState } from 'react';
-import golfScorecard from '@/assets/golf-scorecard.png';
 
 interface HoleData {
-  hole: number | 'clubhouse' | 'halfway';
+  hole: number;
   title: string;
 }
-
-const halfwayHouseData: HoleData = {
-  hole: 'halfway',
-  title: "Halfway House",
-};
-
-const halfwayHousePosition = { x: 13, y: 72 };
-
-const clubhouseData: HoleData = {
-  hole: 'clubhouse',
-  title: "Clubhouse",
-};
-
-const clubhousePosition = { x: 7, y: 49 };
 
 const journeyData: HoleData[] = [
   { hole: 1, title: "First swings" },
@@ -41,28 +26,6 @@ const journeyData: HoleData[] = [
   { hole: 18, title: "The Journey Continues" },
 ];
 
-// Course layout positions - precise coordinates as % of image grid
-const holePositions = [
-  { x: 26.75, y: 36.25 },    // Hole 1
-  { x: 48.75, y: 23.25 },    // Hole 2
-  { x: 61.25, y: 30 },    // Hole 3
-  { x: 74, y: 75.25 },    // Hole 4
-  { x: 67.5, y: 58.25 },    // Hole 5
-  { x: 56, y: 51.25 },    // Hole 6
-  { x: 54.5, y: 72.5 },    // Hole 7
-  { x: 31.25, y: 89.75 },    // Hole 8
-  { x: 6, y: 73.25 },     // Hole 9
-  { x: 34.25, y: 44.25 },    // Hole 10
-  { x: 52.25, y: 39.25 },    // Hole 11
-  { x: 89.5, y: 42.75 },    // Hole 12
-  { x: 94.75, y: 82.5 },    // Hole 13
-  { x: 87.5, y: 67.5 },    // Hole 14
-  { x: 78, y: 31.25 },    // Hole 15
-  { x: 54.25, y: 17.75 },    // Hole 16
-  { x: 30.25, y: 10.75 },    // Hole 17
-  { x: 20.25, y: 33 },    // Hole 18
-];
-
 const GolfCourseMap = () => {
   const [hoveredHole, setHoveredHole] = useState<number | 'clubhouse' | 'halfway' | null>(null);
 
@@ -72,7 +35,7 @@ const GolfCourseMap = () => {
     
     const targetPosition = element.getBoundingClientRect().top + window.scrollY;
     const startPosition = window.scrollY;
-    const distance = targetPosition - startPosition - 32; // offset for scroll-mt-8
+    const distance = targetPosition - startPosition - 32;
     const duration = 1200;
     let startTime: number | null = null;
 
@@ -93,185 +56,145 @@ const GolfCourseMap = () => {
     requestAnimationFrame(animation);
   };
 
+  const frontNine = journeyData.slice(0, 9);
+  const backNine = journeyData.slice(9, 18);
+
+  const HoleCell = ({ hole, title }: { hole: number; title: string }) => {
+    const isHovered = hoveredHole === hole;
+    
+    return (
+      <button
+        onClick={() => scrollToCard(hole)}
+        onMouseEnter={() => setHoveredHole(hole)}
+        onMouseLeave={() => setHoveredHole(null)}
+        className={`
+          relative flex flex-col items-center justify-center
+          w-full aspect-square sm:aspect-[4/3]
+          rounded-lg border-2 transition-all duration-300
+          ${isHovered 
+            ? 'border-amber-400 bg-amber-500/20 scale-105 shadow-lg shadow-amber-500/20' 
+            : 'border-white/20 bg-white/5 hover:border-amber-500/50 hover:bg-white/10'
+          }
+          cursor-pointer group
+        `}
+      >
+        <span className={`
+          text-xl sm:text-2xl md:text-3xl font-bold font-courier transition-colors duration-300
+          ${isHovered ? 'text-amber-400' : 'text-white group-hover:text-amber-300'}
+        `}>
+          {hole}
+        </span>
+        
+        {/* Tooltip on hover */}
+        {isHovered && (
+          <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-courier whitespace-nowrap shadow-xl z-30">
+            {title}
+          </div>
+        )}
+      </button>
+    );
+  };
+
+  const SpecialCell = ({ type, label, icon }: { type: 'clubhouse' | 'halfway'; label: string; icon: React.ReactNode }) => {
+    const isHovered = hoveredHole === type;
+    
+    return (
+      <button
+        onClick={() => scrollToCard(type)}
+        onMouseEnter={() => setHoveredHole(type)}
+        onMouseLeave={() => setHoveredHole(null)}
+        className={`
+          relative flex flex-col items-center justify-center gap-0.5 sm:gap-1
+          w-full aspect-square sm:aspect-[4/3]
+          rounded-lg border-2 transition-all duration-300
+          ${isHovered 
+            ? 'border-amber-400 bg-amber-500/20 scale-105 shadow-lg shadow-amber-500/20' 
+            : 'border-white/20 bg-white/5 hover:border-amber-500/50 hover:bg-white/10'
+          }
+          cursor-pointer group
+        `}
+      >
+        <div className={`transition-colors duration-300 ${isHovered ? 'text-amber-400' : 'text-white/70 group-hover:text-amber-300'}`}>
+          {icon}
+        </div>
+        <span className={`
+          text-[8px] sm:text-xs font-courier transition-colors duration-300 text-center leading-tight
+          ${isHovered ? 'text-amber-400' : 'text-white/60 group-hover:text-amber-300'}
+        `}>
+          {label}
+        </span>
+        
+        {/* Tooltip on hover */}
+        {isHovered && (
+          <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-courier whitespace-nowrap shadow-xl z-30">
+            {type === 'clubhouse' ? 'Start Here' : 'Halfway House'}
+          </div>
+        )}
+      </button>
+    );
+  };
+
+  const ClubhouseIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+      <polyline points="9 22 9 12 15 12 15 22"></polyline>
+    </svg>
+  );
+
+  const CoffeeIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
+      <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
+      <line x1="6" x2="6" y1="2" y2="4"></line>
+      <line x1="10" x2="10" y1="2" y2="4"></line>
+      <line x1="14" x2="14" y1="2" y2="4"></line>
+    </svg>
+  );
+
   return (
-    <div className="w-full px-4 sm:px-6 lg:px-8">
-      {/* Course Map Container */}
-      <div className="relative w-full aspect-[1140/760] rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
-        {/* Scorecard background image - desaturated for sophisticated look */}
-        <img 
-          src={golfScorecard} 
-          alt="Golf course scorecard map" 
-          className="absolute inset-0 w-full h-full object-fill"
-          style={{ filter: 'saturate(0.4) brightness(0.95)' }}
-        />
-
-        {/* Hole markers */}
-        {journeyData.map((hole, index) => {
-          const pos = holePositions[index];
-          const isHovered = hoveredHole === hole.hole;
-          
-          return (
-            <div
-              key={hole.hole}
-              className="absolute transform -translate-x-1/2 transition-all duration-300 group z-10 cursor-pointer"
-              style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
-              onMouseEnter={() => setHoveredHole(hole.hole)}
-              onMouseLeave={() => setHoveredHole(null)}
-              onClick={() => scrollToCard(hole.hole)}
-            >
-              {/* Elegant pin marker */}
-              <div className="relative flex flex-col items-center">
-                {/* Pin head with number */}
-                <div 
-                  className={`rounded-full flex items-center justify-center font-courier font-bold shadow-lg transition-all duration-200 ${
-                    isHovered 
-                      ? 'w-9 h-9 bg-amber-500 text-amber-950 scale-110' 
-                      : 'w-8 h-8 bg-amber-600/90 text-white'
-                  }`}
-                  style={{
-                    boxShadow: isHovered 
-                      ? '0 4px 12px rgba(0,0,0,0.3), 0 0 20px rgba(251,191,36,0.4)' 
-                      : '0 2px 8px rgba(0,0,0,0.3)',
-                  }}
-                >
-                  <span className="text-sm">{hole.hole}</span>
-                </div>
-                {/* Pin point */}
-                <div 
-                  className={`w-0 h-0 transition-all duration-200 ${
-                    isHovered ? 'border-l-[6px] border-r-[6px] border-t-[10px]' 
-                    : 'border-l-[5px] border-r-[5px] border-t-[8px]'
-                  }`}
-                  style={{
-                    borderLeftColor: 'transparent',
-                    borderRightColor: 'transparent',
-                    borderTopColor: isHovered ? '#f59e0b' : 'rgba(217, 119, 6, 0.9)',
-                    marginTop: '-1px',
-                  }}
-                />
-              </div>
-
-              {isHovered && (
-                <div className="absolute left-1/2 top-full mt-1 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-courier whitespace-nowrap shadow-xl z-30">
-                  {hole.title}
-                </div>
-              )}
+    <div className="w-full px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+      {/* Scorecard Container */}
+      <div className="relative rounded-2xl overflow-hidden border border-white/20 bg-black/40 backdrop-blur-sm shadow-2xl">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-green-900/60 to-green-800/60 border-b border-white/10 px-4 sm:px-6 py-3 sm:py-4">
+          <h2 className="text-lg sm:text-xl font-courier text-white text-center tracking-wide">
+            The Journey Scorecard
+          </h2>
+          <p className="text-xs sm:text-sm text-white/50 text-center font-courier mt-1">
+            Click any hole to explore
+          </p>
+        </div>
+        
+        {/* Scorecard Grid */}
+        <div className="p-3 sm:p-4 md:p-6 space-y-3 sm:space-y-4">
+          {/* Front Nine Row */}
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 px-1">
+              <span className="text-xs sm:text-sm font-courier text-amber-400/80 uppercase tracking-wider">Front 9</span>
+              <div className="flex-grow h-px bg-gradient-to-r from-amber-400/30 to-transparent" />
             </div>
-          );
-        })}
-
-        {/* Halfway House marker */}
-        {(() => {
-          const isHovered = hoveredHole === 'halfway';
-          
-          return (
-            <div
-              className="absolute transform -translate-x-1/2 transition-all duration-300 group z-10 cursor-pointer"
-              style={{ left: `${halfwayHousePosition.x}%`, top: `${halfwayHousePosition.y}%` }}
-              onMouseEnter={() => setHoveredHole('halfway')}
-              onMouseLeave={() => setHoveredHole(null)}
-              onClick={() => scrollToCard('halfway')}
-            >
-              <div className="relative flex flex-col items-center">
-                <div 
-                  className={`rounded-full flex items-center justify-center shadow-lg transition-all duration-200 ${
-                    isHovered 
-                      ? 'w-10 h-10 bg-amber-500 text-amber-950 scale-110' 
-                      : 'w-9 h-9 bg-amber-600/90 text-white'
-                  }`}
-                  style={{
-                    boxShadow: isHovered 
-                      ? '0 4px 12px rgba(0,0,0,0.3), 0 0 20px rgba(251,191,36,0.4)' 
-                      : '0 2px 8px rgba(0,0,0,0.3)',
-                  }}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
-                    <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
-                    <line x1="6" x2="6" y1="2" y2="4"></line>
-                    <line x1="10" x2="10" y1="2" y2="4"></line>
-                    <line x1="14" x2="14" y1="2" y2="4"></line>
-                  </svg>
-                </div>
-                <div 
-                  className={`w-0 h-0 transition-all duration-200 ${
-                    isHovered ? 'border-l-[6px] border-r-[6px] border-t-[10px]' 
-                    : 'border-l-[5px] border-r-[5px] border-t-[8px]'
-                  }`}
-                  style={{
-                    borderLeftColor: 'transparent',
-                    borderRightColor: 'transparent',
-                    borderTopColor: isHovered ? '#f59e0b' : 'rgba(217, 119, 6, 0.9)',
-                    marginTop: '-1px',
-                  }}
-                />
-              </div>
-
-              {isHovered && (
-                <div className="absolute left-1/2 top-full mt-1 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-courier whitespace-nowrap shadow-xl z-30">
-                  Halfway House
-                </div>
-              )}
+            <div className="grid grid-cols-10 gap-1 sm:gap-1.5 md:gap-2">
+              <SpecialCell type="clubhouse" label="Start" icon={<ClubhouseIcon />} />
+              {frontNine.map(hole => (
+                <HoleCell key={hole.hole} hole={hole.hole} title={hole.title} />
+              ))}
             </div>
-          );
-        })()}
-
-        {/* Clubhouse marker */}
-        {(() => {
-          const isHovered = hoveredHole === 'clubhouse';
+          </div>
           
-          return (
-            <div
-              className="absolute transform -translate-x-1/2 transition-all duration-300 group z-10 cursor-pointer"
-              style={{ left: `${clubhousePosition.x}%`, top: `${clubhousePosition.y}%` }}
-              onMouseEnter={() => setHoveredHole('clubhouse')}
-              onMouseLeave={() => setHoveredHole(null)}
-              onClick={() => scrollToCard('clubhouse')}
-            >
-              <div className="relative flex flex-col items-center">
-                <div 
-                  className={`rounded-full flex items-center justify-center shadow-lg transition-all duration-200 relative ${
-                    isHovered 
-                      ? 'w-12 h-12 bg-amber-500 text-amber-950 scale-110' 
-                      : 'w-11 h-11 bg-amber-500/90 text-white clubhouse-pulse'
-                  }`}
-                  style={{
-                    boxShadow: isHovered 
-                      ? '0 4px 16px rgba(0,0,0,0.3), 0 0 24px rgba(251,191,36,0.5)' 
-                      : '0 2px 10px rgba(0,0,0,0.3), 0 0 16px rgba(251,191,36,0.3)',
-                  }}
-                >
-                  {/* Pulsing ring - only when not hovered */}
-                  {!isHovered && (
-                    <span className="absolute inset-0 rounded-full clubhouse-ring" />
-                  )}
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 relative z-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                  </svg>
-                </div>
-                <div 
-                  className={`w-0 h-0 transition-all duration-200 ${
-                    isHovered ? 'border-l-[8px] border-r-[8px] border-t-[12px]' 
-                    : 'border-l-[7px] border-r-[7px] border-t-[10px]'
-                  }`}
-                  style={{
-                    borderLeftColor: 'transparent',
-                    borderRightColor: 'transparent',
-                    borderTopColor: isHovered ? '#f59e0b' : 'rgba(245, 158, 11, 0.9)',
-                    marginTop: '-1px',
-                  }}
-                />
-              </div>
-
-              {isHovered && (
-                <div className="absolute left-1/2 top-full mt-1 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-sm font-courier whitespace-nowrap shadow-xl z-30">
-                  Start Here
-                </div>
-              )}
+          {/* Back Nine Row */}
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 px-1">
+              <span className="text-xs sm:text-sm font-courier text-amber-400/80 uppercase tracking-wider">Back 9</span>
+              <div className="flex-grow h-px bg-gradient-to-r from-amber-400/30 to-transparent" />
             </div>
-          );
-        })()}
+            <div className="grid grid-cols-10 gap-1 sm:gap-1.5 md:gap-2">
+              <SpecialCell type="halfway" label="Turn" icon={<CoffeeIcon />} />
+              {backNine.map(hole => (
+                <HoleCell key={hole.hole} hole={hole.hole} title={hole.title} />
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
