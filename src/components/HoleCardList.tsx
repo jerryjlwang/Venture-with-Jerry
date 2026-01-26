@@ -8,6 +8,9 @@ import hole2Trophy from '@/assets/hole2-trophy.jpeg';
 import hole2Team from '@/assets/hole2-team.jpeg';
 import hole3Photo from '@/assets/hole3-photo.png';
 import hole4Photo from '@/assets/hole4-photo.jpeg';
+import hole4Putting from '@/assets/hole4-putting.jpeg';
+import hole4Swing from '@/assets/hole4-swing.jpeg';
+import hole4Tee from '@/assets/hole4-tee.jpeg';
 import hole5Photo from '@/assets/hole5-photo.png';
 import hole6Photo from '@/assets/hole6-photo.jpeg';
 import hole7Photo from '@/assets/hole7-photo.png';
@@ -77,7 +80,7 @@ const holePhotos: Record<number, string[]> = {
   1: [hole1SoccerMedal, hole1SoccerKick],
   2: [hole2Trophy, hole2Team],
   3: [hole3Photo],
-  4: [hole4Photo],
+  4: [hole4Photo, hole4Putting, hole4Swing, hole4Tee],
   5: [hole5Photo],
   6: [hole6Photo],
   7: [hole7Photo],
