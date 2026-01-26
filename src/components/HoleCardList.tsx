@@ -1,7 +1,8 @@
 import { lazy, Suspense } from 'react';
 
 // User's original photos for content
-import hole1Photo from '@/assets/hole1-photo.png';
+import hole1SoccerMedal from '@/assets/hole1-soccer-medal.png';
+import hole1SoccerKick from '@/assets/hole1-soccer-kick.jpeg';
 import hole2Photo from '@/assets/hole2-photo.jpeg';
 import hole3Photo from '@/assets/hole3-photo.png';
 import hole4Photo from '@/assets/hole4-photo.jpeg';
@@ -71,7 +72,7 @@ const journeyOrder: HoleData[] = journeyData;
 
 // Photo collections for each hole (supports multiple photos per hole)
 const holePhotos: Record<number, string[]> = {
-  1: [hole1Photo],
+  1: [hole1SoccerMedal, hole1SoccerKick],
   2: [hole2Photo],
   3: [hole3Photo],
   4: [hole4Photo],
