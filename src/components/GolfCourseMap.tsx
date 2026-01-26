@@ -45,9 +45,9 @@ const journeyData: HoleData[] = [
 ];
 
 const GolfCourseMap = () => {
-  const [hoveredHole, setHoveredHole] = useState<number | 'clubhouse' | 'halfway' | null>(null);
+  const [hoveredHole, setHoveredHole] = useState<number | null>(null);
 
-  const scrollToCard = (holeId: number | 'clubhouse' | 'halfway') => {
+  const scrollToCard = (holeId: number) => {
     const element = document.getElementById(`hole-card-${holeId}`);
     if (!element) return;
     
@@ -122,63 +122,6 @@ const GolfCourseMap = () => {
     );
   };
 
-  const SpecialCell = ({ type, label, icon, tooltipAbove = false }: { type: 'clubhouse' | 'halfway'; label: string; icon: React.ReactNode; tooltipAbove?: boolean }) => {
-    const isHovered = hoveredHole === type;
-    
-    return (
-      <button
-        onClick={() => scrollToCard(type)}
-        onMouseEnter={() => setHoveredHole(type)}
-        onMouseLeave={() => setHoveredHole(null)}
-        className={`
-          relative flex flex-col items-center justify-center gap-0.5 sm:gap-1
-          w-full aspect-square sm:aspect-[4/3]
-          rounded-lg border-2 transition-all duration-300
-          ${isHovered 
-            ? 'border-amber-400 bg-amber-500/20 scale-105 shadow-lg shadow-amber-500/20' 
-            : 'border-white/20 bg-white/5 hover:border-amber-500/50 hover:bg-white/10'
-          }
-          cursor-pointer group
-        `}
-      >
-        <div className={`transition-colors duration-300 ${isHovered ? 'text-amber-400' : 'text-white/70 group-hover:text-amber-300'}`}>
-          {icon}
-        </div>
-        <span className={`
-          text-[8px] sm:text-xs font-courier transition-colors duration-300 text-center leading-tight
-          ${isHovered ? 'text-amber-400' : 'text-white/60 group-hover:text-amber-300'}
-        `}>
-          {label}
-        </span>
-        
-        {/* Tooltip on hover */}
-        {isHovered && (
-          <div className={`absolute left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-courier whitespace-nowrap shadow-xl z-30 ${
-            tooltipAbove ? 'bottom-full mb-2' : 'top-full mt-2'
-          }`}>
-            {type === 'clubhouse' ? 'Start Here' : 'Halfway House'}
-          </div>
-        )}
-      </button>
-    );
-  };
-
-  const ClubhouseIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-      <polyline points="9 22 9 12 15 12 15 22"></polyline>
-    </svg>
-  );
-
-  const CoffeeIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
-      <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
-      <line x1="6" x2="6" y1="2" y2="4"></line>
-      <line x1="10" x2="10" y1="2" y2="4"></line>
-      <line x1="14" x2="14" y1="2" y2="4"></line>
-    </svg>
-  );
 
   return (
     <div className="w-full px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
@@ -199,8 +142,7 @@ const GolfCourseMap = () => {
               <span className="text-xs sm:text-sm font-courier text-amber-400/80 uppercase tracking-wider">Front 9</span>
               <div className="flex-grow h-px bg-gradient-to-r from-amber-400/30 to-transparent" />
             </div>
-            <div className="grid grid-cols-10 gap-1 sm:gap-1.5 md:gap-2">
-              <SpecialCell type="clubhouse" label="Start" icon={<ClubhouseIcon />} />
+            <div className="grid grid-cols-9 gap-1 sm:gap-1.5 md:gap-2">
               {frontNine.map(hole => (
                 <HoleCell key={hole.hole} hole={hole.hole} title={hole.title} category={hole.category} />
               ))}
@@ -213,8 +155,7 @@ const GolfCourseMap = () => {
               <span className="text-xs sm:text-sm font-courier text-amber-400/80 uppercase tracking-wider">Back 9</span>
               <div className="flex-grow h-px bg-gradient-to-r from-amber-400/30 to-transparent" />
             </div>
-            <div className="grid grid-cols-10 gap-1 sm:gap-1.5 md:gap-2">
-              <SpecialCell type="halfway" label="Turn" icon={<CoffeeIcon />} tooltipAbove />
+            <div className="grid grid-cols-9 gap-1 sm:gap-1.5 md:gap-2">
               {backNine.map(hole => (
                 <HoleCell key={hole.hole} hole={hole.hole} title={hole.title} category={hole.category} tooltipAbove />
               ))}
