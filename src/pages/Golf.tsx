@@ -6,12 +6,7 @@ import ScrollTypewriterText from '@/components/ScrollTypewriterText';
 // Lazy load the heavy components
 const GolfCourseMap = lazy(() => import('@/components/GolfCourseMap'));
 const HoleCardList = lazy(() => import('@/components/HoleCardList'));
-
-const VIDEOS = [
-  '/videos/golf-background.mp4',
-  '/videos/golf-background-2.mp4'
-];
-
+const VIDEOS = ['/videos/golf-background.mp4', '/videos/golf-background-2.mp4'];
 const Golf = () => {
   const [showArrow, setShowArrow] = useState(false);
   const [videosReady, setVideosReady] = useState(false);
@@ -27,27 +22,21 @@ const Golf = () => {
     }, 100);
     return () => clearTimeout(timer);
   }, []);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowArrow(true);
     }, 2000);
     return () => clearTimeout(timer);
   }, []);
-
   const handleVideoEnded = (endedIndex: number) => {
     if (endedIndex !== activeVideo) return;
-    
     const nextActive = activeVideo === 0 ? 1 : 0;
     const inactiveRef = nextActive === 0 ? video1Ref : video2Ref;
-    
     if (inactiveRef.current) {
       inactiveRef.current.currentTime = 0;
       inactiveRef.current.play();
     }
-    
     setActiveVideo(nextActive);
-    
     setTimeout(() => {
       const nextSourceIndex = (VIDEOS.indexOf(videoSources[nextActive]) + 1) % VIDEOS.length;
       setVideoSources(prev => {
@@ -57,36 +46,28 @@ const Golf = () => {
       });
     }, 1000);
   };
-
   const smoothScrollTo = (elementId: string) => {
     const element = document.getElementById(elementId);
     if (!element) return;
-    
     const targetPosition = element.getBoundingClientRect().top + window.scrollY;
     const startPosition = window.scrollY;
     const distance = targetPosition - startPosition;
     const duration = 1500; // 1.5 seconds
     let startTime: number | null = null;
-
     const easeInOutCubic = (t: number) => {
       return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     };
-
     const animation = (currentTime: number) => {
       if (startTime === null) startTime = currentTime;
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      
       window.scrollTo(0, startPosition + distance * easeInOutCubic(progress));
-      
       if (elapsed < duration) {
         requestAnimationFrame(animation);
       }
     };
-
     requestAnimationFrame(animation);
   };
-
   return <div className="min-h-screen relative" style={{
     backgroundImage: `url(${golfCourseBackground})`,
     backgroundSize: 'cover',
@@ -94,44 +75,20 @@ const Golf = () => {
     backgroundAttachment: 'fixed'
   }}>
       {/* Green tint overlay for consistency across video + background image */}
-      <div className="absolute inset-0 bg-green-950/70 pointer-events-none" style={{ zIndex: 0 }}></div>
+      <div className="absolute inset-0 bg-green-950/70 pointer-events-none" style={{
+      zIndex: 0
+    }}></div>
       
       {/* Background video section */}
-      <div 
-        className="absolute top-0 left-0 w-full h-screen overflow-hidden"
-        style={{
-          maskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)'
-        }}
-      >
+      <div className="absolute top-0 left-0 w-full h-screen overflow-hidden" style={{
+      maskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)',
+      WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 50%, transparent 100%)'
+    }}>
         {/* Only render videos after initial paint */}
-        {videosReady && (
-          <>
-            <video
-              ref={video1Ref}
-              src={videoSources[0]}
-              autoPlay
-              muted
-              playsInline
-              preload="metadata"
-              onEnded={() => handleVideoEnded(0)}
-              className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000 ${
-                activeVideo === 0 ? 'opacity-55' : 'opacity-0'
-              }`}
-            />
-            <video
-              ref={video2Ref}
-              src={videoSources[1]}
-              muted
-              playsInline
-              preload="none"
-              onEnded={() => handleVideoEnded(1)}
-              className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000 ${
-                activeVideo === 1 ? 'opacity-55' : 'opacity-0'
-              }`}
-            />
-          </>
-        )}
+        {videosReady && <>
+            <video ref={video1Ref} src={videoSources[0]} autoPlay muted playsInline preload="metadata" onEnded={() => handleVideoEnded(0)} className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000 ${activeVideo === 0 ? 'opacity-55' : 'opacity-0'}`} />
+            <video ref={video2Ref} src={videoSources[1]} muted playsInline preload="none" onEnded={() => handleVideoEnded(1)} className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-1000 ${activeVideo === 1 ? 'opacity-55' : 'opacity-0'}`} />
+          </>}
         <div className="absolute inset-0 bg-green-950 bg-opacity-20"></div>
       </div>
       
@@ -141,15 +98,10 @@ const Golf = () => {
           <h1 className="text-4xl md:text-5xl text-white mb-4 font-courier tracking-wide font-medium">
             <ScrollTypewriterText text="18 Holes, 18 Milestones" speed={60} />
           </h1>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto font-courier">My life through golf.</p>
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto font-courier">
+        </p>
           
-          <button 
-            onClick={() => smoothScrollTo('golf-map')}
-            className={`mt-8 transition-all duration-700 cursor-pointer ${
-              showArrow ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}
-            aria-label="Scroll to golf course map"
-          >
+          <button onClick={() => smoothScrollTo('golf-map')} className={`mt-8 transition-all duration-700 cursor-pointer ${showArrow ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} aria-label="Scroll to golf course map">
             <ChevronDown className="w-8 h-8 text-white/60 mx-auto animate-bounce hover:text-white/80 transition-colors" />
           </button>
         </div>
@@ -163,13 +115,10 @@ const Golf = () => {
 
         {/* Dotted connector from map to cards */}
         <div className="flex flex-col items-center py-8">
-          <div 
-            className="w-0.5 h-24"
-            style={{
-              backgroundImage: 'linear-gradient(to bottom, rgba(251, 191, 36, 0.8) 50%, transparent 50%)',
-              backgroundSize: '2px 8px',
-            }}
-          />
+          <div className="w-0.5 h-24" style={{
+          backgroundImage: 'linear-gradient(to bottom, rgba(251, 191, 36, 0.8) 50%, transparent 50%)',
+          backgroundSize: '2px 8px'
+        }} />
           <div className="w-4 h-4 rounded-full bg-amber-500/80" />
         </div>
 
