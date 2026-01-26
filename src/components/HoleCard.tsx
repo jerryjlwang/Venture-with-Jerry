@@ -99,7 +99,7 @@ const HoleCard = ({ hole, index, isLast, photo, background, position }: HoleCard
             {/* Header row */}
             <div className="flex items-start gap-4 mb-4">
               {/* Icon badge */}
-              <div className="w-12 h-12 rounded-full bg-amber-500 border-2 border-white/40 flex items-center justify-center flex-shrink-0">
+              <div className="w-12 h-12 rounded-full bg-transparent border-2 border-amber-500 flex items-center justify-center flex-shrink-0">
                 {getIcon()}
               </div>
               
