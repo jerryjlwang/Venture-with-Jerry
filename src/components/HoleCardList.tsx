@@ -1,7 +1,6 @@
 import { lazy, Suspense } from 'react';
 
 // User's original photos for content
-import clubhousePhoto from '@/assets/clubhouse-photo.jpeg';
 import hole1Photo from '@/assets/hole1-photo.png';
 import hole2Photo from '@/assets/hole2-photo.jpeg';
 import hole3Photo from '@/assets/hole3-photo.png';
@@ -17,8 +16,6 @@ import hole12Photo from '@/assets/hole12-photo.png';
 import hole13Photo from '@/assets/hole13-photo.png';
 
 // Chambers Bay background images
-import chambersBayClubhouse from '@/assets/chambers-bay-clubhouse.jpg';
-import chambersBayHalfway from '@/assets/chambers-bay-halfway.jpg';
 import chambersBayHole1 from '@/assets/chambers-bay-hole1.jpg';
 import chambersBayHole2 from '@/assets/chambers-bay-hole2.jpg';
 import chambersBayHole3 from '@/assets/chambers-bay-hole3.jpg';
@@ -41,23 +38,12 @@ import chambersBayHole18 from '@/assets/chambers-bay-hole18.jpg';
 import HoleCard from './HoleCard';
 
 interface HoleData {
-  hole: number | 'clubhouse' | 'halfway';
+  hole: number;
   title: string;
   description: string;
   year?: string;
 }
 
-const clubhouseData: HoleData = {
-  hole: 'clubhouse',
-  title: "Clubhouse",
-  description: "The clubhouse is where every round begins and ends. For me, this cycle looked like picking up my first club after leaving my previous passion, soccer, behind.",
-};
-
-const halfwayHouseData: HoleData = {
-  hole: 'halfway',
-  title: "Halfway House",
-  description: "At this point in time, I took a step back to think about what I really wanted. After interviewing a venture capital partner for a class project, my eyes caught a glimpse of the startup world for the first time.",
-};
 
 const journeyData: HoleData[] = [
   { hole: 1, title: "European Football", description: "I played club soccer from 2nd to 9th grade, hopping around several teams until I found my place at Titans FC", year: "2015" },
@@ -80,18 +66,12 @@ const journeyData: HoleData[] = [
   { hole: 18, title: "The Journey Continues", description: "Golf, startups, I'm not sure what's next. I do know that I wont be sitting still, there's too much to uncover.", year: "2026" },
 ];
 
-// Complete journey order
-const journeyOrder: HoleData[] = [
-  clubhouseData,
-  ...journeyData.slice(0, 9), // Holes 1-9
-  halfwayHouseData,
-  ...journeyData.slice(9), // Holes 10-18
-];
+// Complete journey order (just the 18 holes)
+const journeyOrder: HoleData[] = journeyData;
 
 // Get user's photo for content
-const getHolePhoto = (hole: number | 'clubhouse' | 'halfway'): string | null => {
+const getHolePhoto = (hole: number): string | null => {
   switch (hole) {
-    case 'clubhouse': return clubhousePhoto;
     case 1: return hole1Photo;
     case 2: return hole2Photo;
     case 3: return hole3Photo;
@@ -110,10 +90,8 @@ const getHolePhoto = (hole: number | 'clubhouse' | 'halfway'): string | null => 
 };
 
 // Get Chambers Bay background
-const getHoleBackground = (hole: number | 'clubhouse' | 'halfway'): string => {
+const getHoleBackground = (hole: number): string => {
   switch (hole) {
-    case 'clubhouse': return chambersBayClubhouse;
-    case 'halfway': return chambersBayHalfway;
     case 1: return chambersBayHole1;
     case 2: return chambersBayHole2;
     case 3: return chambersBayHole3;
