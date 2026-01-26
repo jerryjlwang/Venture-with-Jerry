@@ -160,9 +160,6 @@ const GolfCourseMap = () => {
           <h2 className="text-lg sm:text-xl font-courier text-white text-center tracking-wide">
             The Journey Scorecard
           </h2>
-          <p className="text-xs sm:text-sm text-white/50 text-center font-courier mt-1">
-            Click any hole to explore
-          </p>
         </div>
         
         {/* Scorecard Grid */}
