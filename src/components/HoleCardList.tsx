@@ -24,7 +24,7 @@ import hole10Photo from '@/assets/hole10-photo.jpeg';
 import hole10Onesixone from '@/assets/hole10-onesixone.png';
 import hole11Boardy from '@/assets/hole11-boardy.png';
 import hole12Photo from '@/assets/hole12-photo.png';
-import hole13Photo from '@/assets/hole13-photo.png';
+import hole13Pitchfork from '@/assets/hole13-pitchfork.png';
 
 // Chambers Bay background images
 import chambersBayHole1 from '@/assets/chambers-bay-hole1.jpg';
@@ -94,7 +94,7 @@ const holePhotos: Record<number, string[]> = {
   10: [hole10Photo, hole10Onesixone],
   11: [hole11Boardy],
   12: [hole12Photo],
-  13: [hole13Photo],
+  13: [hole13Pitchfork],
 };
 // Get photos for a hole (returns array)
 const getHolePhotos = (hole: number): string[] => {
