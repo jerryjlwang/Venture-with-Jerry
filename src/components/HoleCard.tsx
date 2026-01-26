@@ -150,7 +150,7 @@ const HoleCard = ({ hole, index, isLast, photos, background, position }: HoleCar
                         alt={`${hole.title} - Photo ${idx + 1}`}
                         loading="lazy"
                         onLoad={() => handleImageLoad(idx)}
-                        className={`w-full h-full object-cover rounded-xl transition-opacity duration-300 ${
+                        className={`w-full h-full object-contain rounded-xl transition-opacity duration-300 ${
                           imagesLoaded[idx] ? 'opacity-100' : 'opacity-0'
                         }`}
                       />
