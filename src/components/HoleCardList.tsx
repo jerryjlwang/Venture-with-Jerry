@@ -66,27 +66,28 @@ const journeyData: HoleData[] = [
   { hole: 18, title: "The Journey Continues", description: "Golf, startups, I'm not sure what's next. I do know that I wont be sitting still, there's too much to uncover.", year: "2026" },
 ];
 
-// Complete journey order (just the 18 holes)
+// Complete journey order
 const journeyOrder: HoleData[] = journeyData;
 
-// Get user's photo for content
-const getHolePhoto = (hole: number): string | null => {
-  switch (hole) {
-    case 1: return hole1Photo;
-    case 2: return hole2Photo;
-    case 3: return hole3Photo;
-    case 4: return hole4Photo;
-    case 5: return hole5Photo;
-    case 6: return hole6Photo;
-    case 7: return hole7Photo;
-    case 8: return hole8Photo;
-    case 9: return hole9Photo;
-    case 10: return hole10Photo;
-    case 11: return hole11Photo;
-    case 12: return hole12Photo;
-    case 13: return hole13Photo;
-    default: return null;
-  }
+// Photo collections for each hole (supports multiple photos per hole)
+const holePhotos: Record<number, string[]> = {
+  1: [hole1Photo],
+  2: [hole2Photo],
+  3: [hole3Photo],
+  4: [hole4Photo],
+  5: [hole5Photo],
+  6: [hole6Photo],
+  7: [hole7Photo],
+  8: [hole8Photo],
+  9: [hole9Photo],
+  10: [hole10Photo],
+  11: [hole11Photo],
+  12: [hole12Photo],
+  13: [hole13Photo],
+};
+// Get photos for a hole (returns array)
+const getHolePhotos = (hole: number): string[] => {
+  return holePhotos[hole] || [];
 };
 
 // Get Chambers Bay background
@@ -124,7 +125,7 @@ const HoleCardList = () => {
             hole={hole}
             index={index}
             isLast={index === journeyOrder.length - 1}
-            photo={getHolePhoto(hole.hole)}
+            photos={getHolePhotos(hole.hole)}
             background={getHoleBackground(hole.hole)}
             position={index % 2 === 0 ? 'left' : 'right'}
           />

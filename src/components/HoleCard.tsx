@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 
 interface HoleData {
-  hole: number | 'clubhouse' | 'halfway';
+  hole: number;
   title: string;
   description: string;
   year?: string;
@@ -11,15 +11,16 @@ interface HoleCardProps {
   hole: HoleData;
   index: number;
   isLast: boolean;
-  photo: string | null;
+  photos: string[];
   background: string;
   position: 'left' | 'right';
 }
 
-const HoleCard = ({ hole, index, isLast, photo, background, position }: HoleCardProps) => {
+const HoleCard = ({ hole, index, isLast, photos, background, position }: HoleCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState<boolean[]>([]);
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
 
   // Lazy loading with IntersectionObserver
   useEffect(() => {
@@ -43,27 +44,28 @@ const HoleCard = ({ hole, index, isLast, photo, background, position }: HoleCard
     return () => observer.disconnect();
   }, []);
 
-  const getIcon = () => {
-    if (hole.hole === 'clubhouse') {
-      return (
-        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-          <polyline points="9 22 9 12 15 12 15 22"></polyline>
-        </svg>
-      );
-    }
-    if (hole.hole === 'halfway') {
-      return (
-        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M17 8h1a4 4 0 1 1 0 8h-1"></path>
-          <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"></path>
-          <line x1="6" x2="6" y1="2" y2="4"></line>
-          <line x1="10" x2="10" y1="2" y2="4"></line>
-          <line x1="14" x2="14" y1="2" y2="4"></line>
-        </svg>
-      );
-    }
-    return <span className="text-lg font-bold text-white font-courier">{hole.hole}</span>;
+  // Initialize loaded state for each photo
+  useEffect(() => {
+    setImagesLoaded(new Array(photos.length).fill(false));
+  }, [photos.length]);
+
+  // Auto-rotate slideshow every 3 seconds
+  useEffect(() => {
+    if (photos.length <= 1) return;
+
+    const interval = setInterval(() => {
+      setCurrentPhotoIndex((prev) => (prev + 1) % photos.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [photos.length]);
+
+  const handleImageLoad = (idx: number) => {
+    setImagesLoaded((prev) => {
+      const updated = [...prev];
+      updated[idx] = true;
+      return updated;
+    });
   };
 
   const cardId = `hole-card-${hole.hole}`;
@@ -102,7 +104,7 @@ const HoleCard = ({ hole, index, isLast, photo, background, position }: HoleCard
             <div className="flex items-start gap-4 mb-4">
               {/* Icon badge */}
               <div className="w-12 h-12 rounded-full bg-transparent border-2 border-amber-500 flex items-center justify-center flex-shrink-0">
-                {getIcon()}
+                <span className="text-lg font-bold text-white font-courier">{hole.hole}</span>
               </div>
               
               {/* Title and year */}
@@ -123,21 +125,51 @@ const HoleCard = ({ hole, index, isLast, photo, background, position }: HoleCard
               {hole.description}
             </p>
             
-            {/* User's photo if available */}
-            {isVisible && photo && (
+            {/* Photo slideshow */}
+            {isVisible && photos.length > 0 && (
               <div className="relative rounded-xl overflow-hidden bg-black/30">
-                {!imageLoaded && (
-                  <div className="w-full h-48 animate-pulse bg-white/10 rounded-xl" />
+                {/* Slideshow container */}
+                <div className="relative">
+                  {photos.map((photo, idx) => (
+                    <div
+                      key={idx}
+                      className={`transition-opacity duration-500 ${
+                        idx === currentPhotoIndex ? 'opacity-100' : 'opacity-0 absolute inset-0'
+                      }`}
+                    >
+                      {!imagesLoaded[idx] && idx === currentPhotoIndex && (
+                        <div className="w-full h-48 animate-pulse bg-white/10 rounded-xl" />
+                      )}
+                      <img 
+                        src={photo} 
+                        alt={`${hole.title} - Photo ${idx + 1}`}
+                        loading="lazy"
+                        onLoad={() => handleImageLoad(idx)}
+                        className={`w-full h-auto max-h-64 object-contain rounded-xl transition-opacity duration-300 ${
+                          imagesLoaded[idx] ? 'opacity-100' : 'opacity-0 absolute inset-0'
+                        }`}
+                      />
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Slideshow indicators */}
+                {photos.length > 1 && (
+                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+                    {photos.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setCurrentPhotoIndex(idx)}
+                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                          idx === currentPhotoIndex 
+                            ? 'bg-amber-400 w-4' 
+                            : 'bg-white/50 hover:bg-white/80'
+                        }`}
+                        aria-label={`Go to photo ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
                 )}
-                <img 
-                  src={photo} 
-                  alt={hole.title}
-                  loading="lazy"
-                  onLoad={() => setImageLoaded(true)}
-                  className={`w-full h-auto max-h-64 object-contain rounded-xl transition-opacity duration-300 ${
-                    imageLoaded ? 'opacity-100' : 'opacity-0 absolute inset-0'
-                  }`}
-                />
               </div>
             )}
           </div>
