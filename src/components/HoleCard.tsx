@@ -44,10 +44,15 @@ const HoleCard = ({ hole, index, isLast, photos, background, position }: HoleCar
     return () => observer.disconnect();
   }, []);
 
-  // Initialize loaded state for each photo
+  // Initialize loaded state for each photo - check if already cached
   useEffect(() => {
-    setImagesLoaded(new Array(photos.length).fill(false));
-  }, [photos.length]);
+    const loadedStates = photos.map((photo) => {
+      const img = new Image();
+      img.src = photo;
+      return img.complete;
+    });
+    setImagesLoaded(loadedStates);
+  }, [photos]);
 
   // Auto-rotate slideshow every 3 seconds
   useEffect(() => {
