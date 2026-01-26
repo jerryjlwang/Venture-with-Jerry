@@ -132,26 +132,26 @@ const HoleCard = ({ hole, index, isLast, photos, background, position }: HoleCar
             
             {/* Photo slideshow */}
             {isVisible && photos.length > 0 && (
-              <div className="relative rounded-xl overflow-hidden bg-black/30">
+              <div className="relative rounded-xl overflow-hidden bg-black/30 h-48 sm:h-56">
                 {/* Slideshow container */}
-                <div className="relative">
+                <div className="relative h-full">
                   {photos.map((photo, idx) => (
                     <div
                       key={idx}
-                      className={`transition-opacity duration-500 ${
-                        idx === currentPhotoIndex ? 'opacity-100' : 'opacity-0 absolute inset-0'
+                      className={`absolute inset-0 transition-opacity duration-500 ${
+                        idx === currentPhotoIndex ? 'opacity-100' : 'opacity-0'
                       }`}
                     >
                       {!imagesLoaded[idx] && idx === currentPhotoIndex && (
-                        <div className="w-full h-48 animate-pulse bg-white/10 rounded-xl" />
+                        <div className="w-full h-full animate-pulse bg-white/10 rounded-xl" />
                       )}
                       <img 
                         src={photo} 
                         alt={`${hole.title} - Photo ${idx + 1}`}
                         loading="lazy"
                         onLoad={() => handleImageLoad(idx)}
-                        className={`w-full h-auto max-h-64 object-contain rounded-xl transition-opacity duration-300 ${
-                          imagesLoaded[idx] ? 'opacity-100' : 'opacity-0 absolute inset-0'
+                        className={`w-full h-full object-cover rounded-xl transition-opacity duration-300 ${
+                          imagesLoaded[idx] ? 'opacity-100' : 'opacity-0'
                         }`}
                       />
                     </div>
