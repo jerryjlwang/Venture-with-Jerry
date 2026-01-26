@@ -1,28 +1,46 @@
 import { useState } from 'react';
 
+// Legend categories with colors
+type Category = 'golf' | 'academics' | 'work' | 'startups';
+
+const categoryColors: Record<Category, { bg: string; border: string; text: string }> = {
+  golf: { bg: 'bg-emerald-500/20', border: 'border-emerald-400', text: 'text-emerald-400' },
+  academics: { bg: 'bg-blue-500/20', border: 'border-blue-400', text: 'text-blue-400' },
+  work: { bg: 'bg-purple-500/20', border: 'border-purple-400', text: 'text-purple-400' },
+  startups: { bg: 'bg-orange-500/20', border: 'border-orange-400', text: 'text-orange-400' },
+};
+
+const legendItems: { category: Category; label: string }[] = [
+  { category: 'golf', label: 'Golf' },
+  { category: 'academics', label: 'Academics' },
+  { category: 'work', label: 'Work' },
+  { category: 'startups', label: 'Startups' },
+];
+
 interface HoleData {
   hole: number;
   title: string;
+  category?: Category;
 }
 
 const journeyData: HoleData[] = [
-  { hole: 1, title: "First swings" },
-  { hole: 2, title: "A chunk and a hole out" },
-  { hole: 3, title: "First Tee" },
-  { hole: 4, title: "High School Varsity" },
-  { hole: 5, title: "Junior Tournaments" },
-  { hole: 6, title: "Passion Projects" },
-  { hole: 7, title: "AIME" },
-  { hole: 8, title: "DECA" },
-  { hole: 9, title: "Wyze Internship" },
-  { hole: 10, title: "Networking" },
-  { hole: 11, title: "Economics Olympiad" },
-  { hole: 12, title: "Venture with Jerry" },
-  { hole: 13, title: "PitchFork" },
-  { hole: 14, title: "Taper" },
-  { hole: 15, title: "Director of Sales" },
-  { hole: 16, title: "The Golden Ratio" },
-  { hole: 17, title: "Senior Season" },
+  { hole: 1, title: "First swings", category: 'academics' },
+  { hole: 2, title: "A chunk and a hole out", category: 'golf' },
+  { hole: 3, title: "First Tee", category: 'golf' },
+  { hole: 4, title: "High School Varsity", category: 'golf' },
+  { hole: 5, title: "Junior Tournaments", category: 'golf' },
+  { hole: 6, title: "Passion Projects", category: 'startups' },
+  { hole: 7, title: "AIME", category: 'academics' },
+  { hole: 8, title: "DECA", category: 'academics' },
+  { hole: 9, title: "Wyze Internship", category: 'work' },
+  { hole: 10, title: "Networking", category: 'startups' },
+  { hole: 11, title: "Economics Olympiad", category: 'academics' },
+  { hole: 12, title: "Venture with Jerry", category: 'startups' },
+  { hole: 13, title: "PitchFork", category: 'startups' },
+  { hole: 14, title: "Taper", category: 'startups' },
+  { hole: 15, title: "Director of Sales", category: 'work' },
+  { hole: 16, title: "The Golden Ratio", category: 'work' },
+  { hole: 17, title: "Senior Season", category: 'golf' },
   { hole: 18, title: "The Journey Continues" },
 ];
 
@@ -59,8 +77,9 @@ const GolfCourseMap = () => {
   const frontNine = journeyData.slice(0, 9);
   const backNine = journeyData.slice(9, 18);
 
-  const HoleCell = ({ hole, title, tooltipAbove = false }: { hole: number; title: string; tooltipAbove?: boolean }) => {
+  const HoleCell = ({ hole, title, category, tooltipAbove = false }: { hole: number; title: string; category?: Category; tooltipAbove?: boolean }) => {
     const isHovered = hoveredHole === hole;
+    const colors = category ? categoryColors[category] : null;
     
     return (
       <button
@@ -72,15 +91,21 @@ const GolfCourseMap = () => {
           w-full aspect-square sm:aspect-[4/3]
           rounded-lg border-2 transition-all duration-300
           ${isHovered 
-            ? 'border-amber-400 bg-amber-500/20 scale-105 shadow-lg shadow-amber-500/20' 
-            : 'border-white/20 bg-white/5 hover:border-amber-500/50 hover:bg-white/10'
+            ? `${colors?.border || 'border-amber-400'} ${colors?.bg || 'bg-amber-500/20'} scale-105 shadow-lg` 
+            : `border-white/20 bg-white/5 hover:${colors?.border || 'border-amber-500/50'} hover:bg-white/10`
           }
           cursor-pointer group
         `}
+        style={isHovered && colors ? { boxShadow: `0 10px 25px -5px ${colors.text.replace('text-', 'rgb(var(--')})` } : undefined}
       >
+        {/* Category indicator dot */}
+        {colors && (
+          <div className={`absolute top-1 right-1 w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${colors.border.replace('border-', 'bg-')}`} />
+        )}
+        
         <span className={`
           text-xl sm:text-2xl md:text-3xl font-normal font-courier transition-colors duration-300
-          ${isHovered ? 'text-amber-400' : 'text-white group-hover:text-amber-300'}
+          ${isHovered ? (colors?.text || 'text-amber-400') : 'text-white group-hover:text-amber-300'}
         `}>
           {hole}
         </span>
@@ -177,7 +202,7 @@ const GolfCourseMap = () => {
             <div className="grid grid-cols-10 gap-1 sm:gap-1.5 md:gap-2">
               <SpecialCell type="clubhouse" label="Start" icon={<ClubhouseIcon />} />
               {frontNine.map(hole => (
-                <HoleCell key={hole.hole} hole={hole.hole} title={hole.title} />
+                <HoleCell key={hole.hole} hole={hole.hole} title={hole.title} category={hole.category} />
               ))}
             </div>
           </div>
@@ -191,7 +216,21 @@ const GolfCourseMap = () => {
             <div className="grid grid-cols-10 gap-1 sm:gap-1.5 md:gap-2">
               <SpecialCell type="halfway" label="Turn" icon={<CoffeeIcon />} tooltipAbove />
               {backNine.map(hole => (
-                <HoleCell key={hole.hole} hole={hole.hole} title={hole.title} tooltipAbove />
+                <HoleCell key={hole.hole} hole={hole.hole} title={hole.title} category={hole.category} tooltipAbove />
+              ))}
+            </div>
+          </div>
+          
+          {/* Legend */}
+          <div className="pt-3 sm:pt-4 border-t border-white/10">
+            <div className="flex items-center justify-center gap-3 sm:gap-6 flex-wrap">
+              {legendItems.map(item => (
+                <div key={item.category} className="flex items-center gap-1.5 sm:gap-2">
+                  <div className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full ${categoryColors[item.category].border.replace('border-', 'bg-')}`} />
+                  <span className={`text-xs sm:text-sm font-courier ${categoryColors[item.category].text}`}>
+                    {item.label}
+                  </span>
+                </div>
               ))}
             </div>
           </div>
