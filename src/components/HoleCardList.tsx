@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 
 // User's original photos for content
 import clubhousePhoto from '@/assets/clubhouse-photo.jpeg';
+import hole1Photo from '@/assets/hole1-photo.png';
 import hole2Photo from '@/assets/hole2-photo.jpeg';
 import hole3Photo from '@/assets/hole3-photo.png';
 import hole4Photo from '@/assets/hole4-photo.jpeg';
@@ -91,6 +92,7 @@ const journeyOrder: HoleData[] = [
 const getHolePhoto = (hole: number | 'clubhouse' | 'halfway'): string | null => {
   switch (hole) {
     case 'clubhouse': return clubhousePhoto;
+    case 1: return hole1Photo;
     case 2: return hole2Photo;
     case 3: return hole3Photo;
     case 4: return hole4Photo;
