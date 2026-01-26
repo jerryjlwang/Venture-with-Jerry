@@ -79,7 +79,7 @@ const GolfCourseMap = () => {
         `}
       >
         <span className={`
-          text-xl sm:text-2xl md:text-3xl font-bold font-courier transition-colors duration-300
+          text-xl sm:text-2xl md:text-3xl font-normal font-courier transition-colors duration-300
           ${isHovered ? 'text-amber-400' : 'text-white group-hover:text-amber-300'}
         `}>
           {hole}
