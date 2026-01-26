@@ -146,6 +146,7 @@ const HoleCardList = () => {
             isLast={index === journeyOrder.length - 1}
             photo={getHolePhoto(hole.hole)}
             background={getHoleBackground(hole.hole)}
+            position={index % 2 === 0 ? 'left' : 'right'}
           />
         ))}
       </div>
