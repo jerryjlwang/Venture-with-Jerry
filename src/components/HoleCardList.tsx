@@ -84,7 +84,7 @@ const holePhotos: Record<number, string[]> = {
   2: [hole2Trophy, hole2Team],
   3: [hole3Photo],
   4: [hole4Photo, hole4Putting, hole4Swing, hole4Tee],
-  5: [hole5Photo, hole5Clubs, hole5Flyer, hole5Team],
+  5: [hole5Clubs, hole5Flyer, hole5Team],
   6: [hole6Photo],
   7: [hole7Photo],
   8: [hole8Photo],
