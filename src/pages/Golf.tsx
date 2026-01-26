@@ -3,8 +3,9 @@ import { ChevronDown } from 'lucide-react';
 import golfCourseBackground from '@/assets/golf-course-background.png';
 import ScrollTypewriterText from '@/components/ScrollTypewriterText';
 
-// Lazy load the heavy GolfCourseMap component
+// Lazy load the heavy components
 const GolfCourseMap = lazy(() => import('@/components/GolfCourseMap'));
+const HoleCardList = lazy(() => import('@/components/HoleCardList'));
 
 const VIDEOS = [
   '/videos/golf-background.mp4',
@@ -155,16 +156,27 @@ const Golf = () => {
       </div>
 
       {/* Map section - below the fold */}
-      <div id="golf-map" className="relative z-10 w-full pb-16">
+      <div id="golf-map" className="relative z-10 w-full">
         <Suspense fallback={<div className="h-96 flex items-center justify-center"><div className="text-white/60 font-courier">Loading map...</div></div>}>
           <GolfCourseMap />
         </Suspense>
 
-        <div className="mt-16 text-center">
-          <p className="text-white/60 font-courier text-sm">
-            ​
-          </p>
+        {/* Dotted connector from map to cards */}
+        <div className="flex flex-col items-center py-8">
+          <div 
+            className="w-0.5 h-24"
+            style={{
+              backgroundImage: 'linear-gradient(to bottom, rgba(251, 191, 36, 0.8) 50%, transparent 50%)',
+              backgroundSize: '2px 8px',
+            }}
+          />
+          <div className="w-4 h-4 rounded-full bg-amber-500/80" />
         </div>
+
+        {/* Hole cards section */}
+        <Suspense fallback={<div className="h-96 flex items-center justify-center"><div className="text-white/60 font-courier">Loading journey...</div></div>}>
+          <HoleCardList />
+        </Suspense>
       </div>
     </div>;
 };
