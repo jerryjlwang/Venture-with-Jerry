@@ -59,7 +59,7 @@ const GolfCourseMap = () => {
   const frontNine = journeyData.slice(0, 9);
   const backNine = journeyData.slice(9, 18);
 
-  const HoleCell = ({ hole, title }: { hole: number; title: string }) => {
+  const HoleCell = ({ hole, title, tooltipAbove = false }: { hole: number; title: string; tooltipAbove?: boolean }) => {
     const isHovered = hoveredHole === hole;
     
     return (
@@ -87,7 +87,9 @@ const GolfCourseMap = () => {
         
         {/* Tooltip on hover */}
         {isHovered && (
-          <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-courier whitespace-nowrap shadow-xl z-30">
+          <div className={`absolute left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-courier whitespace-nowrap shadow-xl z-30 ${
+            tooltipAbove ? 'bottom-full mb-2' : 'top-full mt-2'
+          }`}>
             {title}
           </div>
         )}
@@ -95,7 +97,7 @@ const GolfCourseMap = () => {
     );
   };
 
-  const SpecialCell = ({ type, label, icon }: { type: 'clubhouse' | 'halfway'; label: string; icon: React.ReactNode }) => {
+  const SpecialCell = ({ type, label, icon, tooltipAbove = false }: { type: 'clubhouse' | 'halfway'; label: string; icon: React.ReactNode; tooltipAbove?: boolean }) => {
     const isHovered = hoveredHole === type;
     
     return (
@@ -126,7 +128,9 @@ const GolfCourseMap = () => {
         
         {/* Tooltip on hover */}
         {isHovered && (
-          <div className="absolute left-1/2 top-full mt-2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-courier whitespace-nowrap shadow-xl z-30">
+          <div className={`absolute left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-sm text-green-900 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-courier whitespace-nowrap shadow-xl z-30 ${
+            tooltipAbove ? 'bottom-full mb-2' : 'top-full mt-2'
+          }`}>
             {type === 'clubhouse' ? 'Start Here' : 'Halfway House'}
           </div>
         )}
@@ -154,7 +158,7 @@ const GolfCourseMap = () => {
   return (
     <div className="w-full px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
       {/* Scorecard Container */}
-      <div className="relative rounded-2xl overflow-hidden border border-white/20 bg-black/40 backdrop-blur-sm shadow-2xl">
+      <div className="relative rounded-2xl border border-white/20 bg-black/40 backdrop-blur-sm shadow-2xl">
         {/* Header */}
         <div className="bg-gradient-to-r from-green-900/60 to-green-800/60 border-b border-white/10 px-4 sm:px-6 py-3 sm:py-4">
           <h2 className="text-lg sm:text-xl font-courier text-white text-center tracking-wide">
@@ -185,9 +189,9 @@ const GolfCourseMap = () => {
               <div className="flex-grow h-px bg-gradient-to-r from-amber-400/30 to-transparent" />
             </div>
             <div className="grid grid-cols-10 gap-1 sm:gap-1.5 md:gap-2">
-              <SpecialCell type="halfway" label="Turn" icon={<CoffeeIcon />} />
+              <SpecialCell type="halfway" label="Turn" icon={<CoffeeIcon />} tooltipAbove />
               {backNine.map(hole => (
-                <HoleCell key={hole.hole} hole={hole.hole} title={hole.title} />
+                <HoleCell key={hole.hole} hole={hole.hole} title={hole.title} tooltipAbove />
               ))}
             </div>
           </div>
