@@ -158,7 +158,7 @@ const GolfCourseMap = () => {
         {/* Header */}
         <div className="bg-gradient-to-r from-green-900/60 to-green-800/60 border-b border-white/10 px-4 sm:px-6 py-3 sm:py-4">
           <h2 className="text-lg sm:text-xl font-courier text-white text-center tracking-wide">
-            The Journey Scorecard
+            Jerry's Scorecard
           </h2>
         </div>
         
