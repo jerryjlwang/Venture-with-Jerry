@@ -158,7 +158,87 @@ export const Bunker3 = ({ className = "" }: HazardProps) => (
   </svg>
 );
 
-// Course decoration positions - water and bunkers in separate areas
+// Grass patch - organic tuft shape
+export const Grass = ({ className = "" }: HazardProps) => (
+  <svg 
+    viewBox="0 0 200 140" 
+    className={`pointer-events-none ${className}`}
+    preserveAspectRatio="none"
+  >
+    <defs>
+      <linearGradient id="grassGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#22c55e" />
+        <stop offset="50%" stopColor="#16a34a" />
+        <stop offset="100%" stopColor="#15803d" />
+      </linearGradient>
+    </defs>
+    <path
+      d="M 15,70 C 5,45 20,15 55,12 C 95,8 130,18 160,15 C 190,12 198,45 192,75 C 188,105 165,125 120,128 C 75,132 40,120 22,105 C 5,90 5,80 15,70 Z"
+      fill="url(#grassGradient1)"
+    />
+    {/* Grass texture lines */}
+    <path
+      d="M 40,55 Q 80,48 130,58"
+      fill="none"
+      stroke="rgba(34,197,94,0.4)"
+      strokeWidth="2"
+    />
+    <path
+      d="M 50,85 Q 100,78 150,88"
+      fill="none"
+      stroke="rgba(21,128,61,0.3)"
+      strokeWidth="1.5"
+    />
+  </svg>
+);
+
+// Grass patch 2 - rounder shape
+export const Grass2 = ({ className = "" }: HazardProps) => (
+  <svg 
+    viewBox="0 0 160 120" 
+    className={`pointer-events-none ${className}`}
+    preserveAspectRatio="none"
+  >
+    <defs>
+      <linearGradient id="grassGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#4ade80" />
+        <stop offset="100%" stopColor="#16a34a" />
+      </linearGradient>
+    </defs>
+    <path
+      d="M 20,60 C 8,30 30,8 65,10 C 105,8 140,25 150,55 C 158,85 135,110 90,112 C 45,115 15,95 20,60 Z"
+      fill="url(#grassGradient2)"
+    />
+    <path
+      d="M 40,50 Q 85,42 130,55"
+      fill="none"
+      stroke="rgba(74,222,128,0.35)"
+      strokeWidth="2"
+    />
+  </svg>
+);
+
+// Grass patch 3 - elongated fairway-like
+export const Grass3 = ({ className = "" }: HazardProps) => (
+  <svg 
+    viewBox="0 0 180 100" 
+    className={`pointer-events-none ${className}`}
+    preserveAspectRatio="none"
+  >
+    <defs>
+      <linearGradient id="grassGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#22c55e" />
+        <stop offset="100%" stopColor="#15803d" />
+      </linearGradient>
+    </defs>
+    <path
+      d="M 12,50 C 5,25 25,5 65,8 C 110,5 150,20 170,45 C 180,70 160,92 115,95 C 65,100 25,88 12,65 C 5,55 5,55 12,50 Z"
+      fill="url(#grassGradient3)"
+    />
+  </svg>
+);
+
+// Course decoration positions - water, bunkers, and grass in separate areas
 export const CourseDecorations = () => (
   <>
     {/* Water hazards - left side (lower positions) */}
@@ -186,6 +266,20 @@ export const CourseDecorations = () => (
     <Bunker3 className="absolute right-[8%] top-[50%] w-40 h-28 -rotate-12" />
     <Bunker className="absolute right-[5%] top-[72%] w-48 h-32 rotate-5" />
     <Bunker2 className="absolute right-[10%] top-[95%] w-44 h-30 -rotate-6" />
+    
+    {/* Grass patches - left side (between water and bunkers) */}
+    <Grass className="absolute left-[15%] top-[5%] w-64 h-44 rotate-3" />
+    <Grass2 className="absolute left-[12%] top-[28%] w-56 h-40 -rotate-8" />
+    <Grass3 className="absolute left-[18%] top-[45%] w-60 h-36 rotate-12" />
+    <Grass className="absolute left-[14%] top-[68%] w-52 h-38 -rotate-4" />
+    <Grass2 className="absolute left-[16%] top-[88%] w-48 h-34 rotate-6" />
+    
+    {/* Grass patches - right side (between water and bunkers) */}
+    <Grass2 className="absolute right-[18%] top-[8%] w-56 h-38 -rotate-6" />
+    <Grass3 className="absolute right-[14%] top-[32%] w-64 h-42 rotate-8" />
+    <Grass className="absolute right-[16%] top-[55%] w-52 h-36 -rotate-10" />
+    <Grass2 className="absolute right-[12%] top-[78%] w-60 h-40 rotate-4" />
+    <Grass3 className="absolute right-[18%] top-[92%] w-48 h-32 -rotate-8" />
   </>
 );
 
