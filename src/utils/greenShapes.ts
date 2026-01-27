@@ -1,62 +1,63 @@
-// Unique golf green clip-path shapes for each hole
-// These are organic, natural-looking shapes inspired by real golf greens
+// Unique golf green border-radius shapes for each hole
+// These create smooth, organic blob-like shapes inspired by real golf greens
+// Format: border-radius with 8 values (4 corners x 2 radii each)
 
-export const greenClipPaths: Record<number, string> = {
-  // Hole 1 - Classic oval with slight wave
-  1: "polygon(5% 20%, 15% 5%, 40% 0%, 65% 2%, 85% 8%, 95% 25%, 98% 50%, 95% 75%, 85% 92%, 60% 98%, 35% 100%, 15% 95%, 5% 80%, 2% 50%)",
+export const greenBorderRadius: Record<number, string> = {
+  // Hole 1 - Gentle oval
+  1: "60% 40% 45% 55% / 50% 55% 45% 50%",
   
-  // Hole 2 - Kidney bean shape
-  2: "polygon(10% 30%, 25% 8%, 50% 0%, 75% 5%, 90% 20%, 98% 45%, 95% 70%, 80% 90%, 55% 100%, 30% 95%, 15% 85%, 5% 65%, 2% 45%)",
+  // Hole 2 - Kidney bean
+  2: "70% 30% 40% 60% / 45% 60% 40% 55%",
   
-  // Hole 3 - Elongated with pinch
-  3: "polygon(3% 25%, 20% 5%, 45% 0%, 70% 3%, 90% 15%, 98% 40%, 95% 60%, 85% 80%, 60% 95%, 35% 100%, 15% 90%, 5% 70%, 0% 45%)",
+  // Hole 3 - Elongated blob
+  3: "45% 55% 60% 40% / 55% 45% 50% 50%",
   
-  // Hole 4 - Figure-8 inspired
-  4: "polygon(15% 15%, 35% 2%, 55% 0%, 75% 5%, 92% 20%, 100% 45%, 95% 70%, 80% 88%, 55% 98%, 30% 100%, 10% 90%, 0% 65%, 5% 40%)",
+  // Hole 4 - Organic wave
+  4: "55% 45% 50% 50% / 60% 40% 55% 45%",
   
   // Hole 5 - Teardrop
-  5: "polygon(20% 10%, 45% 0%, 70% 2%, 88% 15%, 98% 35%, 100% 55%, 95% 78%, 80% 92%, 50% 100%, 25% 95%, 8% 80%, 0% 55%, 5% 30%)",
+  5: "65% 35% 45% 55% / 50% 50% 45% 55%",
   
-  // Hole 6 - Hourglass subtle
-  6: "polygon(8% 20%, 28% 3%, 55% 0%, 80% 8%, 95% 25%, 100% 50%, 95% 75%, 78% 92%, 50% 100%, 25% 95%, 8% 80%, 0% 55%, 2% 35%)",
+  // Hole 6 - Soft cloud
+  6: "50% 50% 55% 45% / 55% 45% 50% 50%",
   
-  // Hole 7 - Peanut shape
-  7: "polygon(12% 25%, 30% 5%, 55% 0%, 78% 8%, 95% 28%, 98% 50%, 92% 72%, 72% 92%, 45% 100%, 22% 95%, 5% 75%, 0% 50%, 8% 30%)",
+  // Hole 7 - Pebble
+  7: "58% 42% 48% 52% / 52% 48% 55% 45%",
   
   // Hole 8 - Amoeba
-  8: "polygon(5% 35%, 18% 10%, 45% 0%, 72% 5%, 92% 22%, 100% 48%, 95% 75%, 75% 95%, 45% 100%, 18% 92%, 2% 68%, 0% 45%)",
+  8: "42% 58% 55% 45% / 48% 52% 45% 55%",
   
-  // Hole 9 - Classic round with bumps
-  9: "polygon(10% 25%, 30% 5%, 55% 0%, 78% 8%, 95% 28%, 100% 52%, 95% 78%, 75% 95%, 48% 100%, 22% 95%, 5% 75%, 0% 48%, 5% 28%)",
+  // Hole 9 - Classic round with character
+  9: "52% 48% 50% 50% / 50% 50% 52% 48%",
   
-  // Hole 10 - Peninsula shape
-  10: "polygon(8% 30%, 25% 8%, 52% 0%, 78% 5%, 95% 25%, 100% 50%, 98% 75%, 82% 95%, 55% 100%, 28% 95%, 8% 78%, 0% 52%, 2% 32%)",
+  // Hole 10 - Peninsula
+  10: "62% 38% 42% 58% / 48% 52% 58% 42%",
   
   // Hole 11 - Mushroom cap
-  11: "polygon(5% 40%, 15% 15%, 40% 2%, 62% 0%, 85% 10%, 98% 35%, 100% 58%, 92% 82%, 68% 98%, 38% 100%, 15% 88%, 2% 62%)",
+  11: "55% 45% 52% 48% / 58% 42% 48% 52%",
   
-  // Hole 12 - Leaf shape
-  12: "polygon(12% 22%, 35% 3%, 60% 0%, 82% 12%, 98% 35%, 100% 58%, 90% 82%, 65% 98%, 38% 100%, 15% 88%, 2% 62%, 5% 38%)",
+  // Hole 12 - Leaf
+  12: "68% 32% 38% 62% / 45% 55% 60% 40%",
   
   // Hole 13 - Clover-ish
-  13: "polygon(8% 28%, 28% 5%, 55% 0%, 80% 10%, 98% 32%, 100% 55%, 92% 78%, 70% 95%, 42% 100%, 18% 92%, 2% 68%, 0% 42%)",
+  13: "48% 52% 58% 42% / 55% 45% 42% 58%",
   
-  // Hole 14 - Boomerang subtle
-  14: "polygon(5% 35%, 22% 8%, 50% 0%, 78% 8%, 95% 30%, 100% 55%, 95% 78%, 72% 95%, 45% 100%, 20% 92%, 5% 70%, 0% 48%)",
+  // Hole 14 - Smooth wave
+  14: "55% 45% 48% 52% / 52% 48% 55% 45%",
   
-  // Hole 15 - Bowl shape
-  15: "polygon(10% 30%, 32% 5%, 58% 0%, 82% 10%, 98% 32%, 100% 58%, 92% 82%, 65% 98%, 38% 100%, 12% 88%, 2% 62%, 5% 38%)",
+  // Hole 15 - Bowl
+  15: "50% 50% 45% 55% / 60% 40% 50% 50%",
   
   // Hole 16 - Butterfly wing
-  16: "polygon(8% 25%, 30% 3%, 58% 0%, 85% 12%, 98% 38%, 100% 62%, 88% 88%, 62% 100%, 35% 98%, 12% 85%, 0% 58%, 2% 32%)",
+  16: "62% 38% 55% 45% / 45% 55% 38% 62%",
   
-  // Hole 17 - Signature island shape
-  17: "polygon(15% 20%, 40% 2%, 65% 0%, 88% 15%, 100% 42%, 98% 68%, 82% 92%, 55% 100%, 28% 95%, 8% 75%, 0% 48%, 5% 25%)",
+  // Hole 17 - Island signature
+  17: "70% 30% 35% 65% / 55% 45% 65% 35%",
   
-  // Hole 18 - Grand finale - expansive
-  18: "polygon(5% 25%, 25% 5%, 52% 0%, 78% 5%, 95% 22%, 100% 48%, 98% 75%, 80% 95%, 52% 100%, 25% 95%, 8% 78%, 0% 50%, 2% 28%)",
+  // Hole 18 - Grand finale
+  18: "58% 42% 45% 55% / 52% 48% 58% 42%",
 };
 
-export const getGreenClipPath = (holeNumber: number): string => {
-  return greenClipPaths[holeNumber] || greenClipPaths[1];
+export const getGreenBorderRadius = (holeNumber: number): string => {
+  return greenBorderRadius[holeNumber] || greenBorderRadius[1];
 };
