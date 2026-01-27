@@ -92,40 +92,48 @@ const HoleCard = ({ hole, index, isLast, photos, background, position }: HoleCar
           }`}
           style={{ transitionDelay: `${index * 50}ms` }}
         >
-          {/* SVG organic green border - decorative frame */}
+          {/* Organic green border frame - stretched to match card dimensions */}
           <svg 
-            className="absolute inset-0 w-full h-full pointer-events-none"
+            className="absolute -inset-4 w-[calc(100%+2rem)] h-[calc(100%+2rem)] pointer-events-none z-0"
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
           >
-            {/* Outer glow */}
+            {/* Glow filter */}
             <defs>
-              <filter id={`glow-${hole.hole}`} x="-20%" y="-20%" width="140%" height="140%">
+              <filter id={`glow-${hole.hole}`} x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur stdDeviation="2" result="blur" />
                 <feMerge>
                   <feMergeNode in="blur" />
                   <feMergeNode in="SourceGraphic" />
                 </feMerge>
               </filter>
+              <linearGradient id={`grad-${hole.hole}`} x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#34d399" stopOpacity="1" />
+                <stop offset="50%" stopColor="#10b981" stopOpacity="0.9" />
+                <stop offset="100%" stopColor="#059669" stopOpacity="1" />
+              </linearGradient>
             </defs>
-            {/* Green border shape */}
+            
+            {/* Outer thick green border with glow */}
             <path
               d={greenPath}
               fill="none"
-              stroke="rgba(16, 185, 129, 0.6)"
-              strokeWidth="1.5"
+              stroke={`url(#grad-${hole.hole})`}
+              strokeWidth="3"
               filter={`url(#glow-${hole.hole})`}
+              vectorEffect="non-scaling-stroke"
             />
-            {/* Inner subtle fill for depth */}
+            
+            {/* Inner fill for depth */}
             <path
               d={greenPath}
-              fill="rgba(16, 185, 129, 0.08)"
+              fill="rgba(16, 185, 129, 0.15)"
               stroke="none"
             />
           </svg>
 
-          {/* Main card content - rectangular, never clipped */}
-          <div className="relative m-3 rounded-2xl overflow-hidden shadow-2xl border border-emerald-500/30">
+          {/* Main card content - rectangular with rounded corners */}
+          <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl border border-emerald-500/50">
             {/* Background */}
             {isVisible && (
               <div 
