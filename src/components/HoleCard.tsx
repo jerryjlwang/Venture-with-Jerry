@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import { getGreenBorderRadius } from '@/utils/greenShapes';
+import { getGreenSvgPath } from '@/utils/greenShapes';
 
 interface HoleData {
   hole: number;
@@ -75,112 +75,143 @@ const HoleCard = ({ hole, index, isLast, photos, background, position }: HoleCar
   };
 
   const cardId = `hole-card-${hole.hole}`;
+  const greenPath = getGreenSvgPath(hole.hole);
 
   return (
     <div ref={cardRef} id={cardId} className="w-full max-w-4xl scroll-mt-8">
       {/* Card row with positioning */}
       <div className={`flex ${position === 'left' ? 'justify-start' : 'justify-end'}`}>
-        {/* Card with unique green shape */}
+        {/* Card wrapper with organic green border */}
         <div 
-          className={`relative w-full max-w-xl overflow-hidden shadow-2xl transition-all duration-700 border-2 border-emerald-500/40 ${
+          className={`relative w-full max-w-xl transition-all duration-700 ${
             isVisible 
               ? 'opacity-100 translate-x-0' 
               : position === 'left' 
                 ? 'opacity-0 -translate-x-8' 
                 : 'opacity-0 translate-x-8'
           }`}
-          style={{ 
-            transitionDelay: `${index * 50}ms`,
-            borderRadius: getGreenBorderRadius(hole.hole),
-          }}
+          style={{ transitionDelay: `${index * 50}ms` }}
         >
-          {/* Background */}
-          {isVisible && (
-            <div 
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ 
-                backgroundImage: `url(${background})`,
-              }}
+          {/* SVG organic green border - decorative frame */}
+          <svg 
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+          >
+            {/* Outer glow */}
+            <defs>
+              <filter id={`glow-${hole.hole}`} x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="2" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            {/* Green border shape */}
+            <path
+              d={greenPath}
+              fill="none"
+              stroke="rgba(16, 185, 129, 0.6)"
+              strokeWidth="1.5"
+              filter={`url(#glow-${hole.hole})`}
             />
-          )}
-          
-          {/* Dark overlay with green tint */}
-          <div className="absolute inset-0 bg-gradient-to-br from-green-950/80 via-black/70 to-green-900/60" />
-          
-          {/* Content */}
-          <div className="relative p-6 sm:p-8">
-            {/* Header row */}
-            <div className="flex items-start gap-4 mb-4">
-              {/* Icon badge */}
-              <div className="w-12 h-12 rounded-full bg-transparent border-2 border-amber-500 flex items-center justify-center flex-shrink-0">
-                <span className="text-lg font-bold text-white font-courier">{hole.hole}</span>
-              </div>
-              
-              {/* Title and year */}
-              <div className="flex-grow">
-                <div className="flex items-center gap-3 flex-wrap">
-                  <h3 className="text-xl sm:text-2xl font-courier text-white drop-shadow-lg">{hole.title}</h3>
-                  {hole.year && (
-                    <span className="px-2 py-0.5 bg-white/20 backdrop-blur-sm rounded-lg text-sm font-courier text-white">
-                      {hole.year}
-                    </span>
-                  )}
-                </div>
-              </div>
-            </div>
+            {/* Inner subtle fill for depth */}
+            <path
+              d={greenPath}
+              fill="rgba(16, 185, 129, 0.08)"
+              stroke="none"
+            />
+          </svg>
+
+          {/* Main card content - rectangular, never clipped */}
+          <div className="relative m-3 rounded-2xl overflow-hidden shadow-2xl border border-emerald-500/30">
+            {/* Background */}
+            {isVisible && (
+              <div 
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: `url(${background})` }}
+              />
+            )}
             
-            {/* Description */}
-            <p className="text-gray-100 font-courier text-base sm:text-lg leading-relaxed drop-shadow-md mb-4">
-              {hole.description}
-            </p>
+            {/* Dark overlay with green tint */}
+            <div className="absolute inset-0 bg-gradient-to-br from-green-950/80 via-black/70 to-green-900/60" />
             
-            {/* Photo slideshow */}
-            {isVisible && photos.length > 0 && (
-              <div className="relative rounded-xl overflow-hidden bg-black/30 h-48 sm:h-56">
-                {/* Slideshow container */}
-                <div className="relative h-full">
-                  {photos.map((photo, idx) => (
-                    <div
-                      key={idx}
-                      className={`absolute inset-0 transition-opacity duration-500 ${
-                        idx === currentPhotoIndex ? 'opacity-100' : 'opacity-0'
-                      }`}
-                    >
-                      {!imagesLoaded[idx] && idx === currentPhotoIndex && (
-                        <div className="w-full h-full animate-pulse bg-white/10 rounded-xl" />
-                      )}
-                      <img 
-                        src={photo} 
-                        alt={`${hole.title} - Photo ${idx + 1}`}
-                        loading="lazy"
-                        onLoad={() => handleImageLoad(idx)}
-                        className={`w-full h-full object-contain rounded-xl transition-opacity duration-300 ${
-                          imagesLoaded[idx] ? 'opacity-100' : 'opacity-0'
-                        }`}
-                      />
-                    </div>
-                  ))}
+            {/* Content */}
+            <div className="relative p-6 sm:p-8">
+              {/* Header row */}
+              <div className="flex items-start gap-4 mb-4">
+                {/* Icon badge */}
+                <div className="w-12 h-12 rounded-full bg-transparent border-2 border-amber-500 flex items-center justify-center flex-shrink-0">
+                  <span className="text-lg font-bold text-white font-courier">{hole.hole}</span>
                 </div>
                 
-                {/* Slideshow indicators */}
-                {photos.length > 1 && (
-                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
-                    {photos.map((_, idx) => (
-                      <button
+                {/* Title and year */}
+                <div className="flex-grow">
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <h3 className="text-xl sm:text-2xl font-courier text-white drop-shadow-lg">{hole.title}</h3>
+                    {hole.year && (
+                      <span className="px-2 py-0.5 bg-white/20 backdrop-blur-sm rounded-lg text-sm font-courier text-white">
+                        {hole.year}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+              
+              {/* Description */}
+              <p className="text-gray-100 font-courier text-base sm:text-lg leading-relaxed drop-shadow-md mb-4">
+                {hole.description}
+              </p>
+              
+              {/* Photo slideshow */}
+              {isVisible && photos.length > 0 && (
+                <div className="relative rounded-xl overflow-hidden bg-black/30 h-48 sm:h-56">
+                  {/* Slideshow container */}
+                  <div className="relative h-full">
+                    {photos.map((photo, idx) => (
+                      <div
                         key={idx}
-                        onClick={() => setCurrentPhotoIndex(idx)}
-                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                          idx === currentPhotoIndex 
-                            ? 'bg-amber-400 w-4' 
-                            : 'bg-white/50 hover:bg-white/80'
+                        className={`absolute inset-0 transition-opacity duration-500 ${
+                          idx === currentPhotoIndex ? 'opacity-100' : 'opacity-0'
                         }`}
-                        aria-label={`Go to photo ${idx + 1}`}
-                      />
+                      >
+                        {!imagesLoaded[idx] && idx === currentPhotoIndex && (
+                          <div className="w-full h-full animate-pulse bg-white/10 rounded-xl" />
+                        )}
+                        <img 
+                          src={photo} 
+                          alt={`${hole.title} - Photo ${idx + 1}`}
+                          loading="lazy"
+                          onLoad={() => handleImageLoad(idx)}
+                          className={`w-full h-full object-contain rounded-xl transition-opacity duration-300 ${
+                            imagesLoaded[idx] ? 'opacity-100' : 'opacity-0'
+                          }`}
+                        />
+                      </div>
                     ))}
                   </div>
-                )}
-              </div>
-            )}
+                  
+                  {/* Slideshow indicators */}
+                  {photos.length > 1 && (
+                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+                      {photos.map((_, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => setCurrentPhotoIndex(idx)}
+                          className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                            idx === currentPhotoIndex 
+                              ? 'bg-amber-400 w-4' 
+                              : 'bg-white/50 hover:bg-white/80'
+                          }`}
+                          aria-label={`Go to photo ${idx + 1}`}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
