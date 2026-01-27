@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
+import { getGreenClipPath } from '@/utils/greenShapes';
 
 interface HoleData {
   hole: number;
@@ -81,14 +82,17 @@ const HoleCard = ({ hole, index, isLast, photos, background, position }: HoleCar
       <div className={`flex ${position === 'left' ? 'justify-start' : 'justify-end'}`}>
         {/* Card */}
         <div 
-          className={`relative w-full max-w-xl rounded-2xl overflow-hidden border border-white/20 shadow-2xl transition-all duration-700 ${
+          className={`relative w-full max-w-xl overflow-hidden shadow-2xl transition-all duration-700 ${
             isVisible 
               ? 'opacity-100 translate-x-0' 
               : position === 'left' 
                 ? 'opacity-0 -translate-x-8' 
                 : 'opacity-0 translate-x-8'
           }`}
-          style={{ transitionDelay: `${index * 50}ms` }}
+          style={{ 
+            transitionDelay: `${index * 50}ms`,
+            clipPath: getGreenClipPath(hole.hole),
+          }}
         >
           {/* Background */}
           {isVisible && (
@@ -100,11 +104,11 @@ const HoleCard = ({ hole, index, isLast, photos, background, position }: HoleCar
             />
           )}
           
-          {/* Dark overlay */}
-          <div className="absolute inset-0 bg-black/60" />
+          {/* Dark overlay with green tint */}
+          <div className="absolute inset-0 bg-gradient-to-br from-green-950/70 via-black/60 to-green-900/50" />
           
-          {/* Content */}
-          <div className="relative p-6 sm:p-8">
+          {/* Content - extra padding for clipped edges */}
+          <div className="relative p-8 sm:p-10 pt-10 sm:pt-12 pb-10 sm:pb-12">
             {/* Header row */}
             <div className="flex items-start gap-4 mb-4">
               {/* Icon badge */}
