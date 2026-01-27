@@ -1,20 +1,24 @@
 import { useState } from 'react';
 
 // Legend categories with colors
-type Category = 'golf' | 'academics' | 'work' | 'startups';
+type Category = 'soccer' | 'golf' | 'competitions' | 'internships' | 'startups' | 'me';
 
 const categoryColors: Record<Category, { bg: string; border: string; text: string }> = {
+  soccer: { bg: 'bg-green-500/20', border: 'border-green-400', text: 'text-green-400' },
   golf: { bg: 'bg-emerald-500/20', border: 'border-emerald-400', text: 'text-emerald-400' },
-  academics: { bg: 'bg-blue-500/20', border: 'border-blue-400', text: 'text-blue-400' },
-  work: { bg: 'bg-purple-500/20', border: 'border-purple-400', text: 'text-purple-400' },
+  competitions: { bg: 'bg-blue-500/20', border: 'border-blue-400', text: 'text-blue-400' },
+  internships: { bg: 'bg-purple-500/20', border: 'border-purple-400', text: 'text-purple-400' },
   startups: { bg: 'bg-orange-500/20', border: 'border-orange-400', text: 'text-orange-400' },
+  me: { bg: 'bg-pink-500/20', border: 'border-pink-400', text: 'text-pink-400' },
 };
 
 const legendItems: { category: Category; label: string }[] = [
-  { category: 'golf', label: 'Golf' },
-  { category: 'academics', label: 'Academics' },
-  { category: 'work', label: 'Work' },
-  { category: 'startups', label: 'Startups' },
+  { category: 'soccer', label: '1-2: Soccer' },
+  { category: 'golf', label: '3-5: Golf' },
+  { category: 'competitions', label: '6-8: Competitions' },
+  { category: 'internships', label: '9-11: Internships' },
+  { category: 'startups', label: '12-15: Startups' },
+  { category: 'me', label: '16-18: Me' },
 ];
 
 interface HoleData {
@@ -24,24 +28,24 @@ interface HoleData {
 }
 
 const journeyData: HoleData[] = [
-  { hole: 1, title: "First swings", category: 'academics' },
-  { hole: 2, title: "A chunk and a hole out", category: 'golf' },
+  { hole: 1, title: "First swings", category: 'soccer' },
+  { hole: 2, title: "A chunk and a hole out", category: 'soccer' },
   { hole: 3, title: "First Tee", category: 'golf' },
   { hole: 4, title: "High School Varsity", category: 'golf' },
   { hole: 5, title: "Junior Tournaments", category: 'golf' },
-  { hole: 6, title: "Passion Projects", category: 'startups' },
-  { hole: 7, title: "AIME", category: 'academics' },
-  { hole: 8, title: "DECA", category: 'academics' },
-  { hole: 9, title: "Wyze Internship", category: 'work' },
-  { hole: 10, title: "Networking", category: 'startups' },
-  { hole: 11, title: "Economics Olympiad", category: 'academics' },
+  { hole: 6, title: "Passion Projects", category: 'competitions' },
+  { hole: 7, title: "AIME", category: 'competitions' },
+  { hole: 8, title: "DECA", category: 'competitions' },
+  { hole: 9, title: "Wyze Internship", category: 'internships' },
+  { hole: 10, title: "Networking", category: 'internships' },
+  { hole: 11, title: "Economics Olympiad", category: 'internships' },
   { hole: 12, title: "Venture with Jerry", category: 'startups' },
   { hole: 13, title: "PitchFork", category: 'startups' },
   { hole: 14, title: "Taper", category: 'startups' },
-  { hole: 15, title: "Director of Sales", category: 'work' },
-  { hole: 16, title: "The Golden Ratio", category: 'work' },
-  { hole: 17, title: "Senior Season", category: 'golf' },
-  { hole: 18, title: "The Journey Continues" },
+  { hole: 15, title: "Director of Sales", category: 'startups' },
+  { hole: 16, title: "The Golden Ratio", category: 'me' },
+  { hole: 17, title: "Senior Season", category: 'me' },
+  { hole: 18, title: "The Journey Continues", category: 'me' },
 ];
 
 const GolfCourseMap = () => {
