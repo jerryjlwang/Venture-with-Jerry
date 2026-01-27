@@ -13,35 +13,27 @@ export const WaterHazard = ({ className = "" }: HazardProps) => (
   >
     <defs>
       <linearGradient id="waterGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.4" />
-        <stop offset="50%" stopColor="#0284c7" stopOpacity="0.5" />
-        <stop offset="100%" stopColor="#0369a1" stopOpacity="0.4" />
+        <stop offset="0%" stopColor="#0ea5e9" />
+        <stop offset="50%" stopColor="#0284c7" />
+        <stop offset="100%" stopColor="#0369a1" />
       </linearGradient>
-      <filter id="waterGlow" x="-20%" y="-20%" width="140%" height="140%">
-        <feGaussianBlur stdDeviation="3" result="blur" />
-        <feMerge>
-          <feMergeNode in="blur" />
-          <feMergeNode in="SourceGraphic" />
-        </feMerge>
-      </filter>
     </defs>
     <path
       d="M 20,60 C 5,40 15,10 50,8 C 90,5 120,15 150,10 C 180,8 195,30 190,55 C 188,80 170,100 130,105 C 90,112 50,100 30,95 C 10,90 5,75 20,60 Z"
       fill="url(#waterGradient)"
-      filter="url(#waterGlow)"
     />
     {/* Subtle wave lines */}
     <path
       d="M 40,50 Q 70,45 100,52 Q 130,58 160,50"
       fill="none"
-      stroke="rgba(255,255,255,0.15)"
-      strokeWidth="1.5"
+      stroke="rgba(255,255,255,0.25)"
+      strokeWidth="2"
     />
     <path
       d="M 50,70 Q 80,65 110,72 Q 140,78 170,70"
       fill="none"
-      stroke="rgba(255,255,255,0.1)"
-      strokeWidth="1"
+      stroke="rgba(255,255,255,0.2)"
+      strokeWidth="1.5"
     />
   </svg>
 );
@@ -55,8 +47,8 @@ export const WaterHazard2 = ({ className = "" }: HazardProps) => (
   >
     <defs>
       <linearGradient id="waterGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.35" />
-        <stop offset="100%" stopColor="#0284c7" stopOpacity="0.45" />
+        <stop offset="0%" stopColor="#38bdf8" />
+        <stop offset="100%" stopColor="#0284c7" />
       </linearGradient>
     </defs>
     <path
@@ -66,8 +58,8 @@ export const WaterHazard2 = ({ className = "" }: HazardProps) => (
     <path
       d="M 35,45 Q 80,38 130,48"
       fill="none"
-      stroke="rgba(255,255,255,0.12)"
-      strokeWidth="1.5"
+      stroke="rgba(255,255,255,0.2)"
+      strokeWidth="2"
     />
   </svg>
 );
@@ -81,8 +73,8 @@ export const WaterHazard3 = ({ className = "" }: HazardProps) => (
   >
     <defs>
       <linearGradient id="waterGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.3" />
-        <stop offset="100%" stopColor="#0369a1" stopOpacity="0.4" />
+        <stop offset="0%" stopColor="#0ea5e9" />
+        <stop offset="100%" stopColor="#0369a1" />
       </linearGradient>
     </defs>
     <path
@@ -101,14 +93,10 @@ export const Bunker = ({ className = "" }: HazardProps) => (
   >
     <defs>
       <linearGradient id="bunkerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.35" />
-        <stop offset="50%" stopColor="#d97706" stopOpacity="0.4" />
-        <stop offset="100%" stopColor="#b45309" stopOpacity="0.35" />
+        <stop offset="0%" stopColor="#fcd34d" />
+        <stop offset="50%" stopColor="#f59e0b" />
+        <stop offset="100%" stopColor="#d97706" />
       </linearGradient>
-      <filter id="bunkerTexture" x="0%" y="0%" width="100%" height="100%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
-      </filter>
     </defs>
     <path
       d="M 20,50 C 8,25 25,8 55,10 C 90,5 125,15 145,35 C 155,55 145,80 115,90 C 75,98 35,92 18,75 C 5,60 10,55 20,50 Z"
@@ -118,14 +106,14 @@ export const Bunker = ({ className = "" }: HazardProps) => (
     <path
       d="M 35,40 Q 75,35 115,45"
       fill="none"
-      stroke="rgba(255,255,255,0.1)"
-      strokeWidth="1"
+      stroke="rgba(255,255,255,0.15)"
+      strokeWidth="1.5"
     />
     <path
       d="M 40,60 Q 80,55 120,65"
       fill="none"
-      stroke="rgba(139,69,19,0.15)"
-      strokeWidth="1"
+      stroke="rgba(139,69,19,0.2)"
+      strokeWidth="1.5"
     />
   </svg>
 );
@@ -139,8 +127,8 @@ export const Bunker2 = ({ className = "" }: HazardProps) => (
   >
     <defs>
       <linearGradient id="bunkerGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#fcd34d" stopOpacity="0.3" />
-        <stop offset="100%" stopColor="#b45309" stopOpacity="0.4" />
+        <stop offset="0%" stopColor="#fde68a" />
+        <stop offset="100%" stopColor="#d97706" />
       </linearGradient>
     </defs>
     <path
@@ -159,8 +147,8 @@ export const Bunker3 = ({ className = "" }: HazardProps) => (
   >
     <defs>
       <radialGradient id="bunkerGradient3" cx="50%" cy="40%" r="60%">
-        <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.45" />
-        <stop offset="100%" stopColor="#92400e" stopOpacity="0.35" />
+        <stop offset="0%" stopColor="#fbbf24" />
+        <stop offset="100%" stopColor="#b45309" />
       </radialGradient>
     </defs>
     <path
@@ -174,30 +162,35 @@ export const Bunker3 = ({ className = "" }: HazardProps) => (
 export const CourseDecorations = () => (
   <>
     {/* Water hazards - left side */}
-    <WaterHazard className="absolute left-0 top-[5%] w-48 h-28 opacity-60" />
-    <WaterHazard2 className="absolute left-[5%] top-[25%] w-40 h-24 opacity-50 rotate-12" />
-    <WaterHazard3 className="absolute left-0 top-[55%] w-36 h-24 opacity-55 -rotate-6" />
-    <WaterHazard className="absolute left-[3%] top-[80%] w-44 h-26 opacity-50 rotate-6" />
+    <WaterHazard className="absolute -left-10 top-[3%] w-72 h-44" />
+    <WaterHazard2 className="absolute left-0 top-[18%] w-64 h-40 rotate-12" />
+    <WaterHazard3 className="absolute -left-8 top-[35%] w-56 h-36 -rotate-6" />
+    <WaterHazard className="absolute left-0 top-[52%] w-68 h-42 rotate-6" />
+    <WaterHazard2 className="absolute -left-5 top-[70%] w-60 h-38 -rotate-10" />
+    <WaterHazard3 className="absolute left-0 top-[88%] w-52 h-34 rotate-8" />
     
     {/* Water hazards - right side */}
-    <WaterHazard2 className="absolute right-0 top-[15%] w-44 h-28 opacity-55 -rotate-12" />
-    <WaterHazard className="absolute right-[2%] top-[40%] w-40 h-24 opacity-50 rotate-3" />
-    <WaterHazard3 className="absolute right-0 top-[65%] w-48 h-28 opacity-55 -rotate-8" />
-    <WaterHazard2 className="absolute right-[5%] top-[90%] w-36 h-22 opacity-50 rotate-15" />
+    <WaterHazard2 className="absolute -right-10 top-[8%] w-68 h-44 -rotate-12" />
+    <WaterHazard className="absolute right-0 top-[25%] w-64 h-40 rotate-3" />
+    <WaterHazard3 className="absolute -right-8 top-[42%] w-72 h-44 -rotate-8" />
+    <WaterHazard2 className="absolute right-0 top-[60%] w-56 h-36 rotate-15" />
+    <WaterHazard className="absolute -right-5 top-[78%] w-64 h-40 -rotate-5" />
+    <WaterHazard3 className="absolute right-0 top-[95%] w-52 h-34 rotate-10" />
     
     {/* Bunkers - left side */}
-    <Bunker className="absolute left-[8%] top-[12%] w-32 h-20 opacity-50 rotate-6" />
-    <Bunker2 className="absolute left-[2%] top-[35%] w-28 h-20 opacity-45 -rotate-10" />
-    <Bunker3 className="absolute left-[6%] top-[48%] w-24 h-18 opacity-50 rotate-15" />
-    <Bunker className="absolute left-[4%] top-[70%] w-30 h-20 opacity-45 -rotate-5" />
-    <Bunker2 className="absolute left-[10%] top-[88%] w-26 h-18 opacity-50 rotate-8" />
+    <Bunker className="absolute left-[2%] top-[10%] w-52 h-32 rotate-6" />
+    <Bunker2 className="absolute -left-5 top-[28%] w-44 h-32 -rotate-10" />
+    <Bunker3 className="absolute left-[3%] top-[45%] w-40 h-28 rotate-15" />
+    <Bunker className="absolute left-0 top-[62%] w-48 h-32 -rotate-5" />
+    <Bunker2 className="absolute left-[5%] top-[80%] w-44 h-30 rotate-8" />
     
     {/* Bunkers - right side */}
-    <Bunker2 className="absolute right-[6%] top-[8%] w-28 h-18 opacity-45 -rotate-8" />
-    <Bunker className="absolute right-[3%] top-[28%] w-32 h-20 opacity-50 rotate-10" />
-    <Bunker3 className="absolute right-[8%] top-[52%] w-24 h-18 opacity-45 -rotate-12" />
-    <Bunker className="absolute right-[2%] top-[75%] w-30 h-20 opacity-50 rotate-5" />
-    <Bunker2 className="absolute right-[7%] top-[95%] w-28 h-18 opacity-45 -rotate-6" />
+    <Bunker2 className="absolute right-[3%] top-[5%] w-48 h-32 -rotate-8" />
+    <Bunker className="absolute -right-5 top-[22%] w-52 h-34 rotate-10" />
+    <Bunker3 className="absolute right-[2%] top-[38%] w-40 h-28 -rotate-12" />
+    <Bunker className="absolute right-0 top-[55%] w-48 h-32 rotate-5" />
+    <Bunker2 className="absolute right-[4%] top-[72%] w-44 h-30 -rotate-6" />
+    <Bunker3 className="absolute right-[2%] top-[90%] w-40 h-28 rotate-12" />
   </>
 );
 
