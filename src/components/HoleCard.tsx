@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useMemo } from 'react';
 
 interface HoleData {
   hole: number;
@@ -16,27 +16,27 @@ interface HoleCardProps {
   position: 'left' | 'right';
 }
 
-// Unique organic green shapes for each hole using CSS clip-path
-// These create smooth blob-like shapes with concave and convex curves
-const greenClipPaths: Record<number, string> = {
-  1: "polygon(5% 15%, 15% 3%, 35% 0%, 55% 2%, 75% 0%, 90% 5%, 97% 20%, 100% 40%, 98% 60%, 100% 80%, 95% 92%, 80% 98%, 60% 100%, 40% 98%, 20% 100%, 8% 95%, 2% 80%, 0% 60%, 3% 40%, 0% 20%)",
-  2: "polygon(8% 10%, 25% 2%, 45% 0%, 65% 3%, 85% 0%, 95% 12%, 100% 30%, 98% 50%, 100% 70%, 95% 88%, 82% 97%, 60% 100%, 38% 98%, 18% 100%, 5% 90%, 0% 70%, 2% 50%, 0% 30%, 5% 15%)",
-  3: "polygon(3% 18%, 18% 5%, 40% 0%, 60% 2%, 80% 0%, 95% 10%, 100% 28%, 97% 48%, 100% 68%, 95% 85%, 78% 97%, 55% 100%, 35% 97%, 15% 100%, 3% 88%, 0% 68%, 3% 48%, 0% 28%, 5% 12%)",
-  4: "polygon(6% 12%, 22% 3%, 42% 0%, 62% 4%, 82% 0%, 96% 15%, 100% 35%, 96% 55%, 100% 75%, 93% 92%, 75% 100%, 52% 97%, 30% 100%, 12% 95%, 2% 78%, 0% 55%, 4% 35%, 0% 18%)",
-  5: "polygon(4% 20%, 20% 5%, 42% 0%, 65% 3%, 85% 0%, 97% 18%, 100% 38%, 95% 58%, 100% 78%, 92% 95%, 70% 100%, 48% 95%, 25% 100%, 8% 90%, 0% 70%, 5% 48%, 0% 28%)",
-  6: "polygon(7% 15%, 24% 2%, 48% 0%, 70% 5%, 88% 0%, 98% 20%, 100% 42%, 94% 62%, 100% 82%, 90% 97%, 68% 100%, 42% 95%, 20% 100%, 5% 85%, 0% 62%, 6% 40%, 0% 22%)",
-  7: "polygon(5% 18%, 20% 4%, 45% 0%, 68% 4%, 87% 0%, 97% 15%, 100% 38%, 95% 58%, 100% 78%, 92% 95%, 72% 100%, 45% 96%, 22% 100%, 6% 88%, 0% 65%, 5% 42%, 0% 22%)",
-  8: "polygon(8% 12%, 26% 2%, 50% 0%, 72% 5%, 90% 0%, 100% 18%, 97% 40%, 100% 60%, 95% 82%, 78% 98%, 55% 100%, 32% 95%, 12% 100%, 2% 82%, 0% 58%, 5% 38%, 0% 18%)",
-  9: "polygon(4% 15%, 22% 3%, 46% 0%, 68% 4%, 88% 0%, 98% 18%, 100% 40%, 96% 62%, 100% 82%, 88% 97%, 65% 100%, 40% 96%, 18% 100%, 4% 85%, 0% 62%, 4% 40%, 0% 20%)",
-  10: "polygon(6% 18%, 24% 4%, 48% 0%, 72% 5%, 90% 0%, 100% 22%, 96% 45%, 100% 68%, 92% 90%, 72% 100%, 48% 95%, 24% 100%, 6% 88%, 0% 65%, 5% 42%, 0% 22%)",
-  11: "polygon(5% 14%, 22% 2%, 46% 0%, 70% 4%, 88% 0%, 98% 16%, 100% 38%, 95% 60%, 100% 82%, 88% 98%, 62% 100%, 38% 96%, 15% 100%, 3% 84%, 0% 60%, 5% 38%, 0% 18%)",
-  12: "polygon(7% 16%, 25% 3%, 50% 0%, 74% 5%, 92% 0%, 100% 20%, 96% 44%, 100% 68%, 90% 92%, 68% 100%, 44% 95%, 20% 100%, 5% 86%, 0% 62%, 6% 38%, 0% 18%)",
-  13: "polygon(4% 12%, 20% 2%, 44% 0%, 68% 4%, 86% 0%, 98% 15%, 100% 38%, 94% 60%, 100% 82%, 86% 97%, 62% 100%, 38% 95%, 14% 100%, 2% 82%, 0% 58%, 6% 35%, 0% 15%)",
-  14: "polygon(6% 18%, 23% 4%, 48% 0%, 72% 5%, 90% 0%, 100% 20%, 95% 45%, 100% 70%, 90% 92%, 68% 100%, 42% 95%, 18% 100%, 4% 85%, 0% 60%, 5% 38%, 0% 18%)",
-  15: "polygon(5% 15%, 22% 3%, 48% 0%, 72% 4%, 90% 0%, 98% 18%, 100% 42%, 94% 65%, 100% 85%, 85% 98%, 60% 100%, 35% 95%, 12% 100%, 2% 82%, 0% 58%, 6% 35%, 0% 15%)",
-  16: "polygon(8% 14%, 26% 2%, 52% 0%, 76% 5%, 92% 0%, 100% 18%, 95% 42%, 100% 68%, 88% 92%, 64% 100%, 38% 94%, 15% 100%, 3% 82%, 0% 56%, 6% 32%, 0% 14%)",
-  17: "polygon(10% 12%, 28% 2%, 52% 0%, 76% 4%, 92% 0%, 100% 16%, 94% 40%, 100% 65%, 88% 90%, 62% 100%, 36% 94%, 12% 100%, 2% 80%, 0% 54%, 8% 30%, 0% 12%)",
-  18: "polygon(6% 15%, 24% 3%, 50% 0%, 75% 5%, 92% 0%, 100% 18%, 95% 42%, 100% 68%, 88% 92%, 65% 100%, 40% 95%, 16% 100%, 3% 82%, 0% 58%, 6% 34%, 0% 15%)",
+// Unique smooth blob shapes using SVG paths with bezier curves
+// These create organic, rounded shapes like real golf greens
+const greenSvgPaths: Record<number, string> = {
+  1: "M 50,2 C 75,0 95,15 98,40 C 100,65 90,90 65,98 C 40,102 15,90 5,65 C -2,40 10,5 50,2 Z",
+  2: "M 55,3 C 82,0 98,20 97,50 C 98,78 80,98 50,97 C 22,98 3,75 5,45 C 3,18 28,3 55,3 Z",
+  3: "M 48,2 C 78,0 100,25 95,55 C 92,85 68,100 40,97 C 12,95 0,70 5,40 C 8,12 22,2 48,2 Z",
+  4: "M 52,5 C 80,2 97,22 95,52 C 95,82 75,98 45,97 C 18,98 2,78 5,48 C 5,20 25,5 52,5 Z",
+  5: "M 45,3 C 75,0 98,18 97,48 C 98,78 78,100 48,98 C 18,100 0,75 3,45 C 2,18 18,3 45,3 Z",
+  6: "M 50,5 C 78,2 95,25 97,52 C 100,80 80,97 50,98 C 22,100 5,78 3,50 C 0,22 22,5 50,5 Z",
+  7: "M 55,2 C 85,0 100,28 95,55 C 92,82 70,100 42,97 C 15,97 0,72 5,45 C 8,18 28,2 55,2 Z",
+  8: "M 48,5 C 75,2 97,20 98,48 C 100,78 82,98 52,97 C 22,98 3,80 5,50 C 5,22 22,5 48,5 Z",
+  9: "M 52,3 C 80,0 98,25 95,52 C 95,80 75,98 48,98 C 20,100 2,78 5,50 C 5,22 25,3 52,3 Z",
+  10: "M 50,2 C 80,0 100,22 97,52 C 97,82 77,100 48,97 C 18,97 0,77 5,48 C 8,18 22,2 50,2 Z",
+  11: "M 45,5 C 72,2 95,20 97,48 C 100,77 82,97 52,98 C 23,100 5,80 3,52 C 0,23 20,5 45,5 Z",
+  12: "M 55,3 C 83,0 100,25 95,55 C 92,85 70,100 42,98 C 15,98 0,75 5,47 C 8,18 28,3 55,3 Z",
+  13: "M 48,2 C 77,0 97,22 98,50 C 100,80 80,100 50,98 C 20,98 2,78 3,48 C 2,20 22,2 48,2 Z",
+  14: "M 52,5 C 82,2 100,25 95,55 C 92,85 72,100 45,97 C 18,97 0,75 5,47 C 8,18 25,5 52,5 Z",
+  15: "M 50,3 C 78,0 97,22 98,52 C 100,82 80,100 50,97 C 20,97 2,77 5,48 C 5,18 22,3 50,3 Z",
+  16: "M 55,5 C 85,2 100,28 95,58 C 90,88 68,100 40,95 C 12,92 0,68 5,40 C 10,12 28,5 55,5 Z",
+  17: "M 48,2 C 80,0 100,25 95,55 C 90,88 65,102 38,95 C 10,90 0,65 8,38 C 15,10 22,2 48,2 Z",
+  18: "M 50,3 C 82,0 100,28 95,58 C 88,90 62,102 35,95 C 8,88 0,62 8,35 C 18,8 22,3 50,3 Z",
 };
 
 const HoleCard = ({ hole, index, isLast, photos, background, position }: HoleCardProps) => {
@@ -44,6 +44,10 @@ const HoleCard = ({ hole, index, isLast, photos, background, position }: HoleCar
   const [isVisible, setIsVisible] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState<boolean[]>([]);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+  
+  // Generate unique clip-path ID
+  const clipId = useMemo(() => `green-clip-${hole.hole}`, [hole.hole]);
+  const svgPath = greenSvgPaths[hole.hole] || greenSvgPaths[1];
 
   // Lazy loading with IntersectionObserver
   useEffect(() => {
@@ -97,13 +101,21 @@ const HoleCard = ({ hole, index, isLast, photos, background, position }: HoleCar
   };
 
   const cardId = `hole-card-${hole.hole}`;
-  const clipPath = greenClipPaths[hole.hole] || greenClipPaths[1];
 
   return (
     <div ref={cardRef} id={cardId} className="w-full max-w-4xl scroll-mt-8">
+      {/* Hidden SVG for clip-path definition */}
+      <svg width="0" height="0" className="absolute">
+        <defs>
+          <clipPath id={clipId} clipPathUnits="objectBoundingBox" transform="scale(0.01)">
+            <path d={svgPath} />
+          </clipPath>
+        </defs>
+      </svg>
+
       {/* Card row with positioning */}
       <div className={`flex ${position === 'left' ? 'justify-start' : 'justify-end'}`}>
-        {/* Card with organic green shape */}
+        {/* Card with smooth organic green shape */}
         <div 
           className={`relative w-full max-w-xl transition-all duration-700 ${
             isVisible 
@@ -114,8 +126,8 @@ const HoleCard = ({ hole, index, isLast, photos, background, position }: HoleCar
           }`}
           style={{ 
             transitionDelay: `${index * 50}ms`,
-            clipPath: clipPath,
-            WebkitClipPath: clipPath,
+            clipPath: `url(#${clipId})`,
+            WebkitClipPath: `url(#${clipId})`,
           }}
         >
           {/* Background */}
@@ -127,24 +139,21 @@ const HoleCard = ({ hole, index, isLast, photos, background, position }: HoleCar
           )}
           
           {/* Green grass-like overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-green-800/85 via-green-900/80 to-emerald-900/85" />
+          <div className="absolute inset-0 bg-gradient-to-br from-green-700/90 via-green-800/85 to-emerald-800/90" />
           
           {/* Subtle texture overlay */}
-          <div className="absolute inset-0 opacity-20" style={{
-            backgroundImage: `radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 1px, transparent 1px),
-                              radial-gradient(circle at 80% 70%, rgba(255,255,255,0.08) 1px, transparent 1px)`,
-            backgroundSize: '20px 20px, 15px 15px'
+          <div className="absolute inset-0 opacity-15" style={{
+            backgroundImage: `radial-gradient(circle at 25% 35%, rgba(255,255,255,0.15) 1px, transparent 1px),
+                              radial-gradient(circle at 75% 65%, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: '18px 18px, 14px 14px'
           }} />
           
-          {/* Inner border glow */}
-          <div className="absolute inset-0 shadow-[inset_0_0_30px_rgba(16,185,129,0.3)]" />
-          
-          {/* Content with extra padding to stay within clip bounds */}
-          <div className="relative p-10 sm:p-12 pt-12 sm:pt-14 pb-12 sm:pb-14">
+          {/* Content with extra padding to stay within curved bounds */}
+          <div className="relative p-12 sm:p-14 pt-14 sm:pt-16 pb-14 sm:pb-16">
             {/* Header row */}
             <div className="flex items-start gap-4 mb-4">
               {/* Icon badge */}
-              <div className="w-12 h-12 rounded-full bg-emerald-600/50 border-2 border-emerald-400 flex items-center justify-center flex-shrink-0 shadow-lg">
+              <div className="w-12 h-12 rounded-full bg-emerald-600/50 border-2 border-emerald-300 flex items-center justify-center flex-shrink-0 shadow-lg">
                 <span className="text-lg font-bold text-white font-courier">{hole.hole}</span>
               </div>
               
