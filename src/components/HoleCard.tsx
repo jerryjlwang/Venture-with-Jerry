@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import { getGreenClipPath } from '@/utils/greenShapes';
+import { getGreenBorderRadius } from '@/utils/greenShapes';
 
 interface HoleData {
   hole: number;
@@ -80,9 +80,9 @@ const HoleCard = ({ hole, index, isLast, photos, background, position }: HoleCar
     <div ref={cardRef} id={cardId} className="w-full max-w-4xl scroll-mt-8">
       {/* Card row with positioning */}
       <div className={`flex ${position === 'left' ? 'justify-start' : 'justify-end'}`}>
-        {/* Card */}
+        {/* Card with unique green shape */}
         <div 
-          className={`relative w-full max-w-xl overflow-hidden shadow-2xl transition-all duration-700 ${
+          className={`relative w-full max-w-xl overflow-hidden shadow-2xl transition-all duration-700 border-2 border-emerald-500/40 ${
             isVisible 
               ? 'opacity-100 translate-x-0' 
               : position === 'left' 
@@ -91,7 +91,7 @@ const HoleCard = ({ hole, index, isLast, photos, background, position }: HoleCar
           }`}
           style={{ 
             transitionDelay: `${index * 50}ms`,
-            clipPath: getGreenClipPath(hole.hole),
+            borderRadius: getGreenBorderRadius(hole.hole),
           }}
         >
           {/* Background */}
@@ -105,10 +105,10 @@ const HoleCard = ({ hole, index, isLast, photos, background, position }: HoleCar
           )}
           
           {/* Dark overlay with green tint */}
-          <div className="absolute inset-0 bg-gradient-to-br from-green-950/70 via-black/60 to-green-900/50" />
+          <div className="absolute inset-0 bg-gradient-to-br from-green-950/80 via-black/70 to-green-900/60" />
           
-          {/* Content - extra padding for clipped edges */}
-          <div className="relative p-8 sm:p-10 pt-10 sm:pt-12 pb-10 sm:pb-12">
+          {/* Content */}
+          <div className="relative p-6 sm:p-8">
             {/* Header row */}
             <div className="flex items-start gap-4 mb-4">
               {/* Icon badge */}
