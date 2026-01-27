@@ -4,7 +4,7 @@ import { useState } from 'react';
 type Category = 'soccer' | 'golf' | 'competitions' | 'internships' | 'startups' | 'me';
 
 const categoryColors: Record<Category, { bg: string; border: string; text: string }> = {
-  soccer: { bg: 'bg-green-500/20', border: 'border-green-400', text: 'text-green-400' },
+  soccer: { bg: 'bg-white/20', border: 'border-white', text: 'text-white' },
   golf: { bg: 'bg-emerald-500/20', border: 'border-emerald-400', text: 'text-emerald-400' },
   competitions: { bg: 'bg-blue-500/20', border: 'border-blue-400', text: 'text-blue-400' },
   internships: { bg: 'bg-purple-500/20', border: 'border-purple-400', text: 'text-purple-400' },
