@@ -158,39 +158,34 @@ export const Bunker3 = ({ className = "" }: HazardProps) => (
   </svg>
 );
 
-// Course decoration positions - scattered around the journey
+// Course decoration positions - water and bunkers in separate areas
 export const CourseDecorations = () => (
   <>
-    {/* Water hazards - left side */}
-    <WaterHazard className="absolute -left-10 top-[3%] w-72 h-44" />
-    <WaterHazard2 className="absolute left-0 top-[18%] w-64 h-40 rotate-12" />
-    <WaterHazard3 className="absolute -left-8 top-[35%] w-56 h-36 -rotate-6" />
-    <WaterHazard className="absolute left-0 top-[52%] w-68 h-42 rotate-6" />
-    <WaterHazard2 className="absolute -left-5 top-[70%] w-60 h-38 -rotate-10" />
-    <WaterHazard3 className="absolute left-0 top-[88%] w-52 h-34 rotate-8" />
+    {/* Water hazards - left side (lower positions) */}
+    <WaterHazard className="absolute -left-10 top-[2%] w-72 h-44" />
+    <WaterHazard2 className="absolute left-0 top-[22%] w-64 h-40 rotate-12" />
+    <WaterHazard3 className="absolute -left-8 top-[48%] w-56 h-36 -rotate-6" />
+    <WaterHazard className="absolute left-0 top-[72%] w-68 h-42 rotate-6" />
+    <WaterHazard2 className="absolute -left-5 top-[92%] w-60 h-38 -rotate-10" />
     
-    {/* Water hazards - right side */}
-    <WaterHazard2 className="absolute -right-10 top-[8%] w-68 h-44 -rotate-12" />
-    <WaterHazard className="absolute right-0 top-[25%] w-64 h-40 rotate-3" />
-    <WaterHazard3 className="absolute -right-8 top-[42%] w-72 h-44 -rotate-8" />
-    <WaterHazard2 className="absolute right-0 top-[60%] w-56 h-36 rotate-15" />
-    <WaterHazard className="absolute -right-5 top-[78%] w-64 h-40 -rotate-5" />
-    <WaterHazard3 className="absolute right-0 top-[95%] w-52 h-34 rotate-10" />
+    {/* Water hazards - right side (lower positions) */}
+    <WaterHazard2 className="absolute -right-10 top-[12%] w-68 h-44 -rotate-12" />
+    <WaterHazard className="absolute right-0 top-[38%] w-64 h-40 rotate-3" />
+    <WaterHazard3 className="absolute -right-8 top-[62%] w-72 h-44 -rotate-8" />
+    <WaterHazard2 className="absolute right-0 top-[85%] w-56 h-36 rotate-15" />
     
-    {/* Bunkers - left side */}
-    <Bunker className="absolute left-[2%] top-[10%] w-52 h-32 rotate-6" />
-    <Bunker2 className="absolute -left-5 top-[28%] w-44 h-32 -rotate-10" />
-    <Bunker3 className="absolute left-[3%] top-[45%] w-40 h-28 rotate-15" />
-    <Bunker className="absolute left-0 top-[62%] w-48 h-32 -rotate-5" />
-    <Bunker2 className="absolute left-[5%] top-[80%] w-44 h-30 rotate-8" />
+    {/* Bunkers - left side (offset from water) */}
+    <Bunker className="absolute left-[8%] top-[12%] w-52 h-32 rotate-6" />
+    <Bunker2 className="absolute left-[5%] top-[35%] w-44 h-32 -rotate-10" />
+    <Bunker3 className="absolute left-[10%] top-[58%] w-40 h-28 rotate-15" />
+    <Bunker className="absolute left-[6%] top-[82%] w-48 h-32 -rotate-5" />
     
-    {/* Bunkers - right side */}
-    <Bunker2 className="absolute right-[3%] top-[5%] w-48 h-32 -rotate-8" />
-    <Bunker className="absolute -right-5 top-[22%] w-52 h-34 rotate-10" />
-    <Bunker3 className="absolute right-[2%] top-[38%] w-40 h-28 -rotate-12" />
-    <Bunker className="absolute right-0 top-[55%] w-48 h-32 rotate-5" />
-    <Bunker2 className="absolute right-[4%] top-[72%] w-44 h-30 -rotate-6" />
-    <Bunker3 className="absolute right-[2%] top-[90%] w-40 h-28 rotate-12" />
+    {/* Bunkers - right side (offset from water) */}
+    <Bunker2 className="absolute right-[10%] top-[2%] w-48 h-32 -rotate-8" />
+    <Bunker className="absolute right-[6%] top-[25%] w-52 h-34 rotate-10" />
+    <Bunker3 className="absolute right-[8%] top-[50%] w-40 h-28 -rotate-12" />
+    <Bunker className="absolute right-[5%] top-[72%] w-48 h-32 rotate-5" />
+    <Bunker2 className="absolute right-[10%] top-[95%] w-44 h-30 -rotate-6" />
   </>
 );
 
