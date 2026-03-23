@@ -49,7 +49,7 @@ import chambersBayHole17 from '@/assets/chambers-bay-hole17.jpg';
 import chambersBayHole18 from '@/assets/chambers-bay-hole18.jpg';
 
 import HoleCard from './HoleCard';
-import CourseDecorations from './CourseDecorations';
+
 
 interface HoleData {
   hole: number;
