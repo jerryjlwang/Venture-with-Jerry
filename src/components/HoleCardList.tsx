@@ -49,7 +49,7 @@ import chambersBayHole17 from '@/assets/chambers-bay-hole17.jpg';
 import chambersBayHole18 from '@/assets/chambers-bay-hole18.jpg';
 
 import HoleCard from './HoleCard';
-import CourseDecorations from './CourseDecorations';
+
 
 interface HoleData {
   hole: number;
@@ -134,8 +134,6 @@ const getHoleBackground = (hole: number): string => {
 const HoleCardList = () => {
   return (
     <div className="relative w-full px-4 sm:px-6 lg:px-8 py-16 overflow-hidden">
-      {/* Decorative water hazards and bunkers */}
-      <CourseDecorations />
       
       <div className="relative z-10 flex flex-col items-center">
         {journeyOrder.map((hole, index) => (
