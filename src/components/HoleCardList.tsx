@@ -134,8 +134,6 @@ const getHoleBackground = (hole: number): string => {
 const HoleCardList = () => {
   return (
     <div className="relative w-full px-4 sm:px-6 lg:px-8 py-16 overflow-hidden">
-      {/* Decorative water hazards and bunkers */}
-      <CourseDecorations />
       
       <div className="relative z-10 flex flex-col items-center">
         {journeyOrder.map((hole, index) => (
