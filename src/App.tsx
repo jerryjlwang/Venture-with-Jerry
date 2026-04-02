@@ -25,11 +25,9 @@ const AppContent = () => {
   const location = useLocation();
   const isPostDetail =
     location.pathname.startsWith("/posts/") && location.pathname !== "/posts";
-  const isGolfPage = location.pathname === "/golf";
-
   return (
     <div
-      className={`min-h-screen flex flex-col ${isGolfPage ? "bg-green-950" : "bg-slate-900"}`}
+      className="min-h-screen flex flex-col bg-slate-900"
     >
       {!isPostDetail && <Header />}
       <main className="flex-grow">
