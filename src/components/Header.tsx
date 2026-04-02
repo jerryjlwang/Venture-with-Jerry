@@ -28,12 +28,6 @@ const Header = () => {
           Posts
         </Link>
         <Link 
-          to="/golf" 
-          className={`text-white hover:text-blue-300 transition-colors text-lg font-courier tracking-wide ${isActive('/golf') ? 'text-blue-300' : ''}`}
-        >
-          Golf
-        </Link>
-        <Link 
           to="/about" 
           className={`text-white hover:text-blue-300 transition-colors text-lg font-courier tracking-wide ${isActive('/about') ? 'text-blue-300' : ''}`}
         >
@@ -61,13 +55,6 @@ const Header = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               Posts
-            </Link>
-            <Link 
-              to="/golf" 
-              className={`text-white hover:text-blue-300 transition-colors py-2 font-courier ${isActive('/golf') ? 'text-blue-300' : ''}`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Golf
             </Link>
             <Link 
               to="/about" 

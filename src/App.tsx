@@ -13,7 +13,7 @@ import Home from "./pages/Home";
 import Posts from "./pages/Posts";
 import PostDetail from "./pages/PostDetail";
 import About from "./pages/About";
-import Golf from "./pages/Golf";
+
 
 import NotFound from "./pages/NotFound";
 
@@ -25,11 +25,9 @@ const AppContent = () => {
   const location = useLocation();
   const isPostDetail =
     location.pathname.startsWith("/posts/") && location.pathname !== "/posts";
-  const isGolfPage = location.pathname === "/golf";
-
   return (
     <div
-      className={`min-h-screen flex flex-col ${isGolfPage ? "bg-green-950" : "bg-slate-900"}`}
+      className="min-h-screen flex flex-col bg-slate-900"
     >
       {!isPostDetail && <Header />}
       <main className="flex-grow">
@@ -37,7 +35,7 @@ const AppContent = () => {
           <Route path="/" element={<Home />} />
           <Route path="/posts" element={<Posts />} />
           <Route path="/posts/:id" element={<PostDetail />} />
-          <Route path="/golf" element={<Golf />} />
+          
           <Route path="/about" element={<About />} />
 
           <Route path="*" element={<NotFound />} />
