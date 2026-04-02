@@ -1,7 +1,4 @@
-import { useLocation } from 'react-router-dom';
-
 const Footer = () => {
-  const location = useLocation();
   return (
     <footer className="text-white py-8 mt-16 bg-slate-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
