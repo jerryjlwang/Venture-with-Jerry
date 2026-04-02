@@ -13,7 +13,7 @@ import Home from "./pages/Home";
 import Posts from "./pages/Posts";
 import PostDetail from "./pages/PostDetail";
 import About from "./pages/About";
-import Golf from "./pages/Golf";
+
 
 import NotFound from "./pages/NotFound";
 
