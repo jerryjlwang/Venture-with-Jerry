@@ -1,5 +1,6 @@
 import {
   ArrowUpRight,
+  Download,
   FileText,
   Github,
   GraduationCap,
@@ -42,9 +43,19 @@ const Resume = () => {
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 pb-20 pt-36 sm:px-6 md:pt-40 lg:px-8">
         <section className="mb-12">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-sm font-courier tracking-wide text-cyan-100">
-            <FileText className="h-4 w-4" />
-            Resume
+          <div className="mb-6 flex flex-wrap items-center gap-3">
+            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-sm font-courier tracking-wide text-cyan-100">
+              <FileText className="h-4 w-4" />
+              Resume
+            </div>
+            <a
+              href="/Jerry's_Resume.pdf"
+              download="Jerry's_Resume.pdf"
+              className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/5 px-4 py-2 text-sm font-courier tracking-wide text-white transition-colors hover:border-cyan-300/45 hover:bg-cyan-300/10 hover:text-cyan-100"
+            >
+              <Download className="h-4 w-4" />
+              Download PDF
+            </a>
           </div>
 
           <h1 className="mb-5 text-4xl font-courier tracking-wide text-white md:text-5xl">
@@ -66,7 +77,17 @@ const Resume = () => {
               </span>
             </div>
 
-            <h2 className="mb-4 text-2xl font-courier text-white">
+            <div className="mb-6 flex justify-center">
+              <div className="rounded-full border border-cyan-300/30 bg-white/5 p-2 shadow-[0_0_0_1px_rgba(125,211,252,0.08),0_20px_45px_rgba(8,145,178,0.18)]">
+                <img
+                  src="/lovable-uploads/jerry-resume-profile.jpeg"
+                  alt="Jerry Wang profile"
+                  className="h-40 w-40 rounded-full object-cover object-center md:h-48 md:w-48"
+                />
+              </div>
+            </div>
+
+            <h2 className="mb-4 text-center text-2xl font-courier text-white">
               Jerry Wang
             </h2>
 
@@ -211,10 +232,10 @@ const Resume = () => {
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
               <Link
-                to="/about"
+                to="/"
                 className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/5 px-5 py-3 font-courier text-white transition-colors hover:border-cyan-300/45 hover:bg-cyan-300/10 hover:text-cyan-100"
               >
-                About Me
+                Back Home
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
             </div>

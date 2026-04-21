@@ -24,7 +24,7 @@ const projectItems = [
     title: "AI x Finance Notes",
     summary:
       "A growing collection of ideas on where machine intelligence meets investing, diligence, and operating systems for builders.",
-    url: "/about",
+    url: "/resume",
     image:
       "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&w=1200&q=80",
   },
@@ -42,7 +42,7 @@ const projectItems = [
     title: "Personal Systems",
     summary:
       "Projects shaped by golf, writing, experimentation, and the process of turning curiosity into repeatable habits.",
-    url: "/about",
+    url: "/resume",
     image:
       "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80",
   },

@@ -13,7 +13,6 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 const Posts = lazy(() => import("./pages/Posts"));
 const PostDetail = lazy(() => import("./pages/PostDetail"));
-const About = lazy(() => import("./pages/About"));
 const Resume = lazy(() => import("./pages/Resume"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -41,8 +40,6 @@ const AppContent = () => {
             <Route path="/" element={<Home />} />
             <Route path="/posts" element={<Posts />} />
             <Route path="/posts/:id" element={<PostDetail />} />
-            
-            <Route path="/about" element={<About />} />
             <Route path="/resume" element={<Resume />} />
 
             <Route path="*" element={<NotFound />} />

@@ -175,7 +175,7 @@ That wraps up my learnings from my interview with Erik. A huge thank you to him 
     graphic: "/lovable-uploads/erik-benson-graphic.png"
   },
   {
-    id: "Aviel Ginzburg-Founders\' Co-op",
+    id: "Aviel Ginzburg-Founders' Co-op",
     title: "Build, Build, Build",
     excerpt: "Learn about Aviel's opinion on making it to the VC space and operating several funds.",
     content: `Just build.
@@ -250,7 +250,7 @@ He also reiterates that venture capital is a long haul. Coming from a law backgr
 
 He suggested either follow the traditional route of grinding through college, working through wall street, and getting an MBA; or, jumping into startups early, attaining soft and technical skills, and then entering VC. Both routes are very viable, yet he still prefers the startup method because of how it prepares you for diligence and business evaluation. Founders see clear as day how an early stage company startup works and whether it’s on the path to success. Understanding these “success factors” makes VC a lot easier, and empathizing and relating to founders is a great way to ensure workability.
 
-That wraps up my learnings from this interview with Paul. Make sure to check him out on linkedin or on Ascend VC's website. If you want to learn more my contacts are in the about section.
+That wraps up my learnings from this interview with Paul. Make sure to check him out on linkedin or on Ascend VC's website. If you want to learn more, my contact links are on the resume page.
     
 Until the next one!`,
     date: "2025-06-08",
@@ -310,7 +310,7 @@ I walked away really impressed by Jake—not just because he’s carved out a sp
     
     I asked him whether he envisioned a declining role with venture capitals firms in funding stages and he was firm on its solidarity. He used quantum AI as an example, stating that VC won't be disappearing anytime soon because technoloy is constantly developing. Even with strong revenue models and distribution strategies, funding from venture capitals is always needed to get ahead in the market, and the value that VC firms are bringing to early-stage start-ups is indispensable.
     
-    That wraps up my learnings from this interview with Kirby. Make sure to check him out on linkedin or on Ascend VC's website. If you want to learn more my contacts are in the about section.
+    That wraps up my learnings from this interview with Kirby. Make sure to check him out on linkedin or on Ascend VC's website. If you want to learn more, my contact links are on the resume page.
     
     Until the next one!`,
     date: "2025-05-06",
