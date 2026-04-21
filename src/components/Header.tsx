@@ -33,6 +33,12 @@ const Header = () => {
         >
           About
         </Link>
+        <Link 
+          to="/resume" 
+          className={`text-white hover:text-blue-300 transition-colors text-lg font-courier tracking-wide ${isActive('/resume') ? 'text-blue-300' : ''}`}
+        >
+          Resume
+        </Link>
       </nav>
 
       {/* Mobile menu button */}
@@ -62,6 +68,13 @@ const Header = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               About
+            </Link>
+            <Link 
+              to="/resume" 
+              className={`text-white hover:text-blue-300 transition-colors py-2 font-courier ${isActive('/resume') ? 'text-blue-300' : ''}`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Resume
             </Link>
           </div>
         </nav>

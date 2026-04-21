@@ -194,3 +194,79 @@
   animation: blink 1s steps(1) infinite;
   display: inline-block;
 }
+
+/* Typewriter cursor: rendered as a ::before pseudo-element so it is
+   position:absolute and completely outside the inline flow. This prevents
+   the inline-block cursor from creating spurious soft-wrap opportunities
+   that cause words to jump between lines during the animation. */
+.typewriter-cursor {
+  position: relative;
+}
+
+.typewriter-cursor::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  height: 0.8em;
+  width: 2px;
+  /* --tw-cursor is set inline on the TypewriterText container via JS so the
+     cursor inherits the real text color even though the char span is transparent. */
+  background: var(--tw-cursor, white);
+  animation: blink 1s steps(1) infinite;
+}
+
+.parallax-card-shell {
+  perspective: 1400px;
+}
+
+.parallax-card-media {
+  border-radius: var(--r, 18px);
+  transform-style: preserve-3d;
+  transition:
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 320ms ease,
+    border-color 320ms ease;
+  will-change: transform;
+}
+
+.parallax-card-shell:hover .parallax-card-media,
+.parallax-card-shell:focus-within .parallax-card-media {
+  transform: rotateX(10deg) rotateY(-12deg) translateY(-6px);
+  box-shadow: 0 28px 80px rgba(14, 165, 233, 0.18);
+  border-color: rgba(96, 165, 250, 0.35);
+}
+
+.parallax-img {
+  border-radius: inherit;
+  transform: translateZ(0) scale(1);
+  transform-origin: center;
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.parallax-card-shell:hover .parallax-img,
+.parallax-card-shell:focus-within .parallax-img {
+  transform: translateZ(36px) scale(calc(1 + var(--f, 0.1)));
+}
+
+.parallax-card-overlay,
+.parallax-card-badge,
+.parallax-card-copy {
+  transform: translateZ(34px);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax-card-media,
+  .parallax-img {
+    transition: none;
+  }
+
+  .parallax-card-shell:hover .parallax-card-media,
+  .parallax-card-shell:focus-within .parallax-card-media,
+  .parallax-card-shell:hover .parallax-img,
+  .parallax-card-shell:focus-within .parallax-img {
+    transform: none;
+  }
+}

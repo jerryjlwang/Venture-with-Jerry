@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 interface TypewriterTextProps {
   text: string;
@@ -8,70 +8,72 @@ interface TypewriterTextProps {
   keepCursorAfterComplete?: boolean;
 }
 
-const TypewriterText = ({ text, speed = 50, className = '', onComplete, keepCursorAfterComplete = false }: TypewriterTextProps) => {
+const TypewriterText = ({
+  text,
+  speed = 50,
+  className = '',
+  onComplete,
+  keepCursorAfterComplete = false,
+}: TypewriterTextProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const hasCompletedRef = useRef(false);
+  const containerRef = useRef<HTMLSpanElement>(null);
+  const chars = useMemo(() => Array.from(text), [text]);
 
-  // If the text changes, restart the animation.
+  // Capture the real inherited text color once and store it as a CSS variable
+  // so the ::before cursor can use it even though each char span is color:transparent.
+  useLayoutEffect(() => {
+    if (!containerRef.current) return;
+    const color = getComputedStyle(containerRef.current).color;
+    containerRef.current.style.setProperty('--tw-cursor', color);
+  }, []);
+
   useEffect(() => {
     setCurrentIndex(0);
     hasCompletedRef.current = false;
   }, [text]);
 
   useEffect(() => {
-    if (currentIndex < text.length) {
-      const timeout = setTimeout(() => {
-        setCurrentIndex(prev => prev + 1);
-      }, speed);
-
+    if (currentIndex < chars.length) {
+      const timeout = setTimeout(() => setCurrentIndex(prev => prev + 1), speed);
       return () => clearTimeout(timeout);
     }
-
-    if (!hasCompletedRef.current && currentIndex >= text.length) {
+    if (!hasCompletedRef.current) {
       hasCompletedRef.current = true;
       onComplete?.();
     }
-  }, [currentIndex, text.length, speed, onComplete]);
+  }, [currentIndex, chars.length, speed, onComplete]);
 
-  const { visible, hidden, layoutHidden, cursorActive } = useMemo(() => {
-    const clamped = Math.max(0, Math.min(currentIndex, text.length));
-    const cursorOn = clamped < text.length || keepCursorAfterComplete;
-
-    const hiddenText = text.slice(clamped);
-    // Keep the overall layout width stable:
-    // - If we are showing a cursor while typing, let the cursor take the width of the NEXT character
-    //   by removing that first hidden character from the invisible layout text.
-    // - If keepCursorAfterComplete is true, the cursor is part of the final layout, so don't remove anything.
-    const layoutHiddenText = keepCursorAfterComplete
-      ? hiddenText
-      : cursorOn
-        ? hiddenText.slice(1)
-        : hiddenText;
-
-    return {
-      visible: text.slice(0, clamped),
-      hidden: hiddenText,
-      layoutHidden: layoutHiddenText,
-      cursorActive: cursorOn
-    };
-  }, [currentIndex, text, keepCursorAfterComplete]);
+  const done = currentIndex >= chars.length;
+  const cursorActive = !done || keepCursorAfterComplete;
 
   return (
-    <span className={className}>
-      {/*
-        Why it “typed from the center”:
-        when the parent is text-center (or text-right), concatenating characters changes the element width every tick,
-        so the browser re-centers it continuously.
-
-        Fix: render the full string's width at all times (hidden part keeps layout), and only reveal characters.
-      */}
-      <span>{visible}</span>
-      {cursorActive && (
-        <span className="animate-blink">|</span>
+    <span ref={containerRef} className={className}>
+      {chars.map((char, i) => {
+        const revealed = i < currentIndex;
+        // The cursor class renders a ::before pseudo-element that is position:absolute,
+        // keeping it entirely out of the inline flow so it cannot create soft-wrap
+        // opportunities that would cause words to jump between lines.
+        const isCursorHere = cursorActive && !done && i === currentIndex;
+        return (
+          <span
+            key={i}
+            style={{ color: revealed ? undefined : 'transparent' }}
+            className={isCursorHere ? 'typewriter-cursor' : undefined}
+          >
+            {char}
+          </span>
+        );
+      })}
+      {/* End-of-text cursor: zero-width space keeps it off-layout while the
+          ::before still renders at the correct line position. */}
+      {done && keepCursorAfterComplete && (
+        <span
+          className="typewriter-cursor"
+          style={{ color: 'transparent' }}
+          aria-hidden="true"
+        >{'\u200b'}</span>
       )}
-      <span className="opacity-0" aria-hidden="true">
-        {layoutHidden}
-      </span>
     </span>
   );
 };

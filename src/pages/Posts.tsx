@@ -1,3 +1,4 @@
+import LogoCarousel from '../components/LogoCarousel';
 import PostGraphicCard from '../components/PostGraphicCard';
 import { posts } from '../data/posts';
 import ScrollTypewriterText from '../components/ScrollTypewriterText';
@@ -10,7 +11,7 @@ const Posts = () => {
       {/* Dark overlay to ensure text readability */}
       <div className="absolute inset-0 bg-black bg-opacity-60"></div>
       
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-40 pb-16 md:pt-44">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl text-white mb-6 font-courier tracking-wide font-medium">
             <ScrollTypewriterText text="All Posts" speed={80} />
@@ -18,6 +19,10 @@ const Posts = () => {
           <p className="text-xl text-gray-300 max-w-2xl mx-auto font-courier">
             Check out my insights after interviewing notable venture capital professionals.
           </p>
+        </div>
+
+        <div className="mb-12 rounded-[2rem] border border-white/10 bg-white/5 px-4 py-6 shadow-[0_24px_80px_rgba(2,6,23,0.4)] backdrop-blur-sm sm:px-6 lg:px-8">
+          <LogoCarousel />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
