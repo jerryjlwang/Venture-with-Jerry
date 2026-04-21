@@ -14,18 +14,18 @@ import ParticlesComponent from "@/components/ui/particles-bg";
 
 const focusAreas = [
   "AI x finance research",
-  "Venture capital interviews and synthesis",
+  "Venture capital interviews and startups",
   "Open source experimentation",
-  "Writing and knowledge systems",
+  "Geometry and stochastic physics",
 ];
 
 const skillAreas = [
   "Python",
   "Financial analysis",
-  "Excel modeling",
-  "Experimental design",
-  "Interview-led research",
-  "Community building",
+  "Matlab",
+  "Spatial Encoding",
+  "Computational Geometry",
+  "Full-stack development",
 ];
 
 const Resume = () => {
@@ -53,7 +53,7 @@ const Resume = () => {
 
           <p className="max-w-3xl text-lg font-courier leading-relaxed text-slate-300 md:text-xl">
             A structured snapshot of my background, interests, and the work I am
-            building around AI, finance, and venture.
+            building around frontier AI.
           </p>
         </section>
 
@@ -72,9 +72,8 @@ const Resume = () => {
 
             <div className="space-y-4 font-courier leading-relaxed text-slate-300">
               <p>
-                I am a senior at Interlake High School in Bellevue with a
-                growing interest in the intersection of AI, finance, and
-                venture capital.
+                I am an incoming electrical engineering and computer sciences student at UC Berkeley with a
+                growing interest in the intersection of AI, math, and stochastic problems.
               </p>
               <p>
                 Over the last year, I have been learning through direct
@@ -102,6 +101,10 @@ const Resume = () => {
                 <div className="mb-1 text-sm uppercase tracking-[0.18em] text-slate-400">
                   Education
                 </div>
+                <div className="text-lg text-white">University of California, Berkeley</div>
+                <div className="text-sm text-slate-400">
+                  Berkeley, California
+                </div>
                 <div className="text-lg text-white">Interlake High School</div>
                 <div className="text-sm text-slate-400">
                   Bellevue, Washington
@@ -113,7 +116,7 @@ const Resume = () => {
                   Focus
                 </div>
                 <div className="text-white">
-                  AI, finance, venture capital, and writing
+                  AI, math, spatial systems
                 </div>
               </div>
 
@@ -122,14 +125,14 @@ const Resume = () => {
                   Current direction
                 </div>
                 <div className="text-white">
-                  Interview-driven learning, publishing, and personal projects
+                  Personal projects, startups, and grinding 24/7
                 </div>
               </div>
             </div>
 
             <div className="mt-8 flex flex-wrap gap-3">
               <a
-                href="mailto:wang.jerryjl@gmail.com"
+                href="mailto:jerryjwang@berkeley.edu"
                 className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/5 px-4 py-2 text-sm font-courier text-white transition-colors hover:border-cyan-300/45 hover:bg-cyan-300/10 hover:text-cyan-100"
               >
                 <Mail className="h-4 w-4" />
@@ -145,7 +148,7 @@ const Resume = () => {
                 GitHub
               </a>
               <a
-                href="https://www.linkedin.com/in/jerry-wang-21a282368/"
+                href="https://www.linkedin.com/in/jerrypitchfork/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/5 px-4 py-2 text-sm font-courier text-white transition-colors hover:border-cyan-300/45 hover:bg-cyan-300/10 hover:text-cyan-100"
