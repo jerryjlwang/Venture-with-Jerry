@@ -1,72 +1,60 @@
-"use client"
+'use client';
 
-import type React from "react"
-import { useEffect, useRef } from "react"
+import type React from 'react';
+import { useEffect, useRef } from 'react';
 
 interface MouseQuadrantTrackerProps {
-  text: string
-  hue?: number
-  fontSize?: string
-  shadowIntensity?: number
-  layerCount?: number
-  textColor?: string
-  textGradient?: string
-  className?: string
-  containerClassName?: string
-  minHeight?: string
-  padding?: string
+  text: string;
+  hue?: number;
+  fontSize?: string;
+  shadowIntensity?: number;
+  layerCount?: number;
+  textColor?: string;
+  textGradient?: string;
+  className?: string;
+  containerClassName?: string;
+  minHeight?: string;
+  padding?: string;
 }
 
 export function MouseQuadrantTracker({
   text,
   hue = 200,
-  fontSize = "25vmax",
+  fontSize = '25vmax',
   shadowIntensity = 10,
   layerCount,
   textColor,
   textGradient,
   className,
   containerClassName,
-  minHeight = "100vh",
-  padding = "5vmin",
+  minHeight = '100vh',
+  padding = '5vmin',
 }: MouseQuadrantTrackerProps) {
-  const h1Ref = useRef<HTMLHeadingElement>(null)
-
-  const getQuadrants = (
-    element: HTMLElement,
-    clientX: number,
-    clientY: number
-  ) => {
-    const { x, y, width, height } = element.getBoundingClientRect()
-    const quadX = clientX - (x + 0.5 * width)
-    const quadY = clientY - (y + 0.5 * height)
-
-    return {
-      x: quadX >= 0 ? 1 : -1,
-      y: quadY >= 0 ? 1 : -1,
-    }
-  }
+  const h1Ref = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
-    const h1Element = h1Ref.current
-    if (!h1Element) return
+    const h1 = h1Ref.current;
+    if (!h1) return;
+
+    let lastX = 1;
+    let lastY = 1;
 
     const handleMouseMove = (event: MouseEvent) => {
-      const { clientX, clientY } = event
-      const { x, y } = getQuadrants(h1Element, clientX, clientY)
+      const { x, y, width, height } = h1.getBoundingClientRect();
+      const nextX = event.clientX - (x + 0.5 * width) >= 0 ? 1 : -1;
+      const nextY = event.clientY - (y + 0.5 * height) >= 0 ? 1 : -1;
+      if (nextX === lastX && nextY === lastY) return;
+      lastX = nextX;
+      lastY = nextY;
+      h1.style.setProperty('--x-quadrant', `${nextX}`);
+      h1.style.setProperty('--y-quadrant', `${nextY}`);
+    };
 
-      h1Element.style.setProperty("--x-quadrant", `${x}`)
-      h1Element.style.setProperty("--y-quadrant", `${y}`)
-    }
+    h1.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => h1.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
-    h1Element.addEventListener("mousemove", handleMouseMove)
-
-    return () => {
-      h1Element.removeEventListener("mousemove", handleMouseMove)
-    }
-  }, [])
-
-  const hasGradient = Boolean(textGradient)
+  const hasGradient = Boolean(textGradient);
   const baseLayerLevels = hasGradient
     ? [
         { distance: 1, lightness: 86, alpha: 0.9 },
@@ -80,11 +68,8 @@ export function MouseQuadrantTracker({
         { distance: 3, lightness: 55, alpha: 1 },
         { distance: 4, lightness: 45, alpha: 1 },
         { distance: 5, lightness: 35, alpha: 1 },
-      ]
-  const layerLevels = baseLayerLevels.slice(
-    0,
-    layerCount ?? baseLayerLevels.length
-  )
+      ];
+  const layerLevels = baseLayerLevels.slice(0, layerCount ?? baseLayerLevels.length);
 
   return (
     <div
@@ -92,29 +77,29 @@ export function MouseQuadrantTracker({
       style={
         {
           minHeight,
-          minWidth: "100%",
+          minWidth: '100%',
           margin: 0,
           padding,
-          boxSizing: "border-box",
-          display: "grid",
-          placeItems: "center",
-          "--hue": hue.toString(),
-          "--x-quadrant": "1",
-          "--y-quadrant": "1",
+          boxSizing: 'border-box',
+          display: 'grid',
+          placeItems: 'center',
+          '--hue': hue.toString(),
+          '--x-quadrant': '1',
+          '--y-quadrant': '1',
         } as React.CSSProperties
       }
-      >
+    >
       <h1
         className={className}
         ref={h1Ref}
         style={
           {
-            textTransform: "uppercase",
+            textTransform: 'uppercase',
             fontSize,
             margin: 0,
-            lineHeight: "0.8em",
-            inlineSize: "min-content",
-            display: "inline-grid",
+            lineHeight: '0.8em',
+            inlineSize: 'min-content',
+            display: 'inline-grid',
           } as React.CSSProperties
         }
       >
@@ -124,12 +109,12 @@ export function MouseQuadrantTracker({
             aria-hidden="true"
             style={
               {
-                gridArea: "1 / 1",
+                gridArea: '1 / 1',
                 color: `hsl(${hue} 100% ${layer.lightness}% / ${layer.alpha})`,
                 transform: `translate(calc(var(--x-quadrant) * ${shadowIntensity * layer.distance}px), calc(var(--y-quadrant) * ${shadowIntensity * layer.distance}px))`,
-                transition: "transform 0.2s ease",
-                pointerEvents: "none",
-                userSelect: "none",
+                transition: 'transform 0.2s ease',
+                pointerEvents: 'none',
+                userSelect: 'none',
               } as React.CSSProperties
             }
           >
@@ -139,13 +124,13 @@ export function MouseQuadrantTracker({
         <span
           style={
             {
-              gridArea: "1 / 1",
-              position: "relative",
-              color: hasGradient ? "transparent" : textColor || `hsl(${hue} 90% 90%)`,
+              gridArea: '1 / 1',
+              position: 'relative',
+              color: hasGradient ? 'transparent' : textColor || `hsl(${hue} 90% 90%)`,
               backgroundImage: textGradient,
-              WebkitBackgroundClip: hasGradient ? "text" : undefined,
-              backgroundClip: hasGradient ? "text" : undefined,
-              WebkitTextFillColor: hasGradient ? "transparent" : undefined,
+              WebkitBackgroundClip: hasGradient ? 'text' : undefined,
+              backgroundClip: hasGradient ? 'text' : undefined,
+              WebkitTextFillColor: hasGradient ? 'transparent' : undefined,
             } as React.CSSProperties
           }
         >
@@ -153,5 +138,5 @@ export function MouseQuadrantTracker({
         </span>
       </h1>
     </div>
-  )
+  );
 }

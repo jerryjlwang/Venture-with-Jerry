@@ -1,13 +1,11 @@
-"use client";
+'use client';
 
-import { useCallback, useEffect, useRef } from "react";
-import { cn } from "@/lib/utils";
+import { useCallback, useEffect, useRef } from 'react';
+import { cn } from '@/lib/utils';
 
 type ParticleDomInstance = {
   pJS: {
-    canvas?: {
-      el?: HTMLCanvasElement;
-    };
+    canvas?: { el?: HTMLCanvasElement };
     fn: {
       modes?: {
         pushParticles?: (
@@ -15,9 +13,7 @@ type ParticleDomInstance = {
           position?: { pos_x: number; pos_y: number },
         ) => void;
       };
-      vendors: {
-        destroypJS: () => void;
-      };
+      vendors: { destroypJS: () => void };
     };
   };
 };
@@ -41,35 +37,23 @@ interface ParticlesComponentProps {
 
 const loadParticlesScript = () =>
   new Promise<void>((resolve, reject) => {
-    if (typeof window === "undefined") {
-      resolve();
+    if (typeof window === 'undefined') return resolve();
+    if (window.particlesJS) return resolve();
+
+    const existing = document.querySelector<HTMLScriptElement>(PARTICLES_SCRIPT_SELECTOR);
+    if (existing) {
+      existing.addEventListener('load', () => resolve(), { once: true });
+      existing.addEventListener('error', () => reject(new Error('particles.js load failed')), { once: true });
       return;
     }
 
-    if (window.particlesJS) {
-      resolve();
-      return;
-    }
-
-    const existingScript = document.querySelector<HTMLScriptElement>(
-      PARTICLES_SCRIPT_SELECTOR,
-    );
-
-    if (existingScript) {
-      const handleLoad = () => resolve();
-      const handleError = () => reject(new Error("Failed to load particles.js"));
-
-      existingScript.addEventListener("load", handleLoad, { once: true });
-      existingScript.addEventListener("error", handleError, { once: true });
-      return;
-    }
-
-    const script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js";
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
     script.async = true;
-    script.dataset.particlesJs = "true";
+    script.defer = true;
+    script.dataset.particlesJs = 'true';
     script.onload = () => resolve();
-    script.onerror = () => reject(new Error("Failed to load particles.js"));
+    script.onerror = () => reject(new Error('particles.js load failed'));
     document.body.appendChild(script);
   });
 
@@ -80,84 +64,22 @@ export default function ParticlesComponent({
   linkOpacity = 0.4,
   moveSpeed = 2,
 }: ParticlesComponentProps) {
-  const queuedMouseEventRef = useRef<MouseEvent | null>(null);
-  const mouseFrameRef = useRef<number | null>(null);
-
-  const dispatchMouseEventToCanvas = useCallback(
-    (type: "mousemove" | "click" | "mouseleave", sourceEvent?: MouseEvent) => {
-      const canvas = document.querySelector<HTMLCanvasElement>(
-        "#particles-js canvas",
-      );
-      if (!canvas) return;
-
-      canvas.dispatchEvent(
-        new MouseEvent(type, {
-          bubbles: type !== "mouseleave",
-          cancelable: true,
-          clientX: sourceEvent?.clientX ?? 0,
-          clientY: sourceEvent?.clientY ?? 0,
-          view: window,
-        }),
-      );
-    },
-    [],
-  );
-
-  const pushParticleAtClick = useCallback((sourceEvent: MouseEvent) => {
-    const canvas = document.querySelector<HTMLCanvasElement>(
-      "#particles-js canvas",
-    );
-    if (!canvas || !window.pJSDom?.length) return;
-
-    const particleInstance =
-      window.pJSDom.find((instance) => instance.pJS.canvas?.el === canvas) ??
-      window.pJSDom[window.pJSDom.length - 1];
-
-    const pushParticles = particleInstance?.pJS.fn.modes?.pushParticles;
-    if (!pushParticles) return;
-
-    const rect = canvas.getBoundingClientRect();
-
-    pushParticles(1, {
-      pos_x: sourceEvent.clientX - rect.left,
-      pos_y: sourceEvent.clientY - rect.top,
-    });
-  }, []);
-
-  const initParticles = useCallback((isDark: boolean) => {
-    const container = document.getElementById("particles-js");
+  const initParticles = useCallback(() => {
+    const container = document.getElementById('particles-js');
     if (!container || !window.particlesJS) return;
 
-    const oldCanvas = container.querySelector("canvas");
-    if (oldCanvas) oldCanvas.remove();
+    container.querySelector('canvas')?.remove();
 
     if (window.pJSDom?.length) {
-      window.pJSDom.forEach((particleInstance) =>
-        particleInstance.pJS.fn.vendors.destroypJS(),
-      );
+      window.pJSDom.forEach((inst) => inst.pJS.fn.vendors.destroypJS());
       window.pJSDom = [];
     }
 
-    const colors = isDark
-      ? {
-          particles: "#00f5ff",
-          lines: "#00d9ff",
-          accent: "#0096c7",
-        }
-      : {
-          particles: "#0277bd",
-          lines: "#0288d1",
-          accent: "#039be5",
-        };
-
-    window.particlesJS("particles-js", {
+    window.particlesJS('particles-js', {
       particles: {
-        number: {
-          value: particleCount,
-          density: { enable: true, value_area: 1100 },
-        },
-        color: { value: colors.particles },
-        shape: { type: "circle", stroke: { width: 0.5, color: colors.accent } },
+        number: { value: particleCount, density: { enable: true, value_area: 1100 } },
+        color: { value: '#00f5ff' },
+        shape: { type: 'circle', stroke: { width: 0.5, color: '#0096c7' } },
         opacity: {
           value: 0.7,
           random: true,
@@ -171,22 +93,17 @@ export default function ParticlesComponent({
         line_linked: {
           enable: true,
           distance: linkDistance,
-          color: colors.lines,
+          color: '#00d9ff',
           opacity: linkOpacity,
           width: 1.2,
         },
-        move: {
-          enable: true,
-          speed: moveSpeed,
-          random: true,
-          out_mode: "bounce",
-        },
+        move: { enable: true, speed: moveSpeed, random: true, out_mode: 'bounce' },
       },
       interactivity: {
-        detect_on: "canvas",
+        detect_on: 'window',
         events: {
-          onhover: { enable: true, mode: "grab" },
-          onclick: { enable: false, mode: "push" },
+          onhover: { enable: true, mode: 'grab' },
+          onclick: { enable: false, mode: 'push' },
           resize: true,
         },
         modes: {
@@ -202,26 +119,23 @@ export default function ParticlesComponent({
     });
   }, [linkDistance, linkOpacity, moveSpeed, particleCount]);
 
+  const pushParticleAtClick = useCallback((event: MouseEvent) => {
+    const canvas = document.querySelector<HTMLCanvasElement>('#particles-js canvas');
+    if (!canvas || !window.pJSDom?.length) return;
+    const instance =
+      window.pJSDom.find((inst) => inst.pJS.canvas?.el === canvas) ??
+      window.pJSDom[window.pJSDom.length - 1];
+    const push = instance?.pJS.fn.modes?.pushParticles;
+    if (!push) return;
+    const rect = canvas.getBoundingClientRect();
+    push(1, { pos_x: event.clientX - rect.left, pos_y: event.clientY - rect.top });
+  }, []);
+
+  const mountedRef = useRef(false);
+
   useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    let observer: MutationObserver | null = null;
-    let isMounted = true;
-
-    const handleWindowMouseMove = (event: MouseEvent) => {
-      queuedMouseEventRef.current = event;
-
-      if (mouseFrameRef.current !== null) return;
-
-      mouseFrameRef.current = requestAnimationFrame(() => {
-        if (queuedMouseEventRef.current) {
-          dispatchMouseEventToCanvas("mousemove", queuedMouseEventRef.current);
-        }
-
-        queuedMouseEventRef.current = null;
-        mouseFrameRef.current = null;
-      });
-    };
+    if (typeof window === 'undefined') return;
+    mountedRef.current = true;
 
     const handleWindowClick = (event: MouseEvent) => {
       const target = event.target;
@@ -233,86 +147,38 @@ export default function ParticlesComponent({
       ) {
         return;
       }
-
-      dispatchMouseEventToCanvas("mousemove", event);
       pushParticleAtClick(event);
-    };
-
-    const handleWindowMouseLeave = () => {
-      dispatchMouseEventToCanvas("mouseleave");
-    };
-
-    const detectDark = () => {
-      const html = document.documentElement;
-      return (
-        html.classList.contains("dark") ||
-        html.getAttribute("data-theme") === "dark"
-      );
     };
 
     loadParticlesScript()
       .then(() => {
-        if (!isMounted) return;
-
-        initParticles(detectDark());
-
-        observer = new MutationObserver(() => initParticles(detectDark()));
-        observer.observe(document.documentElement, {
-          attributes: true,
-          attributeFilter: ["class", "data-theme"],
-        });
+        if (!mountedRef.current) return;
+        initParticles();
       })
       .catch(() => {
-        // Fail softly so the landing page still renders even if the CDN is blocked.
+        // Fail softly if the CDN is blocked.
       });
 
-    window.addEventListener("mousemove", handleWindowMouseMove, {
-      passive: true,
-    });
-    window.addEventListener("click", handleWindowClick);
-    document.documentElement.addEventListener(
-      "mouseleave",
-      handleWindowMouseLeave,
-    );
+    window.addEventListener('click', handleWindowClick);
 
     return () => {
-      isMounted = false;
-      observer?.disconnect();
-      window.removeEventListener("mousemove", handleWindowMouseMove);
-      window.removeEventListener("click", handleWindowClick);
-      document.documentElement.removeEventListener(
-        "mouseleave",
-        handleWindowMouseLeave,
-      );
-      if (mouseFrameRef.current !== null) {
-        cancelAnimationFrame(mouseFrameRef.current);
-      }
-      mouseFrameRef.current = null;
-      queuedMouseEventRef.current = null;
+      mountedRef.current = false;
+      window.removeEventListener('click', handleWindowClick);
 
       if (window.pJSDom?.length) {
-        window.pJSDom.forEach((particleInstance) =>
-          particleInstance.pJS.fn.vendors.destroypJS(),
-        );
+        window.pJSDom.forEach((inst) => inst.pJS.fn.vendors.destroypJS());
         window.pJSDom = [];
       }
-
-      const oldCanvas = document.querySelector("#particles-js canvas");
-      if (oldCanvas) oldCanvas.remove();
+      document.querySelector('#particles-js canvas')?.remove();
     };
-  }, [dispatchMouseEventToCanvas, initParticles, pushParticleAtClick]);
+  }, [initParticles, pushParticleAtClick]);
 
   return (
     <div
       id="particles-js"
       aria-hidden="true"
       className={cn(
-        `
-          pointer-events-none absolute inset-0 z-0
-          transition-colors duration-500
-          bg-gradient-to-b from-black via-[#05070a] to-black
-          dark:from-black dark:via-[#05070a] dark:to-black
-        `,
+        'pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-black via-[#05070a] to-black',
         className,
       )}
     />

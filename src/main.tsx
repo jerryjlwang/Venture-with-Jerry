@@ -1,10 +1,5 @@
-import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
-import { preloadCriticalImages, warmImageCache } from './lib/imagePreloader'
+import { createRoot } from 'react-dom/client';
+import App from './App.tsx';
+import './index.css';
 
-// Start preloading critical images immediately
-preloadCriticalImages();
-warmImageCache();
-
-createRoot(document.getElementById("root")!).render(<App />);
+createRoot(document.getElementById('root')!).render(<App />);

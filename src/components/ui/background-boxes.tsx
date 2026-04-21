@@ -1,7 +1,4 @@
-"use client";
-
 import React, { useMemo } from "react";
-import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 const DEFAULT_COLORS = [
@@ -18,8 +15,8 @@ const DEFAULT_COLORS = [
 
 export const BoxesCore = ({
   className,
-  rows = 28,
-  cols = 20,
+  rows = 18,
+  cols = 14,
   ...rest
 }: React.HTMLAttributes<HTMLDivElement> & {
   rows?: number;
@@ -27,8 +24,12 @@ export const BoxesCore = ({
 }) => {
   const rowIndices = useMemo(() => Array.from({ length: rows }, (_, i) => i), [rows]);
   const colIndices = useMemo(() => Array.from({ length: cols }, (_, i) => i), [cols]);
-  const getRandomColor = () =>
-    DEFAULT_COLORS[Math.floor(Math.random() * DEFAULT_COLORS.length)];
+
+  // Deterministic per-cell hover color chosen at mount time. Avoids the
+  // expensive framer-motion per-tile mount and CSS variable means hover
+  // updates cost zero JS.
+  const paletteFor = (r: number, c: number) =>
+    DEFAULT_COLORS[(r * 7 + c * 3) % DEFAULT_COLORS.length];
 
   return (
     <div
@@ -37,10 +38,7 @@ export const BoxesCore = ({
           "translate3d(-50%, -50%, 0) skewX(-48deg) skewY(14deg) scale(0.675)",
         transformOrigin: "center",
       }}
-      className={cn(
-        "absolute left-1/2 top-1/2 z-0 flex p-4",
-        className
-      )}
+      className={cn("absolute left-1/2 top-1/2 z-0 flex p-4", className)}
       {...rest}
     >
       {rowIndices.map((rowIndex) => (
@@ -48,36 +46,29 @@ export const BoxesCore = ({
           key={`row${rowIndex}`}
           className="relative flex w-16 shrink-0 flex-col border-l border-slate-700"
         >
-          {colIndices.map((colIndex) => (
-            <motion.div
-              key={`col${colIndex}`}
-              whileHover={{
-                backgroundColor: getRandomColor(),
-                transition: { duration: 0 },
-              }}
-              animate={{
-                transition: { duration: 2 },
-              }}
-              className="relative h-8 w-16 border-r border-t border-slate-700"
-            >
-              {colIndex % 2 === 0 && rowIndex % 2 === 0 ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="pointer-events-none absolute -left-[22px] -top-[14px] h-6 w-10 stroke-[1px] text-slate-700"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 6v12m6-6H6"
-                  />
-                </svg>
-              ) : null}
-            </motion.div>
-          ))}
+          {colIndices.map((colIndex) => {
+            const showPlus = colIndex % 2 === 0 && rowIndex % 2 === 0;
+            return (
+              <div
+                key={`col${colIndex}`}
+                className="bg-box relative h-8 w-16 border-r border-t border-slate-700 transition-colors duration-0 hover:duration-0"
+                style={{ ["--box-hover" as string]: paletteFor(rowIndex, colIndex) }}
+              >
+                {showPlus ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="pointer-events-none absolute -left-[22px] -top-[14px] h-6 w-10 stroke-[1px] text-slate-700"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m6-6H6" />
+                  </svg>
+                ) : null}
+              </div>
+            );
+          })}
         </div>
       ))}
     </div>

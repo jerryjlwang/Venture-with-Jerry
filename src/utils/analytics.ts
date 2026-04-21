@@ -1,5 +1,3 @@
-import { supabase } from '@/integrations/supabase/client';
-
 interface AnalyticsData {
   page_path: string;
   page_title?: string;
@@ -10,127 +8,126 @@ interface AnalyticsData {
   duration_seconds?: number;
 }
 
+// Lazy-load the supabase client only when we actually need to send analytics.
+// The vast majority of sessions have no consent and never trigger this import,
+// which keeps ~100KB of supabase out of the critical bundle.
+let clientPromise: Promise<typeof import('@/integrations/supabase/client')['supabase']> | null = null;
+
+const getClient = () => {
+  if (!clientPromise) {
+    clientPromise = import('@/integrations/supabase/client').then((m) => m.supabase);
+  }
+  return clientPromise;
+};
+
+const hasConsent = () => {
+  try {
+    return localStorage.getItem('cookie-consent') === 'accepted';
+  } catch {
+    return false;
+  }
+};
+
+const getDeviceType = () => {
+  const width = window.innerWidth;
+  if (width < 768) return 'mobile';
+  if (width < 1024) return 'tablet';
+  return 'desktop';
+};
+
+const getBrowser = () => {
+  const ua = navigator.userAgent;
+  if (ua.includes('Chrome')) return 'Chrome';
+  if (ua.includes('Firefox')) return 'Firefox';
+  if (ua.includes('Safari')) return 'Safari';
+  if (ua.includes('Edge')) return 'Edge';
+  return 'Other';
+};
+
 class Analytics {
   private sessionId: string;
-  private visitorId: string | null;
+  private visitorId: string | null = null;
   private startTime: number;
   private consentGiven: boolean;
 
   constructor() {
-    this.sessionId = this.generateSessionId();
-    this.visitorId = this.getOrCreateVisitorId();
+    this.sessionId = `session_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
     this.startTime = Date.now();
-    this.consentGiven = this.checkConsent();
-    
-    // Listen for consent changes
+    this.consentGiven = hasConsent();
+    this.visitorId = this.getOrCreateVisitorId();
+
     window.addEventListener('analytics-consent-granted', () => {
       this.consentGiven = true;
-      this.trackPageView(); // Track current page once consent is given
+      if (!this.visitorId) this.visitorId = this.getOrCreateVisitorId();
+      this.trackPageView();
     });
 
-    // Track page duration on beforeunload
     window.addEventListener('beforeunload', () => {
-      if (this.consentGiven) {
-        this.trackPageDuration();
-      }
+      if (this.consentGiven) this.trackPageDuration();
     });
-  }
-
-  private generateSessionId(): string {
-    return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   }
 
   private getOrCreateVisitorId(): string | null {
-    let visitorId = localStorage.getItem('visitor-id');
-    if (!visitorId && this.checkConsent()) {
-      visitorId = `visitor_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      localStorage.setItem('visitor-id', visitorId);
+    try {
+      let id = localStorage.getItem('visitor-id');
+      if (!id && this.consentGiven) {
+        id = `visitor_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
+        localStorage.setItem('visitor-id', id);
+      }
+      return id;
+    } catch {
+      return null;
     }
-    return visitorId;
-  }
-
-  private checkConsent(): boolean {
-    return localStorage.getItem('cookie-consent') === 'accepted';
-  }
-
-  private getDeviceType(): string {
-    const width = window.innerWidth;
-    if (width < 768) return 'mobile';
-    if (width < 1024) return 'tablet';
-    return 'desktop';
-  }
-
-  private getBrowser(): string {
-    const userAgent = navigator.userAgent;
-    if (userAgent.includes('Chrome')) return 'Chrome';
-    if (userAgent.includes('Firefox')) return 'Firefox';
-    if (userAgent.includes('Safari')) return 'Safari';
-    if (userAgent.includes('Edge')) return 'Edge';
-    return 'Other';
   }
 
   async trackPageView(customPath?: string) {
     if (!this.consentGiven) return;
-
-    // Update visitor ID if consent was just granted
-    if (!this.visitorId && this.consentGiven) {
-      this.visitorId = this.getOrCreateVisitorId();
-    }
 
     const data: AnalyticsData = {
       page_path: customPath || window.location.pathname,
       page_title: document.title,
       referrer: document.referrer || undefined,
       user_agent: navigator.userAgent,
-      device_type: this.getDeviceType(),
-      browser: this.getBrowser(),
+      device_type: getDeviceType(),
+      browser: getBrowser(),
     };
 
     try {
-      const payload = {
-        session_id: this.sessionId,
-        visitor_id: this.visitorId,
-        consent_given: this.consentGiven,
-        ...data
-      };
-      
-      // Use Supabase functions.invoke - origin validation provides security
+      const supabase = await getClient();
       const { error } = await supabase.functions.invoke('analytics-track', {
-        body: payload,
+        body: {
+          session_id: this.sessionId,
+          visitor_id: this.visitorId,
+          consent_given: this.consentGiven,
+          ...data,
+        },
       });
-      
-      if (error) {
-        console.error('Analytics tracking error:', error.message);
-      }
+      if (error) console.error('Analytics tracking error:', error.message);
     } catch (error) {
       console.error('Analytics tracking failed:', error);
     }
 
-    // Reset start time for duration tracking
     this.startTime = Date.now();
   }
 
   private async trackPageDuration() {
     if (!this.consentGiven) return;
-
     const duration = Math.round((Date.now() - this.startTime) / 1000);
-    
+
     try {
-      const payload = {
-        session_id: this.sessionId,
-        visitor_id: this.visitorId,
-        consent_given: this.consentGiven,
-        page_path: window.location.pathname,
-        page_title: document.title,
-        user_agent: navigator.userAgent,
-        device_type: this.getDeviceType(),
-        browser: this.getBrowser(),
-        duration_seconds: duration
-      };
-      
-      // Use Supabase functions.invoke - origin validation provides security
+      const supabase = await getClient();
       await supabase.functions.invoke('analytics-track', {
-        body: payload,
+        body: {
+          session_id: this.sessionId,
+          visitor_id: this.visitorId,
+          consent_given: this.consentGiven,
+          page_path: window.location.pathname,
+          page_title: document.title,
+          user_agent: navigator.userAgent,
+          device_type: getDeviceType(),
+          browser: getBrowser(),
+          duration_seconds: duration,
+        },
       });
     } catch (error) {
       console.error('Duration tracking failed:', error);
@@ -138,7 +135,5 @@ class Analytics {
   }
 }
 
-// Create a singleton instance
 const analytics = new Analytics();
-
 export default analytics;

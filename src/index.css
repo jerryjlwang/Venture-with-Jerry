@@ -6,91 +6,13 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
     --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
-
     --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-}
-
-@layer base {
   * {
     @apply border-border;
   }
@@ -100,105 +22,14 @@
   }
 }
 
-/* Logo carousel animations */
-@keyframes scroll-horizontal {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-50% - 8px));
-  }
-}
-
-@keyframes scroll-vertical {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(calc(-50% - 8px));
-  }
-}
-
-.animate-scroll-horizontal {
-  animation: scroll-horizontal 30s linear infinite;
-}
-
-.animate-scroll-vertical {
-  animation: scroll-vertical 20s linear infinite;
-}
-
-/* Golf map: clubhouse pulse + ring synced at 3s */
-@keyframes clubhouse-pulse-scale {
-  0%, 100% {
-    transform: scale(1);
-  }
-  15% {
-    transform: scale(1.12);
-  }
-  30% {
-    transform: scale(1);
-  }
-}
-
-@keyframes clubhouse-ring {
-  0% {
-    transform: scale(1.05);
-    opacity: 0.5;
-  }
-  15% {
-    transform: scale(1.4);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1.4);
-    opacity: 0;
-  }
-}
-
-.clubhouse-pulse {
-  animation: clubhouse-pulse-scale 3s ease-in-out infinite;
-}
-
-.clubhouse-ring {
-  animation: clubhouse-ring 3s ease-out infinite;
-}
-
-/* Ken Burns effect for popup backgrounds */
-@keyframes ken-burns {
-  0% {
-    transform: scale(1) translate(0, 0);
-  }
-  50% {
-    transform: scale(1.15) translate(-2%, -1%);
-  }
-  100% {
-    transform: scale(1.1) translate(1%, 2%);
-  }
-}
-
-.ken-burns {
-  animation: ken-burns 20s ease-in-out infinite alternate;
-}
-
-/* Blinking cursor animation */
+/* Cursor blink used by TypewriterText. Positioned as a ::before pseudo-element
+   so the cursor is absolute and stays out of the inline flow — this prevents
+   spurious soft-wrap opportunities while the animation types. */
 @keyframes blink {
-  0%, 49% {
-    opacity: 1;
-  }
-  50%, 100% {
-    opacity: 0;
-  }
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
 }
 
-.animate-blink {
-  animation: blink 1s steps(1) infinite;
-  display: inline-block;
-}
-
-/* Typewriter cursor: rendered as a ::before pseudo-element so it is
-   position:absolute and completely outside the inline flow. This prevents
-   the inline-block cursor from creating spurious soft-wrap opportunities
-   that cause words to jump between lines during the animation. */
 .typewriter-cursor {
   position: relative;
 }
@@ -210,12 +41,16 @@
   top: 0.1em;
   height: 0.8em;
   width: 2px;
-  /* --tw-cursor is set inline on the TypewriterText container via JS so the
-     cursor inherits the real text color even though the char span is transparent. */
   background: var(--tw-cursor, white);
   animation: blink 1s steps(1) infinite;
 }
 
+/* Background boxes hover: pure CSS, zero JS. */
+.bg-box:hover {
+  background-color: var(--box-hover);
+}
+
+/* 3D parallax cards used by RecentPostsCarousel. */
 .parallax-card-shell {
   perspective: 1400px;
 }
@@ -268,5 +103,9 @@
   .parallax-card-shell:hover .parallax-img,
   .parallax-card-shell:focus-within .parallax-img {
     transform: none;
+  }
+
+  .typewriter-cursor::before {
+    animation: none;
   }
 }

@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 
 interface TypewriterTextProps {
   text: string;
@@ -8,6 +8,10 @@ interface TypewriterTextProps {
   keepCursorAfterComplete?: boolean;
 }
 
+// Types characters by moving a single DOM cursor marker through pre-rendered
+// spans. Avoids re-rendering the React tree for every character (old version
+// caused N commits + N effect teardowns per typewriter run) and avoids layout
+// shifts because every glyph is mounted up-front at final width.
 const TypewriterText = ({
   text,
   speed = 50,
@@ -15,64 +19,74 @@ const TypewriterText = ({
   onComplete,
   keepCursorAfterComplete = false,
 }: TypewriterTextProps) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const hasCompletedRef = useRef(false);
   const containerRef = useRef<HTMLSpanElement>(null);
-  const chars = useMemo(() => Array.from(text), [text]);
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
 
-  // Capture the real inherited text color once and store it as a CSS variable
-  // so the ::before cursor can use it even though each char span is color:transparent.
+  // Capture inherited color once so the ::before cursor can inherit it even
+  // though each char span is color: transparent until revealed.
   useLayoutEffect(() => {
-    if (!containerRef.current) return;
-    const color = getComputedStyle(containerRef.current).color;
-    containerRef.current.style.setProperty('--tw-cursor', color);
+    const node = containerRef.current;
+    if (!node) return;
+    node.style.setProperty('--tw-cursor', getComputedStyle(node).color);
   }, []);
 
   useEffect(() => {
-    setCurrentIndex(0);
-    hasCompletedRef.current = false;
-  }, [text]);
+    const container = containerRef.current;
+    if (!container) return;
 
-  useEffect(() => {
-    if (currentIndex < chars.length) {
-      const timeout = setTimeout(() => setCurrentIndex(prev => prev + 1), speed);
-      return () => clearTimeout(timeout);
-    }
-    if (!hasCompletedRef.current) {
-      hasCompletedRef.current = true;
-      onComplete?.();
-    }
-  }, [currentIndex, chars.length, speed, onComplete]);
+    const chars = Array.from(container.querySelectorAll<HTMLElement>('[data-ch]'));
+    chars.forEach((el) => {
+      el.style.color = 'transparent';
+      el.classList.remove('typewriter-cursor');
+    });
 
-  const done = currentIndex >= chars.length;
-  const cursorActive = !done || keepCursorAfterComplete;
+    let index = 0;
+    let cancelled = false;
+    const tick = () => {
+      if (cancelled) return;
+      if (index > 0) {
+        const prev = chars[index - 1];
+        if (prev) prev.classList.remove('typewriter-cursor');
+      }
+      if (index < chars.length) {
+        const current = chars[index];
+        if (current) {
+          current.style.color = '';
+          current.classList.add('typewriter-cursor');
+        }
+        index += 1;
+        timer = window.setTimeout(tick, speed);
+      } else {
+        const tail = container.querySelector<HTMLElement>('[data-cursor-tail]');
+        if (keepCursorAfterComplete && tail) {
+          tail.classList.add('typewriter-cursor');
+        }
+        onCompleteRef.current?.();
+      }
+    };
+
+    let timer = window.setTimeout(tick, speed);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, [text, speed, keepCursorAfterComplete]);
+
+  const chars = Array.from(text);
 
   return (
     <span ref={containerRef} className={className}>
-      {chars.map((char, i) => {
-        const revealed = i < currentIndex;
-        // The cursor class renders a ::before pseudo-element that is position:absolute,
-        // keeping it entirely out of the inline flow so it cannot create soft-wrap
-        // opportunities that would cause words to jump between lines.
-        const isCursorHere = cursorActive && !done && i === currentIndex;
-        return (
-          <span
-            key={i}
-            style={{ color: revealed ? undefined : 'transparent' }}
-            className={isCursorHere ? 'typewriter-cursor' : undefined}
-          >
-            {char}
-          </span>
-        );
-      })}
-      {/* End-of-text cursor: zero-width space keeps it off-layout while the
-          ::before still renders at the correct line position. */}
-      {done && keepCursorAfterComplete && (
-        <span
-          className="typewriter-cursor"
-          style={{ color: 'transparent' }}
-          aria-hidden="true"
-        >{'\u200b'}</span>
+      {chars.map((char, i) => (
+        <span key={i} data-ch style={{ color: 'transparent' }}>
+          {char}
+        </span>
+      ))}
+      {keepCursorAfterComplete && (
+        <span data-cursor-tail style={{ color: 'transparent' }} aria-hidden="true">
+          {'​'}
+        </span>
       )}
     </span>
   );

@@ -19,9 +19,6 @@ export default {
 		},
 		extend: {
 		fontFamily: {
-			'public-sans': ['Public Sans', 'sans-serif'],
-			'merriweather': ["Merriweather", "serif"],
-			'playfair': ['Playfair Display', 'serif'],
 			'courier': ['Courier New', 'Courier', 'monospace'],
 		},
 			colors: {
