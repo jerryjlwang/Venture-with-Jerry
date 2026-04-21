@@ -63,8 +63,7 @@ const Resume = () => {
           </h1>
 
           <p className="max-w-3xl text-lg font-courier leading-relaxed text-slate-300 md:text-xl">
-            A structured snapshot of my background, interests, and the work I am
-            building around frontier AI.
+            I'm a 4 time AIME qualifier, USACO Platinum division qualifier, and USAEO top 50 participant. I'm passionate about human-centered AI and spatial systems.
           </p>
         </section>
 
