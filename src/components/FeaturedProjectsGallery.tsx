@@ -2,49 +2,49 @@ import { Gallery6 } from "@/components/ui/gallery6";
 
 const projectItems = [
   {
-    id: "venture-with-jerry",
-    title: "Venture With Jerry",
+    id: "MedSim",
+    title: "MedSim",
     summary:
-      "A living interview archive that turns conversations with investors into readable notes, visuals, and takeaways.",
-    url: "/posts",
+      "Deploying agent swarms into Trauma center world models. Harvard HSIL Hackathon Innovation Prize winner.",
+    url: "https://github.com/jerryjlwang/medsim",
     image:
-      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
+      "https://news.vcu.edu/image/425b5473-af45-4b85-b55b-2e63a9d203ba",
   },
   {
-    id: "open-source-builds",
-    title: "Open Source Builds",
+    id: "PitchFork Directory",
+    title: "PitchFork Directory",
     summary:
-      "Python and frontend experiments around research workflows, automation, and tools that support AI x finance curiosity.",
-    url: "https://github.com/jerryjlwang",
+      "2M+ startup feature characteristics compiled/imputed.",
+    url: "https://huggingface.co/datasets/jerryjwang/PitchFork_Directory",
     image:
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80",
+      "https://www.usepitchfork.com/_assets/v11/ae6f286f11759f1d2390dfa06302fd672ccc23c2.png",
   },
   {
-    id: "ai-finance-notes",
-    title: "AI x Finance Notes",
+    id: "Annotagent",
+    title: "Annotagent",
     summary:
-      "A growing collection of ideas on where machine intelligence meets investing, diligence, and operating systems for builders.",
+      "Agentic annotation compiler for arXiv.",
+    url: "https://annotagent.vercel.app",
+    image:
+      "https://blog.arxiv.org/files/2021/02/arxiv-logo-1.png",
+  },
+  {
+    id: "OneSixOne Ventures",
+    title: "OneSixOne Ventures",
+    summary:
+      "Redesigned and built OneSixOne Ventures' web platform from ideation to launch. Will support deal flow, event sponsorships, and fund expansion.",
+    url: "https://onesixone.ventures",
+    image:
+      "https://media.licdn.com/dms/image/v2/D4D0BAQGBcVqq8tTIdQ/company-logo_200_200/B4DZX0l9WmGkAI-/0/1743565346614/onesixone_ventures_logo?e=2147483647&v=beta&t=Ub0A8C1xizCvx262yuTiZSwh1SvImBpBNKXS5ksp4Vo",
+  },
+  {
+    id: "AI Research",
+    title: "AI Research",
+    summary:
+      "Leveraging computational geometry and stochastic physics for model training and sampling.",
     url: "/resume",
     image:
-      "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: "community-building",
-    title: "Community Building",
-    summary:
-      "An ongoing effort to connect with founders, operators, and investors while documenting the network behind the journey.",
-    url: "https://www.linkedin.com/in/jerry-wang-21a282368/",
-    image:
-      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    id: "personal-systems",
-    title: "Personal Systems",
-    summary:
-      "Projects shaped by golf, writing, experimentation, and the process of turning curiosity into repeatable habits.",
-    url: "/resume",
-    image:
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80",
+      "https://as2.ftcdn.net/jpg/01/64/60/49/1000_F_164604915_lfoT9BDk9UzTpm14HHZw7hDSJml7A7om.jpg",
   },
 ];
 
