@@ -5,7 +5,11 @@ import { cn } from '@/lib/utils';
 
 type ParticleDomInstance = {
   pJS: {
-    canvas?: { el?: HTMLCanvasElement };
+    canvas?: { el?: HTMLCanvasElement; pxratio?: number };
+    interactivity?: {
+      mouse?: { pos_x?: number; pos_y?: number; click_pos_x?: number; click_pos_y?: number };
+      status?: string;
+    };
     fn: {
       modes?: {
         pushParticles?: (
@@ -100,7 +104,7 @@ export default function ParticlesComponent({
         move: { enable: true, speed: moveSpeed, random: true, out_mode: 'bounce' },
       },
       interactivity: {
-        detect_on: 'window',
+        detect_on: 'canvas',
         events: {
           onhover: { enable: true, mode: 'grab' },
           onclick: { enable: false, mode: 'push' },
@@ -128,7 +132,13 @@ export default function ParticlesComponent({
     const push = instance?.pJS.fn.modes?.pushParticles;
     if (!push) return;
     const rect = canvas.getBoundingClientRect();
-    push(1, { pos_x: event.clientX - rect.left, pos_y: event.clientY - rect.top });
+    const invScaleX = rect.width === 0 ? 1 : canvas.offsetWidth / rect.width;
+    const invScaleY = rect.height === 0 ? 1 : canvas.offsetHeight / rect.height;
+    const pxratio = instance?.pJS.canvas?.pxratio ?? 1;
+    push(1, {
+      pos_x: (event.clientX - rect.left) * invScaleX * pxratio,
+      pos_y: (event.clientY - rect.top) * invScaleY * pxratio,
+    });
   }, []);
 
   const mountedRef = useRef(false);
@@ -150,6 +160,48 @@ export default function ParticlesComponent({
       pushParticleAtClick(event);
     };
 
+    let pendingX = 0;
+    let pendingY = 0;
+    let rafId: number | null = null;
+    const getInstance = () => {
+      const canvas = document.querySelector<HTMLCanvasElement>('#particles-js canvas');
+      if (!canvas || !window.pJSDom?.length) return null;
+      const instance =
+        window.pJSDom.find((inst) => inst.pJS.canvas?.el === canvas) ??
+        window.pJSDom[window.pJSDom.length - 1];
+      return instance ? { canvas, instance } : null;
+    };
+    const forwardMove = () => {
+      rafId = null;
+      const found = getInstance();
+      if (!found) return;
+      const { canvas, instance } = found;
+      const rect = canvas.getBoundingClientRect();
+      const invScaleX = rect.width === 0 ? 1 : canvas.offsetWidth / rect.width;
+      const invScaleY = rect.height === 0 ? 1 : canvas.offsetHeight / rect.height;
+      const pxratio = instance.pJS.canvas?.pxratio ?? 1;
+      const localX = (pendingX - rect.left) * invScaleX * pxratio;
+      const localY = (pendingY - rect.top) * invScaleY * pxratio;
+      if (instance.pJS.interactivity?.mouse) {
+        instance.pJS.interactivity.mouse.pos_x = localX;
+        instance.pJS.interactivity.mouse.pos_y = localY;
+        instance.pJS.interactivity.status = 'mousemove';
+      }
+    };
+    const handleWindowMove = (event: MouseEvent) => {
+      pendingX = event.clientX;
+      pendingY = event.clientY;
+      if (rafId === null) rafId = requestAnimationFrame(forwardMove);
+    };
+    const handleWindowLeave = () => {
+      const found = getInstance();
+      if (!found) return;
+      if (found.instance.pJS.interactivity?.mouse) {
+        found.instance.pJS.interactivity.mouse.pos_x = null as unknown as number;
+        found.instance.pJS.interactivity.mouse.pos_y = null as unknown as number;
+      }
+    };
+
     loadParticlesScript()
       .then(() => {
         if (!mountedRef.current) return;
@@ -160,10 +212,15 @@ export default function ParticlesComponent({
       });
 
     window.addEventListener('click', handleWindowClick);
+    window.addEventListener('mousemove', handleWindowMove, { passive: true });
+    document.documentElement.addEventListener('mouseleave', handleWindowLeave);
 
     return () => {
       mountedRef.current = false;
       window.removeEventListener('click', handleWindowClick);
+      window.removeEventListener('mousemove', handleWindowMove);
+      document.documentElement.removeEventListener('mouseleave', handleWindowLeave);
+      if (rafId !== null) cancelAnimationFrame(rafId);
 
       if (window.pJSDom?.length) {
         window.pJSDom.forEach((inst) => inst.pJS.fn.vendors.destroypJS());
