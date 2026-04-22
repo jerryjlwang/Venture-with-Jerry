@@ -132,12 +132,10 @@ export default function ParticlesComponent({
     const push = instance?.pJS.fn.modes?.pushParticles;
     if (!push) return;
     const rect = canvas.getBoundingClientRect();
-    const invScaleX = rect.width === 0 ? 1 : canvas.offsetWidth / rect.width;
-    const invScaleY = rect.height === 0 ? 1 : canvas.offsetHeight / rect.height;
-    const pxratio = instance?.pJS.canvas?.pxratio ?? 1;
+    if (rect.width === 0 || rect.height === 0) return;
     push(1, {
-      pos_x: (event.clientX - rect.left) * invScaleX * pxratio,
-      pos_y: (event.clientY - rect.top) * invScaleY * pxratio,
+      pos_x: (event.clientX - rect.left) * (canvas.width / rect.width),
+      pos_y: (event.clientY - rect.top) * (canvas.height / rect.height),
     });
   }, []);
 
@@ -177,11 +175,9 @@ export default function ParticlesComponent({
       if (!found) return;
       const { canvas, instance } = found;
       const rect = canvas.getBoundingClientRect();
-      const invScaleX = rect.width === 0 ? 1 : canvas.offsetWidth / rect.width;
-      const invScaleY = rect.height === 0 ? 1 : canvas.offsetHeight / rect.height;
-      const pxratio = instance.pJS.canvas?.pxratio ?? 1;
-      const localX = (pendingX - rect.left) * invScaleX * pxratio;
-      const localY = (pendingY - rect.top) * invScaleY * pxratio;
+      if (rect.width === 0 || rect.height === 0) return;
+      const localX = (pendingX - rect.left) * (canvas.width / rect.width);
+      const localY = (pendingY - rect.top) * (canvas.height / rect.height);
       if (instance.pJS.interactivity?.mouse) {
         instance.pJS.interactivity.mouse.pos_x = localX;
         instance.pJS.interactivity.mouse.pos_y = localY;
