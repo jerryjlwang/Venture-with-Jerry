@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ASSET_V } from '../lib/assetVersion';
-import { Skeleton } from './ui/skeleton';
 
 interface PostGraphicCardProps {
   id: string;
@@ -20,7 +19,7 @@ const PostGraphicCard = ({ id, graphic, title }: PostGraphicCardProps) => {
     <article className="group cursor-pointer overflow-hidden rounded-lg border border-blue-900/30 hover:border-blue-400/60 transition-all duration-300 hover:scale-[1.02] shadow-lg hover:shadow-xl">
       <Link to={`/posts/${id}`} className="block relative aspect-square">
         {!isLoaded && !hasError && (
-          <Skeleton className="absolute inset-0 w-full h-full bg-slate-700/50" />
+          <div className="absolute inset-0 h-full w-full animate-pulse rounded-md bg-slate-700/50" />
         )}
         <img 
           src={displayGraphic}

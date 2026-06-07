@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1064" height="823" viewBox="0 0 1064 823">
+  <defs>
+    <radialGradient id="backgroundGlow" cx="28%" cy="24%" r="70%">
+      <stop offset="0%" stop-color="#10213f"/>
+      <stop offset="48%" stop-color="#0b1428"/>
+      <stop offset="100%" stop-color="#07101f"/>
+    </radialGradient>
+    <radialGradient id="leftGlow" cx="18%" cy="45%" r="35%">
+      <stop offset="0%" stop-color="#0f4d99" stop-opacity="0.35"/>
+      <stop offset="52%" stop-color="#0a2a55" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#081124" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softBlur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <filter id="textGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2.2" result="blur"/>
+      <feFlood flood-color="#7fe8ff" flood-opacity="0.32"/>
+      <feComposite in2="blur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <style>
+      .word {
+        font-family: Rockwell, "Rockwell Extra Bold", "American Typewriter", Georgia, serif;
+        font-size: 172px;
+        font-weight: 900;
+        letter-spacing: -6px;
+        paint-order: stroke fill;
+        stroke-linejoin: round;
+        text-anchor: middle;
+      }
+    </style>
+  </defs>
+
+  <rect width="1064" height="823" fill="url(#backgroundGlow)"/>
+  <rect width="1064" height="823" fill="url(#leftGlow)"/>
+
+  <g opacity="0.18" filter="url(#softBlur)">
+    <circle cx="190" cy="124" r="27" fill="#2d76ff"/>
+    <circle cx="335" cy="127" r="23" fill="#2d76ff"/>
+    <circle cx="240" cy="699" r="30" fill="#0b7cff"/>
+    <circle cx="853" cy="603" r="32" fill="#174d90"/>
+  </g>
+
+  <g opacity="0.58" transform="translate(666 -88) rotate(25)">
+    <g stroke="#263651" stroke-width="1.55">
+      <line x1="-210" y1="0" x2="620" y2="0"/>
+      <line x1="-210" y1="58" x2="620" y2="58"/>
+      <line x1="-210" y1="116" x2="620" y2="116"/>
+      <line x1="-210" y1="174" x2="620" y2="174"/>
+      <line x1="-210" y1="232" x2="620" y2="232"/>
+      <line x1="-210" y1="290" x2="620" y2="290"/>
+      <line x1="-210" y1="348" x2="620" y2="348"/>
+      <line x1="-210" y1="406" x2="620" y2="406"/>
+      <line x1="-210" y1="464" x2="620" y2="464"/>
+      <line x1="-210" y1="522" x2="620" y2="522"/>
+      <line x1="-210" y1="580" x2="620" y2="580"/>
+      <line x1="-210" y1="638" x2="620" y2="638"/>
+      <line x1="-160" y1="-48" x2="-160" y2="685"/>
+      <line x1="-86" y1="-48" x2="-86" y2="685"/>
+      <line x1="-12" y1="-48" x2="-12" y2="685"/>
+      <line x1="62" y1="-48" x2="62" y2="685"/>
+      <line x1="136" y1="-48" x2="136" y2="685"/>
+      <line x1="210" y1="-48" x2="210" y2="685"/>
+      <line x1="284" y1="-48" x2="284" y2="685"/>
+      <line x1="358" y1="-48" x2="358" y2="685"/>
+      <line x1="432" y1="-48" x2="432" y2="685"/>
+      <line x1="506" y1="-48" x2="506" y2="685"/>
+      <line x1="580" y1="-48" x2="580" y2="685"/>
+    </g>
+    <g stroke="#2f4361" stroke-width="2" opacity="0.42">
+      <line x1="-166" y1="-6" x2="-154" y2="6"/>
+      <line x1="-92" y1="52" x2="-80" y2="64"/>
+      <line x1="-18" y1="110" x2="-6" y2="122"/>
+      <line x1="56" y1="168" x2="68" y2="180"/>
+      <line x1="130" y1="226" x2="142" y2="238"/>
+      <line x1="204" y1="284" x2="216" y2="296"/>
+      <line x1="278" y1="342" x2="290" y2="354"/>
+      <line x1="352" y1="400" x2="364" y2="412"/>
+      <line x1="426" y1="458" x2="438" y2="470"/>
+      <line x1="500" y1="516" x2="512" y2="528"/>
+    </g>
+  </g>
+
+  <g class="word" filter="url(#textGlow)">
+    <text x="548" y="391" fill="#005eba" stroke="#005eba" stroke-width="24" transform="translate(46 58)">JERRY</text>
+    <text x="548" y="391" fill="#0070dc" stroke="#0070dc" stroke-width="24" transform="translate(36 46)">JERRY</text>
+    <text x="548" y="391" fill="#108eff" stroke="#108eff" stroke-width="24" transform="translate(26 34)">JERRY</text>
+    <text x="548" y="391" fill="#57b6ff" stroke="#57b6ff" stroke-width="21" transform="translate(16 22)">JERRY</text>
+    <text x="548" y="391" fill="#d8fbff" stroke="#d8fbff" stroke-width="18">JERRY</text>
+
+    <text x="512" y="598" fill="#005eba" stroke="#005eba" stroke-width="24" transform="translate(48 56)">WANG</text>
+    <text x="512" y="598" fill="#0070dc" stroke="#0070dc" stroke-width="24" transform="translate(38 44)">WANG</text>
+    <text x="512" y="598" fill="#108eff" stroke="#108eff" stroke-width="24" transform="translate(28 32)">WANG</text>
+    <text x="512" y="598" fill="#57b6ff" stroke="#57b6ff" stroke-width="21" transform="translate(17 21)">WANG</text>
+    <text x="512" y="598" fill="#d8fbff" stroke="#d8fbff" stroke-width="18">WANG</text>
+  </g>
+
+  <g opacity="0.96">
+    <circle cx="930" cy="468" r="27" fill="none" stroke="#ffffff" stroke-width="2.4"/>
+    <circle cx="930" cy="468" r="8.2" fill="#ffffff"/>
+  </g>
+</svg>

@@ -1,13 +1,13 @@
 <claude-mem-context>
 # Memory Context
 
-# [Venture-with-Jerry] recent context, 2026-04-23 3:05pm PDT
+# [Venture-with-Jerry] recent context, 2026-06-07 12:58pm PDT
 
-Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision
+Legend: 🎯session 🔴bugfix 🟣feature 🔄refactor ✅change 🔵discovery ⚖️decision 🚨security_alert 🔐security_note
 Format: ID TIME TYPE TITLE
 Fetch details: get_observations([IDs]) | Search: mem-search skill
 
-Stats: 22 obs (6,812t read) | 119,705t work | 94% savings
+Stats: 48 obs (15,870t read) | 935,172t work | 98% savings
 
 ### Apr 19, 2026
 89 8:19a 🔵 Venture-with-Jerry project dependency inventory
@@ -35,18 +35,36 @@ S31 Remove unused dependencies and assets affecting performance in Venture-with-
 117 8:53a 🔴 TypewriterText cursor changed to absolute-positioned ::before pseudo-element to fix line-wrap reflow
 119 " ✅ Typewriter cursor color driven by CSS custom property --tw-cursor instead of currentColor
 S34 Venture-with-Jerry TypewriterText line-wrap reflow bug — cursor causes words to jump between lines during animation (Apr 19 at 8:53 AM)
-**Investigated**: TypewriterText.tsx component structure and the previous cursor implementation (inline-block span with width:0, overflow:visible rendering the "|" glyph). Identified that atomic inline elements at zero width still create soft-wrap opportunities in CSS inline formatting, which was the root cause of the line-jump bug.
+### Apr 23, 2026
+129 3:06p 🔵 Venture-with-Jerry favicon replacement task initiated — project structure mapped
+130 " 🔵 Venture-with-Jerry favicon is a remote GCS URL in index.html, not the local favicon.ico
+131 " 🔵 New favicon source image confirmed — 1254×1254 RGB PNG
+132 3:07p ✅ Codex project favicon set to custom ChatGPT-generated image
+133 " ✅ Venture-with-Jerry favicon updated to custom ChatGPT-generated PNG
+### May 11, 2026
+390 11:44p 🔵 Venture-with-Jerry Social Meta Tag Configuration Mapped
+391 11:45p 🔵 Venture-with-Jerry Local Image Inventory and Git State Confirmed
+392 " 🔵 Current og:image GCS URL Contains Unencoded Spaces
+395 " 🔵 Current og:image Confirmed as 1024x1024 RGB PNG (~1.28MB)
+399 11:46p 🔵 Venture-with-Jerry Project Has Existing favicon.png
+402 " 🔵 Session Running Inside OpenAI Codex; Thumbnail Target is GitHub Repo
+400 11:47p 🔵 User Environment: macOS with Google Chrome, Preview, Photos Running
+### Jun 6, 2026
+670 11:06p 🔵 Venture-with-Jerry Project Tech Stack Identified
+671 " 🔵 Venture-with-Jerry Full Stack Deep Dive: Routes, Backend, and Bundle Strategy
+### Jun 7, 2026
+691 1:34a 🔵 Venture-with-Jerry Project Structure Mapped
+692 " 🔵 Design Handoff ZIP Contains Full Homepage Redesign Package
+693 1:35a 🔵 Terminal Homepage Design System — Full Component Inventory Read
+694 " 🔵 App.tsx Wraps Home in Shared Header/Footer — New HomePage Must Replace, Not Wrap
+695 " 🔵 Tailwind Config Token Merge Required — Current Config Lacks All Terminal Design Tokens
+696 1:36a 🔵 All Post Graphic Assets Already Present — No File Copying Needed
+697 " 🔵 Fund Field Mapping for Posts Extracted from Design data.js
+698 " 🔵 Real Contact URLs Confirmed for Terminal Homepage CHIPS Array
+699 " 🔵 No Existing Token Class Collisions — New Design Tokens Are Safe to Merge
+700 " ⚖️ Terminal HomePage Must Suppress Global Header/Footer via App.tsx Condition
+701 1:37a 🔵 Post ID Format Mismatch Between Design data.js and Existing posts.ts
+702 " 🟣 Terminal Homepage Implemented — Complete Design System Integration
 
-**Learned**: CSS treats every atomic inline element (including zero-width inline-block spans) as a valid soft-wrap point. The browser's line-breaking algorithm sees the cursor span and can break there, causing words to appear on the wrong line mid-animation. Absolutely-positioned pseudo-elements are entirely outside the inline flow and are invisible to the line-breaking algorithm, giving stable wrapping throughout the animation. `getComputedStyle` on mount can capture inherited text color before individual char spans override it with `color: transparent`, enabling the pseudo-element to use the correct color via a CSS custom property.
-
-**Completed**: 1. Rewrote TypewriterText.tsx — removed Fragment+inline-block cursor approach; cursor is now a `.typewriter-cursor` class applied to the char span at currentIndex.
-    2. Added `.typewriter-cursor` and `.typewriter-cursor::before` rules to src/index.css — pseudo-element is position:absolute, 2px wide, 0.8em tall, outside inline flow.
-    3. Cursor color driven by `var(--tw-cursor, white)` CSS custom property; TypewriterText sets `--tw-cursor` via `useLayoutEffect` + `getComputedStyle` on mount.
-    4. End-of-text keepCursorAfterComplete cursor uses a zero-width space (U+200B) to anchor the absolute pseudo-element without affecting layout.
-    5. Build verified clean — no TypeScript errors, built in 2.68s.
-
-**Next Steps**: Build is clean and the fix is complete. Likely next step is visual verification in the dev server (hero section typewriter animation) to confirm words no longer jump between lines during playback.
-
-
-Access 120k tokens of past work via get_observations([IDs]) or mem-search skill.
+Access 935k tokens of past work via get_observations([IDs]) or mem-search skill.
 </claude-mem-context>

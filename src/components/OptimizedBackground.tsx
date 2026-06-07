@@ -11,7 +11,7 @@ interface OptimizedBackgroundProps {
 // Preload critical images on app start
 const preloadedImages = new Set<string>();
 
-export const preloadImage = (src: string): Promise<void> => {
+const preloadImage = (src: string): Promise<void> => {
   if (preloadedImages.has(src)) return Promise.resolve();
   
   return new Promise((resolve) => {

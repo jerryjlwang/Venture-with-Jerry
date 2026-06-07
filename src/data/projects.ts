@@ -1,6 +1,13 @@
-import { Gallery6 } from "@/components/ui/gallery6";
+export type FeaturedProject = {
+  id: string;
+  title: string;
+  summary: string;
+  url: string;
+  image: string;
+  tag: string;
+};
 
-const projectItems = [
+export const featuredProjects: FeaturedProject[] = [
   {
     id: "MedSim",
     title: "MedSim",
@@ -9,24 +16,24 @@ const projectItems = [
     url: "https://github.com/jerryjlwang/medsim",
     image:
       "https://news.vcu.edu/image/425b5473-af45-4b85-b55b-2e63a9d203ba",
+    tag: "Research",
   },
   {
     id: "PitchFork Directory",
     title: "PitchFork Directory",
-    summary:
-      "2M+ startup feature characteristics compiled/imputed.",
+    summary: "2M+ startup feature characteristics compiled/imputed.",
     url: "https://huggingface.co/datasets/jerryjwang/PitchFork_Directory",
     image:
       "https://www.usepitchfork.com/_assets/v11/ae6f286f11759f1d2390dfa06302fd672ccc23c2.png",
+    tag: "Data",
   },
   {
     id: "Annotagent",
     title: "Annotagent",
-    summary:
-      "Agentic annotation compiler for arXiv.",
+    summary: "Agentic annotation compiler for arXiv.",
     url: "https://annotagent.vercel.app",
-    image:
-      "https://blog.arxiv.org/files/2021/02/arxiv-logo-1.png",
+    image: "https://blog.arxiv.org/files/2021/02/arxiv-logo-1.png",
+    tag: "Agents",
   },
   {
     id: "OneSixOne Ventures",
@@ -36,6 +43,7 @@ const projectItems = [
     url: "https://onesixone.ventures",
     image:
       "https://media.licdn.com/dms/image/v2/D4D0BAQGBcVqq8tTIdQ/company-logo_200_200/B4DZX0l9WmGkAI-/0/1743565346614/onesixone_ventures_logo?e=2147483647&v=beta&t=Ub0A8C1xizCvx262yuTiZSwh1SvImBpBNKXS5ksp4Vo",
+    tag: "Web",
   },
   {
     id: "AI Research",
@@ -45,19 +53,6 @@ const projectItems = [
     url: "/resume",
     image:
       "https://as2.ftcdn.net/jpg/01/64/60/49/1000_F_164604915_lfoT9BDk9UzTpm14HHZw7hDSJml7A7om.jpg",
+    tag: "Research",
   },
 ];
-
-export default function FeaturedProjectsGallery() {
-  return (
-    <Gallery6
-      heading="Featured Projects"
-      animateHeading
-      headingClassName="font-normal"
-      demoUrl="https://github.com/jerryjlwang"
-      demoLabel="Visit GitHub"
-      demoMode="github-icon"
-      items={projectItems}
-    />
-  );
-}

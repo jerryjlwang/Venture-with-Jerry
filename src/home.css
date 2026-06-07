@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap");
+
+:root,
+[data-terminal-theme="dark"] {
+  --terminal-bg: #000000;
+  --terminal-bg-mid: #05070a;
+  --terminal-text: #ffffff;
+  --terminal-text-secondary: #cbd5e1;
+  --terminal-text-muted: #94a3b8;
+  --terminal-text-faint: rgba(255, 255, 255, 0.5);
+  --terminal-accent: #67e8f9;
+  --terminal-accent-soft: #a5f3fc;
+  --terminal-accent-strong: #22d3ee;
+  --terminal-hero: #d6fbff;
+  --terminal-glass: rgba(255, 255, 255, 0.05);
+  --terminal-glass-strong: rgba(255, 255, 255, 0.08);
+  --terminal-panel: rgba(15, 23, 42, 0.65);
+  --terminal-border: rgba(255, 255, 255, 0.1);
+  --terminal-border-strong: rgba(255, 255, 255, 0.15);
+  --terminal-border-hover: rgba(103, 232, 249, 0.45);
+  --terminal-button-text: #020617;
+  --terminal-rule: rgba(255, 255, 255, 0.15);
+  --terminal-hero-shadow: 0 0 32px rgba(0, 245, 255, 0.38),
+    0 2px 0 rgba(0, 150, 199, 0.4);
+  --terminal-panel-shadow: 0 24px 80px rgba(2, 6, 23, 0.45);
+  --terminal-toggle-shadow: 0 14px 42px rgba(0, 0, 0, 0.3);
+  --terminal-scan-shadow: 0 0 12px #22d3ee;
+}
+
+[data-terminal-theme="light"] {
+  --terminal-bg: #edf6f4;
+  --terminal-bg-mid: #dfecea;
+  --terminal-text: #102a2f;
+  --terminal-text-secondary: #29464c;
+  --terminal-text-muted: #557078;
+  --terminal-text-faint: rgba(16, 42, 47, 0.58);
+  --terminal-accent: #007f8f;
+  --terminal-accent-soft: #006b78;
+  --terminal-accent-strong: #0097a7;
+  --terminal-hero: #123f47;
+  --terminal-glass: rgba(255, 255, 255, 0.5);
+  --terminal-glass-strong: rgba(255, 255, 255, 0.74);
+  --terminal-panel: rgba(247, 252, 251, 0.78);
+  --terminal-border: rgba(18, 75, 82, 0.18);
+  --terminal-border-strong: rgba(18, 75, 82, 0.28);
+  --terminal-border-hover: rgba(0, 127, 143, 0.48);
+  --terminal-button-text: #f7fffe;
+  --terminal-rule: rgba(18, 75, 82, 0.26);
+  --terminal-hero-shadow: 0 0 28px rgba(0, 151, 167, 0.18),
+    0 2px 0 rgba(15, 118, 130, 0.16);
+  --terminal-panel-shadow: 0 24px 70px rgba(22, 78, 85, 0.14);
+  --terminal-toggle-shadow: 0 14px 42px rgba(22, 78, 85, 0.2);
+  --terminal-scan-shadow: 0 0 12px rgba(0, 127, 143, 0.48);
+}
+
+.terminal-page {
+  color-scheme: dark;
+  transition:
+    background-color 300ms ease,
+    color 300ms ease;
+}
+
+[data-terminal-theme="light"] .terminal-page {
+  color-scheme: light;
+}
+
+.terminal-rule {
+  background: linear-gradient(90deg, var(--terminal-rule), transparent);
+}
+
+@keyframes vwj-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-vwj-blink {
+    animation: none;
+  }
+}
